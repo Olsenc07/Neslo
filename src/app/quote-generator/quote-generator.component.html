@@ -1,0 +1,59 @@
+<!-- You can use the 'container', 'row', and 'col' classes from Bootstrap to layout your form -->
+<div class="container mt-3">
+    <form>
+      <!-- Dealer Information -->
+      <div class="mb-3">
+        <h4>DEALER INFORMATION</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="dealerName" class="form-label">Dealer Name:</label>
+            <input type="text" class="form-control"
+            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
+          </div>
+          <!-- Add more fields similarly -->
+        </div>
+      </div>
+  
+      <!-- Job Information -->
+      <div class="mb-3">
+        <h4>JOB INFORMATION</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="jobName" class="form-label">Job Name:</label>
+            <input type="text" class="form-control" id="jobName" placeholder="Enter job name">
+          </div>
+          <!-- Add more fields similarly -->
+        </div>
+      </div>
+  
+      <!-- Door Model Information -->
+      <div class="mb-3">
+        <h4>DOOR MODEL</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="doorModel" class="form-label">Door Model:</label>
+            <select class="form-select" id="doorModel">
+              <option selected>Select a model</option>
+              <option value="1">FDD72 TB Aluminum</option>
+              <!-- Add more options similarly -->
+              <input type="email" placeholder="Email"> 
+              <input type="tel" placeholder="Phone"> 
+            </select>
+          </div>
+          <!-- Add more fields similarly -->
+        </div>
+      </div>
+  
+      <!-- Additional Notes -->
+      <div class="mb-3">
+        <label for="additionalNotes" class="form-label">ADDITIONAL NOTES:</label>
+        <textarea class="form-control" id="additionalNotes" rows="3"></textarea>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  
