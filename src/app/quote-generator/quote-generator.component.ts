@@ -5,7 +5,8 @@ import {MatInputModule} from '@angular/material/input';
   standalone: true,
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
-  styleUrls: ['./quote-generator.component.scss']
+  styleUrls: ['./quote-generator.component.scss'],
+  imports: [MatInputModule]
 })
 export class QuoteGeneratorComponent {
   quoteForm: FormGroup = new FormGroup({
@@ -33,9 +34,7 @@ export class QuoteGeneratorComponent {
   constructor() {}
   
   generatePDF(): void {
-    const doc = new jsPDF();
-
-
-    doc.save('quote.pdf');
+    // const doc = new jsPDF();
+    // doc.save('quote.pdf');
   }
 }

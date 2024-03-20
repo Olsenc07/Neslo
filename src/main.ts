@@ -1,12 +1,35 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import 'zone.js';
+import {
+  bootstrapApplication,
+  provideClientHydration,
+  withHttpTransferCacheOptions
+} from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpClientModule } from '@angular/common/http';
+import { provideRouter, withViewTransitions } from '@angular/router';
+import { importProvidersFrom } from '@angular/core';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app-routes/app-routing.module';
+import { provideServerRendering } from '@angular/platform-server';
 
-if (environment.production) {
-  enableProdMode();
-}
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes, withViewTransitions()),
+    provideAnimationsAsync(),
+    importProvidersFrom(HttpClientModule, BrowserAnimationsModule),
+    provideServerRendering(),
+    provideClientHydration(
+      withHttpTransferCacheOptions({
+        includePostRequests: true
+      })
+    ), provideClientHydration()
+  ]
+})
+  .then((started) => {
+    console.log('Start up is working', started);
+  })
+  .catch((err) => {
+    console.error('error has occured on start up', err);
+  });

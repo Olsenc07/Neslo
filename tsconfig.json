@@ -2,8 +2,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -12,19 +13,27 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
-    "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "dom"]
   },
+  "files": [
+    "server.ts",
+    "src/main.server.ts",
+  ],
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts",
+    "**/node_modules/**",
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
+    "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true

@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/erik-olsen",
+            "outputPath": "dist/Erik-Olsen/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Erik-Olsen:build:production"
+              "buildTarget": "Erik-Olsen:build:production"
             },
             "development": {
-              "browserTarget": "Erik-Olsen:build:development"
+              "buildTarget": "Erik-Olsen:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Erik-Olsen:build"
+            "buildTarget": "Erik-Olsen:build"
           }
         },
         "test": {
@@ -100,6 +100,67 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/Erik-Olsen/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "Erik-Olsen:build:development",
+              "serverTarget": "Erik-Olsen:server:development"
+            },
+            "production": {
+              "browserTarget": "Erik-Olsen:build:production",
+              "serverTarget": "Erik-Olsen:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "Erik-Olsen:build:production",
+              "serverTarget": "Erik-Olsen:server:production"
+            },
+            "development": {
+              "browserTarget": "Erik-Olsen:build:development",
+              "serverTarget": "Erik-Olsen:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
