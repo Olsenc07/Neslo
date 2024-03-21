@@ -4,16 +4,15 @@
     "paths": {
       "@app/*": ["app/*"],
       "@assets/*": ["assets/*"],
-      "@environments/*": ["environments/*"],
-      "@shared/*": ["shared/interfaces/*"]
+      "@environments/*": ["environments/*"]
     },    
     "outDir": "./out-tsc/app"
   },
   "files": [
     "src/main.ts",
-    "../polyfills.ts",
+    "src/polyfills.ts",
     "src/main.server.ts",
-    "../server.ts"
+    "/server.ts"
   ],
   "exclude": [
     "src/test.ts",

@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+
 @Component({
   standalone: true,
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
   styleUrls: ['./quote-generator.component.scss'],
-  imports: [MatInputModule]
+  imports: [MatInputModule, MatSelectModule]
 })
 export class QuoteGeneratorComponent {
   quoteForm: FormGroup = new FormGroup({
