@@ -18,13 +18,13 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/Neslo",
-            "index": "src/index.html",
-            "browser": "neslo-frontend/src/main.ts",
-            "tsConfig": "tsconfig.app.json",
-            "polyfills": ["neslo-frontend/src/polyfills.ts"],
+            "index": "neslo-frontend/src/index.html",
+            "browser": "/neslo-frontend/src/main.ts",
+            "tsConfig": "neslo-frontend/tsconfig.app.json",
+            "polyfills": ["polyfills.ts"],
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets"
+              "src/assets/images"
             ],
             "allowedCommonJsDependencies": [
               "body-parser",
@@ -34,7 +34,7 @@
               "neslo-frontend/src/styles.scss"
             ],
             "scripts": [],
-            "server": "neslo-frontend/src/main.server.ts",
+            "server": "/neslo-frontend/src/main.server.ts",
             "prerender": true,
             "ssr": {
               "entry": "server.ts"

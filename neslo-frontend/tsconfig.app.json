@@ -9,13 +9,13 @@
     "outDir": "./out-tsc/app"
   },
   "files": [
-    "neslo-frontend/src/main.ts",
-    "neslo-frontend/src/polyfills.ts",
-    "neslo-frontend/src/main.server.ts",
-    "/server.ts"
+    "src/main.ts",
+    "../polyfills.ts",
+    "src/main.server.ts",
+    "../server.ts"
   ],
   "exclude": [
-    "neslo-frontend/src/test.ts",
-    "neslo-frontend/src/**/*.spec.ts"
+    "src/test.ts",
+    "src/**/*.spec.ts"
   ]
 }

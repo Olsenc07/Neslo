@@ -4,7 +4,6 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "baseUrl": "./",
-    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -23,11 +22,11 @@
     "lib": ["ES2022", "dom"]
   },
   "files": [
-    "server.ts",
-    "neslo-frontend/src/main.server.ts",
+    "../server.ts",
+    "src/main.server.ts",
   ],
   "exclude": [
-    "neslo-frontend/src/test.ts",
+    "src/test.ts",
     "**/*.spec.ts",
     "**/node_modules/**",
   ],
