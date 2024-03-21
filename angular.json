@@ -24,7 +24,6 @@
             "polyfills": ["polyfills.ts"],
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/Neslo.ico",
               "src/assets"
             ],
             "allowedCommonJsDependencies": [
