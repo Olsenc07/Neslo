@@ -10,7 +10,7 @@ import { Component, HostListener, ElementRef, ViewChild, Renderer2 } from '@angu
 export class HomeComponent {
 
   @ViewChild('heroSection', { static: false }) heroSection: ElementRef;
-
+  divEl = viewChild<ElementRef>('el'); 
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
