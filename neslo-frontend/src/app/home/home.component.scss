@@ -1,9 +1,11 @@
 .hero-section {
     background-image: url('../../../src/assets/images/Erik_Red_Working.jpg');
     background-size: cover;
+    background-attachment: fixed; /* Add this line */
     height: 100vh;
-    color: white;
+    transition: opacity 0.5s; /* Smooth transition for opacity changes */
 }
+
 .section-padding {
     padding: 60px 0;
 }

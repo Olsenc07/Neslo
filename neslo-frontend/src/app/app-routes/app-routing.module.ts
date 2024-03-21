@@ -1,9 +1,9 @@
 import { Routes} from '@angular/router'
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'main',
+    path: 'home',
     loadComponent: () =>
       import('../home/home.component').then(
         (mod) => mod.HomeComponent,
