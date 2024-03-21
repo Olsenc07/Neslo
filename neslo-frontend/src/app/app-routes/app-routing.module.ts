@@ -5,14 +5,14 @@ export const routes: Routes = [
   {
     path: 'main',
     loadComponent: () =>
-      import('src/app/home/home.component').then(
+      import('neslo-frontend/src/app/home/home.component').then(
         (mod) => mod.HomeComponent,
       )
   },
   {
     path: 'quotes',
     loadComponent: () =>
-      import('src/app/quote-generator/quote-generator.component').then(
+      import('neslo-frontend/src/app/quote-generator/quote-generator.component').then(
         (mod) => mod.QuoteGeneratorComponent,
       )
   }

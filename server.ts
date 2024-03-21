@@ -5,7 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import { join, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import bootstrap from './src/main.server';
+import bootstrap from './neslo-frontend/src/main.server';
 // Routes
 import emailRoute from './backend/routes/email';
 

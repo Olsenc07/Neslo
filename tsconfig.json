@@ -24,10 +24,10 @@
   },
   "files": [
     "server.ts",
-    "src/main.server.ts",
+    "neslo-frontend/src/main.server.ts",
   ],
   "exclude": [
-    "src/test.ts",
+    "neslo-frontend/src/test.ts",
     "**/*.spec.ts",
     "**/node_modules/**",
   ],
