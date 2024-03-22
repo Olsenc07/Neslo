@@ -10,12 +10,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-home',
   standalone: true,
-  imports: [MatButtonModule, 
+
+  selector: 'app-home',
+  imports: [
+    MatButtonModule, 
     MatIconModule,
     ReactiveFormsModule,
-    MatFormFieldModule],
+    MatFormFieldModule
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -33,7 +36,8 @@ export class HomeComponent {
       Validators.email
     ]),
     message: new FormControl<string | null>(null, Validators.required)
-  })
+  });
+
   ngAfterViewInit(): void {
     this.handleScroll(); 
   }
