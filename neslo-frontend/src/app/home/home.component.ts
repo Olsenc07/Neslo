@@ -35,7 +35,9 @@ export class HomeComponent {
       Validators.required,
       Validators.email
     ]),
-    message: new FormControl<string | null>(null, Validators.required)
+    message: new FormControl<string | null>(null, Validators.required),
+    file: new FormControl<File | null>(null)
+
   });
 
   ngAfterViewInit(): void {
@@ -54,7 +56,7 @@ export class HomeComponent {
 
     // Use renderer to adjust the CSS filter property for the blur effect
     this.renderer.setStyle(this.vikingImage.nativeElement, 'filter', `blur(${blurValue}px)`);
-    this.renderer.setStyle(this.imgLayout.nativeElement, 'background-position', `50% (${imgValue}%)`);
+    this.renderer.setStyle(this.vikingImage.nativeElement, 'background-position', `50% (${imgValue}%)`);
   }
   onFileSelected(event: Event) {
     const element = event.currentTarget as HTMLInputElement;

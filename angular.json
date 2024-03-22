@@ -28,7 +28,13 @@
             ],
             "allowedCommonJsDependencies": [
               "body-parser",
-              "compression"
+              "compression",
+              "safe-buffer",
+              "bytes",
+              "compressible",
+              "debug",
+              "on-headers",
+              "vary"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
