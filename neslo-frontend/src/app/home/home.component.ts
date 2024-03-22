@@ -8,6 +8,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -21,7 +22,9 @@ import {MatIconModule} from '@angular/material/icon';
 export class HomeComponent {
   selectedFile: File | null = null;
   @ViewChild('vikingImage', { static: false }) vikingImage!: ElementRef<HTMLImageElement>;
-  constructor(private renderer: Renderer2) {}
+  @ViewChild('imgLayout', { static: false }) imgLayout!: ElementRef<HTMLImageElement>;
+
+  constructor(private renderer: Renderer2, private router: Router) {}
 
   contactForm: FormGroup = new FormGroup({
     name: new FormControl<string | null>(null, Validators.required),
@@ -34,17 +37,20 @@ export class HomeComponent {
   ngAfterViewInit(): void {
     this.handleScroll(); 
   }
-
+  requestQuote(): void {
+    this.router.navigate(['/quotes']);
+  }
   @HostListener('window:scroll', ['$event']) 
   handleScroll(): void {
     const scrollPosition = window.scrollY;
     const height = window.innerHeight;
     // Adjust the blur value based on the scroll position. You can tweak this formula to change how quickly the blur effect increases.
     const blurValue = Math.min(70, (scrollPosition / height) * 20); // Cap the blur at a maximum value, e.g., 20px
+    const imgValue = 50 - (scrollPosition / height) * 10; 
 
     // Use renderer to adjust the CSS filter property for the blur effect
     this.renderer.setStyle(this.vikingImage.nativeElement, 'filter', `blur(${blurValue}px)`);
-  
+    this.renderer.setStyle(this.imgLayout.nativeElement, 'background-position', `50% (${imgValue}%)`);
   }
   onFileSelected(event: Event) {
     const element = event.currentTarget as HTMLInputElement;

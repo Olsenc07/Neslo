@@ -1,20 +1,16 @@
-<div class="img">
+<div #imgLayout class="img">
 <header #vikingImage class="hero-section d-flex align-items-center justify-content-center text-center">
-        <div>
+    <div class="text-center">
         <h1 neslo>Welcome to Neslo</h1>
-        <p>Your trusted partner in premium windows and doors</p>
-        <!-- Direct to /quotes  style this-->
-     
-        <button mat-raised-button quote>
-            <!-- <mat-icon class="material-symbols-outlined">
-                request_quote
-            </mat-icon> -->
+        <h2 class=" text-white">Your trusted partner in premium windows and doors</h2>
+        <!-- Direct to /quotes  style this -->
+        <button quote class="btn btn-lg btn-primary mt-4" (click)="requestQuote()">
             Request a quote
         </button>
     </div>
+    
 </header>
 </div>
-
 <section id="about" class="section-padding bg-light">
     <div class="container">
         <h2 class="text-center mb-4">About Us</h2>
