@@ -43,6 +43,7 @@ export class HomeComponent {
   ngAfterViewInit(): void {
     this.handleScroll(); 
   }
+  
   requestQuote(): void {
     this.router.navigate(['/quotes']);
   }
