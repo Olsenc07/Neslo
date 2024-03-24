@@ -13,19 +13,19 @@
     background-color: transparent;
     color: white;
     border: solid;
-    border-color: white;
-    box-shadow: 4px 4px 7px 5px white;
+    border-color: #80808082;
+    box-shadow: 4px 4px 7px 5px black;
   }
   
   .quote::after {
     content: '';
     position: absolute;
-    top: -2px; /* Adjust the position and size to match your border thickness */
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    top: -4px; /* Adjust the position and size to match your border thickness */
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
     z-index: -1;
-    background-image: linear-gradient(45deg, white, #c1daf4);
+    background-image: linear-gradient(45deg, white, #80808082);
     background-size: 70% 70%;
     animation: gradient-flow 3s linear infinite;
     border-radius: 4px; /* Match your button's border-radius */
@@ -64,6 +64,9 @@
 }
 h2[heading]{
   color: white;
+}
+h2[hidden]{
+  display: none;
 }
 h1[neslo] {
     background-clip: text;
