@@ -8,29 +8,20 @@
     }
   }
   }
+  form{
+    display: flex;
+    flex-direction: column;
+  }
   .quote {
     position: relative;
     background-color: transparent;
-    color: white;
     border: solid;
-    border-color: #80808082;
-    box-shadow: 4px 4px 7px 5px black;
+    box-shadow: 3px 3px 4px 2px white;
   }
-  
-  .quote::after {
-    content: '';
-    position: absolute;
-    top: -4px; /* Adjust the position and size to match your border thickness */
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    z-index: -1;
-    background-image: linear-gradient(45deg, white, #80808082);
-    background-size: 70% 70%;
-    animation: gradient-flow 3s linear infinite;
-    border-radius: 4px; /* Match your button's border-radius */
+  .quote:hover{
+    box-shadow: 3px 3px 4px 2px  var(--wood);
+
   }
-  
   @keyframes gradient-flow {
     0% {
       background-position: 0% 50%;
@@ -46,9 +37,9 @@
     background-image: url('../../../src/assets/images/Erik_Red_Working.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Add this line */
-    background-position: 50% 60%;
+    background-attachment: scroll; /* Add this line */
     transition: opacity 0.85s;
+    background-position: 50% 65%;
     height: 100%;
 }
 .section-padding {
@@ -58,9 +49,20 @@
 .btn-primary {
   transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the glow effect */
 }
-
 .btn-primary:hover, .btn-primary:focus {
-  box-shadow: 0 0 15px #007bff; /* Adjust color and size to fit your design */
+  box-shadow: 0 0 15px var(--blue); /* Adjust color and size to fit your design */
+}
+button[type="submit"]{
+  color: white;
+background-color: var(--wood);
+&:hover{
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; 
+    // background-image: linear-gradient(45deg, #004080, #8B4513);
+    // background-image: linear-gradient(45deg, white, #e78282, white);
+  background-image: linear-gradient(45deg, white, var(--wood), white);
+}
 }
 h2[heading]{
   color: white;
@@ -72,7 +74,9 @@ h1[neslo] {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent; 
-    background-image: linear-gradient(45deg, white, #e78282, white);
+    // background-image: linear-gradient(45deg, #004080, #8B4513);
+    // background-image: linear-gradient(45deg, white, #e78282, white);
+    background-image: linear-gradient(45deg, white, var(--wood), white);
     background-size: 200% 200%; 
     @include gradientFlow;
     animation: gradient-flow 10s linear infinite; 

@@ -24,9 +24,11 @@
             "polyfills": ["polyfills.ts"],
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets/images"
+              "src/assets/images",
+              "src/assets/images/folding_sliding_doors_logo.png"
             ],
             "allowedCommonJsDependencies": [
+              "accepts",
               "body-parser",
               "compression",
               "safe-buffer",

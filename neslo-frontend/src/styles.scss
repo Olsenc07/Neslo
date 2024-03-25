@@ -4,7 +4,10 @@
   box-sizing: border-box;
   font-family: 'Josefin Sans', sans-serif;
 }
-
+:root {
+  --wood: #8B4513;
+  --blue: #007bff;
+}
 html, body {
     height: 100%;
     margin: 0;
