@@ -1,3 +1,4 @@
+// go through and optimize
 @mixin gradientFlow {
   @keyframes gradient-flow {
     0%{
@@ -20,6 +21,10 @@
     box-shadow: 0 0 20px 5px var(--wood-dark); /* Stronger shadow for standout effect */
     background-image: linear-gradient(45deg, var(--wood-light), var(--wood-dark));
   }
+  button[file]{
+    background-color: #4A2C2A;
+    color: white;
+  }
   button[mat-fab]:active {
     background-color: var(--wood-light) !important; /* Force override Material styles */
   }
@@ -28,8 +33,7 @@
     margin: 0% 2%;
     margin-top: -20px;
     position: relative;
-  font-size: medium;
-
+    font-size: medium;
     color: white; /* Text color */
     background-color: transparent;
     border: 2px solid var(--wood);
@@ -60,6 +64,15 @@
     border-radius: 25px;
     border: 1px groove;
   }
+  div[contact]{
+    padding: 1%;
+    border-radius: 25px;
+    border: 1px groove;
+  }
+  span[fileName]{
+    font-style: italic; 
+    color: var(--wood-red);
+  }
   @keyframes gradient-flow {
     0% {
       background-position: 0% 50%;
@@ -87,7 +100,7 @@ button[type="submit"]{
   color: white;
   background-color: var(--wood);
 &:hover{
-  background-color: var(--wood-dark);
+  background-color: var(--wood-red);
 }
 }
 h2[heading]{

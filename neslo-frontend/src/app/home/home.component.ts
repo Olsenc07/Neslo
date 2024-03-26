@@ -32,7 +32,7 @@ export class HomeComponent implements AfterViewInit {
   @ViewChild('imgChild', { static: false }) imgChild!: ElementRef<HTMLImageElement>;
   triggerSubmit = document.getElementById('submitBtn');
   state: 'noFocus' | 'focus' = 'noFocus';
-
+  imageSrc: string | ArrayBuffer | null = null;
   constructor(private renderer: Renderer2, private router: Router) {}
 
   contactForm: FormGroup = new FormGroup({
@@ -71,14 +71,21 @@ export class HomeComponent implements AfterViewInit {
     }
 
   }
+  onClearMessage(): void {
+  this.contactForm.get('message')?.reset();
+    this.imageSrc = null;
+  }
   onFileSelected(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
     let fileList: FileList | null = element.files;
     if (fileList) {
       this.selectedFile = fileList[0];
-      // You can also do further validations or checks here
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result;
+      reader.readAsDataURL(fileList);
     }
   }
+
 
   onHover(isHovered: boolean): void {
     this.state = isHovered ? 'focus' : 'noFocus';
@@ -88,5 +95,8 @@ export class HomeComponent implements AfterViewInit {
     console.log('Message emailed');
     // Gives message, this message will be mailed to redman.. 
     // do you wish to continue?
+
+    // display message
+    // thx for the messae, get back to u soon
 }
 }
