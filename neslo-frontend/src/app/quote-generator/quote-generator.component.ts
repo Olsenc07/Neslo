@@ -1,14 +1,15 @@
+import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   standalone: true,
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
   styleUrls: ['./quote-generator.component.scss'],
-  imports: [MatInputModule, MatSelectModule]
+  imports: [AutoSearchComponent, MatInputModule, MatSelectModule]
 })
 export class QuoteGeneratorComponent {
   quoteForm: FormGroup = new FormGroup({
@@ -32,9 +33,9 @@ export class QuoteGeneratorComponent {
 
   })
   
-
+// add typing in search
   doorModel: string[] = [
-
+  'FD27 PVCU'
   ]
   exteriorFinish: string[] = [
     'Anotized',

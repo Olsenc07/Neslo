@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline">
+<mat-label>
+    {{ label }}
+  </mat-label>
+<input type="text" matInput [matAutocomplete]="auto" [formControl]="input"
+  [placeholder]="filler">
+    <mat-autocomplete #auto="matAutocomplete" >
+      @for(options of (filteredList$ | async); let i = $index; track options){
+        <mat-option [value]="options" (click)="emitSelectedChange(options)">
+          <span [innerHTML]="options | bold: input.value!">
+          </span>
+        </mat-option>
+    }
+    </mat-autocomplete>
+</mat-form-field>

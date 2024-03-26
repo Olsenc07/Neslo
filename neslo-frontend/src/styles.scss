@@ -12,6 +12,9 @@
   --wood-red: #CC9966;
   --blue: #007bff;
 }
+b {
+  color: var(--wood-light);
+  }
 html, body {
     height: 100%;
     margin: 0;

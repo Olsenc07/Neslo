@@ -2,15 +2,67 @@
 <div class="container mt-3">
     <form>
       <!-- Dealer Information -->
+      <!-- Auto fills in message -->
       <div class="mb-3">
         <h4>DEALER INFORMATION</h4>
         <div class="row">
           <div class="col-md-4">
-            <label for="dealerName" class="form-label">Dealer Name:</label>
-            <input type="text" class="form-control"
+            <mat-form-field appearance="outline">
+              <mat-label>
+                Dealer Name:
+                </mat-label>
+            <input type="text"
             formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
+            </mat-form-field>
           </div>
-          <!-- Add more fields similarly -->
+        </div>
+        <!-- Dealer Branch -->
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                Dealer Branch:
+                </mat-label>
+            <input type="text"
+            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Contact Name -->
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                Contact Name:
+                </mat-label>
+            <input type="text"
+            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Contact Email -->
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                Dealer Name:
+                </mat-label>
+            <input type="email"
+            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
+            </mat-form-field>
+          </div>
+        </div>
+        <!-- Phone -->
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                Dealer Name:
+                </mat-label>
+            <input type="tel"
+            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
+            </mat-form-field>
+          </div>
         </div>
       </div>
   
@@ -19,8 +71,12 @@
         <h4>JOB INFORMATION</h4>
         <div class="row">
           <div class="col-md-4">
-            <label for="jobName" class="form-label">Job Name:</label>
+            <mat-form-field appearance="outline">
+              <mat-label>
+                JOBName:
+                </mat-label>
             <input type="text" class="form-control" id="jobName" placeholder="Enter job name">
+            </mat-form-field>
           </div>
           <!-- Add more fields similarly -->
         </div>
@@ -28,19 +84,82 @@
   
       <!-- Door Model Information -->
       <div class="mb-3">
-        <h4>DOOR MODEL</h4>
         <div class="row">
           <div class="col-md-4">
 
-            <mat-form-field>
-              <mat-label>Door Model</mat-label>
-              <mat-select>
-                  <mat-option></mat-option>
-              </mat-select>
-            </mat-form-field>
+           <app-auto-search [label]="'Door Model'" 
+           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+          </app-auto-search>
             
           </div>
-          <!-- Add more fields similarly -->
+ 
+        </div>
+        <!-- ext finish -->
+        <div class="row">
+          <div class="col-md-4">
+
+           <app-auto-search [label]="'Door Model'" 
+           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+          </app-auto-search>
+            
+          </div>
+ 
+        </div>
+        <!-- ext color -->
+        <div class="row">
+          <div class="col-md-4">
+
+           <app-auto-search [label]="'Door Model'" 
+           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+          </app-auto-search>
+            
+          </div>
+ 
+        </div>
+        <!-- int finish -->
+        <div class="row">
+          <div class="col-md-4">
+
+           <app-auto-search [label]="'Interior Finish'" 
+           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+          </app-auto-search>
+            
+          </div>
+ <!-- Add Hint -->
+ <!-- If Door Model is FD72 then Interior Finish is "Same as Exterior" -->
+        </div>
+        <!-- Int Color -->
+        <div class="row">
+          <div class="col-md-4">
+
+           <app-auto-search [label]="'Interior Color'" 
+           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+          </app-auto-search>
+            
+          </div>
+ 
+        </div>
+        <!-- Glass -->
+        <div class="row">
+          <div class="col-md-4">
+
+           <app-auto-search [label]="'Door Model'" 
+           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+          </app-auto-search>
+            
+          </div>
+ 
+        </div>
+        <!-- Handle Color -->
+        <div class="row">
+          <div class="col-md-4">
+
+           <app-auto-search [label]="'Door Model'" 
+           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+          </app-auto-search>
+            
+          </div>
+ 
         </div>
       </div>
   
