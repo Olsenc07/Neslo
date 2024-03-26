@@ -135,8 +135,13 @@
                 <mat-label for="message" class="form-label">Message</mat-label>
                 <textarea formControlName="message"  matInput class="form-control" id="message" rows="3"
                 placeholder="I would like to acquire about...">
-        <!-- show image -->
+                @if(contactForm.get('message')?.value){
+                    <button matSuffix mat-icon-button (click)="onClearMessage()">
+                      <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+                    </button>
+                  }
             </textarea>
+            <!-- make this fit properly -->
             @if(imageSrc){
             <div  class="thumbnail-container">
             <img  [src]="imageSrc" 
@@ -144,11 +149,7 @@
             alt="Selected file thumbnail" />
             </div>
             }
-                @if(contactForm.get('message')?.value){
-                    <button matSuffix mat-icon-button (click)="onClearMessage()">
-                      <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
-                    </button>
-                  }
+                
             </mat-form-field>
                   <div class="container">
                     <div class="row justify-content-between align-items-start">
@@ -158,12 +159,16 @@
                   <button mat-fab extended (click)="fileInput.click()" file>
                   Attach your request quote
                   <mat-icon class="material-symbols-outlined">attach_file</mat-icon>
-                 
                   </button>
                   @if(contactForm.get('file')?.value){
                     <span fileName>
                     {{ contactForm.get('file')?.value }}
                 </span>
+                  }
+                  @if(contactForm.get('message')?.value){
+                    <button matSuffix mat-icon-button (click)="onClearMessage()">
+                      <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+                    </button>
                   }
                 </div>
 

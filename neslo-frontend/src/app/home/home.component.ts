@@ -27,8 +27,6 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements AfterViewInit {
-  selectedFile: File | null = null;
-  // @ViewChild('vikingImage', { static: false }) vikingImage!: ElementRef<HTMLImageElement>;
   @ViewChild('imgChild', { static: false }) imgChild!: ElementRef<HTMLImageElement>;
   triggerSubmit = document.getElementById('submitBtn');
   state: 'noFocus' | 'focus' = 'noFocus';
@@ -73,16 +71,19 @@ export class HomeComponent implements AfterViewInit {
   }
   onClearMessage(): void {
   this.contactForm.get('message')?.reset();
-    this.imageSrc = null;
+  }
+  onClearFile(): void {
+    this.contactForm.get('file')?.reset();
+
   }
   onFileSelected(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
     let fileList: FileList | null = element.files;
     if (fileList) {
-      this.selectedFile = fileList[0];
+      const file = fileList[0];
       const reader = new FileReader();
       reader.onload = e => this.imageSrc = reader.result;
-      reader.readAsDataURL(fileList);
+      reader.readAsDataURL(file);
     }
   }
 
