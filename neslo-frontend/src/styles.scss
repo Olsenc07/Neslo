@@ -6,10 +6,15 @@
 }
 :root {
   --wood: #8B4513;
+  // --wood: #8a6d3b; 
+  --wood-dark: #5c471f; 
+  --wood-light: #bd9865;
   --blue: #007bff;
 }
 html, body {
     height: 100%;
     margin: 0;
 }
-
+div.mat-mdc-text-field-wrapper {
+  background-color: #ffffff;
+}

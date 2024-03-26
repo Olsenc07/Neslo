@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
   selector: 'app-home',
   imports: [
     MatButtonModule, 
+    MatDividerModule,
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -51,13 +53,19 @@ export class HomeComponent implements AfterViewInit {
   requestQuote(): void {
     this.router.navigate(['/quotes']);
   }
+  navigateToContact(): void {
+    document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' });
+  }
+  navigateToMsg(): void {
+    document.getElementById('msg')?.scrollIntoView({ behavior: 'smooth' });
+  }
   @HostListener('window:scroll', ['$event']) 
   handleScroll(): void {
     const scrollPosition = window.scrollY;
     const height = window.innerHeight;
     // Adjust the blur value based on the scroll position. You can tweak this formula to change how quickly the blur effect increases.
-    const blurValue = Math.min(70, (scrollPosition / height) * 20); // Cap the blur at a maximum value, e.g., 20px
-    const imgValue = 50 - (scrollPosition / height);
+    const blurValue = Math.min(70, (scrollPosition / (height) * 30)); // Cap the blur at a maximum value, e.g., 20px
+  
     if (this.imgChild && this.imgChild.nativeElement) {
       this.renderer.setStyle(this.imgChild.nativeElement, 'filter', `blur(${blurValue}px)`);
     }
