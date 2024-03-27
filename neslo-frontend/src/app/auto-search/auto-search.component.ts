@@ -7,6 +7,7 @@ import { AsyncPipe } from '@angular/common';
 import { BoldPipe } from 'src/app/pipes/bold.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { combineLatestWith, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
@@ -22,6 +23,7 @@ import { Observable, of } from 'rxjs';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     ReactiveFormsModule
   ],
   templateUrl: './auto-search.component.html',
@@ -30,13 +32,16 @@ import { Observable, of } from 'rxjs';
 export class AutoSearchComponent implements OnChanges {
   @Input() filler!: string;
   @Input() label!: string;
+  @Input() hint?: string;
   @Input() initialList: string[] = [''];
   input: FormControl<string | null> = new FormControl<string | null>('');
   @ViewChild('auto') matAutocomplete!: MatAutocomplete;
   auto: MatAutocomplete | undefined;
-  @Output() selectedChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
   filteredList$: Observable<string[]> = new Observable<string[]>();
 
+  constructor(){}
+  
   ngOnChanges(): void {
     const initialList$ = of(this.initialList);
 
@@ -55,7 +60,10 @@ export class AutoSearchComponent implements OnChanges {
     );
   }
   emitSelectedChange(selectedValue: string): void {
-    this.selectedChange.emit(selectedValue);
+    this.valueChange.emit(selectedValue);
   }
-
+  reset(): void {
+    this.input.reset();
+    this.valueChange.emit('');
+  }
 }

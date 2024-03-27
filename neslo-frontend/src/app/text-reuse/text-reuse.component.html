@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-12">
+      @if(intro){
+      {{intro}}
+      }
+      <mat-form-field appearance="outline">
+      @if(label){
+        <mat-label>
+          {{label}}
+          </mat-label>
+        }
+      <input [type]=types matInput
+      [formControl]="input" >
+      @if(input.value){
+        <button matSuffix mat-icon-button (click)="reset()">
+          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+        </button>
+      }
+      </mat-form-field>
+    </div>
+  </div>

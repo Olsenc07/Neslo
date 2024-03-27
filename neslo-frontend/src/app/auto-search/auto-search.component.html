@@ -1,7 +1,9 @@
+<div class="row">
+  <div class="col-12">
+      @if(label){
+        {{label}}
+        }
 <mat-form-field appearance="outline">
-<mat-label>
-    {{ label }}
-  </mat-label>
 <input type="text" matInput [matAutocomplete]="auto" [formControl]="input"
   [placeholder]="filler">
     <mat-autocomplete #auto="matAutocomplete" >
@@ -12,4 +14,16 @@
         </mat-option>
     }
     </mat-autocomplete>
+    @if(input.value){
+      <button matSuffix mat-icon-button (click)="reset()">
+        <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+      </button>
+    }
+    @if (hint){
+      <mat-hint>{{hint}}</mat-hint>
+      }
 </mat-form-field>
+
+</div>
+
+</div>

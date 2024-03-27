@@ -1,166 +1,64 @@
 <!-- You can use the 'container', 'row', and 'col' classes from Bootstrap to layout your form -->
 <div class="container mt-3">
-    <form>
-      <!-- Dealer Information -->
-      <!-- Auto fills in message -->
-      <div class="mb-3">
-        <h4>DEALER INFORMATION</h4>
-        <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline">
-              <mat-label>
-                Dealer Name:
-                </mat-label>
-            <input type="text"
-            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
-            </mat-form-field>
-          </div>
-        </div>
+    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
+      <div class="row">
+        <!-- Dealer Information Section -->
+        <div class="col-12 col-md-6">
+        <h4>Dealer Information</h4>
+        <!-- alwasy dad ! -->
+       <app-text-reuse [intro]="'Dealer Name'" [label]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
         <!-- Dealer Branch -->
-        <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline">
-              <mat-label>
-                Dealer Branch:
-                </mat-label>
-            <input type="text"
-            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
-            </mat-form-field>
-          </div>
-        </div>
+        <app-text-reuse [intro]="'Branch Name'"  (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
         <!-- Contact Name -->
-        <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline">
-              <mat-label>
-                Contact Name:
-                </mat-label>
-            <input type="text"
-            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
-            </mat-form-field>
-          </div>
-        </div>
+        <app-text-reuse  [intro]="'Contact name'" (valueChange)="updateField('contactName', $event)"></app-text-reuse>
         <!-- Contact Email -->
-        <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline">
-              <mat-label>
-                Dealer Name:
-                </mat-label>
-            <input type="email"
-            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
-            </mat-form-field>
-          </div>
-        </div>
+        <app-text-reuse [intro]="'Contact email'" [label]="'redman68&#64;live.ca'" [types]="'email'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
         <!-- Phone -->
-        <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline">
-              <mat-label>
-                Dealer Name:
-                </mat-label>
-            <input type="tel"
-            formControlName="dealerName" id="dealerName" placeholder="Enter dealer name">
-            </mat-form-field>
-          </div>
-        </div>
+        <app-text-reuse [intro]="'Contact number'"  [label]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
       </div>
   
       <!-- Job Information -->
-      <div class="mb-3">
-        <h4>JOB INFORMATION</h4>
-        <div class="row">
-          <div class="col-md-4">
-            <mat-form-field appearance="outline">
-              <mat-label>
-                JOBName:
-                </mat-label>
-            <input type="text" class="form-control" id="jobName" placeholder="Enter job name">
-            </mat-form-field>
-          </div>
-          <!-- Add more fields similarly -->
-        </div>
+      <div class="col-12 col-md-6">
+        <h4>Job Information</h4>
+        <ul>
+          Please Note
+          <li>
+          All Configurations are Viewed from the inside.
+          </li>
+          </ul>
+        <app-text-reuse  [intro]="'Job name'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Site adress'" (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'City'" (valueChange)="updateField('jobCity', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Date'" (valueChange)="updateField('date', $event)"></app-text-reuse>
       </div>
-  
       <!-- Door Model Information -->
-      <div class="mb-3">
-        <div class="row">
-          <div class="col-md-4">
-
-           <app-auto-search [label]="'Door Model'" 
-           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+      <div class="container mb-3">
+        <h4>Specify your selection</h4>
+           <app-auto-search [label]="'Door Model'" [hint]="'If Door Model is FD72 then Interior Finish is `Same as Exterior`'"
+           [filler]="'FD27 PVCU'" [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
           </app-auto-search>
-            
-          </div>
- 
-        </div>
-        <!-- ext finish -->
-        <div class="row">
-          <div class="col-md-4">
-
-           <app-auto-search [label]="'Door Model'" 
-           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+        <!-- Ext finish -->
+           <app-auto-search [label]="'Exterior Finish'" (valueChange)="updateField('exteriorFinish', $event)"
+           [filler]="exteriorFinish[0]" [initialList]="exteriorFinish">
           </app-auto-search>
-            
-          </div>
- 
-        </div>
-        <!-- ext color -->
-        <div class="row">
-          <div class="col-md-4">
-
-           <app-auto-search [label]="'Door Model'" 
-           [filler]="'FD27 PVCU'" [initialList]="doorModel">
+        <!-- Ext color -->
+           <app-text-reuse  [label]="'Exterior Color'" 
+           (valueChange)="updateField('exteriorColor', $event)">
+          </app-text-reuse >
+        <!-- Int finish -->
+           <app-auto-search [label]="'Interior Finish'" (valueChange)="updateField('interiorFinish', $event)"
+           [filler]="interionFinish[0]" [initialList]="interionFinish">
           </app-auto-search>
-            
-          </div>
- 
-        </div>
-        <!-- int finish -->
-        <div class="row">
-          <div class="col-md-4">
-
-           <app-auto-search [label]="'Interior Finish'" 
-           [filler]="'FD27 PVCU'" [initialList]="doorModel">
-          </app-auto-search>
-            
-          </div>
- <!-- Add Hint -->
- <!-- If Door Model is FD72 then Interior Finish is "Same as Exterior" -->
-        </div>
         <!-- Int Color -->
-        <div class="row">
-          <div class="col-md-4">
-
-           <app-auto-search [label]="'Interior Color'" 
-           [filler]="'FD27 PVCU'" [initialList]="doorModel">
-          </app-auto-search>
-            
-          </div>
- 
-        </div>
+           <app-text-reuse  [label]="'Interior Color'" (valueChange)="updateField('interiorColor', $event)">
+          </app-text-reuse >
         <!-- Glass -->
-        <div class="row">
-          <div class="col-md-4">
+           <app-text-reuse [label]="'Glass'"  (valueChange)="updateField('glass', $event)">
+          </app-text-reuse>
 
-           <app-auto-search [label]="'Door Model'" 
-           [filler]="'FD27 PVCU'" [initialList]="doorModel">
-          </app-auto-search>
-            
-          </div>
- 
-        </div>
         <!-- Handle Color -->
-        <div class="row">
-          <div class="col-md-4">
-
-           <app-auto-search [label]="'Door Model'" 
-           [filler]="'FD27 PVCU'" [initialList]="doorModel">
-          </app-auto-search>
-            
-          </div>
- 
-        </div>
+           <app-text-reuse [label]="'Handle Color'" (valueChange)="updateField('handleColor', $event)">
+          </app-text-reuse>
       </div>
   
       <!-- Additional Notes -->
@@ -171,8 +69,16 @@
   
       <!-- Submit Button -->
       <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button mat-fab extended type="submit" class="btn btn-primary">
+          <mat-icon class="material-symbols-outlined">
+            picture_as_pdf
+          </mat-icon>
+          Download as PDF
+        </button>
+      </div>
       </div>
     </form>
+<!-- Attach a message and email driectly to Neslo -->
+
   </div>
   

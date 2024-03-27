@@ -1,0 +1,89 @@
+<form [formGroup]="contactForm" (ngSubmit)="send()">
+    <mat-form-field appearance="outline" >
+    <mat-label class="form-label">Name</mat-label>
+    <input type="text" formControlName="name" matInput  placeholder="Your Name">
+    @if(contactForm.get('name')?.value){
+        <button matSuffix mat-icon-button (click)="contactForm.get('name')?.reset()">
+          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+        </button>
+      }
+      @if(contactForm.get('name')?.errors?.['required']){
+        <mat-error>Please supply your name</mat-error>
+          }
+</mat-form-field>
+    <mat-form-field  appearance="outline" >
+    <mat-label class="form-label">Email</mat-label>
+    <input type="email" formControlName="email" matInput placeholder="name@example.com">
+    @if(contactForm.get('email')?.value){
+        <button matSuffix mat-icon-button (click)="contactForm.get('email')?.reset()">
+          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+        </button>
+      }
+      @if(contactForm.get('email')?.errors?.['required']){
+        <mat-error>Email is required</mat-error>
+          }
+</mat-form-field>
+    <mat-form-field  appearance="outline">
+    <mat-label for="message" class="form-label">Message</mat-label>
+    <textarea formControlName="message"  matInput  rows="3"
+    placeholder="I would like to acquire about...">
+    @if(contactForm.get('message')?.value){
+        <button matSuffix mat-icon-button (click)="onClearMessage()">
+          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+        </button>
+      }
+</textarea>
+<!-- make this fit properly -->
+@if(imageSrc){
+<div  class="thumbnail-container">
+<img  [src]="imageSrc" 
+class="img-thumbnail img-fluid mx-auto d-block" 
+alt="Selected file thumbnail" />
+</div>
+}
+    
+</mat-form-field>
+      <div class="container">
+        <div class="row justify-content-between align-items-start">
+            <div class="col-6 col-md-4 d-flex align-items-start">
+      <input type="file" formControlName="file"  (change)="onFileSelected($event)"
+      hidden #fileInput accept=".pdf, .doc, .docx, .jpg" multiple>
+      <button mat-fab extended (click)="fileInput.click()" file>
+      Attach your request quote
+      <mat-icon class="material-symbols-outlined">attach_file</mat-icon>
+      </button>
+      @if(contactForm.get('file')?.value){
+        <span fileName>
+        {{ contactForm.get('file')?.value }}
+    </span>
+      }
+      @if(contactForm.get('message')?.value){
+        <button matSuffix mat-icon-button (click)="onClearMessage()">
+          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+        </button>
+      }
+    </div>
+
+
+
+
+    
+    <div class="col-6 col-md-4 ms-auto text-end">
+<button mat-fab extended type="submit" id="submitBtn" 
+    (mouseover)="onHover(true)" (mouseleave)="onHover(false)" 
+      [disabled]="contactForm.valid">
+      Send Email 
+      <mat-icon class="material-symbols-outlined">
+    @switch (state) { 
+        @case ('noFocus') { keyboard_arrow_right }
+        @case ('focus') { arrow_right_alt }
+       @default { keyboard_arrow_right }
+      }
+    </mat-icon>
+    </button>
+    </div>
+    </div>
+    </div>
+
+    
+</form>
