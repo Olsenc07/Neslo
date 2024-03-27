@@ -37,7 +37,7 @@ export class ContactFormComponent {
   onClearMessage(): void {
     this.contactForm.get('message')?.reset();
     }
-    onClearFile(): void {
+  onClearFile(): void {
       this.contactForm.get('file')?.reset();
     }
     onFileSelected(event: Event) {

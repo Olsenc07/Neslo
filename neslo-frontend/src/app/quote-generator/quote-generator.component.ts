@@ -1,6 +1,6 @@
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './quote-generator.component.html',
   styleUrls: ['./quote-generator.component.scss'],
   imports: [AutoSearchComponent, MatInputModule,
-    MatIconModule, MatFormFieldModule,
+    MatIconModule, MatFormFieldModule, ReactiveFormsModule,
      MatSelectModule, TextReuseComponent]
 })
 export class QuoteGeneratorComponent {
@@ -36,10 +36,14 @@ export class QuoteGeneratorComponent {
     handleColor: new FormControl<string>(''),
     additionalNotes: new FormControl<string>('')
   })
-  
+
   constructor() {}
+  
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
+  }
+  onClear(): void {
+    this.quoteForm.get('additionalNotes')?.reset();
   }
   generatePDF(): void {
     // const doc = new jsPDF();

@@ -1,8 +1,7 @@
-<header #imgChild   class=" img d-flex align-items-center justify-content-center text-center">
+<header #imgChild  class=" img d-flex align-items-center justify-content-center text-center">
     <div  class="text-center">
         <h1 neslo>Welcome to Neslo</h1>
         <h2 heading>Your trusted partner in premium windows and doors</h2>
-
         <div class="d-flex justify-content-center mt-4 gap-2 ">
             <button mat-fab extended  class="quote-base quoteS btn btn-outline-primary btn-lg" (click)="navigateToContact()">
                 Contacts
@@ -23,76 +22,38 @@
                   </mat-icon>
             </button>
         </div>
-        
-        
-
     </div>    
 </header>
 
 <!-- add a header when upper has faded out or just quote option -->
+@defer(on viewport){
 <section  class="section-padding bg-light">
     <div about class="container bg-white">
-        <h2 class="text-center mb-4 pt-3" id="contacts">About Us
+        <h2 class="text-center mb-4 pt-3" id="contacts">
+            About Us
             <mat-divider></mat-divider>
         </h2>
         <div class="row">
-            <div class="col-md-6 mb-4">
-                <h3 class="text-center mb-3">Alberta's Distributor</h3>
-                <p class="text-center">Folding Sliding Doors Canada is the proud supplier for Neslo.</p>
-               <div class="text-center">
-                <p>
-                    <a class="link-secondary" href="tel:4039941202">Erik Olsen: (403) 994 – 1202</a>
-                </p>
-                <p>
-                    <a class="link-secondary" href="mailto:redman68@live.ca">
-                        Email: redman68&#64;live.ca
-                    </a>
-                </p>
-                <p class="text-center">Alberta's location for delivery and instolation.</p>
-                <p class="text-center">
-                    Located in Olds, AB, Neslo specializes in the supply and installation 
-                    of premium windows and doors, offering unparalleled durability and energy efficiency. 
-                    Using the Folding Sliding Door System designed by FSDC.
-                </p> 
-            </div> 
-            </div>
-          <div class="col-md-6 mb-4">
-                <h3 class="text-center mb-3">Primary Supplier</h3>
-                <p class="text-center">Folding Sliding Doors Canada is the proud supplier for Neslo.</p>
-                <div class="text-center">
-
-                    <p>
-                        <a class="link-secondary" href="tel:2504486418">
-                            Phone: (250) 448 – 6418
-                        </a>
-                    </p>
- 
-                      <p>
-                        <a class="link-secondary" href="mailto:sales@foldingslidingdoors.ca">
-                            Email: sales&#64;foldingslidingdoors.ca
-                        </a>
-                    </p>
-          
-                    <p>
-                        <span class="link-secondary">
-                            Fax: (250) 448 – 6444
-                        </span>
-                    </p>
-                </div>
-    
-                <p class="text-center">
-                    Check out our latest projects at Folding Sliding Doors Canada:
-                    <!-- <img src="assets/images/folding_sliding_doors_logo.png" alt="Folding Sliding Doors Canada" class="img-fluid mb-3"> -->
-                    <a class="link-primary" href="https://www.foldingslidingdoors.ca/" target="_blank">www.foldingslidingdoors.ca</a>
-                </p>
-            </div> 
+            <!-- Alberta -->
+            <app-about-us [title]="'Alberta`s Distributor'"
+            [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'redman68@live.ca'"
+            [message]="messageAB"></app-about-us>
+            <!-- Supplier -->
+            <app-about-us [title]="'Primary Supplier'"
+            [intro]="introAB" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
+            [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
         </div>
         </div>
 </section>
+}@placeholder { 
+    <app-skeleton-form></app-skeleton-form>
+     }
+@defer(on viewport){
 <!-- Reuse this after invoice has ben made -->
 <section  class="section-padding bg-light">
     <div contact class="container">
-        <h2 class="text-center mb-4" id="msg">Contact Us
+        <h2 class="text-center mb-4" id="msg">
+            Contact Us
             <mat-divider></mat-divider>
         </h2>
         <ul>
@@ -110,6 +71,9 @@
     </div>
     </div>
 </section>
+}@placeholder { 
+    <app-skeleton-form></app-skeleton-form>
+     }
 
 <footer class="text-center section-padding bg-dark text-light">
 <div class="container">

@@ -23,9 +23,9 @@
         <mat-error>Email is required</mat-error>
           }
 </mat-form-field>
-    <mat-form-field  appearance="outline">
+    <mat-form-field appearance="outline">
     <mat-label for="message" class="form-label">Message</mat-label>
-    <textarea formControlName="message"  matInput  rows="3"
+    <textarea formControlName="message" matInput rows="2"
     placeholder="I would like to acquire about...">
     @if(contactForm.get('message')?.value){
         <button matSuffix mat-icon-button (click)="onClearMessage()">
