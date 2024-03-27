@@ -19,6 +19,10 @@ html, body {
     height: 100%;
     margin: 0;
 }
+div[container]{
+  border-radius: 25px;
+  border: 1px groove;
+}
 div.mat-mdc-text-field-wrapper {
   background-color: #ffffff;
 }

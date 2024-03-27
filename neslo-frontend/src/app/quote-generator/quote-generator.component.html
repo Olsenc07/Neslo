@@ -1,19 +1,40 @@
-<header class="header p-3">
+<header class=" bg-light p-3">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col">
-        <!-- Assuming the image includes company details and 'QUOTE REQUEST' -->
-        <img src="../../assets/images/folding_sliding_doors_logo.png" class="img-fluid" alt="Folding Sliding Doors Canada Ltd.">
+        <!-- Company Logo -->
+        <div>
+        <img src="assets/images/folding_sliding_doors_logo.png"  class="img-fluid mb-2" alt="Folding Sliding Doors Canada Ltd. Logo">
+        </div>
+        <!-- Company Details -->
+        <div class="col text-center">
+        <h1 class="h3 mb-0">Folding Sliding Doors Canada Ltd.</h1>
+        <p class="mb-1">105 - 1155 St. Paul Street</p>
+        <p class="mb-1">Kelowna, BC V1Y 2C6</p>
+        <p class="mb-1">Ph: 1(250)-448-6418</p>
       </div>
+      <div class="col text-center">
+      <h4 class="mt-3 bg-success">
+        QUOTE REQUEST
+       </h4>
+        <!-- Contact Information -->
+        <p class="mb-1">
+          <a href="tel:12504486418" class="link-secondary">Ph: 1(250)-448-6418</a>
+        </p>
+        <p class="mb-1">
+          <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary">Email: sales&#64;foldingslidingdoors.ca</a>
+        </p>
+        <p class="mb-1">
+          <a href="https://www.foldingslidingdoors.ca" class="link-secondary">Web: www.foldingslidingdoors.ca</a>
+        </p>
+      </div>      
     </div>
   </div>
 </header>
-
 <div class="mt-3">
     <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
     <section  class="section-padding row bg-light">
         <!-- Dealer Information Section -->
-        <div class="col-12 col-md-6">
+        <div container class="col-12 col-md-6 contaiiner">
         <h4>Dealer Information</h4>
         <!-- alwasy dad ! -->
        <app-text-reuse [intro]="'Dealer Name'" [label]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
@@ -30,7 +51,6 @@
       <div class="col-12 col-md-6">
         <h4>Job Information</h4>
         <ul>
-          Please Note
           <li>
           All Configurations are Viewed from the inside.
           </li>
@@ -38,12 +58,12 @@
         <app-text-reuse  [intro]="'Job name'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
         <app-text-reuse  [intro]="'Site adress'" (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
         <app-text-reuse  [intro]="'City'" (valueChange)="updateField('jobCity', $event)"></app-text-reuse>
-        <app-text-reuse  [intro]="'Date'" (valueChange)="updateField('date', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Date'" [types]="'date'" (valueChange)="updateField('date', $event)"></app-text-reuse>
         </div>
       </section>
       <!-- Door Model Information -->
-      <section  class="section-padding row bg-dark">
-        <div class="col-12 col-md-6">
+      <section  class="section-padding  bg-light">
+        <div container class="col-12 col-md-6 container">
         <h4>Specify your selection</h4>
            <app-auto-search [label]="'Door Model'" [hint]="'If Door Model is FD72 then Interior Finish is `Same as Exterior`'"
            [filler]="'FD27 PVCU'" [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
