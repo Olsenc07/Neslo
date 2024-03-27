@@ -1,0 +1,14 @@
+button[file]{
+    background-color: #4A2C2A;
+    color: white;
+  }
+button[type="submit"]{
+    color: white;
+    background-color: var(--wood);
+  &:hover{
+    background-color: var(--wood-red);
+  }
+  }
+  button[mat-fab]:active {
+    background-color: var(--wood-light) ; /* Force override Material styles */
+  }

@@ -1,21 +1,22 @@
-<header #imgChild  class=" img d-flex align-items-center justify-content-center text-center">
+@defer(on immediate){
+<header #imgChild class="img d-flex align-items-center justify-content-center text-center">
     <div  class="text-center">
         <h1 neslo>Welcome to Neslo</h1>
         <h2 heading>Your trusted partner in premium windows and doors</h2>
         <div class="d-flex justify-content-center mt-4 gap-2 ">
-            <button mat-fab extended  class="quote-base quoteS btn btn-outline-primary btn-lg" (click)="navigateToContact()">
-                Contacts
+            <button mat-fab extended  class=" btn btn-primary btn-lg" (click)="navigateToContact()">
+                Contact a member
                 <mat-icon class="material-symbols-outlined">
                     contact_mail
                 </mat-icon>
             </button>
-            <button mat-fab extended  class="quote btn btn-primary btn-lg px-4" (click)="requestQuote()" style="transform: scale(1.1); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);">
+            <button mat-fab extended  class="quote btn btn-primary btn-lg px-4" (click)="requestQuote()">
                 Request a quote
                   <mat-icon class="material-symbols-outlined">
                     attach_money
                   </mat-icon>
             </button>
-            <button mat-fab extended  class="quote-base btn btn-outline-primary btn-lg" (click)="navigateToMsg()">
+            <button mat-fab extended  class="btn btn-primary btn-lg" (click)="navigateToMsg()">
                 Send a message
                   <mat-icon class="material-symbols-outlined">
                     send
@@ -24,56 +25,62 @@
         </div>
     </div>    
 </header>
-
-<!-- add a header when upper has faded out or just quote option -->
-@defer(on viewport){
-<section  class="section-padding bg-light">
-    <div container class="container bg-white">
+}
+<section  class="my-3">
+    <div container class="container bg-light">
         <h2 class="text-center mb-4 pt-3" id="contacts">
             About Us
-            <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
         </h2>
         <div class="row">
-            <!-- Alberta -->
-            <app-about-us [title]="'Alberta`s Distributor'"
-            [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'redman68@live.ca'"
-            [message]="messageAB"></app-about-us>
-            <!-- Supplier -->
-            <app-about-us [title]="'Primary Supplier'"
-            [intro]="introAB" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
-            [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
+            <!-- Alberta's Distributor -->
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+        @defer(on viewport){
+                <app-about-us [title]="'Alberta’s Distributor'" 
+                [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'redman68@live.ca'"
+                [message]="messageAB"></app-about-us>
+            } @placeholder { 
+                <app-skeleton-form class="col-12"></app-skeleton-form>
+                 }
+                </div>
+            <!-- Primary Supplier -->
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+        @defer(on viewport){
+                <app-about-us [title]="'Primary Supplier'" 
+                [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
+                [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
+            } @placeholder { 
+                <app-skeleton-form class="col-12"></app-skeleton-form>
+                 }
+                </div>
         </div>
-        </div>
+    </div>
 </section>
-}@placeholder { 
-    <app-skeleton-form></app-skeleton-form>
-     }
-@defer(on viewport){
-<!-- Reuse this after invoice has ben made -->
-<section  class="section-padding bg-light">
-    <div container class="container">
+
+<section class="my-3 ">
+    <div container class="container py-3 bg-light">
         <h2 class="text-center mb-4" id="msg">
             Contact Us
             <mat-divider></mat-divider>
         </h2>
-        <ul>
+        <ul class="mt-4">
 <li>For a quick message, please text or call (403) 994 – 1202 </li>
 <li>Emails sent through this form will be directed to 
-<ul>
-    <li>
-     Erik Olsen: "redman68&#64;live.ca".
-    </li>
+<ul class="mt-2">
+<li>Erik Olsen: <a href="mailto:redman68@live.ca" class="link-secondary">redman{{atSymbol}}live.ca</a></li>
     </ul>
     </li>
         </ul>
-        <div class="col-12">
+        <div class="col-12 mt-4">
+@defer(on viewport){
        <app-contact-form></app-contact-form>
+    }@placeholder { 
+        <app-skeleton-form-fill></app-skeleton-form-fill>
+         }
     </div>
     </div>
 </section>
-}@placeholder { 
-    <app-skeleton-form></app-skeleton-form>
-     }
+
 
 <footer class="text-center section-padding bg-dark text-light">
 <div class="container">
