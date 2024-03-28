@@ -1,0 +1,61 @@
+
+  @keyframes gradient-flow {
+    0%{
+      background-position: 200% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  .intro-head{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 44vh;
+  }
+.btn-primary {
+    transition: background-image .3s ease-in-out; 
+    background-image: linear-gradient(45deg, var(--wood), var(--wood-light));
+    border: 3px solid var(--wood-dark);
+    color: white; 
+  }
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: var(--wood-light);
+    background-image: linear-gradient(45deg, var(--wood-dark), var(--wood));
+    border-color: var(--wood); 
+    transform: scale(1.10); 
+  }
+  .quote {
+    box-shadow: 0px 1px 0px 2px white;
+  }
+  .mobile{
+    margin: 3%;
+    width: 75%;
+  }
+  .quoteDesk{
+    margin: 0% 2%;
+    margin-top: -20px;
+  }
+  h1[neslo] {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent; 
+    background-image: linear-gradient(45deg, var(--wood), white, var(--wood));
+    background-size: 200% 200%; 
+    animation: gradient-flow 10s linear infinite; 
+      }
+
+h2[heading] {
+  color: black;
+  @media only screen and (min-width: 600px) {
+    color: white;
+  }
+    text-align: center; 
+    word-wrap: break-word; 
+  }
+  .universal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+  }

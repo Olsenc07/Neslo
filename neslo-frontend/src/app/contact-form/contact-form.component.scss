@@ -10,5 +10,33 @@ button[type="submit"]{
   }
   }
   button[mat-fab]:active {
-    background-color: var(--wood-light) ; /* Force override Material styles */
+    background-color: var(--wood-light) ; 
   }
+  .limit {
+    max-height: 200px; 
+    overflow: hidden; 
+    position: relative; 
+  }
+  .full{
+    width: 100%;
+    padding: 3%;
+  }
+  .full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 7; 
+    background-color: rgba(0,0,0,0.8); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .full-screen img {
+    width: auto; 
+    max-width: 90%; 
+    max-height: 90%; 
+  }
+  

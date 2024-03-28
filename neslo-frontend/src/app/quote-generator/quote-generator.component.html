@@ -101,7 +101,7 @@
           <mat-label>Additional Notes:</mat-label>
         <textarea matInput rows="2" formControlName="additionalNotes">
           @if(contactForm.get('additionalNotes')?.value){
-              <button matSuffix mat-icon-button (click)="onClearMessage()">
+              <button matSuffix mat-icon-button (click)="contactForm.get('additionalNotes')?.reset()">
                 <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
               </button>
             }

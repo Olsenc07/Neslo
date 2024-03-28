@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  {MatButtonModule } from '@angular/material/button';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-contact-form',
@@ -18,7 +19,8 @@ import  {MatButtonModule } from '@angular/material/button';
     MatIconModule, 
     MatInputModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgClass
   ],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss'
@@ -26,6 +28,8 @@ import  {MatButtonModule } from '@angular/material/button';
 export class ContactFormComponent {
   state: 'noFocus' | 'focus' = 'noFocus';
   imageSrc: string | ArrayBuffer | null = null;
+  isFullScreen: boolean = false;
+
   contactForm: FormGroup = new FormGroup({
     name: new FormControl<string | null>(null, Validators.required),
     email: new FormControl<string | null>(null, [
@@ -36,12 +40,9 @@ export class ContactFormComponent {
     file: new FormControl<File | null>(null)
   });
 
-  onClearMessage(): void {
-    this.contactForm.get('message')?.reset();
-    }
-  onClearFile(): void {
-      this.contactForm.get('file')?.reset();
-    }
+  toggleFullScreen(): void {
+    this.isFullScreen = !this.isFullScreen;
+  }
     onFileSelected(event: Event) {
       const element = event.currentTarget as HTMLInputElement;
       let fileList: FileList | null = element.files;

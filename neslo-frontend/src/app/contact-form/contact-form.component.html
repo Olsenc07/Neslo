@@ -33,44 +33,43 @@
     <mat-label for="message" class="form-label">Message</mat-label>
     <textarea formControlName="message" matInput rows="2"
     placeholder="I would like to acquire about...">
-    @if(contactForm.get('message')?.value){
-        <button matSuffix mat-icon-button (click)="onClearMessage()">
+      @if(contactForm.get('message')?.value){
+        <button matSuffix mat-icon-button (click)="contactForm.get('message')?.reset()">
           <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
         </button>
       }
-</textarea>
+
 <!-- make this fit properly -->
-@if(imageSrc){
-<div  class="thumbnail-container">
+@if(imageSrc && contactForm.get('file')?.value){
+<div  class="thumbnail-container limit" [ngClass]="{'full-screen': isFullScreen}" (click)="toggleFullScreen()">
 <img  [src]="imageSrc" 
 class="img-thumbnail img-fluid mx-auto d-block" 
 alt="Selected file thumbnail" />
 </div>
 }
+</textarea>
 </mat-form-field>
 </div>
-      <div class="container">
-        <div class="row justify-content-between align-items-start">
-            <div class="col-6 col-md-4 d-flex align-items-start">
+      <div class="container align-items-center d-flex">
+       
       <input type="file" formControlName="file"  (change)="onFileSelected($event)"
       hidden #fileInput accept=".pdf, .doc, .docx, .jpg" multiple>
+      <div class="g-3 g-md-3 justify-content-md-between d-block d-md-flex">
+        <div class="full col-12 col-md-6 d-flex justify-content-start">
       <button mat-fab extended (click)="fileInput.click()" file>
       Attach your request quote
       <mat-icon class="material-symbols-outlined">attach_file</mat-icon>
       </button>
       @if(contactForm.get('file')?.value){
-        <span fileName>
+        <div>
         {{ contactForm.get('file')?.value }}
-    </span>
-      }
-      @if(contactForm.get('message')?.value){
-        <button matSuffix mat-icon-button (click)="onClearMessage()">
-          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
-        </button>
+        </div>
+    <button matSuffix mat-icon-button (click)="contactForm.get('file')?.reset()">
+      <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
+    </button>
       }
     </div>
-
-    <div class="col-6 col-md-4 ms-auto text-end">
+    <div class="full col-12 col-md-6 d-flex justify-content-end">
 <button mat-fab extended type="submit" id="submitBtn" 
     (mouseover)="onHover(true)" (mouseleave)="onHover(false)" 
       [disabled]="contactForm.valid">
@@ -84,7 +83,7 @@ alt="Selected file thumbnail" />
     </mat-icon>
     </button>
     </div>
-    </div>
+  </div>
     </div>
 </section>
 </form>

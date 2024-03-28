@@ -42,9 +42,7 @@ export class QuoteGeneratorComponent {
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
-  onClear(): void {
-    this.quoteForm.get('additionalNotes')?.reset();
-  }
+ 
   generatePDF(): void {
     // const doc = new jsPDF();
     // doc.save('quote.pdf');
