@@ -7,6 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { jsPDF } from 'jspdf';
 
 @Component({
   standalone: true,
@@ -38,16 +40,30 @@ export class QuoteGeneratorComponent {
     additionalNotes: new FormControl<string>('')
   })
 
-  constructor() {}
+  constructor(private router: Router){}
   
+  returnHome(): void {
+    this.router.navigate(['/home']);
+  }
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
  
   generatePDF(): void {
-    // const doc = new jsPDF();
-    // doc.save('quote.pdf');
+    const doc = new jsPDF();
+  
+    // Basic text layout example
+    doc.text('Quote Form', 10, 10);
+    doc.text(`Dealer Name: ${this.quoteForm.value.dealerName}`, 10, 20);
+    doc.text(`Contact Email: ${this.quoteForm.value.contactEmail}`, 10, 30);
+    doc.text(`Contact Phone: ${this.quoteForm.value.contactPhone}`, 10, 40);
+
+    // add the colum chart
+    // Attach two other pages below it 
+    // Save the PDF
+    doc.save('quote.pdf');
   }
+  
 
   doorModel: string[] = [
     'FD27 PVCU'

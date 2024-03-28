@@ -28,13 +28,15 @@
         </p>
       </div>      
     </div>
+    <button back mat-fab (click)="returnHome()">
+      <mat-icon class="material-symbols-outlined">arrow_back</mat-icon>
+    </button>
   </div>
 </header>
-<div class="my-3">
     <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
-    <section  class="my-3 section-padding row bg-light">
+    <section class="py-3">
         <!-- Dealer Information Section -->
-        <div container class="py-3 col-12 col-md-6 contaiiner">
+        <div class="col-12 col-md-6"></div>
         <h2>Dealer Information</h2>
         <!-- alwasy dad ! -->
        <app-text-reuse [intro]="'Dealer Name'" [label]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
@@ -46,10 +48,10 @@
         <app-text-reuse [intro]="'Contact email'" [label]="'redman68&#64;live.ca'" [types]="'email'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
         <!-- Phone -->
         <app-text-reuse [intro]="'Contact phone'"  [label]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
-      </div>
+        </section>
       <!-- Job Information -->
-      <div class="py-3 col-12 col-md-6">
-        <h4>Job Information</h4>
+      <section class="py-3">
+        <h2>Job Information</h2>
         <ul>
           <li>
           All Configurations are Viewed from the inside.
@@ -59,11 +61,9 @@
         <app-text-reuse  [intro]="'Site adress'" (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
         <app-text-reuse  [intro]="'City'" (valueChange)="updateField('jobCity', $event)"></app-text-reuse>
         <app-text-reuse  [intro]="'Date'" [types]="'date'" (valueChange)="updateField('date', $event)"></app-text-reuse>
-        </div>
-      </section>
+        </section>
       <!-- Door Model Information -->
-      <section class="my-3 section-padding  bg-light">
-        <div container class="col-12 col-md-6 container">
+      <section class="py-3">
         <h2>Specify your selection</h2>
            <app-auto-search [label]="'Door Model'" [hint]="'If Door Model is FD72 then Interior Finish is `Same as Exterior`'"
            [filler]="'FD27 PVCU'" [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
@@ -91,7 +91,6 @@
            <app-text-reuse [label]="'Handle Color'" (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
           </div>
-      </div>
       </section>
   
       <!-- Additional Notes -->
@@ -116,8 +115,9 @@
           Download as PDF
         </button>
       </div>
+ b
+      <!-- Have contact form pop up and has this pdf downloaded -->
     </form>
-      </div>
 <!-- Attach a message and email driectly to Neslo -->
 
   
