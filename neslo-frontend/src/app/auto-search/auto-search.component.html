@@ -1,9 +1,11 @@
 <div class="row">
-  <div class="col-12">
+  <div class="col-12 col-md">
+  <mat-form-field appearance="outline">
       @if(label){
+        <mat-label>
         {{label}}
+        </mat-label>
         }
-<mat-form-field appearance="outline">
 <input type="text" matInput [matAutocomplete]="auto" [formControl]="input"
   [placeholder]="filler">
     <mat-autocomplete #auto="matAutocomplete" >

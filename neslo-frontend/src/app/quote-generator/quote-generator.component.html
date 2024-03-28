@@ -13,7 +13,7 @@
         <p class="mb-1">Ph: 1(250)-448-6418</p>
       </div>
       <div class="col text-center">
-      <h4 class="mt-3 bg-success">
+      <h4 class="mt-3 quote-head">
         QUOTE REQUEST
        </h4>
         <!-- Contact Information -->
@@ -30,12 +30,12 @@
     </div>
   </div>
 </header>
-<div class="mt-3">
+<div class="my-3">
     <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
-    <section  class="section-padding row bg-light">
+    <section  class="my-3 section-padding row bg-light">
         <!-- Dealer Information Section -->
-        <div container class="col-12 col-md-6 contaiiner">
-        <h4>Dealer Information</h4>
+        <div container class="py-3 col-12 col-md-6 contaiiner">
+        <h2>Dealer Information</h2>
         <!-- alwasy dad ! -->
        <app-text-reuse [intro]="'Dealer Name'" [label]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
         <!-- Dealer Branch -->
@@ -48,7 +48,7 @@
         <app-text-reuse [intro]="'Contact phone'"  [label]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
       </div>
       <!-- Job Information -->
-      <div class="col-12 col-md-6">
+      <div class="py-3 col-12 col-md-6">
         <h4>Job Information</h4>
         <ul>
           <li>
@@ -62,9 +62,9 @@
         </div>
       </section>
       <!-- Door Model Information -->
-      <section  class="section-padding  bg-light">
+      <section class="my-3 section-padding  bg-light">
         <div container class="col-12 col-md-6 container">
-        <h4>Specify your selection</h4>
+        <h2>Specify your selection</h2>
            <app-auto-search [label]="'Door Model'" [hint]="'If Door Model is FD72 then Interior Finish is `Same as Exterior`'"
            [filler]="'FD27 PVCU'" [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
           </app-auto-search>
@@ -87,7 +87,6 @@
         <div class="col-12 col-md-6">
            <app-text-reuse [label]="'Glass'"  (valueChange)="updateField('glass', $event)">
           </app-text-reuse>
-
         <!-- Handle Color -->
            <app-text-reuse [label]="'Handle Color'" (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
@@ -98,7 +97,7 @@
       <!-- Additional Notes -->
       <div class="mb-3">
         <mat-form-field appearance="outline">
-          <mat-label>Additional Notes:</mat-label>
+          <mat-label>Additional notes...</mat-label>
         <textarea matInput rows="2" formControlName="additionalNotes">
           @if(contactForm.get('additionalNotes')?.value){
               <button matSuffix mat-icon-button (click)="contactForm.get('additionalNotes')?.reset()">

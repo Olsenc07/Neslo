@@ -6,13 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import  { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
   styleUrls: ['./quote-generator.component.scss'],
-  imports: [AutoSearchComponent, MatInputModule,
+  imports: [AutoSearchComponent, MatInputModule, MatButtonModule,
     MatIconModule, MatFormFieldModule, ReactiveFormsModule,
      MatSelectModule, TextReuseComponent]
 })

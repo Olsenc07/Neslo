@@ -17,8 +17,8 @@ button[type="submit"]{
     overflow: hidden; 
     position: relative; 
   }
-  .full{
-    width: 100%;
+  .pad{
+    display: flex;
     padding: 3%;
   }
   .full-screen {
