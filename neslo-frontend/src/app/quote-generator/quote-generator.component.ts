@@ -9,13 +9,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { jsPDF } from 'jspdf';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 @Component({
   standalone: true,
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
   styleUrls: ['./quote-generator.component.scss'],
-  imports: [AutoSearchComponent, MatInputModule, MatButtonModule,
+  imports: [AutoSearchComponent, ContactFormComponent, MatInputModule, MatButtonModule,
     MatIconModule, MatFormFieldModule, ReactiveFormsModule,
      MatSelectModule, TextReuseComponent]
 })
@@ -40,7 +43,8 @@ export class QuoteGeneratorComponent {
     additionalNotes: new FormControl<string>('')
   })
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private snackBar: MatSnackBar,
+    private dialog: MatDialog){}
   
   returnHome(): void {
     this.router.navigate(['/home']);
@@ -63,8 +67,21 @@ export class QuoteGeneratorComponent {
     // Save the PDF
     doc.save('quote.pdf');
   }
-  
-
+contactForm(): void {
+  const dialogRef = this.dialog.open(ContactFormComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'send') {
+    const snackBarRef = this.snackBar.open(
+      "Your message has been sent!",
+      "We will get back to you shortly.",
+      {
+        duration: 3500
+      }
+    );
+      }
+      // handle send failure
+  });
+}
   doorModel: string[] = [
     'FD27 PVCU'
     ]

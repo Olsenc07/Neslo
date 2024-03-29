@@ -8,7 +8,7 @@
         }
 <input type="text" matInput [matAutocomplete]="auto" [formControl]="input"
   [placeholder]="filler">
-    <mat-autocomplete #auto="matAutocomplete" >
+    <mat-autocomplete class="drop-down" #auto="matAutocomplete" >
       @for(options of (filteredList$ | async); let i = $index; track options){
         <mat-option [value]="options" (click)="emitSelectedChange(options)">
           <span [innerHTML]="options | bold: input.value!">

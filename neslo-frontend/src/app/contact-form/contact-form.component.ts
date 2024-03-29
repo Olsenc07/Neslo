@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { NgClass } from '@angular/common';
+import { MatDialogRef } from '@angular/material/dialog';
+import { QuoteGeneratorComponent } from '../quote-generator/quote-generator.component';
 
 @Component({
   selector: 'app-contact-form',
@@ -39,7 +41,7 @@ export class ContactFormComponent {
     message: new FormControl<string | null>(null, Validators.required),
     file: new FormControl<File | null>(null)
   });
-
+constructor(public dialogRef: MatDialogRef<QuoteGeneratorComponent>){}
   toggleFullScreen(): void {
     this.isFullScreen = !this.isFullScreen;
   }
@@ -59,6 +61,10 @@ export class ContactFormComponent {
     }
     send(): void {
       console.log('Message emailed');
+      if(this.dialogRef){
+        // what if does not 
+        this.dialogRef.close('send');
+      }
       // Gives message, this message will be mailed to redman.. 
       // do you wish to continue?
   

@@ -34,14 +34,13 @@
   </div>
 </header>
     <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
-
-        <div class="container">
-          <div class="row">
+          <div class="row justify-content-center">
           <!-- Dealer Information Section -->
+          <div class="d-flex flex-column flex-md-row">
           <div container class="my-2 col-12 col-md-6">
           <section class="py-3">
         <h2>Dealer Information</h2>
-        <!-- alwasy dad ! -->
+        <!-- Dealer Name -->
        <app-text-reuse [intro]="'Dealer Name'" [label]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
         <!-- Dealer Branch -->
         <app-text-reuse [intro]="'Branch Name'"  (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
@@ -59,7 +58,7 @@
         <h2>Job Information</h2>
         <ul>
           <li>
-          All Configurations are Viewed from the inside.
+          All Configurations are `Viewed from the inside`.
           </li>
           </ul>
         <app-text-reuse  [intro]="'Job name'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
@@ -68,13 +67,13 @@
         <app-text-reuse  [intro]="'Date'" [types]="'date'" (valueChange)="updateField('date', $event)"></app-text-reuse>
         </section>
       </div>
+    </div>
   </div>
       <!-- Door Model Information -->
       <div class="row justify-content-center">
       <div container class="my-2 col-12 col-md-6">
       <section class="py-3">
         <h2>Specify your selection</h2>
-        <div class="container">
           <div class="row">
             <!-- Column for the first set of options -->
             <div class="col-12 col-md-6">
@@ -104,16 +103,7 @@
         <!-- Handle Color -->
            <app-text-reuse [label]="'Handle Color'" (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
-          </div>
-          </div>
-          </div>
-      </section>
-    </div>
-    </div>
-
-  </div>
-      <!-- Additional Notes -->
-      <div class="mb-3">
+           <!-- Additional Notes -->
         <mat-form-field appearance="outline">
           <mat-label>Additional notes...</mat-label>
         <textarea matInput rows="2" formControlName="additionalNotes">
@@ -124,9 +114,14 @@
             }
         </textarea>
         </mat-form-field>
-      </div>
+          </div>
+          </div>
+      </section>
+    </div>
+    </div>
+    <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->
-      <div class="pdf">
+      <div class="pdf col-12 col-md-6 justify-content-start">
         <button mat-fab extended type="submit" class="btn btn-primary">
           <mat-icon class="material-symbols-outlined">
             picture_as_pdf
@@ -134,7 +129,15 @@
           Download as PDF
         </button>
       </div>
-
+      <div class="col-12 col-md-6  justify-content-end">
+        <button mat-fab extended type="submit" class="btn btn-primary">
+          <mat-icon class="material-symbols-outlined">
+            picture_as_pdf
+          </mat-icon>
+          Send PDF directly
+        </button>
+      </div>
+      </div>
       <!-- Have contact form pop up and has this pdf downloaded -->
     </form>
 <!-- Attach a message and email driectly to Neslo -->
