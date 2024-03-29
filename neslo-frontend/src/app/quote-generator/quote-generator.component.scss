@@ -7,3 +7,20 @@ button[back]{
 .quote-head{
     color: green;
 }
+.pdf{
+    display: flex;
+    justify-content: flex-end;
+    button{
+    background-color: var(--wood);
+    color: white;
+    }
+}
+.input-wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+div[container]{
+    margin: 2%;
+    background-color: var(--wood-light-grey);
+}

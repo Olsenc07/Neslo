@@ -17,6 +17,12 @@ button[type="submit"]{
     overflow: hidden; 
     position: relative; 
   }
+  .info-container {
+    background-color: var(--wood-light-grey);
+    border-radius: 25px;
+    padding: 20px; 
+    margin-bottom: 20px; 
+  }
   .pad{
     display: flex;
     padding: 3%;
