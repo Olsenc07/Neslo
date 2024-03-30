@@ -11,14 +11,15 @@ import { Router } from '@angular/router';
 import { jsPDF } from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
 
 @Component({
   standalone: true,
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
   styleUrls: ['./quote-generator.component.scss'],
-  imports: [AutoSearchComponent, ContactFormComponent, MatInputModule, MatButtonModule,
+  imports: [AutoSearchComponent, ContactDialogComponent, 
+    MatInputModule, MatButtonModule,
     MatIconModule, MatFormFieldModule, ReactiveFormsModule,
      MatSelectModule, TextReuseComponent]
 })
@@ -55,7 +56,6 @@ export class QuoteGeneratorComponent {
  
   generatePDF(): void {
     const doc = new jsPDF();
-  
     // Basic text layout example
     doc.text('Quote Form', 10, 10);
     doc.text(`Dealer Name: ${this.quoteForm.value.dealerName}`, 10, 20);
@@ -68,11 +68,11 @@ export class QuoteGeneratorComponent {
     doc.save('quote.pdf');
   }
 contactForm(): void {
-  const dialogRef = this.dialog.open(ContactFormComponent);
+  const dialogRef = this.dialog.open(ContactDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'send') {
     const snackBarRef = this.snackBar.open(
-      "Your message has been sent!",
+      "Your message has been sent to redman68@live.ca",
       "We will get back to you shortly.",
       {
         duration: 3500

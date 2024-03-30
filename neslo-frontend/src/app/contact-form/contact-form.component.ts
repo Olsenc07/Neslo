@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,8 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { NgClass } from '@angular/common';
-import { MatDialogRef } from '@angular/material/dialog';
-import { QuoteGeneratorComponent } from '../quote-generator/quote-generator.component';
 
 @Component({
   selector: 'app-contact-form',
@@ -31,7 +29,9 @@ export class ContactFormComponent {
   state: 'noFocus' | 'focus' = 'noFocus';
   imageSrc: string | ArrayBuffer | null = null;
   isFullScreen: boolean = false;
-
+  fillAttached: boolean = false;
+  @Input() dialog: boolean = false;
+  @Output() sentMsg: EventEmitter<string> = new EventEmitter<string>();
   contactForm: FormGroup = new FormGroup({
     name: new FormControl<string | null>(null, Validators.required),
     email: new FormControl<string | null>(null, [
@@ -41,7 +41,6 @@ export class ContactFormComponent {
     message: new FormControl<string | null>(null, Validators.required),
     file: new FormControl<File | null>(null)
   });
-constructor(public dialogRef: MatDialogRef<QuoteGeneratorComponent>){}
   toggleFullScreen(): void {
     this.isFullScreen = !this.isFullScreen;
   }
@@ -53,18 +52,34 @@ constructor(public dialogRef: MatDialogRef<QuoteGeneratorComponent>){}
         const reader = new FileReader();
         reader.onload = e => this.imageSrc = reader.result;
         reader.readAsDataURL(file);
+        this.fillAttached = true;
+      }
+      else{
+        this.fillAttached = false;
       }
     }
   
     onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
     }
+    cancelMsg(): void{
+      
+    }
     send(): void {
-      console.log('Message emailed');
-      if(this.dialogRef){
-        // what if does not 
-        this.dialogRef.close('send');
+      if(this.dialog){
+        this.sentMsg.emit('sent');
       }
+      if(this.fillAttached)
+      {
+
+      }else{
+        // create one based on the filled in info
+        // attach that to the email before sending!
+        // this.QuoteGeneratorComponent.generatePDF()
+      }
+      console.log('Message emailed');
+
+
       // Gives message, this message will be mailed to redman.. 
       // do you wish to continue?
   

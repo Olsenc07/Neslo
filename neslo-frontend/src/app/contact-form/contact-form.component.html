@@ -16,7 +16,7 @@
 </div>
 <div class="row">
     <mat-form-field  appearance="outline" >
-    <mat-label class="form-label">Email</mat-label>
+    <mat-label class="form-label">Return Email</mat-label>
     <input type="email" formControlName="email" matInput placeholder="name@example.com">
     @if(contactForm.get('email')?.value){
         <button matSuffix mat-icon-button (click)="contactForm.get('email')?.reset()">
@@ -53,6 +53,7 @@ alt="Selected file thumbnail" />
       <input type="file" formControlName="file"  (change)="onFileSelected($event)"
       hidden #fileInput accept=".pdf, .doc, .docx, .jpg" multiple>
       <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
+        @if(!dialog){
         <div class="pad col-12 col-md-6 justify-content-start">
       <button mat-fab extended (click)="fileInput.click()" file>
       Attach your request quote
@@ -67,7 +68,8 @@ alt="Selected file thumbnail" />
     </button>
       }
     </div>
-    <div class="pad col-12 col-md-6  justify-content-end">
+  }
+    <div class="pad col-12 col-md-6 justify-content-end">
 <button mat-fab extended type="submit" id="submitBtn" 
     (mouseover)="onHover(true)" (mouseleave)="onHover(false)" 
       [disabled]="contactForm.valid">

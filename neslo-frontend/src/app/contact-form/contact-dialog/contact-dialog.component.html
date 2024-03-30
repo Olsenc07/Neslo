@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Include a message</h2>
+<mat-dialog-content>
+<app-contact-form [dialog]="true" (sentMsg)="msg($event)"
+></app-contact-form>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Dismiss</button>
+<!-- send? -->
+  </mat-dialog-actions>
+</mat-dialog-content>
