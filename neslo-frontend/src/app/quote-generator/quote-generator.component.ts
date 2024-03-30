@@ -1,6 +1,6 @@
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -12,6 +12,7 @@ import { jsPDF } from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
+
 
 @Component({
   standalone: true,
@@ -25,21 +26,29 @@ import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-d
 })
 export class QuoteGeneratorComponent {
   quoteForm: FormGroup = new FormGroup({
-    dealerName: new FormControl<string>('Erik Olsen'),
+    dealerName: new FormControl<string>('Erik Olsen', [
+      Validators.required]),
     dealerBranch: new FormControl<string>(''),
     contactName: new FormControl<string>(''),
-    contactEmail: new FormControl<string>('redman68&#64;live.ca'),
-    contactPhone: new FormControl<string>('403 994 - 1202'),
+    contactEmail: new FormControl<string>('redman68&#64;live.ca', [
+      Validators.required]),
+    contactPhone: new FormControl<string>('403 994 - 1202', [
+      Validators.required]),
     jobName: new FormControl<string>(''),
-    jobSiteAddress: new FormControl<string>(''),
-    jobCity: new FormControl<string>(''),
-    date: new FormControl<string>(''),
-    doorModel: new FormControl<string>(''),
+    jobSiteAddress: new FormControl<string>('', [
+      Validators.required]),
+    jobCity: new FormControl<string>('', [
+      Validators.required]),
+    date: new FormControl<string>('', [
+      Validators.required]),
+    doorModel: new FormControl<string>('', [
+      Validators.required]),
     exteriorFinish: new FormControl<string>(''),
     exteriorColor: new FormControl<string>(''),
     interiorFinish: new FormControl<string>(''),
     interiorColor: new FormControl<string>(''),
-    glass: new FormControl<string>(''),
+    glass: new FormControl<string>('', [
+      Validators.required]),
     handleColor: new FormControl<string>(''),
     additionalNotes: new FormControl<string>('')
   })

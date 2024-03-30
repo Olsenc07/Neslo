@@ -36,8 +36,12 @@
     <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
           <!-- <div class="row justify-content-center"> -->
           <!-- Dealer Information Section -->
+          <div class="container my-2">
+            <div class="row">
+              <!-- Dealer Information Section -->
           <div class="d-flex flex-column flex-md-row">
-          <div container class="my-2 col-12 col-md-6">
+          <div container class="my-2 container 
+           col-12 col-md-6">
           <section class="py-3">
         <h2>Dealer Information</h2>
         <!-- Dealer Name -->
@@ -53,7 +57,8 @@
         </section>
         </div>
       <!-- Job Information -->
-      <div container class="my-2 col-12 col-md-6">
+      <div container class="my-2 container 
+      col-12 col-md-6">
       <section class="py-3">
         <h2>Job Information</h2>
         <ul>
@@ -68,10 +73,13 @@
         </section>
       </div>
     </div>
-  <!-- </div> -->
+  </div>
+  </div>
       <!-- Door Model Information -->
       <div class="row justify-content-center">
-      <div container class="my-2 col-12 col-md-6">
+        <div container class="my-2 container
+           col-12 col-md-6">
+      <!-- <div container class="my-2 col-12 col-md-6"> -->
       <section class="py-3">
         <h2>Specify your selection</h2>
           <div class="row">
