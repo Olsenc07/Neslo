@@ -1,0 +1,18 @@
+<!-- <form [formGroup]="doorConfigForm" (ngSubmit)="onSubmit()"> -->
+    <div formArrayName="rows">
+        <!-- look at skalarly for format -->
+        <!-- @for(rowControl of rows.controls; i as index [formGroupName]="i"){
+        <mat-form-field>
+          <input matInput placeholder="Room Label" formControlName="roomLabel">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Width" formControlName="width">
+        </mat-form-field> -->
+        <!-- ... additional form fields for each column -->
+        <button mat-button (click)="removeRow(i)">Remove</button>
+    <!-- } -->
+    </div>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-button (click)="addRow()">Add Row</button>
+  <!-- </form> -->
+  

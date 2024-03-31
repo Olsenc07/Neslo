@@ -12,7 +12,8 @@ import { jsPDF } from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
-
+import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
+import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 
 @Component({
   standalone: true,
@@ -20,9 +21,9 @@ import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-d
   templateUrl: './quote-generator.component.html',
   styleUrls: ['./quote-generator.component.scss'],
   imports: [AutoSearchComponent, ContactDialogComponent, 
-    MatInputModule, MatButtonModule,
+    MatInputModule, MatButtonModule, GridFormComponent,
     MatIconModule, MatFormFieldModule, ReactiveFormsModule,
-     MatSelectModule, TextReuseComponent]
+     MatSelectModule, TextReuseComponent, SkeletonFormFillComponent]
 })
 export class QuoteGeneratorComponent {
   quoteForm: FormGroup = new FormGroup({

@@ -40,8 +40,7 @@
             <div class="row">
               <!-- Dealer Information Section -->
           <div class="d-flex flex-column flex-md-row">
-          <div container class="my-2 container 
-           col-12 col-md-6">
+          <div container class="my-2 col-12 col-md-6">
           <section class="py-3">
         <h2>Dealer Information</h2>
         <!-- Dealer Name -->
@@ -127,6 +126,12 @@
       </section>
     </div>
     </div>
+    @defer(on viewport){
+    <!-- grid inputs 2nd pg -->
+    <app-grid-form></app-grid-form>
+    } @placeholder {
+      <app-skeleton-form-fill></app-skeleton-form-fill>
+    }
     <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->
       <div class="pdf col-12 col-md-6 justify-content-start">
