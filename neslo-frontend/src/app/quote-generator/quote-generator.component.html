@@ -130,7 +130,7 @@
     <!-- grid inputs 2nd pg -->
     <app-grid-form></app-grid-form>
     } @placeholder {
-      <app-skeleton-form-fill></app-skeleton-form-fill>
+      <app-skeleton-form-fill (sendGrid)="grid($event)"></app-skeleton-form-fill>
     }
     <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->
