@@ -1,5 +1,5 @@
 <header class="bg-light p-3">
-  <div class="container">
+  <div  class="container">
     <div class="row align-items-center">
         <!-- Company Logo -->
         <div>
@@ -33,14 +33,14 @@
     </button>
   </div>
 </header>
-    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
+
+    <form container [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
           <!-- <div class="row justify-content-center"> -->
           <!-- Dealer Information Section -->
-          <div class="container my-2">
-            <div class="row">
+          <div  class="container">
               <!-- Dealer Information Section -->
           <div class="d-flex flex-column flex-md-row">
-          <div container class="my-2 col-12 col-md-6">
+          <div  class="my-2 mx-2 col-12 col-md-6">
           <section class="py-3">
         <h2>Dealer Information</h2>
         <!-- Dealer Name -->
@@ -56,8 +56,7 @@
         </section>
         </div>
       <!-- Job Information -->
-      <div container class="my-2 container 
-      col-12 col-md-6">
+      <div class="my-2 mx-2 col-12 col-md-6">
       <section class="py-3">
         <h2>Job Information</h2>
         <ul>
@@ -71,12 +70,11 @@
         <app-text-reuse  [intro]="'Date'" [types]="'date'" (valueChange)="updateField('date', $event)"></app-text-reuse>
         </section>
       </div>
-    </div>
   </div>
   </div>
       <!-- Door Model Information -->
       <div class="row justify-content-center">
-        <div container class="my-2 container
+        <div  class="my-2 container
            col-12 col-md-6">
       <!-- <div container class="my-2 col-12 col-md-6"> -->
       <section class="py-3">
@@ -128,9 +126,9 @@
     </div>
     @defer(on viewport){
     <!-- grid inputs 2nd pg -->
-    <app-grid-form></app-grid-form>
+    <app-grid-form (sendGrid)="grid($event)"></app-grid-form>
     } @placeholder {
-      <app-skeleton-form-fill (sendGrid)="grid($event)"></app-skeleton-form-fill>
+      <app-skeleton-form-fill></app-skeleton-form-fill>
     }
     <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->

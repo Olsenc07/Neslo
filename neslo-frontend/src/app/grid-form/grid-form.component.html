@@ -1,19 +1,82 @@
 <form [formGroup]="doorConfigForm">
-    <div formArrayName="rows">
-        <!-- look at skalarly for format -->
-        @for(rowControl of rows.controls; let i = $index; track rowControl){
+  <!-- all headers here and then each row is added to the grid  -->
+  <div formArrayName="rows">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>SET #</th>
+          <th>ROOM LABEL</th>
+          <th colspan="2">ROUGH OPENING</th>
+          <th colspan="3">CONFIGURATION</th>
+          <th>LEFT</th>
+          <th>RIGHT</th>
+          <th>ACTIVE PANEL</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      </table>
+      @for(rowControl of rows.controls; let i = $index; track rowControl){
         <form [formGroupName]="i">
-        <mat-form-field>
-          <input matInput placeholder="Room Label" formControlName="roomLabel">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Width" formControlName="width">
+              <tbody formArrayName="rows">
+                <tr>
+              <ul>
+                <li>
+                  {{ i + 1}}
+                </li>
+              </ul>
+              <td>
+      <!-- Room Label -->
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Room Label" formControlName="roomLabel">
+      </mat-form-field>
+    </td>
+    <td>
+      <!-- Rough Opening -->
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Width (ins)" formControlName="width">
         </mat-form-field> 
-        <!-- ... additional form fields for each column -->
-        <button mat-button (click)="removeRow(i)">Remove</button>
-        </form>
-    }
-    </div>
-    <button mat-button (click)="addRow()">Add Row</button>
-  </form>
-  
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Height (ins)" formControlName="height">
+        </mat-form-field> 
+      </td>
+      <td>
+      <!-- Configuration -->
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Configuration" formControlName="configuration">
+      </mat-form-field>
+    </td>
+    <td>
+      <!-- Left -->
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Left" formControlName="left">
+      </mat-form-field>
+          +
+      <!-- Right -->
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Right" formControlName="right">
+      </mat-form-field>
+  </td>
+  <td>
+      <!-- Active Panel -->
+        
+      <mat-form-field appearance="outline">
+    <mat-select formControlName="activePanel">
+        <mat-label>Active Panel</mat-label>
+        <option value="Right">Right</option>
+        <option value="Left">Left</option>
+    </mat-select>
+      </mat-form-field>
+
+    </td>
+    <td>
+      <button mat-button type="button" (click)="removeRow(i)">Remove Row</button>
+    </td>
+  </tr>
+  </tbody>
+</form>
+  }
+  </div>
+
+  <button mat-button type="button" (click)="addRow()">Add Row</button>
+
+<p class="config-note">We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</p>

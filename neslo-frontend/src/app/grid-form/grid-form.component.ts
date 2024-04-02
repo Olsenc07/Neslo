@@ -1,38 +1,41 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { FormArray, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { Grid } from '../interfaces/grid';
+import  { MatButtonModule } from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+
 @Component({
   selector: 'app-grid-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule],
+  imports: [ReactiveFormsModule, MatSelectModule,
+  MatButtonModule, MatFormFieldModule],
   templateUrl: './grid-form.component.html',
   styleUrl: './grid-form.component.scss'
 })
-export class GridFormComponent implements OnInit {
+export class GridFormComponent implements OnDestroy {
   doorConfigForm: FormGroup;
-
-@Output() sendGrid: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-
+  @Output() sendGrid: EventEmitter<Grid[]> = new EventEmitter<Grid[]>();
+  private unsubscribe$: Subject<void> = new Subject<void>();
+  
   constructor(private fb: FormBuilder) {
     this.doorConfigForm = this.fb.group({
       rows: this.fb.array([])
     });
   }
   ngOnInit(): void {
-      // do this without sub!!!!
-  
     this.doorConfigForm.valueChanges
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
+        takeUntil(this.unsubscribe$) // This will unsubscribe when unsubscribe$ emits
       )
-      // .subscribe((value) => {
-        this.sendGrid.emit(value);
-      });
+      .subscribe((value) => {
+        this.sendGrid.emit(value.rows);
+      }); 
+        this.addRow();
 
-    // Initialize with one row
-    this.addRow();
   }
   get rows(): FormArray {
     return this.doorConfigForm.get('rows') as FormArray;
@@ -48,7 +51,6 @@ export class GridFormComponent implements OnInit {
       right: '',
       activePanel: ''
     });
-
     this.rows.push(rowForm);
   }
   removeRow(index: number): void {
@@ -57,8 +59,9 @@ export class GridFormComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
-// emeit on doorConfigForm value changes in 
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }

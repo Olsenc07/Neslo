@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
 import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
+import { Grid } from '../interfaces/grid'
 
 @Component({
   standalone: true,
@@ -91,6 +92,10 @@ contactForm(): void {
       }
       // handle send failure
   });
+}
+
+grid(values: Grid[]): void {
+console.log('grid list', values);
 }
   doorModel: string[] = [
     'FD27 PVCU'
