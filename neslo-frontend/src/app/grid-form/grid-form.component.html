@@ -1,64 +1,88 @@
 <form [formGroup]="doorConfigForm">
   <!-- all headers here and then each row is added to the grid  -->
-  <div formArrayName="rows">
     <table class="table">
-      <thead>
-        <tr>
-          <th>SET #</th>
-          <th>ROOM LABEL</th>
-          <th colspan="2">ROUGH OPENING</th>
-          <th colspan="3">CONFIGURATION</th>
-          <th>LEFT</th>
-          <th>RIGHT</th>
-          <th>ACTIVE PANEL</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      </table>
+<caption>We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</caption>
+<thead>
+  <tr>
+    <th colspan="1">
+      <div titles>SET #</div>
+    </th>
+    <th colspan="1">
+      <div titles>ROOM LABEL</div>
+    </th>
+      <th colspan="2">ROUGH OPENING</th>
+      <div>
+      <div>Width (ins)</div>
+      <div>Height (ins)</div>
+      </div>
+    <th colspan="3">
+      <div titles>CONFIGURATION</div>
+    </th>
+    <th colspan="1">
+      <div titles>LEFT</div>
+    </th>
+    <th colspan="1">
+      <div titles>RIGHT</div>
+    </th>
+    <th colspan="1">
+      <div titles>ACTIVE PANEL</div>
+    </th>
+  </tr>
+</thead>
+
+      <tbody formArrayName="rows">
       @for(rowControl of rows.controls; let i = $index; track rowControl){
-        <form [formGroupName]="i">
-              <tbody formArrayName="rows">
-                <tr>
+                <tr [formGroupName]="i">
+                  <td>
               <ul>
                 <li>
                   {{ i + 1}}
                 </li>
               </ul>
-              <td>
+              </td>
       <!-- Room Label -->
-      <mat-form-field appearance="outline">
-        <input matInput placeholder="Room Label" formControlName="roomLabel">
+      <td blue>
+      <mat-form-field  appearance="outline">
+        <input matInput type="text" formControlName="roomLabel">
       </mat-form-field>
     </td>
-    <td>
       <!-- Rough Opening -->
+      <td green>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="Width (ins)" formControlName="width">
-        </mat-form-field> 
-        <mat-form-field appearance="outline">
-          <input matInput placeholder="Height (ins)" formControlName="height">
+          <input matInput  formControlName="width">
         </mat-form-field> 
       </td>
-      <td>
+      <td green>
+        <mat-form-field appearance="outline">
+          <input matInput  formControlName="height">
+        </mat-form-field> 
+      </td>
+      <td red>
       <!-- Configuration -->
       <mat-form-field appearance="outline">
-        <input matInput placeholder="Configuration" formControlName="configuration">
+        <input matInput formControlName="configuration0">
+      </mat-form-field>
+      </td>
+      <td>+</td>
+      <td red>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="configuration1">
       </mat-form-field>
     </td>
     <td>
       <!-- Left -->
       <mat-form-field appearance="outline">
-        <input matInput placeholder="Left" formControlName="left">
+        <input matInput formControlName="left">
       </mat-form-field>
-          +
+    </td>
+      <td>
       <!-- Right -->
       <mat-form-field appearance="outline">
-        <input matInput placeholder="Right" formControlName="right">
+        <input matInput formControlName="right">
       </mat-form-field>
-  </td>
-  <td>
+      </td>
+  <td purple>
       <!-- Active Panel -->
-        
       <mat-form-field appearance="outline">
     <mat-select formControlName="activePanel">
         <mat-label>Active Panel</mat-label>
@@ -69,14 +93,12 @@
 
     </td>
     <td>
-      <button mat-button type="button" (click)="removeRow(i)">Remove Row</button>
+      <button matSuffix mat-icon-button (click)="removeRow(i)">
+        <mat-icon  class="material-symbols-outlined">cancel</mat-icon></button>
     </td>
   </tr>
-  </tbody>
-</form>
   }
-  </div>
-
-  <button mat-button type="button" (click)="addRow()">Add Row</button>
-
-<p class="config-note">We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</p>
+</tbody>
+</table>
+</form>
+  <button mat-stroked-button (click)="addRow()" add>Add Row</button>

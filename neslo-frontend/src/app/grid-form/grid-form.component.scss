@@ -1,3 +1,32 @@
-form{
-background-color: var(--wood-light-grey);
+button[add]{
+    background-color: white;
+}
+div[titles]{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+tbody{
+    align-items: center;
+}
+th{
+    background-color: green;
+    color: white;
+}
+td[blue]{
+    background-color: lightblue;
+}
+td[green]{
+    background-color: lightgreen;
+}
+td[red]{
+    background-color: rgb(213, 105, 105);
+}
+td[purple]{
+    background-color: plum;
+}
+div[row]{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

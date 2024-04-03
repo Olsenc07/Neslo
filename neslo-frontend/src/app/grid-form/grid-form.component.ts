@@ -4,27 +4,28 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { Grid } from '../interfaces/grid';
 import  { MatButtonModule } from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-grid-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatSelectModule,
-  MatButtonModule, MatFormFieldModule],
+  imports: [ReactiveFormsModule, MatSelectModule, MatIconModule,
+    MatInputModule, MatButtonModule, MatFormFieldModule],
   templateUrl: './grid-form.component.html',
   styleUrl: './grid-form.component.scss'
 })
 export class GridFormComponent implements OnDestroy {
-  doorConfigForm: FormGroup;
+  doorConfigForm!: FormGroup;
   @Output() sendGrid: EventEmitter<Grid[]> = new EventEmitter<Grid[]>();
   private unsubscribe$: Subject<void> = new Subject<void>();
   
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {}
+  ngOnInit(): void {
     this.doorConfigForm = this.fb.group({
       rows: this.fb.array([])
     });
-  }
-  ngOnInit(): void {
     this.doorConfigForm.valueChanges
       .pipe(
         debounceTime(500),
@@ -37,6 +38,7 @@ export class GridFormComponent implements OnDestroy {
         this.addRow();
 
   }
+  
   get rows(): FormArray {
     return this.doorConfigForm.get('rows') as FormArray;
   }
@@ -46,7 +48,8 @@ export class GridFormComponent implements OnDestroy {
       roomLabel: '',
       width: '',
       height: '',
-      configuration: '',
+      configuration0: '',
+      configuration1: '',
       left: '',
       right: '',
       activePanel: ''
