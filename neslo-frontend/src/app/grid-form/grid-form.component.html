@@ -1,7 +1,7 @@
 <form [formGroup]="doorConfigForm">
   <div class="table-responsive">
     <table class="table table-bordered table-sm">
-<caption>We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</caption>
+<caption class="text-center">We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</caption>
 <thead>
   <tr>
     <th colspan="1">
@@ -32,63 +32,62 @@
     </th>
   </tr>
 </thead>
-
       <tbody formArrayName="rows">
       @for(rowControl of rows.controls; let i = $index; track rowControl){
                 <tr [formGroupName]="i">
                   <td>
-              <ul>
-                <li>
+                    @if(i > 0){
+              <button mat-fab extended close (click)="removeRow(i)">
                   {{ i + 1}}
-                </li>
-              </ul>
+                <mat-icon  class="material-symbols-outlined">close</mat-icon>
+              </button>
+              } @else {
+                <button mat-fab disabled>
+                  1
+              </button>
+              }
               </td>
       <!-- Room Label -->
-      <td blue>
-        <input  type="text" formControlName="roomLabel">
+      <td >
+        <input blue  type="text" formControlName="roomLabel">
     </td>
       <!-- Rough Opening -->
-      <td green>
-          <input formControlName="width">
+      <td>
+          <input green  type="text"  formControlName="width">
       </td>
-      <td green>
-          <input formControlName="height">
+      <td >
+          <input green  type="text"  formControlName="height">
       </td>
-      <td red>
+      <td>
       <!-- Configuration -->
-        <input matInput formControlName="configuration0">
+        <input red type="text" formControlName="configuration0">
       </td>
       <td>+</td>
-      <td red>
-        <input matInput formControlName="configuration1">
+      <td >
+        <input red  type="text"  formControlName="configuration1">
     </td>
     <td>
       <!-- Left -->
-        <input matInput formControlName="left">
+        <input  type="text"  formControlName="left">
     </td>
       <td>
       <!-- Right -->
-      <mat-form-field appearance="outline">
-        <input matInput formControlName="right">
-      </mat-form-field>
+        <input type="text" formControlName="right">
       </td>
-  <td purple>
+  <td>
       <!-- Active Panel -->
-    <select formControlName="activePanel">
+    <select purple formControlName="activePanel">
         <option value="Right">Right</option>
         <option value="Left">Left</option>
     </select>
     </td>
-  <td>
-      <button matSuffix mat-icon-button (click)="removeRow(i)">
-        <mat-icon  class="material-symbols-outlined">cancel</mat-icon></button>
-    </td>
   </tr>
   }
 </tbody>
+<button mat-icon-button color="primary" (click)="addRow()">
+  <mat-icon  class="material-symbols-outlined">add_circle</mat-icon>
+</button>
 </table>
 </div>
 </form>
-  <button mat-icon-button (click)="addRow()" add>
-    <mat-icon  class="material-symbols-outlined">add</mat-icon>
-     Row</button>
+  

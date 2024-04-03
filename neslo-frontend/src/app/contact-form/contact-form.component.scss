@@ -8,10 +8,7 @@ button[type="submit"]{
   &:hover{
     background-color: var(--wood-red);
   }
-  }
-  button[mat-fab]:active {
-    background-color: var(--wood-light) ; 
-  }
+}
   .limit {
     max-height: 200px; 
     overflow: hidden; 
@@ -22,10 +19,6 @@ button[type="submit"]{
     border-radius: 25px;
     padding: 20px; 
     margin-bottom: 20px; 
-  }
-  .pad{
-    display: flex;
-    padding: 3%;
   }
   .full-screen {
     position: fixed;

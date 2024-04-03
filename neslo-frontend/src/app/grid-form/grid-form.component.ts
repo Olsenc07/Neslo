@@ -48,8 +48,8 @@ export class GridFormComponent implements OnDestroy {
       height: '',
       configuration0: '',
       configuration1: '',
-      left: '',
-      right: '',
+      left: '0',
+      right: '0',
       activePanel: ''
     });
     this.rows.push(rowForm);

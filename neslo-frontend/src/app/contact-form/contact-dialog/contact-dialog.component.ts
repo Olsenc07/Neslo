@@ -7,11 +7,13 @@ import {
   MatDialogContent,
   MatDialogActions,
 } from '@angular/material/dialog';
+import  { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-contact-dialog',
   standalone: true,
   imports: [
+  MatButtonModule,
   MatDialogActions,
   MatDialogTitle,
   MatDialogContent,

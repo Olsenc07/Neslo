@@ -3,11 +3,13 @@ button[back]{
         top: 20px; 
         left: 20px; 
         z-index: 10; 
+        opacity: .7;
         background-color: var(--wood-light-grey);    
 }
 button[email]{
     background-color: whitesmoke;
 }
+
 .quote-head{
     color: green;
 }

@@ -39,7 +39,7 @@
               "vary"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "neslo-frontend/src/styles.scss"
             ],
             "scripts": [],

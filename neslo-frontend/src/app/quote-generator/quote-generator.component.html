@@ -109,9 +109,9 @@
            <app-text-reuse [label]="'Handle Color'" (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
            <!-- Additional Notes -->
-        <mat-form-field appearance="outline">
+        <mat-form-field  appearance="outline">
           <mat-label>Additional notes...</mat-label>
-        <textarea matInput rows="2" formControlName="additionalNotes">
+        <textarea matInput formControlName="additionalNotes">
           @if(contactForm.get('additionalNotes')?.value){
               <button matSuffix mat-icon-button (click)="contactForm.get('additionalNotes')?.reset()">
                 <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
@@ -130,7 +130,7 @@
     } @placeholder {
       <app-skeleton-form-fill></app-skeleton-form-fill>
     }
-    <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
+    <div class="g-3 g-md-3 pb-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->
       <div class="pdf col-12 col-md-6 justify-content-start">
         <button mat-fab extended
@@ -141,7 +141,7 @@
           Download PDF
         </button>
       </div>
-      <div class="col-12 col-md-6  justify-content-end">
+      <div class="col-12 col-md-6  d-flex justify-content-end">
         <button email mat-fab extended type="button" class="btn btn-primary"
         (click)="contactForm()">
           <mat-icon class="material-symbols-outlined">
@@ -151,8 +151,4 @@
         </button>
       </div>
       </div>
-      <!-- Have contact form pop up and has this pdf downloaded -->
     </form>
-<!-- Attach a message and email driectly to Neslo -->
-
-  

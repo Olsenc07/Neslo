@@ -1,5 +1,6 @@
-button[add]{
-    background-color: white;
+
+button[close]{
+    background-color: lightgray;
 }
 div[titles]{
     display: flex;
@@ -9,8 +10,8 @@ div[titles]{
 }
 div[row]{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
 }
 .table {
     width: 100%;
@@ -18,30 +19,23 @@ div[row]{
     margin-bottom: 1rem;
     background-color: transparent;
   }
-tbody{
-    align-items: center;
-}
 th{
     background-color: green;
     color: white;
 }
-td{
-    align-items: center;
-}
-td[blue]{
+input[blue]{
     background-color: lightblue;
 }
-td[green]{
+input[green]{
     background-color: lightgreen;
 }
-td[red]{
-    background-color: rgb(213, 105, 105);
+input[red]{
+    background-color: hwb(0 46% 14%);
 }
-td[purple]{
-    background-color: plum;
+select[purple]{
+    background-color: rgb(224, 154, 224);
+    color: white;
+    text-align: center;
+    width: 100%;
 }
-div[row]{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+
