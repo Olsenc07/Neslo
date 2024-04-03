@@ -1,6 +1,6 @@
 <form [formGroup]="doorConfigForm">
-  <!-- all headers here and then each row is added to the grid  -->
-    <table class="table">
+  <div class="table-responsive">
+    <table class="table table-bordered table-sm">
 <caption>We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</caption>
 <thead>
   <tr>
@@ -10,11 +10,14 @@
     <th colspan="1">
       <div titles>ROOM LABEL</div>
     </th>
-      <th colspan="2">ROUGH OPENING</th>
+      <th colspan="2">
+        <div class="text-center">ROUGH OPENING
       <div row>
       <div>Width (ins)</div>
       <div>Height (ins)</div>
       </div>
+    </div>
+      </th>
     <th colspan="3">
       <div titles>CONFIGURATION</div>
     </th>
@@ -42,38 +45,26 @@
               </td>
       <!-- Room Label -->
       <td blue>
-      <mat-form-field  appearance="outline">
-        <input matInput type="text" formControlName="roomLabel">
-      </mat-form-field>
+        <input  type="text" formControlName="roomLabel">
     </td>
       <!-- Rough Opening -->
       <td green>
-        <mat-form-field appearance="outline">
-          <input matInput  formControlName="width">
-        </mat-form-field> 
+          <input formControlName="width">
       </td>
       <td green>
-        <mat-form-field appearance="outline">
-          <input matInput  formControlName="height">
-        </mat-form-field> 
+          <input formControlName="height">
       </td>
       <td red>
       <!-- Configuration -->
-      <mat-form-field appearance="outline">
         <input matInput formControlName="configuration0">
-      </mat-form-field>
       </td>
       <td>+</td>
       <td red>
-      <mat-form-field appearance="outline">
         <input matInput formControlName="configuration1">
-      </mat-form-field>
     </td>
     <td>
       <!-- Left -->
-      <mat-form-field appearance="outline">
         <input matInput formControlName="left">
-      </mat-form-field>
     </td>
       <td>
       <!-- Right -->
@@ -83,16 +74,12 @@
       </td>
   <td purple>
       <!-- Active Panel -->
-      <mat-form-field appearance="outline">
-    <mat-select formControlName="activePanel">
-        <mat-label>Active Panel</mat-label>
+    <select formControlName="activePanel">
         <option value="Right">Right</option>
         <option value="Left">Left</option>
-    </mat-select>
-      </mat-form-field>
-
+    </select>
     </td>
-    <td>
+  <td>
       <button matSuffix mat-icon-button (click)="removeRow(i)">
         <mat-icon  class="material-symbols-outlined">cancel</mat-icon></button>
     </td>
@@ -100,5 +87,8 @@
   }
 </tbody>
 </table>
+</div>
 </form>
-  <button mat-stroked-button (click)="addRow()" add>Add Row</button>
+  <button mat-icon-button (click)="addRow()" add>
+    <mat-icon  class="material-symbols-outlined">add</mat-icon>
+     Row</button>

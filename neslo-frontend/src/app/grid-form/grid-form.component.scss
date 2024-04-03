@@ -10,7 +10,14 @@ div[titles]{
 div[row]{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+  }
 tbody{
     align-items: center;
 }
