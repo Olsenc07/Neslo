@@ -5,7 +5,9 @@ button[back]{
         z-index: 10; 
         background-color: var(--wood-light-grey);    
 }
-
+button[email]{
+    background-color: white;
+}
 .quote-head{
     color: green;
 }

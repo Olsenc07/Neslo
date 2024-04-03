@@ -7,12 +7,19 @@ div[titles]{
     justify-content: center;
     align-items: center;
 }
+div[row]{
+    display: flex;
+    flex-direction: row;
+}
 tbody{
     align-items: center;
 }
 th{
     background-color: green;
     color: white;
+}
+td{
+    align-items: center;
 }
 td[blue]{
     background-color: lightblue;
