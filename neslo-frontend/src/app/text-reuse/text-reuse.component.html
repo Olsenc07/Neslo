@@ -3,14 +3,14 @@
       @if(intro){
       {{intro}}
       }
-      <mat-form-field appearance="outline">
-      @if(label){
-        <mat-label>
-          {{label}}
-          </mat-label>
+      <mat-form-field appearance="fill">
+        @if(intValue){
+          <input [type]=types matInput
+          [formControl]="input" [placeholder]="intValue">
+        } @else {
+          <input [type]=types matInput
+          [formControl]="input">
         }
-      <input [type]=types matInput
-      [formControl]="input" >
       @if(input.value){
         <button matSuffix mat-icon-button (click)="reset()">
           <mat-icon  class="material-symbols-outlined">cancel</mat-icon>

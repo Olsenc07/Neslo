@@ -23,16 +23,16 @@ th{
     background-color: green;
     color: white;
 }
-input[blue]{
+mat-form-field[blue]{
     background-color: lightblue;
 }
-input[green]{
+mat-form-field[green]{
     background-color: lightgreen;
 }
-input[red]{
+mat-form-field[red]{
     background-color: hwb(0 46% 14%);
 }
-select[purple]{
+mat-form-field[purple]{
     background-color: rgb(224, 154, 224);
     color: white;
     text-align: center;

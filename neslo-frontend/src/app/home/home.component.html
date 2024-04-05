@@ -3,7 +3,7 @@
    <app-intro [orientation]="this.orientationService.screen()"></app-intro>
 </header>
 }
-@defer(when delay){
+@defer{
 <section class="my-3">
     <div container class="container bg-light">
         <h2 class="text-center mb-4 pt-3" id="contacts">
@@ -15,7 +15,7 @@
             <div class="col-12 col-md-6 d-flex flex-column align-items-center">
         @defer(on viewport){
                 <app-about-us [title]="'Alberta’s Distributor'" 
-                [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'redman68@live.ca'"
+                [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
                 [message]="messageAB"></app-about-us>
             } @placeholder { 
                 <app-skeleton-form class="col-12"></app-skeleton-form>
@@ -45,7 +45,7 @@
 <li>For a quick message, please text or call (403) 994 – 1202 </li>
 <li>Emails sent through this form will be directed to 
 <ul class="mt-2">
-<li>Erik Olsen: <a href="mailto:redman68@live.ca" class="link-secondary">redman{{atSymbol}}live.ca</a></li>
+<li>Erik Olsen: <a href="mailto:Foldingslidingdoors.ab@gmail.com" class="link-secondary">Foldingslidingdoors.ab{{atSymbol}}gmail.com</a></li>
     </ul>
     </li>
         </ul>

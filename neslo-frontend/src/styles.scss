@@ -6,7 +6,6 @@
 }
 :root {
   --wood: #8B4513;
-  // --wood: #8a6d3b; 
   --wood-dark: #5c471f; 
   --wood-light: #bd9865;
   --wood-light-grey: #d3d3d385;
@@ -24,13 +23,8 @@ div[container]{
   border-radius: 25px;
   border: 1px groove;
 }
-div.mat-mdc-text-field-wrapper {
-  background-color: #ffffff;
-}
-.mdc-text-field--focused{
-  border-color: var(--wood-light);
-  color: red;
-}
 h2{
   color: var(--wood-dark);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

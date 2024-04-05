@@ -5,12 +5,14 @@ import { Grid } from '../interfaces/grid';
 import  { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-grid-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatIconModule,
-    MatInputModule, MatButtonModule],
+  imports: [ReactiveFormsModule, MatIconModule, MatSelectModule,
+    MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './grid-form.component.html',
   styleUrl: './grid-form.component.scss'
 })

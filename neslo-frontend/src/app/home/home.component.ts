@@ -29,19 +29,18 @@ import { IntroComponent } from 'src/app/intro/intro.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements AfterViewInit {
-  delay: boolean =false;
+
 atSymbol = '@';
-messageAB: string = `Located in Olds, AB, Neslo specializes in the supply and installation 
-of premium windows and doors, offering unparalleled durability and energy efficiency. 
+messageAB: string = `Rooted in Central Alberta, we bring over 30 years of expertise as journeyman carpenters and custom home builders to your door and window installations. 
+Specializing in custom solutions, we ensure top-quality craftsmanship tailored to your home. 
 <br>Stay up to date:<br>
 <a href="https://www.instagram.com/foldingsliding_doors_erik" target="_blank" class="styled-link">@foldingsliding_doors_erik</a>`
-introAB: string =`Alberta's location for delivery and instolation of 
-Folding Sliding Doors Canada.`
+introAB: string =`Alberta's premier destination for the delivery and installation of Folding Sliding Doors Canada.`
 
-messageBC: string = `
+messageBC: string = `Neslo specializes in the installation of folding sliding doors from Kelowna, BC.
+<br>
 Check out our latest projects at Folding Sliding Doors Canada: 
 <br>
-
 <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link">www.foldingslidingdoors</a>`
 introBC: string = `Folding Sliding Doors Canada is the proud supplier for Neslo.`
   @ViewChild('imgChild', { static: false }) imgChild!: ElementRef<HTMLImageElement>;
@@ -50,7 +49,7 @@ introBC: string = `Folding Sliding Doors Canada is the proud supplier for Neslo.
 
   ngAfterViewInit(): void {
     this.handleScroll(); 
-    this.delay = true;
+    console.log('scroll')
   }
   
   @HostListener('window:scroll', ['$event']) 

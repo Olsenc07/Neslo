@@ -32,7 +32,7 @@ export class QuoteGeneratorComponent {
       Validators.required]),
     dealerBranch: new FormControl<string>(''),
     contactName: new FormControl<string>(''),
-    contactEmail: new FormControl<string>('redman68&#64;live.ca', [
+    contactEmail: new FormControl<string>('sales@foldingslidingdoors.ca', [
       Validators.required]),
     contactPhone: new FormControl<string>('403 994 - 1202', [
       Validators.required]),
@@ -73,8 +73,8 @@ export class QuoteGeneratorComponent {
     doc.text(`Contact Email: ${this.quoteForm.value.contactEmail}`, 10, 30);
     doc.text(`Contact Phone: ${this.quoteForm.value.contactPhone}`, 10, 40);
 
-    // add the colum chart
-    // Attach two other pages below it 
+
+
     // Save the PDF
     doc.save('quote.pdf');
   }
@@ -83,7 +83,7 @@ contactForm(): void {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'send') {
     const snackBarRef = this.snackBar.open(
-      "Your message has been sent to redman68@live.ca",
+      "Your message has been sent to sales@foldingslidingdoors.ca",
       "We will get back to you shortly.",
       {
         duration: 3500

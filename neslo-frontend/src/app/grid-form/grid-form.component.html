@@ -48,38 +48,54 @@
               }
               </td>
       <!-- Room Label -->
-      <td >
-        <input blue  type="text" formControlName="roomLabel">
+      <td>
+        <mat-form-field blue appearance="fill">
+        <input matInput type="text" formControlName="roomLabel">
+      </mat-form-field>
     </td>
       <!-- Rough Opening -->
       <td>
-          <input green  type="text"  formControlName="width">
+        <mat-form-field green appearance="fill">
+          <input matInput type="text"  formControlName="width">
+        </mat-form-field>
       </td>
       <td >
-          <input green  type="text"  formControlName="height">
+        <mat-form-field green appearance="fill">
+          <input matInput type="text"  formControlName="height">
+        </mat-form-field>
       </td>
       <td>
       <!-- Configuration -->
-        <input red type="text" formControlName="configuration0">
+      <mat-form-field red appearance="fill">
+        <input matInput type="text" formControlName="configuration0">
+      </mat-form-field>
       </td>
       <td>+</td>
       <td >
-        <input red  type="text"  formControlName="configuration1">
+        <mat-form-field red appearance="fill">
+        <input matInput type="text"  formControlName="configuration1">
+      </mat-form-field>
     </td>
     <td>
       <!-- Left -->
-        <input  type="text"  formControlName="left">
+      <mat-form-field appearance="fill">
+        <input matInput type="text"  formControlName="left">
+      </mat-form-field>
     </td>
       <td>
       <!-- Right -->
-        <input type="text" formControlName="right">
+      <mat-form-field appearance="fill">
+        <input matInput type="text" formControlName="right">
+      </mat-form-field>
       </td>
   <td>
       <!-- Active Panel -->
-    <select purple formControlName="activePanel">
+      <mat-form-field purple appearance="fill">
+    <mat-select formControlName="activePanel">
         <option value="Right">Right</option>
         <option value="Left">Left</option>
-    </select>
+    </mat-select>
+  </mat-form-field>
     </td>
   </tr>
   }

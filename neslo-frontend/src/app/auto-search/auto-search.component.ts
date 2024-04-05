@@ -31,8 +31,7 @@ import { Observable, of } from 'rxjs';
 })
 export class AutoSearchComponent implements OnChanges {
   @Input() filler!: string;
-  @Input() label!: string;
-  @Input() hint?: string;
+  @Input() intro!: string;
   @Input() initialList: string[] = [''];
   input: FormControl<string | null> = new FormControl<string | null>('');
   @ViewChild('auto') matAutocomplete!: MatAutocomplete;
