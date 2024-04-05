@@ -5,11 +5,8 @@ button[back]{
         z-index: 10; 
         opacity: .7;
         background-color: var(--wood-light-grey);    
+        color: black;
 }
-button[email]{
-    background-color: whitesmoke;
-}
-
 .quote-head{
     color: green;
 }

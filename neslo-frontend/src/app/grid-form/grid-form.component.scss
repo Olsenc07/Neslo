@@ -16,9 +16,11 @@ div[row]{
 .table {
     width: 100%;
     max-width: 100%;
+    table-layout: fixed;
     margin-bottom: 1rem;
     background-color: transparent;
   }
+  
 th{
     background-color: green;
     color: white;
