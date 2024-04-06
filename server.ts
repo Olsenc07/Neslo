@@ -8,7 +8,18 @@ import { fileURLToPath } from 'url';
 import bootstrap from './neslo-frontend/src/main.server';
 // Routes
 import emailRoute from './backend/routes/email';
+import rateLimit from 'express-rate-limit';
 
+// Rate limiting middleware
+const apiLimiter = rateLimit({
+    windowMs: 30 * 60 * 1000, // 30 minutes
+    max: 3, // limit each IP to 3 requests per windowMs
+    handler: (req, res, next) => {
+      res.status(429).json({
+          error: 'Please don"t spam emails, try again after 30 minutes'
+      });
+  }
+  });
  // The Express app is exported so that it can be used by serverless Functions.
   async function createExpressApp(): Promise<express.Express> {
     const app = express();
@@ -25,7 +36,7 @@ import emailRoute from './backend/routes/email';
     // API Routes
 
 // API Routes
-    app.use("/api/email", emailRoute);
+    app.use("/api/email", apiLimiter, emailRoute);
 
     // Serve static files
     app.get('*.*', express.static(browserDistFolder, {

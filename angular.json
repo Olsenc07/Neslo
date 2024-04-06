@@ -18,9 +18,9 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/Neslo",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
+            "index": "neslo-frontend/src/index.html",
+            "browser": "neslo-frontend/src/main.ts",
+            "tsConfig": "neslo-frontend/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
