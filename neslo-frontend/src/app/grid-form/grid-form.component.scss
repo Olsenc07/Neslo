@@ -1,6 +1,9 @@
-
 button[close]{
     background-color: lightgray;
+}
+button[add]{
+    margin-top: 5%;
+    background-color: var(--green);
 }
 div[titles]{
     display: flex;
@@ -12,21 +15,64 @@ div[row]{
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
+} 
+.plus {
+    text-align: center; 
+    vertical-align: middle; 
+    font-size: 1.5rem; 
+    background-color: transparent;
+  }
 .table {
     width: 100%;
     max-width: 100%;
-    table-layout: fixed;
     margin-bottom: 1rem;
+    table-layout: fixed;
     background-color: transparent;
+    border-collapse: separate; 
+    border-spacing: 7px 0;  
+  }    
+.table td {
+    min-width: 120px; 
+    overflow: hidden; 
+  }
+td {
+    text-align: center; 
+    padding: 3px; 
+  }
+//   mobile grid
+  @media only screen and (max-width: 600px) {
+    .table td, .table th {
+      display: block;
+      width: 100%;
+    }
+    .table thead {
+      display: none; /* Hide the table headers on small screens */
+    }
+    .table tbody td {
+      text-align: right;
+      position: relative;
+    }
+    .table tbody td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      text-align: left;
+      font-weight: bold;
+    }
+    /* Add additional styles here to improve the layout */
   }
   
 th{
-    background-color: green;
+    border: 1px ;
+    background-color: var(--green);
     color: white;
 }
+input, .mat-form-field {
+    width: 100%; 
+    box-sizing: border-box; 
+  }
 mat-form-field[blue]{
-    background-color: lightblue;
+    background-color: rgb(21, 35, 40);
 }
 mat-form-field[green]{
     background-color: lightgreen;
