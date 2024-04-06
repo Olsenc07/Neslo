@@ -18,10 +18,9 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/Neslo",
-            "index": "neslo-frontend/src/index.html",
-            "browser": "neslo-frontend/src/main.ts",
-            "tsConfig": "neslo-frontend/tsconfig.app.json",
-            "polyfills": ["polyfills.ts"],
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
@@ -44,7 +43,7 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "neslo-frontend/src/styles.scss"
+              "src/styles.scss"
             ],
             "scripts": [],
             "server": "/neslo-frontend/src/main.server.ts",
