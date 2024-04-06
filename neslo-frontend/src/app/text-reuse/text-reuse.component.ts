@@ -4,12 +4,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-text-reuse',
   standalone: true,
-  imports: [MatButtonModule, MatInputModule, MatIconModule, 
-    MatFormFieldModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatInputModule, MatIconModule,  
+    MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './text-reuse.component.html',
   styleUrl: './text-reuse.component.scss'
 })

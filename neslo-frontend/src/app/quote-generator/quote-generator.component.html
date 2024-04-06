@@ -1,4 +1,5 @@
-<header class="bg-light p-3">
+<div id="quote">
+<header class="bg-light p-3" >
   <div  class="container">
     <div class="row align-items-center">
         <!-- Company Logo -->
@@ -28,7 +29,7 @@
         </p>
       </div>      
     </div>
-    <button back mat-fab (click)="returnHome()">
+    <button id="ignore1" back mat-fab (click)="returnHome()">
       <mat-icon class="material-symbols-outlined">arrow_back</mat-icon>
     </button>
   </div>
@@ -143,11 +144,12 @@
     } @placeholder {
       <app-skeleton-form-fill></app-skeleton-form-fill>
     }
-    <div class="g-3 g-md-3 pb-3 container justify-content-md-between d-block d-md-flex">
+    <div id="ignore1" class="g-3 g-md-3 pb-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->
       <div class="pdf col-12 col-md-6 justify-content-start">
+        <!-- [disabled]="quoteForm.invalid" -->
         <button mat-fab extended
-        [disabled]="quoteForm.invalid" type="submit" class="btn btn-primary">
+        type="submit" class="btn btn-primary">
           <mat-icon class="material-symbols-outlined">
             picture_as_pdf
           </mat-icon>
@@ -165,3 +167,7 @@
       </div>
       </div>
     </form>
+
+  </div>
+
+    
