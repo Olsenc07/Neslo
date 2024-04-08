@@ -34,7 +34,7 @@ atSymbol = '@';
 messageAB: string = `Rooted in Central Alberta, we bring over 30 years of expertise as journeyman carpenters and custom home builders to your door and window installations. 
 Specializing in custom solutions, we ensure top-quality craftsmanship tailored to your home. 
 <br>Stay up to date:<br>
-<a href="https://www.instagram.com/foldingsliding_doors_erik" target="_blank" class="styled-link">@foldingsliding_doors_erik</a>`
+<a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="styled-link">@foldingslidingdoors_erik</a>`
 introAB: string =`Alberta's premier destination for the delivery and installation of Folding Sliding Doors Canada.`
 
 messageBC: string = `Neslo specializes in the installation of folding sliding doors from Kelowna, BC.

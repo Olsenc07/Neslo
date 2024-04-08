@@ -8,7 +8,7 @@
         </div>
         <!-- Company Details -->
         <div class="col text-center">
-        <h1 class="h3 mb-0">Folding Sliding Doors Canada Ltd.</h1>
+        <h1 class="h3 pb-1 mb-0">Folding Sliding Doors Canada Ltd.</h1>
         <p class="mb-1">105 - 1155 St. Paul Street</p>
         <p class="mb-1">Kelowna, BC V1Y 2C6</p>
         <p class="mb-1">Ph: 1(250)-448-6418</p>
@@ -51,11 +51,11 @@
         <!-- Dealer Branch -->
         <app-text-reuse [intro]="'Branch Name'"  (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
         <!-- Contact Name -->
-        <app-text-reuse  [intro]="'Contact name'" (valueChange)="updateField('contactName', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Contact Name'" (valueChange)="updateField('contactName', $event)"></app-text-reuse>
         <!-- Contact Email -->
-        <app-text-reuse [intro]="'Contact email'" [intValue]="'Foldingslidingdoors.ab@gmail.com'" [types]="'email'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
+        <app-text-reuse [intro]="'Contact Email'" [intValue]="'Foldingslidingdoors.ab@gmail.com'" [types]="'email'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
         <!-- Phone -->
-        <app-text-reuse [intro]="'Contact phone'"  [intValue]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
+        <app-text-reuse [intro]="'Contact Phone'"  [intValue]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
         </section>
         </div>
       <!-- Job Information -->
@@ -71,10 +71,10 @@
             </p>
           </li>
           </ul>
-        <app-text-reuse  [intro]="'Job name'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
-        <app-text-reuse  [intro]="'Site address'" (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Job Name'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Site Address'" (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
         <app-text-reuse  [intro]="'City'" (valueChange)="updateField('jobCity', $event)"></app-text-reuse>
-        <app-text-reuse  [intro]="'Date'" [types]="'date'" (valueChange)="updateField('date', $event)"></app-text-reuse>
+        <app-date-reuse  [intro]="'Date'" (valueChange)="updateField('date', $event)"></app-date-reuse>
         </section>
       </div>
   </div>
@@ -89,7 +89,11 @@
         <mat-divider></mat-divider>
         </h2>
           <div class="row">
-            <p>If Door Model is FD72 then Interior Finish is ‘Same as Exterior’</p>
+            <ul>
+              <li>
+                <p>If Door Model is FD72 then Interior Finish is ‘Same as Exterior’</p>
+              </li>
+            </ul>
             <!-- Column for the first set of options -->
             <div class="col-12 col-md-6">
            <app-auto-search [intro]="'Door Model'" 
@@ -136,11 +140,11 @@
     </div>
     @defer(on viewport){
     <!-- grid inputs 2nd pg -->
-    @if(!this.orientationService.screen()){
+    <!-- @if(!this.orientationService.screen()){ -->
     <app-grid-form (sendGrid)="grid($event)"></app-grid-form>
-    } @else{
+    <!-- } @else{
      <h1 class="text-center align-items-center"> Please use a larger screen size to edit configurations. </h1>
-    }
+    } -->
     } @placeholder {
       <app-skeleton-form-fill></app-skeleton-form-fill>
     }

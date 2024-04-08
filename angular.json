@@ -43,7 +43,7 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "neslo-frontend/src/styles.scss"
             ],
             "scripts": [],
             "server": "/neslo-frontend/src/main.server.ts",

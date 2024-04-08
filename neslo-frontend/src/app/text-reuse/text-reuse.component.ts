@@ -5,28 +5,22 @@ import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {provideNativeDateAdapter} from '@angular/material/core';
+
 
 @Component({
   selector: 'app-text-reuse',
   standalone: true,
   imports: [MatButtonModule, MatInputModule, MatIconModule,  
     MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule],
-  providers: [provideNativeDateAdapter()],
+  providers: [],
   templateUrl: './text-reuse.component.html',
   styleUrl: './text-reuse.component.scss'
 })
 export class TextReuseComponent {
 @Input() intValue?: string;
 @Input() intro!: string;
-@Input() types: 'text' | 'tel' | 'date' | 'email' = 'text';
+@Input() types: 'text' | 'tel' | 'email' = 'text';
 input: FormControl<string | null> = new FormControl<string | null>('');
 @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
-constructor(){}
-
-reset(): void {
-  this.input.reset();
-  this.valueChange.emit('');
-}
 }

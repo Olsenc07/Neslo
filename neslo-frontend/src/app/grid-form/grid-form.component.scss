@@ -39,29 +39,7 @@ td {
     text-align: center; 
     padding: 3px; 
   }
-//   mobile grid
-  @media only screen and (max-width: 600px) {
-    .table td, .table th {
-      display: block;
-      width: 100%;
-    }
-    .table thead {
-      display: none; /* Hide the table headers on small screens */
-    }
-    .table tbody td {
-      text-align: right;
-      position: relative;
-    }
-    .table tbody td:before {
-      content: attr(data-label);
-      position: absolute;
-      left: 0;
-      text-align: left;
-      font-weight: bold;
-    }
-    /* Add additional styles here to improve the layout */
-  }
-  
+
 th{
     border: 1px ;
     background-color: var(--green);

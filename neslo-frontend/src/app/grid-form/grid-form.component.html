@@ -1,6 +1,6 @@
 <form [formGroup]="doorConfigForm">
   <div class="table-responsive-md">
-    <table class="table table-bordered d-block d-md-table">
+    <table class="table d-block d-md-table">
 <caption class="text-center">We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</caption>
 <thead>
   <tr>
@@ -35,15 +35,16 @@
       <tbody formArrayName="rows">
       @for(rowControl of rows.controls; let i = $index; track rowControl){
                 <tr [formGroupName]="i">
-                  <td>
+                  <td class="bg-transparent">
                     @if(i > 0){
               <button mat-fab extended close (click)="removeRow(i)">
                   {{ i + 1}}
                 <mat-icon class="material-symbols-outlined">close</mat-icon>
               </button>
               } @else {
-                <button mat-fab extended class="align-items-center" disabled>
-                  1
+                <button mat-fab extended add class="align-items-center" (click)="addRow()">
+                  <mat-icon class="material-symbols-outlined">add</mat-icon>
+                    Row
               </button>
               }
               </td>
@@ -100,11 +101,7 @@
   </tr>
   }
 </tbody>
-  <button mat-fab add extended type="button" (click)="addRow()">
-    <mat-icon class="material-symbols-outlined">add</mat-icon>
-    Row
-  </button>
-
+  
 </table>
 </div>
 </form>

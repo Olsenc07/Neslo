@@ -5,6 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
+import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -26,7 +28,7 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./quote-generator.component.scss'],
   imports: [AutoSearchComponent, ContactDialogComponent, 
     MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
-    MatIconModule, MatFormFieldModule, ReactiveFormsModule,
+    MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
      MatSelectModule, TextReuseComponent, SkeletonFormFillComponent]
 })
 export class QuoteGeneratorComponent {
@@ -68,39 +70,61 @@ export class QuoteGeneratorComponent {
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
- 
-  // maybe reduce? and need to add more grids dynamically
+  
   generatePDF(): void {
     const formElement = document.getElementById('quote') as HTMLElement;
-
-    if (formElement) {
-      html2canvas(formElement, {
-        scale: 1,
-        logging: true,
-        useCORS: true,
-        ignoreElements: (element) => {
-          // Condition to ignore specific elements
-          return element.classList.contains('ignore0') || element.classList.contains('ignore1');
-        }
-      }).then((canvas) => {
-        // Canvas is generated
-        const imgData = canvas.toDataURL('image/jpeg', 1.0);
   
-        // Now, generate a PDF with this image
-        const doc = new jsPDF({
-          orientation: 'landscape',
-          unit: 'px',
-          format: [canvas.width, canvas.height]
-        });
+    // if (formElement) {
+    //   // Save the current styles to restore later
+    //   const originalStyles = formElement.getAttribute('style');
   
-        doc.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
-        doc.save('quote.pdf');
-      });
-    } else {
-      console.error('Element not found');
-    } 
+    //   // Set styles to enforce desktop layout
+    //   formElement.setAttribute('style', 'max-width: none; width: 800px;'); // Set width to your desktop width
+  
+    //   html2canvas(formElement, {
+    //     scale: 1,
+    //     logging: true,
+    //     useCORS: true,
+    //     ignoreElements: (element) => {
+    //       // Condition to ignore specific elements
+    //       return element.classList.contains('ignore0') || element.classList.contains('ignore1');
+    //     },
+    //     onclone: (clonedDoc) => {
+    //       // This function is called after the document is cloned for rendering
+    //       // but before it's rendered. Apply any styles or classes that should
+    //       // only affect the cloned document for the screenshot here.
+    //       const clonedElement = clonedDoc.getElementById('quote');
+    //       if (clonedElement) {
+    //         clonedElement.style.width = '1600px'; // Ensure cloned element is also set to desktop width
+    //       }
+    //     }
+    //   }).then((canvas) => {
+    //     // Canvas is generated
+    //     const imgData = canvas.toDataURL('image/jpeg', 1.0);
+  
+    //     // Now, generate a PDF with this image
+    //     const pdfWidth = 1600; // A4 width in mm
+    //     const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Calculate the height in mm
+    //     const doc = new jsPDF({
+    //       orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
+    //       unit: 'mm',
+    //       format: [pdfWidth, pdfHeight]
+    //     });
+  
+    //     doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+    //     doc.save('quote.pdf');
+  
+    //     // Restore the original styles
+    //     if (originalStyles) {
+    //       formElement.setAttribute('style', originalStyles);
+    //     } else {
+    //       formElement.removeAttribute('style');
+    //     }
+    //   });
+    // } else {
+    //   console.error('Element not found');
+    // }
   }
-  
   
 contactForm(): void {
   const dialogRef = this.dialog.open(ContactDialogComponent);
