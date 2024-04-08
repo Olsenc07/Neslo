@@ -18,7 +18,6 @@ import {
   })
   export class OrientationService implements OnDestroy {
     private routeSub$: Subject<void> = new Subject<void>()
-    private platformId: Object;
   
     private orientationState = signal<boolean>(true)
     screen = computed<boolean>(() => this.orientationState())
@@ -29,9 +28,8 @@ import {
     constructor(
       private ngZone: NgZone,
       private router: Router,
-      @Inject(PLATFORM_ID) platformId: Object 
+      @Inject(PLATFORM_ID) private platformId: Object
       ) {
-        this.platformId = platformId;
       if (isPlatformBrowser(this.platformId)) {
         this.setOrientationState()
         window.addEventListener('resize', () => {

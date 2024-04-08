@@ -5,12 +5,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 
-import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
-import { AboutUsComponent } from 'src/app/about-us/about-us.component';
-import { SkeletonFormComponent } from 'src/app/about-us/skeleton-form/skeleton-form.component';
-import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
-import { OrientationService } from 'src/app/services/orientation.service';
-import { IntroComponent } from 'src/app/intro/intro.component';
+import { ContactFormComponent } from 'app/contact-form/contact-form.component';
+import { AboutUsComponent } from 'app/about-us/about-us.component';
+import { SkeletonFormComponent } from 'app/about-us/skeleton-form/skeleton-form.component';
+import { SkeletonFormFillComponent } from 'app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
+import { OrientationService } from 'app/services/orientation.service';
+import { IntroComponent } from 'app/intro/intro.component';
 
 @Component({
   standalone: true,

@@ -9,9 +9,9 @@
     "outDir": "./out-tsc/app"
   },
   "files": [
-    "src/main.ts",
+    "../src/main.ts",
     "../polyfills.ts",
-    "src/main.server.ts",
+    "../src/main.server.ts",
     "../server.ts"
   ],
   "exclude": [

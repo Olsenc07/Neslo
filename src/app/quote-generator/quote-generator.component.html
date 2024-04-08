@@ -123,7 +123,7 @@
            <app-text-reuse [intro]="'Handle Color'" (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
            <!-- Additional Notes -->
-        <mat-form-field  appearance="fill">
+        <mat-form-field class="w-100"  appearance="fill">
           <mat-label>Additional notes...</mat-label>
         <textarea matInput formControlName="additionalNotes">
           @if(contactForm.get('additionalNotes')?.value){

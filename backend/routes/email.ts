@@ -18,7 +18,8 @@ const storage  = multer.diskStorage({
     }
 });
 const upload = multer({storage: storage})
-router.post('/send-email', upload.single('file'), async (req: Request, res: Response) => {
+
+router.post('/email', upload.single('file'), async (req: Request, res: Response) => {
     const { text, fromName, fromEmail } = req.body;
     // preserve white spaces
     const htmlText = text.replace(/\n/g, '<br>');

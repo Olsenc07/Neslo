@@ -1,25 +1,29 @@
-import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AutoSearchComponent } from 'app/auto-search/auto-search.component';
+import { Component, Inject } from '@angular/core';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
-import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
+import { TextReuseComponent } from 'app/text-reuse/text-reuse.component';
+import { DateReuseComponent } from 'app/date-reuse/date-reuse.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { jsPDF } from 'jspdf';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
-import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
-import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
+import { GridFormComponent } from 'app/grid-form/grid-form.component';
+import { SkeletonFormFillComponent } from 'app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 import { Grid } from '../interfaces/grid'
 import { MatDividerModule } from '@angular/material/divider';
 import { OrientationService } from '../services/orientation.service';
-import html2canvas from 'html2canvas';
+import { PdfService } from '../services/pdf.service';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
+import { TitleStrategy } from '@angular/router'
+import { CustomTitleStrategy } from './../services/title-strategy.service';
 
 @Component({
   standalone: true,
@@ -29,7 +33,8 @@ import html2canvas from 'html2canvas';
   imports: [AutoSearchComponent, ContactDialogComponent, 
     MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
     MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
-     MatSelectModule, TextReuseComponent, SkeletonFormFillComponent]
+     MatSelectModule, TextReuseComponent, SkeletonFormFillComponent],
+     providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }]
 })
 export class QuoteGeneratorComponent {
   quoteForm: FormGroup = new FormGroup({
@@ -58,11 +63,18 @@ export class QuoteGeneratorComponent {
       Validators.required]),
     handleColor: new FormControl<string>(''),
     additionalNotes: new FormControl<string>('')
-  })
+  });
+
+  gridFormArray: FormArray = new FormArray<FormGroup>([]);
 
   constructor(private router: Router, private snackBar: MatSnackBar,
-    protected orientationService: OrientationService,
-    private dialog: MatDialog){}
+    private titleService:TitleStrategy,
+    protected orientationService: OrientationService, 
+   @Inject(PLATFORM_ID) private platformId: Object,
+    private pdfService: PdfService,
+    private dialog: MatDialog){
+      this.titleService.setTitle('Neslo _ Quote')
+    }
   
   returnHome(): void {
     this.router.navigate(['/home']);
@@ -70,60 +82,53 @@ export class QuoteGeneratorComponent {
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
-  
+  grid(values: Grid[]): void {  
+    values.forEach((gridRow: Grid) => {
+      const rowGroup = new FormGroup({
+        roomLabel: new FormControl(gridRow.roomLabel),
+        width: new FormControl(gridRow.width),
+        height: new FormControl(gridRow.height),
+        configuration0: new FormControl(gridRow.configuration0),
+        configuration1: new FormControl(gridRow.configuration1),
+        left: new FormControl(gridRow.left),
+        right: new FormControl(gridRow.right),
+        activePanel: new FormControl(gridRow.activePanel),
+      });
+      this.gridFormArray.push(rowGroup); 
+    });
+  }
+
   generatePDF(): void {
-    const formElement = document.getElementById('quote') as HTMLElement;
-  
-    // if (formElement) {
-    //   // Save the current styles to restore later
-    //   const originalStyles = formElement.getAttribute('style');
-  
-    //   // Set styles to enforce desktop layout
-    //   formElement.setAttribute('style', 'max-width: none; width: 800px;'); // Set width to your desktop width
-  
-    //   html2canvas(formElement, {
-    //     scale: 1,
-    //     logging: true,
-    //     useCORS: true,
-    //     ignoreElements: (element) => {
-    //       // Condition to ignore specific elements
-    //       return element.classList.contains('ignore0') || element.classList.contains('ignore1');
-    //     },
-    //     onclone: (clonedDoc) => {
-    //       // This function is called after the document is cloned for rendering
-    //       // but before it's rendered. Apply any styles or classes that should
-    //       // only affect the cloned document for the screenshot here.
-    //       const clonedElement = clonedDoc.getElementById('quote');
-    //       if (clonedElement) {
-    //         clonedElement.style.width = '1600px'; // Ensure cloned element is also set to desktop width
-    //       }
-    //     }
-    //   }).then((canvas) => {
-    //     // Canvas is generated
-    //     const imgData = canvas.toDataURL('image/jpeg', 1.0);
-  
-    //     // Now, generate a PDF with this image
-    //     const pdfWidth = 1600; // A4 width in mm
-    //     const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Calculate the height in mm
-    //     const doc = new jsPDF({
-    //       orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
-    //       unit: 'mm',
-    //       format: [pdfWidth, pdfHeight]
-    //     });
-  
-    //     doc.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-    //     doc.save('quote.pdf');
-  
-    //     // Restore the original styles
-    //     if (originalStyles) {
-    //       formElement.setAttribute('style', originalStyles);
-    //     } else {
-    //       formElement.removeAttribute('style');
-    //     }
-    //   });
-    // } else {
-    //   console.error('Element not found');
-    // }
+    if (isPlatformBrowser(this.platformId)) {
+    const finalFormData = {
+      ...this.quoteForm.value, 
+      grid: this.gridFormArray.value 
+    };
+    // Send the combined data to the backend using the PDF service
+    this.pdfService.generatePdf(finalFormData).subscribe({
+      next: (pdfBlob: any) => {
+        console.log('blobbb', pdfBlob)
+        // const blobUrl = window.URL.createObjectURL(pdfBlob);
+        // const link = document.createElement('a');
+        // link.href = blobUrl;
+        // link.download = 'FSD_Neslo_Quote.pdf';
+        // link.click();
+        // window.URL.revokeObjectURL(link.href);
+        this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
+          duration: 3000
+        });
+      },
+      error: (error: any) => {
+        console.error('PDF generator failed:', error);
+        this.snackBar.open('Error generating pdf. Please try again.', 'Close', {
+          duration: 3000
+        });
+      },
+      complete: () => {
+        console.log('PDF generation process is complete.');
+      }
+  });
+  }
   }
   
 contactForm(): void {
@@ -142,9 +147,6 @@ contactForm(): void {
   });
 }
 
-grid(values: Grid[]): void {
-console.log('grid list', values);
-}
   doorModel: string[] = [
     'FD27 PVCU'
     ]

@@ -1,20 +1,20 @@
 import 'zone.js';
 import express, { Request, Response } from 'express';
-import bodyParser from 'body-parser';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import { join, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import bootstrap from './neslo-frontend/src/main.server';
+import bootstrap from './src/main.server';
 // Routes
 import emailRoute from './backend/routes/email';
+import pdfRoute from './backend/routes/pdf';
 import rateLimit from 'express-rate-limit';
 
 // Rate limiting middleware
 const apiLimiter = rateLimit({
     windowMs: 30 * 60 * 1000, // 30 minutes
     max: 3, // limit each IP to 3 requests per windowMs
-    handler: (req, res, next) => {
+    handler: (req: Request, res: Response, next) => {
       res.status(429).json({
           error: 'Please don"t spam emails, try again after 30 minutes'
       });
@@ -30,13 +30,15 @@ const apiLimiter = rateLimit({
   
     const compression = (await import('compression')).default;
     app.use(compression());
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
+    
   
     // API Routes
 
 // API Routes
     app.use("/api/email", apiLimiter, emailRoute);
+    app.use("/api/pdf", pdfRoute);
 
     // Serve static files
     app.get('*.*', express.static(browserDistFolder, {

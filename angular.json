@@ -18,9 +18,9 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/Neslo",
-            "index": "neslo-frontend/src/index.html",
-            "browser": "neslo-frontend/src/main.ts",
-            "tsConfig": "neslo-frontend/tsconfig.app.json",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "tsConfig": "src/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
@@ -43,10 +43,10 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "neslo-frontend/src/styles.scss"
+              "src/styles.scss"
             ],
             "scripts": [],
-            "server": "/neslo-frontend/src/main.server.ts",
+            "server": "/src/main.server.ts",
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
@@ -56,8 +56,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "neslo-frontend/environments/environment.ts",
-                  "with": "neslo-frontend/environments/environment.prod.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
               ],
               "budgets": [
@@ -112,9 +112,26 @@
               "src/**/*.html"
             ]
           }
+        },
+        "test": { 
+        "builder": "@angular-devkit/build-angular:karma",
+        "options": {
+          "main": "src/test.ts", 
+          "polyfills": "src/polyfills.ts",
+          "tsConfig": "src/tsconfig.spec.json", 
+          "karmaConfig": "./karma.conf.js", 
+          "assets": [
+            "src/favicon.ico",
+            "src/assets"
+          ],
+          "styles": [ 
+            "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+            "src/styles.scss"
+          ]
         }
       }
     }
+  }
   },
   "cli": {
     "analytics": false
