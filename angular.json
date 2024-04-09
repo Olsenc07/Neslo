@@ -20,7 +20,7 @@
             "outputPath": "dist/Neslo",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
@@ -32,6 +32,7 @@
               "@babel",
               "body-parser",
               "core-js",
+              "cors",
               "compression",
               "compressible",
               "debug",
@@ -46,7 +47,7 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "server": "/src/main.server.ts",
+            "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
@@ -118,7 +119,7 @@
         "options": {
           "main": "src/test.ts", 
           "polyfills": "src/polyfills.ts",
-          "tsConfig": "src/tsconfig.spec.json", 
+          "tsConfig": "tsconfig.spec.json", 
           "karmaConfig": "./karma.conf.js", 
           "assets": [
             "src/favicon.ico",

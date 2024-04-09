@@ -22,11 +22,10 @@
     "lib": ["ES2022", "dom"]
   },
   "files": [
-    "../server.ts",
-    "../src/main.server.ts",
+    "src/main.ts",
+    "src/polyfills.ts"
   ],
   "exclude": [
-    "src/test.ts",
     "**/*.spec.ts",
     "**/node_modules/**",
   ],

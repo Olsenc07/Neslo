@@ -9,6 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class AboutUsComponent {
   @Input() title!: string;
+  @Input() img!: {img: string, alt: string };
   @Input() intro!: string;
   @Input() tel!: string;
   @Input() email!: string;

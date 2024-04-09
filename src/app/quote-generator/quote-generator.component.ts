@@ -1,11 +1,11 @@
-import { AutoSearchComponent } from 'app/auto-search/auto-search.component';
+import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { Component, Inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { TextReuseComponent } from 'app/text-reuse/text-reuse.component';
-import { DateReuseComponent } from 'app/date-reuse/date-reuse.component';
+import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
+import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
-import { GridFormComponent } from 'app/grid-form/grid-form.component';
-import { SkeletonFormFillComponent } from 'app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
+import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
+import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 import { Grid } from '../interfaces/grid'
 import { MatDividerModule } from '@angular/material/divider';
 import { OrientationService } from '../services/orientation.service';
@@ -22,6 +22,7 @@ import { PdfService } from '../services/pdf.service';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
+import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 
@@ -68,12 +69,12 @@ export class QuoteGeneratorComponent {
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
 
   constructor(private router: Router, private snackBar: MatSnackBar,
-    private titleService:TitleStrategy,
+    private title:Title,
     protected orientationService: OrientationService, 
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService,
     private dialog: MatDialog){
-      this.titleService.setTitle('Neslo _ Quote')
+      this.title.setTitle('Neslo | Quote')
     }
   
   returnHome(): void {
@@ -108,12 +109,7 @@ export class QuoteGeneratorComponent {
     this.pdfService.generatePdf(finalFormData).subscribe({
       next: (pdfBlob: any) => {
         console.log('blobbb', pdfBlob)
-        // const blobUrl = window.URL.createObjectURL(pdfBlob);
-        // const link = document.createElement('a');
-        // link.href = blobUrl;
-        // link.download = 'FSD_Neslo_Quote.pdf';
-        // link.click();
-        // window.URL.revokeObjectURL(link.href);
+       
         this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
           duration: 3000
         });
@@ -128,9 +124,14 @@ export class QuoteGeneratorComponent {
         console.log('PDF generation process is complete.');
       }
   });
+      }
   }
-  }
-  
+   // const blobUrl = window.URL.createObjectURL(pdfBlob);
+        // const link = document.createElement('a');
+        // link.href = blobUrl;
+        // link.download = 'FSD_Neslo_Quote.pdf';
+        // link.click();
+        // window.URL.revokeObjectURL(link.href);
 contactForm(): void {
   const dialogRef = this.dialog.open(ContactDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {

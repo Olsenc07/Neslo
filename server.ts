@@ -2,13 +2,16 @@ import 'zone.js';
 import express, { Request, Response } from 'express';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
-import { join, resolve } from 'path';
+import { join } from 'path';
 import { fileURLToPath } from 'url';
 import bootstrap from './src/main.server';
 // Routes
 import emailRoute from './backend/routes/email';
 import pdfRoute from './backend/routes/pdf';
 import rateLimit from 'express-rate-limit';
+import cors from 'cors';
+import * as path from 'path';
+console.log('app on 321')
 
 // Rate limiting middleware
 const apiLimiter = rateLimit({
@@ -23,19 +26,23 @@ const apiLimiter = rateLimit({
  // The Express app is exported so that it can be used by serverless Functions.
   async function createExpressApp(): Promise<express.Express> {
     const app = express();
+console.log('app on')
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const browserDistFolder = join(__dirname, '..', 'browser'); 
+    const indexHtml = join(browserDistFolder, 'index.html'); 
+    
+console.log('d', __dirname)
     const __filename = fileURLToPath(import.meta.url);
     const serverDistFolder = __filename;
-    const browserDistFolder = resolve(serverDistFolder, '../browser');
-    const indexHtml = join(browserDistFolder, 'index.server.html');
+    // const browserDistFolder = resolve(serverDistFolder, '../browser');
+    // const indexHtml = join(browserDistFolder, 'index.server.html');
   
     const compression = (await import('compression')).default;
+    app.use(cors());
     app.use(compression());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     
-  
-    // API Routes
-
 // API Routes
     app.use("/api/email", apiLimiter, emailRoute);
     app.use("/api/pdf", pdfRoute);
@@ -49,7 +56,6 @@ const apiLimiter = rateLimit({
     app.get('*', (req: Request, res: Response) => {
         const { protocol, originalUrl, baseUrl, headers } = req;
         const commonEngine = new CommonEngine();
-  
         commonEngine.render({
             bootstrap,
             documentFilePath: indexHtml,
@@ -70,6 +76,7 @@ const apiLimiter = rateLimit({
 
 // Run server
 async function run() {
+    console.log('hello')
   const port = process.env['PORT'] || 4200;
   const app = createExpressApp();
 

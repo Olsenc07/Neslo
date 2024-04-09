@@ -9,10 +9,10 @@
     "outDir": "./out-tsc/app"
   },
   "files": [
-    "../src/main.ts",
-    "../polyfills.ts",
-    "../src/main.server.ts",
-    "../server.ts"
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/main.server.ts",
+    "server.ts"
   ],
   "exclude": [
     "src/test.ts",
