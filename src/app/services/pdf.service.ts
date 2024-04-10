@@ -16,13 +16,15 @@ export class PdfService {
   ) { }
 
   generatePdf(finalForm: any): Observable<Blob> {
+    console.log('women', finalForm);
 
+    console.log('bags', this.apiUrl + '/pdf/generator');
     if (!isPlatformBrowser(this.platformId)) {
         console.log('PDF generation is not supported on the server');
         // Return an observable with a specific value or message
         return of(new Blob(['PDF generation not supported on the server']));
       }
-    return this.http.post(this.apiUrl, finalForm, { responseType: 'blob' })
+    return this.http.post(this.apiUrl + '/pdf/generator', finalForm, { responseType: 'blob' })
     .pipe(
       catchError((error) => {
         console.error('Error generating PDF:', error);

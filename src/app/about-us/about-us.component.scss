@@ -4,9 +4,15 @@
   border: 2px solid var(--wood-light-grey);
   padding: 20px;
   margin-bottom: 20px;
+  height: 100%
   }
   .img{
     border-radius: 50%;
     max-width: 20vh;
     margin-bottom: 2%;
   }
+ 
+.parent-container {
+  display: flex;
+  align-items: stretch; /* This will apply stretch to all children */
+}

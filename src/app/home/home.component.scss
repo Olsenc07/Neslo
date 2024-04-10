@@ -22,4 +22,8 @@
 h2[hidden]{
   display: none;
 }
-
+app-about-us {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* The parent container must have a height for stretch to work */
+}

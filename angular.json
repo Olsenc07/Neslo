@@ -40,8 +40,21 @@
               "@sendgrid",
               "multer",
               "on-headers",
-              "vary"
+              "vary",
+              "crypto-js",
+              "jpeg-exif",
+              "png-js",
+              "restructure",
+              "deep-equal",
+              "unicode-trie",
+              "dfa",
+              "clone",
+              "tiny-inflate",
+              "brotli/decompress.js",
+              "base64-js",
+              "iconv-lite"
             ],
+            
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"

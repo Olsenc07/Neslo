@@ -2,7 +2,7 @@ import 'zone.js';
 import express, { Request, Response } from 'express';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
-import { join } from 'path';
+import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import bootstrap from './src/main.server';
 // Routes
@@ -10,7 +10,6 @@ import emailRoute from './backend/routes/email';
 import pdfRoute from './backend/routes/pdf';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
-import * as path from 'path';
 import compression from 'compression';
 
 // Rate limiting middleware
@@ -23,6 +22,7 @@ const apiLimiter = rateLimit({
       });
   }
   });
+  
 //  // The Express app is exported so that it can be used by serverless Functions.
   async function createExpressApp(): Promise<express.Express> {
     const app = express();
@@ -31,11 +31,17 @@ const apiLimiter = rateLimit({
      app.use(compression());
      app.use(express.json());
      app.use(express.urlencoded({ extended: false }));
-     
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const browserDistFolder = join(__dirname, '..', 'browser'); 
     const indexHtml = join(browserDistFolder, 'index.html'); 
     
+    console.log('bdname',__dirname);
+    console.log('chass',browserDistFolder);
+
+    console.log(indexHtml);
+
     app.use("/api/email", apiLimiter, emailRoute);
     app.use("/api/pdf", pdfRoute);
 
