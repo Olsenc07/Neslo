@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, take, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { isPlatformBrowser } from '@angular/common'
 import { of } from 'rxjs';
@@ -17,20 +17,20 @@ export class PdfService {
 
   generatePdf(finalForm: any): Observable<Blob> {
     console.log('women', finalForm);
-
-    console.log('bags', this.apiUrl + '/pdf/generator');
+    console.log('bags', `${this.apiUrl}/pdf/generator`);
     if (!isPlatformBrowser(this.platformId)) {
         console.log('PDF generation is not supported on the server');
         // Return an observable with a specific value or message
         return of(new Blob(['PDF generation not supported on the server']));
       }
-    return this.http.post(this.apiUrl + '/pdf/generator', finalForm, { responseType: 'blob' })
-    .pipe(
-      catchError((error) => {
-        console.error('Error generating PDF:', error);
-        return throwError(() => new Error('Error generating PDF'));
-      })
-    );
-  
-  }
+      return this.http.post(`${this.apiUrl}/pdf/generator`, finalForm, { responseType: 'blob' })
+      .pipe(
+        take(1),
+        catchError((error) => {
+            console.error('Error generating PDF:', error);
+            return throwError(() => new Error('Error generating PDF'));
+        })
+      );
+    }
+
 }

@@ -9,8 +9,14 @@ router.post('/generator', (req: Request, res: Response) => {
   // const quarterWidth = pageWidth / 4;
   const rowHeight = 20;
 
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename=FSD_Neslo_quote.pdf');
+  // res.setHeader('Content-Type', 'application/pdf');
+  // res.setHeader('Content-Disposition', 'attachment; filename=FSD_Neslo_quote.pdf');
+
+});
+export default router;
+
+
+
 
 //   // Pipe the PDF into the HTTP response
 //   doc.pipe(res);
@@ -85,5 +91,3 @@ router.post('/generator', (req: Request, res: Response) => {
 //   doc.save()
 // })
 //  };
-});
-export default router;

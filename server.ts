@@ -2,8 +2,8 @@ import 'zone.js';
 import express, { Request, Response } from 'express';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import bootstrap from './src/main.server';
 // Routes
 import emailRoute from './backend/routes/email';
@@ -11,6 +11,8 @@ import pdfRoute from './backend/routes/pdf';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import compression from 'compression';
+
+console.log('grilled cheese')
 
 // Rate limiting middleware
 const apiLimiter = rateLimit({
@@ -24,36 +26,33 @@ const apiLimiter = rateLimit({
   });
   
 //  // The Express app is exported so that it can be used by serverless Functions.
-  async function createExpressApp(): Promise<express.Express> {
-    const app = express();
+   function app(): express.Express {
+    const server = express();
      // Middleware
-     app.use(cors());
-     app.use(compression());
-     app.use(express.json());
-     app.use(express.urlencoded({ extended: false }));
+     server.use(cors());
+     server.use(compression());
+     server.use(express.json());
+     server.use(express.urlencoded({ extended: false }));
 
-
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-    const browserDistFolder = join(__dirname, '..', 'browser'); 
-    const indexHtml = join(browserDistFolder, 'index.html'); 
-    
-    console.log('bdname',__dirname);
-    console.log('chass',browserDistFolder);
-
-    console.log(indexHtml);
-
-    app.use("/api/email", apiLimiter, emailRoute);
-    app.use("/api/pdf", pdfRoute);
+     const distFolder = dirname(fileURLToPath(import.meta.url));
+     const browserDistFolder = resolve(distFolder, '../browser');
+     server.set('view engine', 'html');
+     server.set('views', browserDistFolder);
+     
+    // routes
+    server.use("/api/email", apiLimiter, emailRoute);
+    server.use("/api/pdf", pdfRoute);
 
     // Serve static files
-    app.get('*.*', express.static(browserDistFolder, {
-        maxAge: '1y'
-    }));
-  
+    server.get('*.*', express.static(browserDistFolder, { maxAge: '1y'}));
+ 
     // All regular routes use the Angular engine
-    app.get('*', (req: Request, res: Response) => {
+    server.get('*', (req: Request, res: Response) => {
+        console.log('its in')
         const { protocol, originalUrl, baseUrl, headers } = req;
         const commonEngine = new CommonEngine();
+        const indexHtml = join(distFolder, 'index.server.html');
+
         commonEngine.render({
             bootstrap,
             documentFilePath: indexHtml,
@@ -67,14 +66,17 @@ const apiLimiter = rateLimit({
             res.status(500).send('Server error');
         });
     });
-return app;
+return server;
   }
+
 async function startServer() {
-    const app = await createExpressApp();
     const port = process.env['PORT'] || 4200;
-    app.listen(port, () => {
+
+    const server = app();
+    server.listen(port, () => {
         console.log(`Node Express server listening on http://localhost:${port}`);
     });
 }
-
-startServer();
+startServer().catch(err => {
+    console.error('Failed to start the server:', err);
+});

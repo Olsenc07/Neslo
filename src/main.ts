@@ -24,7 +24,7 @@ bootstrapApplication(AppComponent, {
       withHttpTransferCacheOptions({
         includePostRequests: true
       })
-    ), provideClientHydration(), provideAnimationsAsync(), provideAnimationsAsync()
+    )
   ]
 })
   .then((started) => {

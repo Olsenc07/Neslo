@@ -84,6 +84,7 @@ export class QuoteGeneratorComponent {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
   grid(values: Grid[]): void {  
+    if (isPlatformBrowser(this.platformId)) {
     values.forEach((gridRow: Grid) => {
       const rowGroup = new FormGroup({
         roomLabel: new FormControl(gridRow.roomLabel),
@@ -97,6 +98,7 @@ export class QuoteGeneratorComponent {
       });
       this.gridFormArray.push(rowGroup); 
     });
+  }
   }
 
   generatePDF(): void {
@@ -126,6 +128,9 @@ export class QuoteGeneratorComponent {
   });
       }
   }
+
+
+
    // const blobUrl = window.URL.createObjectURL(pdfBlob);
         // const link = document.createElement('a');
         // link.href = blobUrl;
