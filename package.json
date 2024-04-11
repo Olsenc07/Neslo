@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "serve": "node dist/Neslo/server/main.server.mjs",
+    "serve": "node dist/Neslo/server/server.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint . --ext .ts,.js",
