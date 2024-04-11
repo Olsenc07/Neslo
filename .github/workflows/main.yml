@@ -19,12 +19,12 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        heroku container:push web -a neslo
+        heroku container:push web -a neslo-fs
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
     - name: Release image to the app
       run: |
-        heroku container:release web -a neslo
+        heroku container:release web -a neslo-fs
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
