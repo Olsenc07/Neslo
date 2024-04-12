@@ -25,9 +25,6 @@
     border-color: var(--wood); 
     transform: scale(1.10); 
   }
-  .quote {
-    box-shadow: 0px 1px 0px 2px white;
-  }
   .mobile{
     margin: 3%;
     width: 75%;
@@ -37,6 +34,8 @@
     margin-top: -20px;
   }
   .theeTitle{
+    font-size: 1.4em; 
+    padding: 2%;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent; 
@@ -44,7 +43,16 @@
     background-size: 200% 200%; 
     animation: gradient-flow 10s linear infinite; 
       }
-
+  @media (min-width: 601px) {
+        .theeTitle{
+          font-size: 2.1em; 
+        }
+    }
+  @media (min-width: 1025px) {
+        .theeTitle{
+          font-size: 2.8vw; 
+        }
+      }
 h2[heading] {
   color: black;
   @media only screen and (min-width: 600px) {

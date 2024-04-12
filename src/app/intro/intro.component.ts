@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -17,6 +17,8 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 })
 export class IntroComponent implements OnInit {
 @Input() orientation: boolean = true
+@Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private router: Router,
     private title:Title
   ){}
@@ -24,6 +26,7 @@ export class IntroComponent implements OnInit {
     this.title.setTitle('Neslo | Premium Windows and Doors')
     
   }
+  // test nopt in
   requestQuote(): void {
     this.router.navigate(['/quotes']);
   }
@@ -31,6 +34,6 @@ export class IntroComponent implements OnInit {
     document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' });
   }
   navigateToMsg(): void {
-    document.getElementById('msg')?.scrollIntoView({ behavior: 'smooth' });
+      this.valueChange.emit();
   }
 }

@@ -1,9 +1,7 @@
-@defer(on immediate){
 <header #imgChild class="intro">
-   <app-intro [orientation]="this.orientationService.screen()"></app-intro>
+   <app-intro [orientation]="this.orientationService.screen()" 
+   (valueChange)="triggerScroll()"></app-intro>
 </header>
-}
-@defer{
 <section class="my-3">
     <div container class="container bg-light">
         <h2 class="text-center mb-4 pt-3" id="contacts">
@@ -35,7 +33,7 @@
     </div>
 </section>
 
-<section class="my-3 ">
+<section class="my-3" >
     <div container class="container py-3 bg-light">
         <h2 class="text-center mb-4" >
             Contact Us
@@ -49,16 +47,16 @@
     </ul>
     </li>
         </ul>
-        <div class="col-12 mt-4" id="msg">
+        <div class="col-12 mt-4">
 @defer(on viewport){
-       <app-contact-form></app-contact-form>
+       <app-contact-form ></app-contact-form>
     }@placeholder { 
-        <app-skeleton-form-fill></app-skeleton-form-fill>
+        <app-skeleton-form-fill ></app-skeleton-form-fill>
          }
     </div>
     </div>
 </section>
-<footer class="text-center section-padding bg-dark text-light">
+<footer class="text-center section-padding bg-dark text-light"  >
 <div class="container">
 <p>© 2024 Neslo Windows and Doors. All rights reserved.</p>
 <p>Follow us on social media for the latest updates and offers.</p>
@@ -67,4 +65,3 @@
 </a>
 </div>
 </footer> 
-}

@@ -9,19 +9,7 @@
 button, input, select, textarea {
   font-family: 'Josefin Sans', sans-serif;
 }
-.theeTitle{
-  font-size: 1em; 
-}
-@media (min-width: 601px) {
-  .theeTitle{
-    font-size: 1.5em; 
-  }
-}
-@media (min-width: 1025px) {
-  .theeTitle{
-    font-size: 2.2vw; 
-  }
-}
+
 .mat-typography {
   font-family: 'Josefin Sans', sans-serif;
   
@@ -52,7 +40,7 @@ button, input, select, textarea {
     & .mat-h2, & h2 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.3em; 
-      color: #f8f9fa;
+      color: #8b4512;
     }
 
     & h3 {
@@ -71,7 +59,7 @@ button, input, select, textarea {
     & .mat-h2, & h2 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 2vw; 
-      color: #f8f9fa;
+      color: #8b4512;
     }
 
     & h3 {

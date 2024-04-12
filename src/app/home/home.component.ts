@@ -28,7 +28,7 @@ import { IntroComponent } from 'src/app/intro/intro.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent {
 
 atSymbol = '@';
 imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.jpg', alt: 'Neslo Ltd. Logo' }
@@ -48,10 +48,6 @@ introBC: string = `Folding Sliding Doors Canada is the proud supplier for Neslo.
   @ViewChild('imgChild', { static: false }) imgChild!: ElementRef<HTMLImageElement>;
   constructor(private renderer: Renderer2, 
     protected orientationService: OrientationService) {}
-
-  ngAfterViewInit(): void {
-    this.handleScroll(); 
-  }
   
   @HostListener('window:scroll', ['$event']) 
   handleScroll(): void {
@@ -64,5 +60,7 @@ introBC: string = `Folding Sliding Doors Canada is the proud supplier for Neslo.
     }
 
   }
- 
+  triggerScroll(): void {
+    
+  }
 }

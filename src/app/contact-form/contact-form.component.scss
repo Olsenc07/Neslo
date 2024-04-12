@@ -1,5 +1,9 @@
-button[file]{
+.file-empty{
     background-color: #4A2C2A;
+    color: white;
+  }
+  .file-added{
+    background-color: var(--wood-light-grey);
     color: white;
   }
 button[type="submit"]{
@@ -8,6 +12,14 @@ button[type="submit"]{
   &:hover{
     background-color: var(--wood-red);
   }
+}
+.file-wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.file{
+  padding: 0% 2%;
 }
   .limit {
     max-height: 200px; 

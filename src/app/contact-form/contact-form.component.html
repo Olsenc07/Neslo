@@ -54,13 +54,27 @@ alt="Selected file thumbnail" />
       hidden #fileInput accept=".pdf, .doc, .docx, .jpg" multiple>
       <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
         @if(!dialog){
-        <div class="pad col-12 col-md-6 justify-content-start">
-      <button mat-fab extended (click)="fileInput.click()" file>
+        <div  class="pad col-12 col-md-6 file-wrapper">
+      <button mat-fab extended (click)="fileInput.click()" [ngClass]="contactForm.get('file')?.value ? 'file-empty' : 'file-added'">
+        <mat-icon class="material-symbols-outlined">
+        @if(contactForm.get('file')?.value){
+        file_download_done
+
+        } @else {
+        attach_file
+
+        }
+      </mat-icon>
+   @if(contactForm.get('file')?.value){
+    File attached successfully 
+
+    } @else {
       Attach your request quote
-      <mat-icon class="material-symbols-outlined">attach_file</mat-icon>
+
+    }
       </button>
       @if(contactForm.get('file')?.value){
-        <div>
+        <div class="file">
         {{ contactForm.get('file')?.value }}
         </div>
     <button matSuffix mat-icon-button (click)="contactForm.get('file')?.reset()">

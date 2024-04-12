@@ -23,4 +23,15 @@ export class TextReuseComponent {
 input: FormControl<string | null> = new FormControl<string | null>('');
 @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
+constructor() {
+  // Subscribe to the FormControl value changes.
+  this.input.valueChanges.subscribe((value: string | null) => {
+    // Emit the value through the valueChange EventEmitter.
+    this.valueChange.emit(value || ''); // If value is null, emit an empty string.
+  });
+}
+reset(): void {
+  this.input.reset();
+  this.valueChange.emit('');
+}
 }
