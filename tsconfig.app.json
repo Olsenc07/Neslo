@@ -1,5 +1,6 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  "extends": "./tsconfig.json",
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
@@ -26,22 +27,19 @@
     "module": "ES2022",
     "lib": ["ES2022", "dom"]
   },
-  "files": [
-    "src/main.ts",
-    "src/main.server.ts",
+  "include": [
+    "src/**/*.d.ts",
     "server.ts",
-    "src/polyfills.ts"
+    "src/**/*.ts"
   ],
+  // "files": [
+  //   "src/main.ts",
+  //   "src/main.server.ts",
+  //   "server.ts"
+  // ],
   "exclude": [
     "**/*.spec.ts",
     "src/test.ts",
     "**/node_modules/**"
-  ],
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  }
+  ]
 }

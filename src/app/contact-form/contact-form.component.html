@@ -38,15 +38,14 @@
           <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
         </button>
       }
-
 <!-- make this fit properly -->
-@if(imageSrc && contactForm.get('file')?.value){
+<!-- @if(imageSrc && contactForm.get('file')?.value){ -->
 <div  class="thumbnail-container limit" [ngClass]="{'full-screen': isFullScreen}" (click)="toggleFullScreen()">
-<img  [src]="imageSrc" 
+<img [src]="imageSrc" 
 class="img-thumbnail img-fluid mx-auto d-block" 
 alt="Selected file thumbnail" />
 </div>
-}
+<!-- } -->
 </textarea>
 </mat-form-field>
 </div>
@@ -55,7 +54,7 @@ alt="Selected file thumbnail" />
       <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
         @if(!dialog){
         <div  class="pad col-12 col-md-6 file-wrapper">
-      <button mat-fab extended (click)="fileInput.click()" [ngClass]="contactForm.get('file')?.value ? 'file-empty' : 'file-added'">
+      <button mat-fab extended (click)="fileInput.click()" [ngClass]="contactForm.get('file')?.value ? 'file-added' : 'file-empty'">
         <mat-icon class="material-symbols-outlined">
         @if(contactForm.get('file')?.value){
         file_download_done

@@ -73,6 +73,7 @@ import {
     }
     // SSR
     private setOrientationState(): void {
+      if (isPlatformBrowser(this.platformId)) {
       const orientationType = window.screen.orientation.type
       switch (orientationType) {
         case 'landscape-primary':
@@ -87,6 +88,7 @@ import {
           this.orientationState.set(true)
           break
       }
+    }
     }
   
     ngOnDestroy(): void {
