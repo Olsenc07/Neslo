@@ -7,36 +7,13 @@
       "@app/*": ["app/*"],
       "@assets/*": ["assets/*"],
       "@environments/*": ["environments/*"]
-    }, 
-    "outDir": "./dist/out-tsc",
-    "baseUrl": "./",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "ES2022",
-    "lib": ["ES2022", "dom"]
+    }
   },
   "include": [
     "src/**/*.d.ts",
     "server.ts",
     "src/**/*.ts"
   ],
-  // "files": [
-  //   "src/main.ts",
-  //   "src/main.server.ts",
-  //   "server.ts"
-  // ],
   "exclude": [
     "**/*.spec.ts",
     "src/test.ts",
