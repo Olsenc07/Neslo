@@ -1,10 +1,12 @@
 button[close]{
-    background-color: lightgray;
+    margin-top: 7%;
+    background-color: black;
 }
 button[add]{
-    margin-top: 5%;
+    margin-top: 7%;
     background-color: var(--green);
 }
+
 div[titles]{
     display: flex;
     text-align: center;
@@ -16,6 +18,9 @@ div[row]{
     justify-content: space-around;
     align-items: center;
 } 
+mat-card{
+    margin: 0% 2% 2% 2%;
+}
 .plus {
     text-align: center; 
     vertical-align: middle; 
@@ -41,9 +46,8 @@ td {
   }
 
 th{
-    border: 1px ;
-    background-color: var(--green);
-    color: white;
+    border: 1px;
+    color: var(--green);
 }
 input, .mat-form-field {
     width: 100%; 

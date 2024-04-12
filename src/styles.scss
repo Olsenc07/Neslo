@@ -9,11 +9,24 @@
 button, input, select, textarea {
   font-family: 'Josefin Sans', sans-serif;
 }
+.theeTitle{
+  font-size: 1em; 
+}
+@media (min-width: 601px) {
+  .theeTitle{
+    font-size: 1.5em; 
+  }
+}
+@media (min-width: 1025px) {
+  .theeTitle{
+    font-size: 2.2vw; 
+  }
+}
 .mat-typography {
   font-family: 'Josefin Sans', sans-serif;
   
   // Base mobile styles
-  & .mat-h1, & .mat-headline-5, & h1 {
+  & .mat-h1, & .mat-headline-5 {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1em; 
   }
@@ -21,7 +34,7 @@ button, input, select, textarea {
   & .mat-h2, & h2 {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 0.8em; 
-    color: grey;
+    color: #f8f9fa;
   }
 
   & h3 {
@@ -31,7 +44,7 @@ button, input, select, textarea {
 
   // Tablet and up
   @media (min-width: 601px) {
-    & .mat-h1, & .mat-headline-5, & h1 {
+    & .mat-h1, & .mat-headline-5 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.5em; 
     }
@@ -39,7 +52,7 @@ button, input, select, textarea {
     & .mat-h2, & h2 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.3em; 
-      color: grey;
+      color: #f8f9fa;
     }
 
     & h3 {
@@ -50,7 +63,7 @@ button, input, select, textarea {
 
   // Desktops and up
   @media (min-width: 1025px) {
-    & .mat-h1, & .mat-headline-5, & h1 {
+    & .mat-h1, & .mat-headline-5 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 2.2vw; 
     }
@@ -58,7 +71,7 @@ button, input, select, textarea {
     & .mat-h2, & h2 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 2vw; 
-      color: grey;
+      color: #f8f9fa;
     }
 
     & h3 {
@@ -75,7 +88,7 @@ button, input, select, textarea {
   --wood-light-grey: #d3d3d385;
   --wood-red: #CC9966;
   --blue: #007bff;
-  --green: #4B6F44;
+  --green: #008643;
 }
 b {
   color: var(--wood-light);

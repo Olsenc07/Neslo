@@ -7,11 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-grid-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatIconModule, MatSelectModule,
+  imports: [ReactiveFormsModule, MatIconModule, MatSelectModule, MatCardModule,
     MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './grid-form.component.html',
   styleUrl: './grid-form.component.scss'

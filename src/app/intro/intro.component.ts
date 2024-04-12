@@ -1,19 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { Title } from '@angular/platform-browser'
+import { TitleStrategy } from '@angular/router'
+import { CustomTitleStrategy } from './../services/title-strategy.service';
 
 @Component({
   selector: 'app-intro',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, NgClass],
   templateUrl: './intro.component.html',
-  styleUrl: './intro.component.scss'
+  styleUrl: './intro.component.scss',
+  providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }]
 })
-export class IntroComponent {
+export class IntroComponent implements OnInit {
 @Input() orientation: boolean = true
-  constructor(private router: Router){}
+  constructor(private router: Router,
+    private title:Title
+  ){}
+  ngOnInit(): void {
+    this.title.setTitle('Neslo | Premium Windows and Doors')
+    
+  }
   requestQuote(): void {
     this.router.navigate(['/quotes']);
   }

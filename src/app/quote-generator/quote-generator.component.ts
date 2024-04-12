@@ -1,5 +1,5 @@
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
+
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -37,7 +38,7 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
      MatSelectModule, TextReuseComponent, SkeletonFormFillComponent],
      providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }]
 })
-export class QuoteGeneratorComponent {
+export class QuoteGeneratorComponent implements OnInit {
   quoteForm: FormGroup = new FormGroup({
     dealerName: new FormControl<string>('Erik Olsen', [
       Validators.required]),
@@ -73,10 +74,11 @@ export class QuoteGeneratorComponent {
     protected orientationService: OrientationService, 
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService,
-    private dialog: MatDialog){
+    private dialog: MatDialog){}
+
+    ngOnInit(): void {
       this.title.setTitle('Neslo | Quote')
     }
-  
   returnHome(): void {
     this.router.navigate(['/home']);
   }
