@@ -110,29 +110,27 @@ export class QuoteGeneratorComponent implements OnInit {
       grid: this.gridFormArray.value 
     };
     // Send the combined data to the backend using the PDF service
-    this.pdfService.generatePdf(finalFormData).subscribe({
-      next: (pdfBlob: any) => {
-        console.log('blobbb', pdfBlob)
+    this.pdfService.generatePdf(finalFormData)
+  //   .subscribe({
+  //     next: (pdfBlob: any) => {
+  //       console.log('blobbb', pdfBlob)
        
-        this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
-          duration: 3000
-        });
-      },
-      error: (error: any) => {
-        console.error('PDF generator failed:', error);
-        this.snackBar.open('Error generating pdf. Please try again.', 'Close', {
-          duration: 3000
-        });
-      },
-      complete: () => {
-        console.log('PDF generation process is complete.');
-      }
-  });
+  //       this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
+  //         duration: 3000
+  //       });
+  //     },
+  //     error: (error: any) => {
+  //       console.error('PDF generator failed:', error);
+  //       this.snackBar.open('Error generating pdf. Please try again.', 'Close', {
+  //         duration: 3000
+  //       });
+  //     },
+  //     complete: () => {
+  //       console.log('PDF generation process is complete.');
+  //     }
+  // });
       }
   }
-
-
-
    // const blobUrl = window.URL.createObjectURL(pdfBlob);
         // const link = document.createElement('a');
         // link.href = blobUrl;

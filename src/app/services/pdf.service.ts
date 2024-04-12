@@ -15,22 +15,34 @@ export class PdfService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
-  generatePdf(finalForm: any): Observable<Blob> {
-    console.log('women', finalForm);
-    console.log('bags', `${this.apiUrl}/pdf/generator`);
-    if (!isPlatformBrowser(this.platformId)) {
-        console.log('PDF generation is not supported on the server');
-        // Return an observable with a specific value or message
-        return of(new Blob(['PDF generation not supported on the server']));
-      }
+  // generatePdf(finalForm: any): Observable<Blob> {
+  //   console.log('women', finalForm);
+  //   console.log('bags', `${this.apiUrl}/pdf/generator`);
+  //   if (!isPlatformBrowser(this.platformId)) {
+  //       console.log('PDF generation is not supported on the server');
+  //       // Return an observable with a specific value or message
+  //       return of(new Blob(['PDF generation not supported on the server']));
+  //     }
+  //     return this.http.post(`${this.apiUrl}/pdf/generator`, finalForm, { responseType: 'blob' })
+  //     .pipe(
+  //       take(1),
+  //       catchError((error) => {
+  //           console.error('Error generating PDF:', error);
+  //           return throwError(() => new Error('Error generating PDF'));
+  //       })
+  //     );
+  //   }
+
+    generatePdf(finalForm: any): Observable<Blob> {
+      console.log('Sending request to backend', `${this.apiUrl}`);
       return this.http.post(`${this.apiUrl}/pdf/generator`, finalForm, { responseType: 'blob' })
-      .pipe(
-        take(1),
-        catchError((error) => {
+        .pipe(
+          catchError((error) => {
             console.error('Error generating PDF:', error);
             return throwError(() => new Error('Error generating PDF'));
-        })
-      );
+          })
+        );
     }
+
 
 }
