@@ -1,5 +1,5 @@
 import { Component, HostListener, Renderer2, 
-  ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+  ElementRef, ViewChild } from '@angular/core';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
@@ -7,7 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
 import { AboutUsComponent } from 'src/app/about-us/about-us.component';
-import { SkeletonFormComponent } from 'src/app/about-us/skeleton-form/skeleton-form.component';
+// import { SkeletonFormComponent } from 'src/app/about-us/skeleton-form/skeleton-form.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 import { OrientationService } from 'src/app/services/orientation.service';
 import { IntroComponent } from 'src/app/intro/intro.component';
@@ -21,7 +21,7 @@ import { IntroComponent } from 'src/app/intro/intro.component';
     MatButtonModule, 
     MatDividerModule,
     MatIconModule,
-    SkeletonFormComponent,
+    // SkeletonFormComponent,
     SkeletonFormFillComponent,
     IntroComponent
   ],
@@ -46,7 +46,7 @@ Check out our latest projects at Folding Sliding Doors Canada:
 <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link">www.foldingslidingdoors</a>`
 introBC: string = `Folding Sliding Doors Canada is the proud supplier for Neslo.`
   @ViewChild('imgChild', { static: false }) imgChild!: ElementRef<HTMLImageElement>;
-  constructor(private renderer: Renderer2, 
+  constructor(private renderer: Renderer2,
     protected orientationService: OrientationService) {}
   
   @HostListener('window:scroll', ['$event']) 
@@ -60,7 +60,5 @@ introBC: string = `Folding Sliding Doors Canada is the proud supplier for Neslo.
     }
 
   }
-  triggerScroll(): void {
-    
-  }
+  
 }

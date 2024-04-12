@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -6,6 +6,8 @@ import { NgClass } from '@angular/common';
 import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-intro',
@@ -17,23 +19,27 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 })
 export class IntroComponent implements OnInit {
 @Input() orientation: boolean = true
-@Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private router: Router,
-    private title:Title
+    private title:Title, @Inject(PLATFORM_ID) private platformId: Object,
   ){}
+
   ngOnInit(): void {
     this.title.setTitle('Neslo | Premium Windows and Doors')
-    
   }
   // test nopt in
   requestQuote(): void {
     this.router.navigate(['/quotes']);
   }
   navigateToContact(): void {
+    if (isPlatformBrowser(this.platformId)) {
     document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' });
+    }
   }
+
   navigateToMsg(): void {
-      this.valueChange.emit();
+      if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
   }
 }
