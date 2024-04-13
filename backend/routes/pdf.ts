@@ -3,7 +3,7 @@ import { Router, Request, Response } from 'express';
 const router = Router();
 
 router.post('/generator', (req: Request, res: Response) => {
-  console.log('end',req);
+  console.log('end',req.body);
   // const doc = new PDFDocument();
   // const pageWidth = doc.page.width;
   // const quarterWidth = pageWidth / 4;

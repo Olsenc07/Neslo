@@ -85,6 +85,7 @@ export class QuoteGeneratorComponent implements OnInit {
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
+  
   grid(values: Grid[]): void {  
     if (isPlatformBrowser(this.platformId)) {
     values.forEach((gridRow: Grid) => {
@@ -100,8 +101,7 @@ export class QuoteGeneratorComponent implements OnInit {
       });
       this.gridFormArray.push(rowGroup); 
     });
-  }
-  }
+  }}
 
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -111,24 +111,24 @@ export class QuoteGeneratorComponent implements OnInit {
     };
     // Send the combined data to the backend using the PDF service
     this.pdfService.generatePdf(finalFormData)
-  //   .subscribe({
-  //     next: (pdfBlob: any) => {
-  //       console.log('blobbb', pdfBlob)
+    .subscribe({
+      next: (pdfBlob: any) => {
+        console.log('blobbb', pdfBlob)
        
-  //       this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
-  //         duration: 3000
-  //       });
-  //     },
-  //     error: (error: any) => {
-  //       console.error('PDF generator failed:', error);
-  //       this.snackBar.open('Error generating pdf. Please try again.', 'Close', {
-  //         duration: 3000
-  //       });
-  //     },
-  //     complete: () => {
-  //       console.log('PDF generation process is complete.');
-  //     }
-  // });
+        this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
+          duration: 3000
+        });
+      },
+      error: (error: any) => {
+        console.error('PDF generator failed:', error);
+        this.snackBar.open('Error generating pdf. Please try again.', 'Close', {
+          duration: 3000
+        });
+      },
+      complete: () => {
+        console.log('PDF generation process is complete.');
+      }
+  });
       }
   }
    // const blobUrl = window.URL.createObjectURL(pdfBlob);

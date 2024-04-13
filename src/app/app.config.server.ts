@@ -5,7 +5,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 export const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(),
-    provideHttpClient(withFetch()),
-    importProvidersFrom(HttpClientModule)
+    importProvidersFrom(HttpClientModule),
+    provideHttpClient(withFetch())
   ]
 }

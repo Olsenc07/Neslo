@@ -1,33 +1,28 @@
 import 'zone.js';
-import {
-  bootstrapApplication,
-  provideClientHydration,
-  withHttpTransferCacheOptions
-} from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule } from '@angular/common/http';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
 import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { routes } from './app/app-routes/app-routing.module';
 import { importProvidersFrom } from '@angular/core';
 
-import { AppComponent } from './app/app.component';
-import { routes } from './app/app-routes/app-routing.module';
-import { provideServerRendering } from '@angular/platform-server';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes, withViewTransitions()),
     provideAnimationsAsync(),
-    importProvidersFrom(HttpClientModule, BrowserAnimationsModule),
-    provideServerRendering(),
     provideClientHydration(
       withHttpTransferCacheOptions({
-        includePostRequests: true
-      })
-    )
-  ]
-})
-  .then((started) => {
+      includePostRequests: true
+      })),
+      importProvidersFrom(
+        HttpClientModule,
+        BrowserAnimationsModule
+      )]
+}).then((started) => {
     console.log('Start up is working', started);
   })
   .catch((err) => {
