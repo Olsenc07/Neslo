@@ -21,12 +21,10 @@ const apiLimiter = rateLimit({
       });
   }
   });
-  
   // Define __dirname equivalent in ESM
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 // Define directories relative to current file
-const browserDistFolder = join(__dirname, '../browser');
+const browserDistFolder = join(__filename, '../browser');
 const indexHtml = join(browserDistFolder, 'index.server.html');
 
   // The Express app is exported so that it can be used by serverless Functions.
