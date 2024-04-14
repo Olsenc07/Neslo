@@ -2,8 +2,8 @@ import 'zone.js';
 import express, { Request, Response } from 'express';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import bootstrap from './src/main.server';
 // Routes
 import emailRoute from './backend/routes/email';
@@ -11,9 +11,6 @@ import pdfRoute from './backend/routes/pdf';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import compression from 'compression';
-
-console.log('grilled cheese')
-
 // Rate limiting middleware
 const apiLimiter = rateLimit({
     windowMs: 30 * 60 * 1000, // 30 minutes
@@ -25,7 +22,14 @@ const apiLimiter = rateLimit({
   }
   });
   
-//  // The Express app is exported so that it can be used by serverless Functions.
+  // Define __dirname equivalent in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+// Define directories relative to current file
+const browserDistFolder = join(__dirname, '../browser');
+const indexHtml = join(browserDistFolder, 'index.server.html');
+
+  // The Express app is exported so that it can be used by serverless Functions.
    function app(): express.Express {
     const server = express();
      // Middleware
@@ -34,24 +38,18 @@ const apiLimiter = rateLimit({
      server.use(express.json());
      server.use(express.urlencoded({ extended: false }));
 
-     const distFolder = dirname(fileURLToPath(import.meta.url));
-     const browserDistFolder = resolve(distFolder, '../browser');
-     server.set('view engine', 'html');
-     server.set('views', browserDistFolder);
-     
+    server.set('view engine', 'html');
+    server.set('views', browserDistFolder);
     // routes
     server.use("/api/email", apiLimiter, emailRoute);
     server.use("/api/pdf", pdfRoute);
-
     // Serve static files
     server.get('*.*', express.static(browserDistFolder, { maxAge: '1y'}));
  
     // All regular routes use the Angular engine
     server.get('*', (req: Request, res: Response) => {
-        console.log('its in')
         const { protocol, originalUrl, baseUrl, headers } = req;
         const commonEngine = new CommonEngine();
-        const indexHtml = join(distFolder, 'index.server.html');
 
         commonEngine.render({
             bootstrap,

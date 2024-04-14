@@ -110,16 +110,19 @@ export class QuoteGeneratorComponent implements OnInit {
       grid: this.gridFormArray.value 
     };
     // Send the combined data to the backend using the PDF service
-    this.pdfService.generatePdf(finalFormData)
-    .subscribe({
-      next: (pdfBlob: any) => {
+    const element = document.getElementById('quote');
+    if (element) {
+      const htmlContent = element.outerHTML;
+      this.pdfService.generatePdf(htmlContent).subscribe({
+      next: (pdfBlob: Blob) => {
         console.log('blobbb', pdfBlob)
-       
+        this.downloadPDF(pdfBlob);
         this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
           duration: 3000
         });
       },
       error: (error: any) => {
+        
         console.error('PDF generator failed:', error);
         this.snackBar.open('Error generating pdf. Please try again.', 'Close', {
           duration: 3000
@@ -130,13 +133,19 @@ export class QuoteGeneratorComponent implements OnInit {
       }
   });
       }
+    }
   }
-   // const blobUrl = window.URL.createObjectURL(pdfBlob);
-        // const link = document.createElement('a');
-        // link.href = blobUrl;
-        // link.download = 'FSD_Neslo_Quote.pdf';
-        // link.click();
-        // window.URL.revokeObjectURL(link.href);
+// download 
+private downloadPDF(pdfBlob: Blob): void {
+  const url = window.URL.createObjectURL(pdfBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Neslo-Quote.pdf'; 
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  a.remove();
+}
 contactForm(): void {
   const dialogRef = this.dialog.open(ContactDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {

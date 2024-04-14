@@ -11,15 +11,19 @@ export class PdfService {
   apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
-
-  generatePdf(finalForm: any): Observable<Blob> {
-    console.log('hey', `${this.apiUrl}`)
-      return this.http.post(`${this.apiUrl}/pdf/generator`, finalForm, { responseType: 'blob' })
-      .pipe(
-        catchError((error) => {
-            console.error('Error generating PDF:', error);
-            return throwError(() => new Error('Error generating PDF'));
-        })
-      );
-}
-}
+  
+  generatePdf(htmlContent: string): Observable<Blob> {
+    console.log('Sending data to:', `${this.apiUrl}/pdf/generator`);
+  
+    return this.http.post(`${this.apiUrl}/pdf/generator`, { htmlContent }, {
+      responseType: 'blob'
+    }).pipe(
+      catchError(error => {
+        // Log the error or perform other error handling steps
+        console.error('Failed to generate PDF:', error);
+        return throwError(() => new Error('A friendly error message.'));
+      })
+    );
+  }
+  
+  }

@@ -4,6 +4,12 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "baseUrl": "./",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@assets/*": ["src/assets/*"],
+      "@environments/*": ["src/environments/*"],
+      "@types/*": ["src/types/*"]
+    },
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -13,7 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "emitDecoratorMetadata": true,
+    // "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -24,14 +30,10 @@
   "exclude": [
     "**/*.spec.ts",
     "src/test.ts",
-    "node_modules",
-    "dist"
+    "node_modules"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
   }
 }
