@@ -10,7 +10,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve:dev",
-    "serve:dev": "nodemon  server.ts",
+    "serve:dev": "nodemon server.ts",
     "build": "ng build",
     "serve": "node dist/Neslo/server/server.mjs",
     "watch": "ng build --watch --configuration development",

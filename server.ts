@@ -2,7 +2,7 @@ import 'zone.js';
 import express, { Request, Response } from 'express';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
-import { join, dirname } from 'path';
+import { join } from 'path';
 import { fileURLToPath } from 'url';
 import bootstrap from './src/main.server';
 // Routes
@@ -26,11 +26,7 @@ const __filename = fileURLToPath(import.meta.url);
 // Define directories relative to current file
 const browserDistFolder = join(__filename, '../browser');
 console.log('b', browserDistFolder);
-const serverDistFolder = join(__filename, '../server');
-console.log('c', serverDistFolder);
 
-const indexHtml = join(serverDistFolder, 'index.server.html');
-console.log('hmm', indexHtml);
   // The Express app is exported so that it can be used by serverless Functions.
    function createServer(): express.Express {
     const server = express();
@@ -45,6 +41,7 @@ console.log('hmm', indexHtml);
     // routes
     server.use("/api/email", apiLimiter, emailRoute);
     server.use("/api/pdf", pdfRoute);
+    
     // Serve static files
     server.get('*.*', express.static(browserDistFolder, { maxAge: '1y'}));
  
@@ -52,7 +49,7 @@ console.log('hmm', indexHtml);
     server.get('*', (req: Request, res: Response) => {
         const { protocol, originalUrl, baseUrl, headers } = req;
         const commonEngine = new CommonEngine();
-
+        const indexHtml = join(__filename, 'index.server.html');
         commonEngine.render({
             bootstrap,
             documentFilePath: indexHtml,
