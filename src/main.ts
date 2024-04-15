@@ -21,7 +21,8 @@ bootstrapApplication(AppComponent, {
       importProvidersFrom(
         HttpClientModule,
         BrowserAnimationsModule
-      )]
+      )
+    ]
 }).then((started) => {
     console.log('Start up is working', started);
   })

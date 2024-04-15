@@ -25,10 +25,14 @@ const apiLimiter = rateLimit({
 const __filename = fileURLToPath(import.meta.url);
 // Define directories relative to current file
 const browserDistFolder = join(__filename, '../browser');
-const indexHtml = join(browserDistFolder, 'index.server.html');
+console.log('b', browserDistFolder);
+const serverDistFolder = join(__filename, '../server');
+console.log('c', serverDistFolder);
 
+const indexHtml = join(serverDistFolder, 'index.server.html');
+console.log('hmm', indexHtml);
   // The Express app is exported so that it can be used by serverless Functions.
-   function app(): express.Express {
+   function createServer(): express.Express {
     const server = express();
      // Middleware
      server.use(cors());
@@ -68,11 +72,12 @@ return server;
 async function startServer() {
     const port = process.env['PORT'] || 4200;
 
-    const server = app();
+    const server = createServer();
     server.listen(port, () => {
         console.log(`Node Express server listening on http://localhost:${port}`);
     });
 }
+
 startServer().catch(err => {
-    console.error('Failed to start the server:', err);
+    console.error('Uncaught error in startServer:', err);
 });

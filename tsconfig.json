@@ -10,7 +10,7 @@
       "@environments/*": ["src/environments/*"],
       "@types/*": ["src/types/*"]
     },
-    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -19,7 +19,6 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    // "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -33,7 +32,9 @@
     "node_modules"
   ],
   "angularCompilerOptions": {
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
     "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
+    "strictInjectionParameters": true
   }
 }
