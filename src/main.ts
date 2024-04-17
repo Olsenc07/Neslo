@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app/app-routes/app-routing.module';
 import { importProvidersFrom } from '@angular/core';
 
-
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes, withViewTransitions()),

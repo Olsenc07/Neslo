@@ -2,12 +2,23 @@ import 'zone.js';
 import express, { Request, Response } from 'express';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
-import { join } from 'path';
-import { fileURLToPath } from 'url';
-import bootstrap from './src/main.server';
-// Routes
-import emailRoute from './backend/routes/email';
-import pdfRoute from './backend/routes/pdf';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+console.log('filename', __filename);
+const __dirname = dirname(__filename);
+console.log('dirname', __dirname);
+// static files
+const browserDistFolder = join(__dirname, '../dist/browser');
+// SSR entry
+const bootstrapPath = join(__dirname, '../server/main.server');
+const indexHtml = join(__filename, 'index.server.html');
+
+// Routes backend
+const emailRoutePath = join(__filename, '../../backend/routes/email.js');
+const pdfRoutePath = join(__filename, '../../backend/routes/pdf.js');
+
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import compression from 'compression';
@@ -21,14 +32,8 @@ const apiLimiter = rateLimit({
       });
   }
   });
-  // Define __dirname equivalent in ESM
-const __filename = fileURLToPath(import.meta.url);
-// Define directories relative to current file
-const browserDistFolder = join(__filename, '../browser');
-console.log('b', browserDistFolder);
-
   // The Express app is exported so that it can be used by serverless Functions.
-   function createServer(): express.Express {
+   async function createServer(): Promise<express.Express> {
     const server = express();
      // Middleware
      server.use(cors());
@@ -38,18 +43,24 @@ console.log('b', browserDistFolder);
 
     server.set('view engine', 'html');
     server.set('views', browserDistFolder);
-    // routes
-    server.use("/api/email", apiLimiter, emailRoute);
-    server.use("/api/pdf", pdfRoute);
     
     // Serve static files
     server.get('*.*', express.static(browserDistFolder, { maxAge: '1y'}));
  
+     // Backend routes
+     const emailRoute = (await import(emailRoutePath)).default;
+     const pdfRoute = (await import(pdfRoutePath)).default;
+     
+     server.use("/api/email", apiLimiter, emailRoute);
+     server.use("/api/pdf", pdfRoute);
+
+     
     // All regular routes use the Angular engine
-    server.get('*', (req: Request, res: Response) => {
+    server.get('*', async (req: Request, res: Response) => {
         const { protocol, originalUrl, baseUrl, headers } = req;
         const commonEngine = new CommonEngine();
-        const indexHtml = join(__filename, 'index.server.html');
+        try {
+            const bootstrap = (await import(bootstrapPath)).default;
         commonEngine.render({
             bootstrap,
             documentFilePath: indexHtml,
@@ -62,6 +73,10 @@ console.log('b', browserDistFolder);
             console.error('Error occurred in server side rendering:', err);
             res.status(500).send('Server error');
         });
+    } catch (error) {
+        console.error('Error occurred in server side rendering:', error);
+        res.status(500).send('Server error');
+    }
     });
 return server;
   }
@@ -70,7 +85,7 @@ async function startServer() {
     const port = process.env['PORT'] || 4200;
 
     const server = createServer();
-    server.listen(port, () => {
+    (await server).listen(port, () => {
         console.log(`Node Express server listening on http://localhost:${port}`);
     });
 }

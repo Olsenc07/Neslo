@@ -1,0 +1,22 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "baseUrl": "./",
+      "outDir": "./dist/backend/routes",
+      "incremental": true,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "target": "ES2022",
+      "module": "ES2022",
+      "lib": ["ES2022", "dom"]
+    },
+    "include": [
+      "backend/**/*.ts"
+    ],    
+    "exclude": [
+      "**/*.spec.ts",
+      "src/test.ts",
+      "**/node_modules/**"
+    ]
+  }

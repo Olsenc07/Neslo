@@ -1,32 +1,25 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "./tsconfig.json",
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "baseUrl": "./",
-    "paths": {
-      "@app/*": ["src/app/*"],
-      "@assets/*": ["src/assets/*"],
-      "@environments/*": ["src/environments/*"],
-      "@types/*": ["src/types/*"]
-    },
+  "ts-node": {
+    "compilerOptions": {
+      "transpileOnly": true,
+      "files": true
+    }
   },
-  "include": [
-    "src/main.ts",
-    "src/main.server.ts",
-    "server.ts",
-    "src/**/*.d.ts"
+  "compilerOptions": {
+    "baseUrl": "./"
+  },
+  "files": [
+    "server.ts"
   ],
+  "include": [
+    "src/**/*.ts",
+    "backend/**/*.ts"
+  ],    
   "exclude": [
     "**/*.spec.ts",
     "src/test.ts",
     "**/node_modules/**"
-  ],
-  "angularCompilerOptions": {
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true
-  }
+  ]
 }
