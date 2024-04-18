@@ -14,8 +14,7 @@
     "server.ts"
   ],
   "include": [
-    "src/**/*.ts",
-    "backend/**/*.ts"
+    "src/**/*.ts"
   ],    
   "exclude": [
     "**/*.spec.ts",

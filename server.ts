@@ -10,12 +10,11 @@ console.log('filename', __filename);
 const __dirname = dirname(__filename);
 console.log('dirname', __dirname);
 // static files
-const browserDistFolder = join(__dirname, '../dist/browser');
+const browserDistFolder = join(__dirname, '../browser');
 // SSR entry
-const bootstrapPath = join(__dirname, '../server/main.server');
-const indexHtml = join(__filename, 'index.server.html');
+const bootstrapPath = join(__dirname, '../server/main.server.mjs');
+const indexHtml = join(__dirname, 'index.server.html');
 
-// Routes backend
 const emailRoutePath = join(__filename, '../../backend/routes/email.js');
 const pdfRoutePath = join(__filename, '../../backend/routes/pdf.js');
 
@@ -60,7 +59,8 @@ const apiLimiter = rateLimit({
         const { protocol, originalUrl, baseUrl, headers } = req;
         const commonEngine = new CommonEngine();
         try {
-            const bootstrap = (await import(bootstrapPath)).default;
+            console.log('darling', bootstrapPath);
+        const { default: bootstrap } = await import(bootstrapPath);
         commonEngine.render({
             bootstrap,
             documentFilePath: indexHtml,
