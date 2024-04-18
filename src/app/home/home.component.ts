@@ -12,6 +12,7 @@ import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fi
 import { OrientationService } from 'src/app/services/orientation.service';
 import { IntroComponent } from 'src/app/intro/intro.component';
 
+
 @Component({
   standalone: true,
   selector: 'app-home',

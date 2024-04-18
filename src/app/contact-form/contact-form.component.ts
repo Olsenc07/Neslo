@@ -62,9 +62,6 @@ export class ContactFormComponent {
     onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
     }
-    cancelMsg(): void{
-      
-    }
     send(): void {
       if(this.dialog){
         this.sentMsg.emit('sent');

@@ -26,7 +26,7 @@
         </p>
       </div>      
     </div>
-    <button id="ignore1" back mat-fab (click)="returnHome()">
+    <button id="ignore0" back mat-fab (click)="returnHome()">
       <mat-icon class="material-symbols-outlined">arrow_back</mat-icon>
     </button>
   </div>
@@ -162,11 +162,15 @@
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-end">
         <button  mat-fab extended color="primary" type="button" class="btn btn-primary"
-        (click)="contactForm()">
-          <mat-icon class="material-symbols-outlined">
-            arrow_forward
+        (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
+        Email PDF
+        <mat-icon class="material-symbols-outlined">
+          @switch (state) { 
+              @case ('noFocus') { keyboard_arrow_right }
+              @case ('focus') { arrow_right_alt }
+             @default { keyboard_arrow_right }
+            }
           </mat-icon>
-          Email PDF
         </button>
       </div>
       </div>

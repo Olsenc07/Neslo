@@ -26,12 +26,16 @@ import { isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
+import { HttpClient } from '@angular/common/http';
+import { catchError, firstValueFrom, throwError } from 'rxjs';
+import { environment } from 'environments/environment';
+
 
 @Component({
   standalone: true,
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
-  styleUrls: ['./quote-generator.component.scss'],
+  styleUrl: './quote-generator.component.scss',
   imports: [AutoSearchComponent, ContactDialogComponent, 
     MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
     MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
@@ -39,12 +43,15 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
      providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }]
 })
 export class QuoteGeneratorComponent implements OnInit {
+  apiUrl = environment.apiUrl;
+  state: 'noFocus' | 'focus' = 'noFocus';
+
   quoteForm: FormGroup = new FormGroup({
     dealerName: new FormControl<string>('Erik Olsen', [
       Validators.required]),
     dealerBranch: new FormControl<string>(''),
     contactName: new FormControl<string>(''),
-    contactEmail: new FormControl<string>('sales@foldingslidingdoors.ca', [
+    contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com', [
       Validators.required]),
     contactPhone: new FormControl<string>('403 994 - 1202', [
       Validators.required]),
@@ -70,7 +77,7 @@ export class QuoteGeneratorComponent implements OnInit {
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
 
   constructor(private router: Router, private snackBar: MatSnackBar,
-    private title:Title,
+    private title:Title, private http: HttpClient,
     protected orientationService: OrientationService, 
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService,
@@ -79,6 +86,7 @@ export class QuoteGeneratorComponent implements OnInit {
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote')
     }
+
   returnHome(): void {
     this.router.navigate(['/home']);
   }
@@ -103,38 +111,73 @@ export class QuoteGeneratorComponent implements OnInit {
     });
   }}
 
+  fetchStyles(): Promise<string> {
+    const cssUrl = `${this.apiUrl}/assets/pdf`;  
+    return firstValueFrom(
+      this.http.get<string>(cssUrl, { responseType: 'text' as 'json' }).pipe(
+      catchError(error => {
+        console.error('Failed to fetch styles:', error);
+        return throwError(() => new Error(`Failed to load styles from ${cssUrl}: ${error.message}`));
+      })
+    )
+    );
+  }
+    getHtmlExcludingIds(): string {
+      const originalElement = document.getElementById('quote');
+      if (!originalElement) return '';
+  
+      const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+  
+      ['ignore0', 'ignore1'].forEach(id => {
+        const elementToRemove = clonedElement.querySelector(`#${id}`);
+        if (elementToRemove) {
+          elementToRemove.remove();
+        }
+      });
+
+      return clonedElement.outerHTML;
+    }
+
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
     const finalFormData = {
       ...this.quoteForm.value, 
       grid: this.gridFormArray.value 
     };
-    // Send the combined data to the backend using the PDF service
-    const element = document.getElementById('quote');
-    if (element) {
-      const htmlContent = element.outerHTML;
-      this.pdfService.generatePdf(htmlContent).subscribe({
+    const htmlContent = this.getHtmlExcludingIds();
+    if (htmlContent) {
+      this.fetchStyles().then(cssStyles => {
+        this.pdfService.generatePdf(htmlContent, cssStyles).subscribe({
       next: (pdfBlob: Blob) => {
-        console.log('blobbb', pdfBlob)
         this.downloadPDF(pdfBlob);
-        this.snackBar.open('PDF has been generated and downloaded.', 'Close', {
+        this.snackBar.open('Your Quote has been generated successfully.', '✅', {
           duration: 3000
         });
       },
       error: (error: any) => {
-        
         console.error('PDF generator failed:', error);
-        this.snackBar.open('Error generating pdf. Please try again.', 'Close', {
+        this.snackBar.open('Error generating PDF. Please try again.', '❌', {
           duration: 3000
         });
       },
       complete: () => {
         console.log('PDF generation process is complete.');
       }
-  });
-      }
+  })
+
+      })
+    }else {
+      console.warn('The quote element does not exist in the DOM.');
+      this.snackBar.open('Unable to find the quote element for PDF generation.', '❌', {
+        duration: 3000
+      });
     }
-  }
+  } else {
+    console.warn('PDF generation is not supported on this platform.');
+    this.snackBar.open('PDF generation is only available in a browser environment.', '❌', {
+      duration: 3000
+    });
+  }}
 // download 
 private downloadPDF(pdfBlob: Blob): void {
   const url = window.URL.createObjectURL(pdfBlob);
@@ -161,6 +204,9 @@ contactForm(): void {
       // handle send failure
   });
 }
+  onHover(isHovered: boolean): void {
+      this.state = isHovered ? 'focus' : 'noFocus';
+    }
 
   doorModel: string[] = [
     'FD27 PVCU'

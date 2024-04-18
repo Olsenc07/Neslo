@@ -8,6 +8,7 @@ import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-intro',
@@ -15,6 +16,14 @@ import { isPlatformBrowser } from '@angular/common';
   imports: [MatButtonModule, MatIconModule, NgClass],
   templateUrl: './intro.component.html',
   styleUrl: './intro.component.scss',
+  animations: [
+    trigger('fadeInLeft', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-100px)' }),
+        animate('500ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ])
+    ])
+  ],
   providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }]
 })
 export class IntroComponent implements OnInit {

@@ -17,7 +17,7 @@
 <div class="row">
     <mat-form-field  appearance="fill" >
     <mat-label class="form-label">Return Email</mat-label>
-    <input type="email" formControlName="email" matInput placeholder="name@example.com">
+    <input type="email" formControlName="email" matInput placeholder="name@mail.com">
     @if(contactForm.get('email')?.value){
         <button matSuffix mat-icon-button (click)="contactForm.get('email')?.reset()">
           <mat-icon  class="material-symbols-outlined">cancel</mat-icon>

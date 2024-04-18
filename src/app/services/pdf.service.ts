@@ -12,10 +12,10 @@ export class PdfService {
 
   constructor(private http: HttpClient) {}
   
-  generatePdf(htmlContent: string): Observable<Blob> {
+  generatePdf(htmlContent: string, cssStyles: string): Observable<Blob> {
     console.log('Sending data to:', `${this.apiUrl}/pdf/generator`);
-  
-    return this.http.post(`${this.apiUrl}/pdf/generator`, { htmlContent }, {
+    return this.http.post(`${this.apiUrl}/pdf/generator`, { htmlContent, cssStyles }, 
+    {
       responseType: 'blob'
     }).pipe(
       catchError(error => {
