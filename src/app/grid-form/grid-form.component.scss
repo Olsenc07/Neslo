@@ -52,7 +52,6 @@ th{
 mat-form-field {
     width: 100%; 
     box-sizing: border-box; 
-    padding-left: 2%;
   }
 mat-form-field[blue]{
     background-color: rgb(21, 35, 40);
@@ -68,5 +67,4 @@ mat-form-field[purple]{
     color: white;
     text-align: center;
     width: 100%;
-    padding-left: 0%;
 }

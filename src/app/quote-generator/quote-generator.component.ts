@@ -111,17 +111,6 @@ export class QuoteGeneratorComponent implements OnInit {
     });
   }}
 
-  fetchStyles(): Promise<string> {
-    const cssUrl = `${this.apiUrl}/assets/pdf`;  
-    return firstValueFrom(
-      this.http.get<string>(cssUrl, { responseType: 'text' as 'json' }).pipe(
-      catchError(error => {
-        console.error('Failed to fetch styles:', error);
-        return throwError(() => new Error(`Failed to load styles from ${cssUrl}: ${error.message}`));
-      })
-    )
-    );
-  }
     getHtmlExcludingIds(): string {
       const originalElement = document.getElementById('quote');
       if (!originalElement) return '';
@@ -146,8 +135,7 @@ export class QuoteGeneratorComponent implements OnInit {
     };
     const htmlContent = this.getHtmlExcludingIds();
     if (htmlContent) {
-      this.fetchStyles().then(cssStyles => {
-        this.pdfService.generatePdf(htmlContent, cssStyles).subscribe({
+        this.pdfService.generatePdf(htmlContent).subscribe({
       next: (pdfBlob: Blob) => {
         this.downloadPDF(pdfBlob);
         this.snackBar.open('Your Quote has been generated successfully.', '✅', {
@@ -165,7 +153,7 @@ export class QuoteGeneratorComponent implements OnInit {
       }
   })
 
-      })
+
     }else {
       console.warn('The quote element does not exist in the DOM.');
       this.snackBar.open('Unable to find the quote element for PDF generation.', '❌', {

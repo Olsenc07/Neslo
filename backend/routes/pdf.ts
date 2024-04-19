@@ -1,16 +1,28 @@
 import { Router, Request, Response } from 'express';
 import puppeteer from 'puppeteer';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import fs from 'fs';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const router = Router();
+
 router.post('/generator', async (req: Request, res: Response) => {
 try {
-  const { htmlContent, cssStyles } = req.body;
-    console.log('pdf info 1');  
+  const { htmlContent } = req.body;
+  console.log('again', __dirname)
+  // adjusy routes
+
+  const quoteStyles = join(__dirname, '../../../browser/assets/pdf/styles'); 
+  const allStyles = join(__dirname, '../../../browser/styles.css'); 
+  console.log('allStyles', allStyles)
+  const cssStyles = fs.readFileSync(allStyles, 'utf-8');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.setViewport({
-    width: 1025,
-    height: 1080
-});
+//   await page.setViewport({
+//     width: 1025,
+//     height: 1080
+// });
   const fullHTMLContent = `
   <html>
     <head>
@@ -35,3 +47,4 @@ await page.setContent(fullHTMLContent, {
 });
 
 export default router;
+  
