@@ -12,19 +12,35 @@ router.post('/generator', async (req: Request, res: Response) => {
 try {
   const { htmlContent } = req.body;
   console.log('again', __dirname)
-
-
-  const cssPattern = path.join(__dirname, '../../../dist/browser/assets/pdf.scss');
-
-  const cssStyles = fs.readFileSync(cssPattern, 'utf-8');
+  function findMatchingStylesheet(directory: any, pattern: any) {
+    try {
+      const files = fs.readdirSync(directory);
+      const regex = new RegExp(pattern); // Regex to match the file name pattern
+      const stylesheet = files.find(file => regex.test(file));
   
+      return stylesheet ? path.join(directory, stylesheet) : null;
+    } catch (error) {
+      console.error('Failed to read the directory:', error);
+      return null;
+    }
+  }
+  
+  // Usage
+  const directoryPath = path.join(__dirname, '../../../dist/browser');
+  const cssFile = findMatchingStylesheet(directoryPath, '^styles-.*\\.css$'); // Regex for 'styles-**.css'
+  
+  if (cssFile) {
+    console.log('CSS file found:', cssFile);
+    // Further actions like reading the file or including it in your HTML content
+  } else {
+    console.log('No matching CSS file found.');
+  }
+  const fsdLogoUrl = path.join(__dirname, '../../../dist/browser/assets/folding_sliding_doors_logo.png');
+  const fsdLogo = fs.readFileSync(fsdLogoUrl, 'utf-8');
+
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  // increase width add photo access and material styles!!
-//   await page.setViewport({
-//     width: 1025,
-//     height: 1080
-// });
+
 const fullHTMLContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +55,9 @@ const fullHTMLContent = `
   <style>${cssStyles}</style>
 </head>
 <body>
+<img src="${fsdLogoUrl}" class="img-fluid img" alt="Folding Sliding Doors Canada Ltd. Logo">
   <div class="mat-typography">${htmlContent}</div>
+  <script type="module"> import @angular/material from https://cdn.jsdelivr.net/npm/@angular/material@17.3.4/+esm </script>
 </body>
 </html>
 `;

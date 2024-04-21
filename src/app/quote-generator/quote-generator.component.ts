@@ -117,7 +117,7 @@ export class QuoteGeneratorComponent implements OnInit {
   
       const clonedElement = originalElement.cloneNode(true) as HTMLElement;
   
-      ['ignore0', 'ignore1'].forEach(id => {
+      ['ignore0', 'ignore1', 'ignore2'].forEach(id => {
         const elementToRemove = clonedElement.querySelector(`#${id}`);
         if (elementToRemove) {
           elementToRemove.remove();
