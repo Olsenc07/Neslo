@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { Form } from '../interfaces/form';
+import { Grid } from '../interfaces/grid';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +15,10 @@ export class PdfService {
 
   constructor(private http: HttpClient) {}
   
-  generatePdf(htmlContent: string): Observable<Blob> {
+  generatePdf(quoteForm: Form, grid: Grid): Observable<Blob> {
+    
     console.log('Sending data to:', `${this.apiUrl}/pdf/generator`);
-    return this.http.post(`${this.apiUrl}/pdf/generator`, { htmlContent }, 
+    return this.http.post(`${this.apiUrl}/pdf/generator`, { quoteForm, grid }, 
     {
       responseType: 'blob'
     }).pipe(

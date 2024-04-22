@@ -4,7 +4,7 @@
     <div class="row align-items-center">
         <!-- Company Details -->
         <div class="col text-center">
-          <img id="ignore2" src="../../assets/folding_sliding_doors_logo.png"  class="img-fluid img" alt="Folding Sliding Doors Canada Ltd. Logo">
+          <img src="../../assets/folding_sliding_doors_logo.png"  class="img-fluid img" alt="Folding Sliding Doors Canada Ltd">
         <h1 class="mt-1 pb-1 mb-0">Folding Sliding Doors Canada Ltd.</h1>
         <p class="mb-1">105 - 1155 St. Paul Street</p>
         <p class="mb-1">Kelowna, BC V1Y 2C6</p>
@@ -139,12 +139,7 @@
     </div>
 
     @defer(on viewport){
-    <!-- grid inputs 2nd pg -->
-    <!-- @if(!this.orientationService.screen()){ -->
-    <app-grid-form (sendGrid)="grid($event)"></app-grid-form>
-    <!-- } @else{
-     <h1 class="text-center align-items-center"> Please use a larger screen size to edit configurations. </h1>
-    } -->
+    <app-grid-form (sendGrid)="grid($event)" [gridForm]="gridFormArray"></app-grid-form>
     } @placeholder {
       <app-skeleton-form-fill></app-skeleton-form-fill>
     }
@@ -152,15 +147,19 @@
       <!-- Submit Button -->
       <div class="pdf col-12 col-md-6 justify-content-start">
         <!-- [disabled]="quoteForm.invalid" -->
+        @if(!progress){
         <button mat-fab extended
         type="submit" class="btn btn-primary">
           <mat-icon class="material-symbols-outlined">
-            picture_as_pdf
+          picture_as_pdf      
           </mat-icon>
           Download PDF
-        </button>
+        </button> 
+      } @else {
+        <mat-spinner [diameter]="50"></mat-spinner>
+      }
       </div>
-      <div class="col-12 col-md-6 d-flex justify-content-end">
+      <div class="col-12 col-md-6 d-flex justify-content-end ">
         <button  mat-fab extended color="primary" type="button" class="btn btn-primary"
         (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
         Email PDF
@@ -177,5 +176,3 @@
     </form>
 
   </div>
-
-    

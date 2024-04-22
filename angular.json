@@ -78,7 +78,8 @@
             ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/quote-generator/pdf-creation.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",

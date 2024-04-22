@@ -1,5 +1,5 @@
 # Build Backend & Angular SSR
-FROM node:20.9.0 as build-step
+FROM node:18.20.2 as build-step
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # Step 2: Setup the server
-FROM node:20.9.0
+FROM node:18.20.2
 
 WORKDIR /app
 

@@ -9,6 +9,7 @@ import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,7 +28,6 @@ import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { HttpClient } from '@angular/common/http';
-import { catchError, firstValueFrom, throwError } from 'rxjs';
 import { environment } from 'environments/environment';
 
 
@@ -36,7 +36,7 @@ import { environment } from 'environments/environment';
   selector: 'app-quote-generator',
   templateUrl: './quote-generator.component.html',
   styleUrl: './quote-generator.component.scss',
-  imports: [AutoSearchComponent, ContactDialogComponent, 
+  imports: [AutoSearchComponent, ContactDialogComponent, MatProgressSpinnerModule,
     MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
     MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
      MatSelectModule, TextReuseComponent, SkeletonFormFillComponent],
@@ -44,8 +44,10 @@ import { environment } from 'environments/environment';
 })
 export class QuoteGeneratorComponent implements OnInit {
   apiUrl = environment.apiUrl;
+  progress: boolean = false;
   state: 'noFocus' | 'focus' = 'noFocus';
-
+  
+  // add disabled button on invalid fields
   quoteForm: FormGroup = new FormGroup({
     dealerName: new FormControl<string>('Erik Olsen', [
       Validators.required]),
@@ -110,56 +112,28 @@ export class QuoteGeneratorComponent implements OnInit {
       this.gridFormArray.push(rowGroup); 
     });
   }}
-
-    getHtmlExcludingIds(): string {
-      const originalElement = document.getElementById('quote');
-      if (!originalElement) return '';
-  
-      const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-  
-      ['ignore0', 'ignore1', 'ignore2'].forEach(id => {
-        const elementToRemove = clonedElement.querySelector(`#${id}`);
-        if (elementToRemove) {
-          elementToRemove.remove();
-        }
-      });
-
-      return clonedElement.outerHTML;
-    }
-
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
-    const finalFormData = {
-      ...this.quoteForm.value, 
-      grid: this.gridFormArray.value 
-    };
-    const htmlContent = this.getHtmlExcludingIds();
-    if (htmlContent) {
-        this.pdfService.generatePdf(htmlContent).subscribe({
+      this.progress = true;
+        this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
         this.downloadPDF(pdfBlob);
-        this.snackBar.open('Your Quote has been generated successfully.', '✅', {
+        this.snackBar.open('Quote has been generated successfully.', '✅', {
           duration: 3000
         });
       },
       error: (error: any) => {
+      this.progress = false;
         console.error('PDF generator failed:', error);
         this.snackBar.open('Error generating PDF. Please try again.', '❌', {
           duration: 3000
         });
       },
       complete: () => {
+      this.progress = false;
         console.log('PDF generation process is complete.');
       }
   })
-
-
-    }else {
-      console.warn('The quote element does not exist in the DOM.');
-      this.snackBar.open('Unable to find the quote element for PDF generation.', '❌', {
-        duration: 3000
-      });
-    }
   } else {
     console.warn('PDF generation is not supported on this platform.');
     this.snackBar.open('PDF generation is only available in a browser environment.', '❌', {
@@ -185,7 +159,7 @@ contactForm(): void {
       "Your message has been sent to sales@foldingslidingdoors.ca",
       "We will get back to you shortly.",
       {
-        duration: 3500
+        duration: 3000
       }
     );
       }
