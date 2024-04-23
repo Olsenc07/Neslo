@@ -8,12 +8,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-grid-form',
   standalone: true,
   imports: [ReactiveFormsModule, MatIconModule, MatSelectModule, MatCardModule,
-    MatFormFieldModule, MatInputModule, MatButtonModule],
+    MatDividerModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './grid-form.component.html',
   styleUrl: './grid-form.component.scss'
 })
@@ -26,7 +27,6 @@ export class GridFormComponent implements OnDestroy {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    console.log('array', this.gridForm);
     this.doorConfigForm = this.fb.group({
       rows: this.fb.array([])
     });
@@ -68,7 +68,6 @@ export class GridFormComponent implements OnDestroy {
     });
   }
   // Normal
-  
   get rows(): FormArray {
     return this.doorConfigForm.get('rows') as FormArray;
   }

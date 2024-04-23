@@ -4,21 +4,23 @@
       {{intro}}
       }
       <mat-form-field appearance="fill">
-        @if(intValue){
-          <input [type]=types matInput
-          [formControl]="input" [placeholder]="intValue">
-        } @else {
-          <input [type]=types matInput
-          [formControl]="input">
-        }
-      <!-- @if(input.value){
-        <button matSuffix mat-icon-button (click)="input.reset()">
-          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
-        </button>
-      } -->
-      <!-- @if (input.invalid) {
-        <mat-error>This field is required</mat-error>
-      } -->
+            <input [attr.type]="types" matInput [formControl]="input" [attr.required]="need"
+                   [placeholder]="intValue ? intValue : ''">
+                   @if(input.hasError('required')){
+                   <mat-error>
+                    This field is required.
+                  </mat-error>
+                    }
+                    @if(input.hasError('email')){
+                  <mat-error>
+                    Please enter a valid email address.
+                  </mat-error>
+                    }
+                    @if(input.hasError('tel')){
+                  <mat-error>
+                    Please enter a valid telephone number.
+                  </mat-error>
+                }
       </mat-form-field>
     </div>
     </div>

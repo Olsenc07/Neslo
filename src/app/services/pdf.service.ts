@@ -16,8 +16,6 @@ export class PdfService {
   constructor(private http: HttpClient) {}
   
   generatePdf(quoteForm: Form, grid: Grid): Observable<Blob> {
-    
-    console.log('Sending data to:', `${this.apiUrl}/pdf/generator`);
     return this.http.post(`${this.apiUrl}/pdf/generator`, { quoteForm, grid }, 
     {
       responseType: 'blob'

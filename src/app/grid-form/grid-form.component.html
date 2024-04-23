@@ -5,33 +5,34 @@
 <caption class="text-center">We do not build the following Configurations: 1+2, 2+3, 4+1, and 3+4</caption>
 <thead>
   <tr>
-    <th colspan="1">
-      <div titles>SET #</div>
+    <th pdf colspan="1">
+      <div titles>Set #</div>
     </th>
-    <th colspan="1">
-      <div titles>ROOM LABEL</div>
+    <th pdf colspan="1">
+      <div titles>Room Label</div>
     </th>
-      <th colspan="2">
-        <div class="text-center">ROUGH OPENING
+      <th pdf colspan="2">
+        <div class="text-center">Rough Opening
       <div row>
       <div>Width (ins)</div>
       <div>Height (ins)</div>
       </div>
     </div>
       </th>
-    <th colspan="3">
-      <div titles>CONFIGURATION</div>
+    <th pdf colspan="3">
+      <div titles>Configuration</div>
     </th>
-    <th colspan="1">
-      <div titles>LEFT</div>
+    <th pdf colspan="1">
+      <div titles>Left</div>
     </th>
-    <th colspan="1">
-      <div titles>RIGHT</div>
+    <th pdf colspan="1">
+      <div titles>Right</div>
     </th>
-    <th colspan="1">
-      <div titles>ACTIVE PANEL</div>
+    <th pdf colspan="1">
+      <div titles>Active Panel</div>
     </th>
   </tr>
+  <mat-divider></mat-divider>
 </thead>
 
       <tbody formArrayName="rows">
@@ -40,12 +41,12 @@
                   <td class="bg-transparent">
                     <div class="align-items-center">
                     @if(i > 0){
-              <button mat-fab extended close (click)="removeRow(i)">
+              <button mat-button close (click)="removeRow(i)">
                   {{ i + 1}}
-                <mat-icon class="material-symbols-outlined">close</mat-icon>
+                <mat-icon class="material-symbols-outlined">remove</mat-icon>
               </button>
               } @else {
-                <button mat-fab extended add class="align-items-center" (click)="addRow()">
+                <button mat-button add class="align-items-center" (click)="addRow()">
                   <mat-icon class="material-symbols-outlined">add</mat-icon>
                     Row
               </button>
@@ -64,9 +65,9 @@
           <input matInput type="text"  formControlName="width">
         </mat-form-field>
       </td>
-      <td >
+      <td>
         <mat-form-field green appearance="fill">
-          <input matInput type="text"  formControlName="height">
+          <input matInput type="text" formControlName="height">
         </mat-form-field>
       </td>
       <td>

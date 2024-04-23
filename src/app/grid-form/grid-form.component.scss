@@ -1,10 +1,6 @@
-button[close]{
+button[close], button[add]{
     margin-top: 7%;
-    background-color: black;
-}
-button[add]{
-    margin-top: 7%;
-    background-color: var(--green);
+    color: black;
 }
 
 div[titles]{
@@ -19,14 +15,14 @@ div[row]{
     align-items: center;
 } 
 mat-card{
-    margin: 0% 2% 2% 2%;
+    margin: 0% 1% 2% 1%;
 }
 .plus {
     text-align: center; 
     vertical-align: middle; 
     font-size: 1.5rem; 
     background-color: transparent;
-  }
+}
 .table {
     width: 100%;
     max-width: 100%;

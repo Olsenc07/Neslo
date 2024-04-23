@@ -23,7 +23,7 @@ bootstrapApplication(AppComponent, {
       )
     ]
 }).then((started) => {
-    console.log('Start up is working', started);
+    console.log('Start up is working');
   })
   .catch((err) => {
     console.error('error has occured on start up', err);

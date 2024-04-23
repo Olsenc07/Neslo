@@ -1,0 +1,22 @@
+.img[pdf] {
+  max-width: 35% !important;
+}
+
+p[pdf], th[pdf] {
+  font-size: 12px !important; 
+  color: red !important; 
+}
+
+.mat-typography .mat-h1,
+.mat-typography .mat-headline-5 {
+  font-size: 21px !important; 
+}
+
+.mat-typography .mat-h2,
+.mat-typography h2 {
+  font-size: 18px !important; 
+}
+
+.mat-typography h3 {
+  font-size: 14px !important; 
+}

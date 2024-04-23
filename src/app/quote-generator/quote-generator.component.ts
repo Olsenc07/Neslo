@@ -1,6 +1,6 @@
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
@@ -78,7 +78,9 @@ export class QuoteGeneratorComponent implements OnInit {
 
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
 
-  constructor(private router: Router, private snackBar: MatSnackBar,
+  constructor(private router: Router,
+    private fb: FormBuilder, private route: ActivatedRoute,
+     private snackBar: MatSnackBar,
     private title:Title, private http: HttpClient,
     protected orientationService: OrientationService, 
    @Inject(PLATFORM_ID) private platformId: Object,
@@ -86,12 +88,35 @@ export class QuoteGeneratorComponent implements OnInit {
     private dialog: MatDialog){}
 
     ngOnInit(): void {
-      this.title.setTitle('Neslo | Quote')
+      this.title.setTitle('Neslo | Quote Request');
+      this.route.queryParams.subscribe(params => {
+        if (!isPlatformBrowser(this.platformId)) {   
+      console.log('0', this.route);
+      console.log('1', params);
+
+        this.initializeForm(params['formDataSecure']);
+        }
+      });
+    }
+    returnHome(): void {
+      this.router.navigate(['/home']);
     }
 
-  returnHome(): void {
-    this.router.navigate(['/home']);
-  }
+    initializeForm(params: any): void {
+      console.log('2', params);
+      if (!params) {
+        console.error('No form data received');
+        return;
+      }
+      Object.keys(this.quoteForm.controls).forEach(key => {
+        const control = this.quoteForm.get(key);
+        if (control && params[key] !== undefined) { 
+          control.setValue(params[key]);
+        }
+      });
+    }
+    
+ 
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
@@ -145,7 +170,7 @@ private downloadPDF(pdfBlob: Blob): void {
   const url = window.URL.createObjectURL(pdfBlob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'Neslo-Quote.pdf'; 
+  a.download = 'Neslo-Quote-Request.pdf'; 
   document.body.appendChild(a);
   a.click();
   window.URL.revokeObjectURL(url);

@@ -1,37 +1,56 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-
 
 @Component({
   selector: 'app-text-reuse',
   standalone: true,
   imports: [MatButtonModule, MatInputModule, MatIconModule,  
-    MatDatepickerModule, MatFormFieldModule, ReactiveFormsModule],
+  MatFormFieldModule, ReactiveFormsModule],
   providers: [],
   templateUrl: './text-reuse.component.html',
   styleUrl: './text-reuse.component.scss'
 })
 export class TextReuseComponent {
+@Input() need?:boolean = true;
 @Input() intValue?: string;
 @Input() intro!: string;
+@Input() value?: string;
 @Input() types: 'text' | 'tel' | 'email' = 'text';
 input: FormControl<string | null> = new FormControl<string | null>('');
 @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
-constructor() {
-  // Subscribe to the FormControl value changes.
+constructor(private cdr: ChangeDetectorRef) {
   this.input.valueChanges.subscribe((value: string | null) => {
-    // Emit the value through the valueChange EventEmitter.
-    this.valueChange.emit(value || ''); // If value is null, emit an empty string.
+    this.valueChange.emit(value || ''); 
   });
 }
-reset(): void {
-  this.input.reset();
-  this.valueChange.emit('');
-}
-}
+
+ngOnChanges(changes: SimpleChanges): void {
+  if (changes['types'] || changes['intValue'] || changes['value']) {
+    this.updateValidatorsAndValue();
+  }
+  }
+
+  updateValidatorsAndValue(): void {
+    const validators = [Validators.required]; // All fields are required
+    if (this.types === 'email') {
+      validators.push(Validators.email);
+    } else if (this.types === 'tel') {
+      // Example regex for phone numbers; adapt as necessary
+      validators.push(Validators.pattern(/^(\+?\d{1,3}[- ]?)?\d{10}$/));
+    }
+
+    this.input.setValidators(validators);
+    this.input.updateValueAndValidity();
+
+    // Update the form control value only if it is not manually set or input type changes
+    if (!this.input.value || this.input.pristine) {
+      this.input.setValue(this.intValue || this.value || '', { emitEvent: false });
+      this.cdr.detectChanges();
+    }
+
+}}

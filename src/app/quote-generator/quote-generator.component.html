@@ -1,14 +1,14 @@
 <div id="quote">
-<header class="bg-light p-3" >
+<header class="p-3" >
   <div  class="container">
     <div class="row align-items-center">
         <!-- Company Details -->
         <div class="col text-center">
-          <img src="../../assets/folding_sliding_doors_logo.png"  class="img-fluid img" alt="Folding Sliding Doors Canada Ltd">
+          <img pdf src="../../assets/folding_sliding_doors_logo.png" class="img-fluid img" alt="Folding Sliding Doors Canada Ltd">
         <h1 class="mt-1 pb-1 mb-0">Folding Sliding Doors Canada Ltd.</h1>
-        <p class="mb-1">105 - 1155 St. Paul Street</p>
-        <p class="mb-1">Kelowna, BC V1Y 2C6</p>
-        <p class="mb-1">Ph: 1(250)-448-6418</p>
+        <p pdf class="mb-1">105 - 1155 St. Paul Street</p>
+        <p pdf class="mb-1">Kelowna, BC V1Y 2C6</p>
+        <p pdf class="mb-1">1(250)-448-6418</p>
       </div>
       <div class="col text-center">
       <h2 quote class="mt-3">
@@ -16,7 +16,7 @@
        </h2>
         <!-- Contact Information -->
         <p class="mb-1">
-          <a href="tel:12504486418" class="link-secondary">Ph: 1(250)-448-6418</a>
+          <a href="tel:12504486418" class="link-secondary">1(250)-448-6418</a>
         </p>
         <p class="mb-1">
           <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary">Email: sales&#64;foldingslidingdoors.ca</a>
@@ -32,7 +32,7 @@
   </div>
 </header>
 
-    <form container [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
+    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
           <!-- <div class="row justify-content-center"> -->
           <!-- Dealer Information Section -->
       
@@ -45,15 +45,20 @@
         <mat-divider></mat-divider>
         </h2>
         <!-- Dealer Name -->
-       <app-text-reuse [intro]="'Dealer Name'" [intValue]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
+       <app-text-reuse [intro]="'Dealer Name'" [value]="quoteForm.get('dealerName')?.value"
+        [intValue]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
         <!-- Dealer Branch -->
-        <app-text-reuse [intro]="'Branch Name'"  (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
+        <app-text-reuse [intro]="'Branch Name'" [value]="quoteForm.get('dealerBranch')?.value"
+          (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
         <!-- Contact Name -->
-        <app-text-reuse  [intro]="'Contact Name'" (valueChange)="updateField('contactName', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Contact Name'" [value]="quoteForm.get('contactName')?.value"
+         (valueChange)="updateField('contactName', $event)"></app-text-reuse>
         <!-- Contact Email -->
-        <app-text-reuse [intro]="'Contact Email'" [intValue]="'Foldingslidingdoors.ab@gmail.com'" [types]="'email'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
+        <app-text-reuse [intro]="'Contact Email'" [value]="quoteForm.get('contactEmail')?.value"
+         [intValue]="'Foldingslidingdoors.ab@gmail.com'" [types]="'email'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
         <!-- Phone -->
-        <app-text-reuse [intro]="'Contact Phone'"  [intValue]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
+        <app-text-reuse [intro]="'Contact Phone'" [value]="quoteForm.get('contactPhone')?.value"
+          [intValue]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
         </section>
         </div>
       <!-- Job Information -->
@@ -69,10 +74,14 @@
             </p>
           </li>
           </ul>
-        <app-text-reuse  [intro]="'Job Name'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
-        <app-text-reuse  [intro]="'Site Address'" (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
-        <app-text-reuse  [intro]="'City'" (valueChange)="updateField('jobCity', $event)"></app-text-reuse>
-        <app-date-reuse  [intro]="'Date'" (valueChange)="updateField('date', $event)"></app-date-reuse>
+        <app-text-reuse  [intro]="'Job Name'" [value]="quoteForm.get('jobName')?.value"
+         (valueChange)="updateField('jobName', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'Site Address'" [value]="quoteForm.get('jobSiteAddress')?.value"
+         (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
+        <app-text-reuse  [intro]="'City'" [value]="quoteForm.get('jobCity')?.value"
+        (valueChange)="updateField('jobCity', $event)"></app-text-reuse>
+        <app-date-reuse  [intro]="'Date'" [value]="quoteForm.get('date')?.value"
+        (valueChange)="updateField('date', $event)"></app-date-reuse>
         </section>
       </div>
   </div>
@@ -95,31 +104,35 @@
             </ul>
             <!-- Column for the first set of options -->
             <div class="col-12 col-md-6">
-           <app-auto-search [intro]="'Door Model'" 
+           <app-auto-search [intro]="'Door Model'" [value]="quoteForm.get('doorModel')?.value"
            [filler]="'FD27 PVCU'" [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
           </app-auto-search>
         <!-- Ext finish -->
-           <app-auto-search [intro]="'Exterior Finish'" (valueChange)="updateField('exteriorFinish', $event)"
-           [filler]="exteriorFinish[0]" [initialList]="exteriorFinish">
+           <app-auto-search [intro]="'Exterior Finish'" [value]="quoteForm.get('exteriorFinish')?.value"
+           (valueChange)="updateField('exteriorFinish', $event)" [filler]="exteriorFinish[0]" [initialList]="exteriorFinish">
           </app-auto-search>
         <!-- Ext color -->
-           <app-text-reuse  [intro]="'Exterior Color'" 
+           <app-text-reuse  [intro]="'Exterior Color'" [value]="quoteForm.get('exteriorColor')?.value"
            (valueChange)="updateField('exteriorColor', $event)">
           </app-text-reuse >
         <!-- Int finish -->
-           <app-auto-search [intro]="'Interior Finish'" (valueChange)="updateField('interiorFinish', $event)"
+           <app-auto-search [intro]="'Interior Finish'" [value]="quoteForm.get('interiorFinish')?.value"
+            (valueChange)="updateField('interiorFinish', $event)"
            [filler]="interionFinish[0]" [initialList]="interionFinish">
           </app-auto-search>
         <!-- Int Color -->
-           <app-text-reuse  [intro]="'Interior Color'" (valueChange)="updateField('interiorColor', $event)">
+           <app-text-reuse  [intro]="'Interior Color'" [value]="quoteForm.get('interiorColor')?.value"
+           (valueChange)="updateField('interiorColor', $event)">
           </app-text-reuse >
         </div>
         <!-- Glass -->
         <div class="col-12 col-md-6">
-           <app-text-reuse [intro]="'Glass'"  (valueChange)="updateField('glass', $event)">
+           <app-text-reuse [intro]="'Glass'" [value]="quoteForm.get('glass')?.value"
+            (valueChange)="updateField('glass', $event)">
           </app-text-reuse>
         <!-- Handle Color -->
-           <app-text-reuse [intro]="'Handle Color'" (valueChange)="updateField('handleColor', $event)">
+           <app-text-reuse [intro]="'Handle Color'" [value]="quoteForm.get('handleColor')?.value"
+            (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
            <!-- Additional Notes -->
         <mat-form-field class="w-100"  appearance="fill">

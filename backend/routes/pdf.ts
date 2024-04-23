@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
 import puppeteer from 'puppeteer';
-import cheerio from 'cheerio';
-import path, { dirname } from 'node:path';
+import path, { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import fs from 'fs';
-import { Form } from 'src/app/interfaces/form';
+
+import { PDFDocument } from 'pdf-lib';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,18 +13,20 @@ const router = Router();
 router.post('/generator', async (req: Request, res: Response) => {
   try {
     const port = process.env['PORT'] || 4200;
-   
-    const quoteForm: Form = req.body.quoteForm;
-    // grid data send to parent!!
-    const gridFormArray: Form = req.body.grid;
+    const { quoteForm, gridFormArray } = req.body;
+   // Serialize data
+    const formDataSecure = new URLSearchParams(quoteForm).toString();
+    const gridDataSecure = new URLSearchParams(gridFormArray).toString();
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.setViewport({ width: 2480, height: 3000 });
-    await page.goto(`http://localhost:${port}/quotes` , { waitUntil: 'networkidle0' });
-    await page.addStyleTag({ path: 'src/app/quote-generator/pdf-creation.scss' });
+    await page.setViewport({ width: 1930, height: 2100 });
+    await page.goto(`http://localhost:${port}/quotes?${formDataSecure}&${gridDataSecure}` , { waitUntil: 'networkidle0' });
     await page.waitForFunction('window.getAllAngularTestabilities().findIndex(x => !x.isStable()) === -1');
+    const styles = join(__dirname, '../../browser/pdf-creation.css')
+    console.log('styles', styles);
+    await page.addStyleTag({ path: styles });
     // IDs to ignore
     const idsToIgnore = ['ignore0', 'ignore1'];
     await page.evaluate((ids) => {
@@ -35,37 +37,17 @@ router.post('/generator', async (req: Request, res: Response) => {
         }
       });
     }, idsToIgnore);
-
-    // Fill in the form fields using evaluate to inject the values directly
-    for (const [key, value] of Object.entries(quoteForm)) {
-      console.log('key', key);
-      console.log('value', value);
-
-      if (key === 'additionalNotes') {
-        await page.evaluate((val) => {
-          const textArea = document.querySelector('textarea[name="additionalNotes"]');
-          if (textArea instanceof HTMLTextAreaElement) {
-            textArea.value = val;
-            textArea.dispatchEvent(new Event('input', { bubbles: true })); 
-          }
-        }, value);
-        
-      } else {
-        await page.evaluate((val, name) => {
-          const inputElement = document.querySelector(`input[name="${name}"]`);
-          if (inputElement instanceof HTMLInputElement) {
-            inputElement.value = val;
-            inputElement.dispatchEvent(new Event('input', { bubbles: true })); 
-          }
-        }, value, key);
-      }
-    }
+    await page.screenshot({path: 'debug_screenshot.png'});
 
     const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
     await browser.close();
+
+ // Load the existing PDF
+  const quoteLastPg = join(__dirname, '../../browser/assets/fsd-sizes.pdf');
     // Generate PDF using Puppeteer
-      res.contentType('application/pdf');
-      res.send(pdfBuffer);
+    res.contentType('application/pdf');
+    res.send(pdfBuffer);
+
     } catch (error) {
       console.error('Error generating PDF:', error);
       res.status(500).send('Failed to generate PDF');

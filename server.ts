@@ -80,7 +80,7 @@ async function startServer() {
     const port = process.env['PORT'] || 4200;
     const server = createServer();
     (await server).listen(port, () => {
-        console.log(`Node Express server listening on http://localhost:${port}`);
+        console.log(`Node Express server listening`);
     });
 }
 
