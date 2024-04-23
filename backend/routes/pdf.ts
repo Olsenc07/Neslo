@@ -21,8 +21,9 @@ router.post('/generator', async (req: Request, res: Response) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.setViewport({ width: 1920, height: 1080 });
+    await page.setViewport({ width: 2480, height: 3000 });
     await page.goto(`http://localhost:${port}/quotes` , { waitUntil: 'networkidle0' });
+    await page.addStyleTag({ path: 'src/app/quote-generator/pdf-creation.scss' });
     await page.waitForFunction('window.getAllAngularTestabilities().findIndex(x => !x.isStable()) === -1');
     // IDs to ignore
     const idsToIgnore = ['ignore0', 'ignore1'];
@@ -37,26 +38,28 @@ router.post('/generator', async (req: Request, res: Response) => {
 
     // Fill in the form fields using evaluate to inject the values directly
     for (const [key, value] of Object.entries(quoteForm)) {
+      console.log('key', key);
+      console.log('value', value);
+
       if (key === 'additionalNotes') {
         await page.evaluate((val) => {
           const textArea = document.querySelector('textarea[name="additionalNotes"]');
           if (textArea instanceof HTMLTextAreaElement) {
             textArea.value = val;
+            textArea.dispatchEvent(new Event('input', { bubbles: true })); 
           }
         }, value);
+        
       } else {
         await page.evaluate((val, name) => {
           const inputElement = document.querySelector(`input[name="${name}"]`);
           if (inputElement instanceof HTMLInputElement) {
             inputElement.value = val;
+            inputElement.dispatchEvent(new Event('input', { bubbles: true })); 
           }
         }, value, key);
       }
     }
-
-    // fill in grid
-    gridFormArray
-
 
     const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
     await browser.close();

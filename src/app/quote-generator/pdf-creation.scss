@@ -1,50 +1,24 @@
-.pdf{
-    display: flex;
-    justify-content: flex-end;
-    button{
-    background-color: var(--wood);
-    color: white;
-    }
-}
-.input-wrapper{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
 .img{
-    max-width: 15%;
+    max-width: 50%;
     border-radius: 50%;
-    box-shadow: 2px 2px 2px #00000042;
-}
-form[container]{
-    background-color: #e0e3e88a;
-}
-h2[quote]{
-    color: #003e1d;
-}
-// styles.scss
-p {
-    font-size: 1.1em; 
-  }
-  input{
-    padding-left: 2%;
-  }
-  div[container]{
-    border-radius: 25px;
-    border: 1px groove;
+    box-shadow: purple;
   }
 
+// styles.scss
+p {
+    font-size: 10px; 
+}
 .mat-typography {
-  font-family: 'Josefin Sans', sans-serif;
+
   & .mat-h1, & .mat-headline-5 {
-    font-size: 2.2vw !important; 
+    font-size: 24px !important; 
   }
 
   & .mat-h2, & h2 {
-    font-size: 2vw !important; 
+    font-size: 18px !important; 
   }
 
   & h3 {
-    font-size: 1.4vw !important; 
+    font-size: 14px !important; 
   }
 }
