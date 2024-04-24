@@ -3,20 +3,19 @@
 }
 
 p[pdf], th[pdf] {
-  font-size: 12px !important; 
-  color: red !important; 
+  font-size: 14px !important; 
 }
 
 .mat-typography .mat-h1,
 .mat-typography .mat-headline-5 {
-  font-size: 21px !important; 
+  font-size: 23px !important; 
 }
 
 .mat-typography .mat-h2,
 .mat-typography h2 {
-  font-size: 18px !important; 
+  font-size: 20px !important; 
 }
 
 .mat-typography h3 {
-  font-size: 14px !important; 
+  font-size: 16px !important; 
 }

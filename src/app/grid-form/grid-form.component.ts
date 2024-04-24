@@ -16,7 +16,7 @@ import {MatDividerModule} from '@angular/material/divider';
   imports: [ReactiveFormsModule, MatIconModule, MatSelectModule, MatCardModule,
     MatDividerModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './grid-form.component.html',
-  styleUrl: './grid-form.component.scss'
+  styleUrl: './grid-form.component.scss',
 })
 export class GridFormComponent implements OnDestroy {
   doorConfigForm!: FormGroup;

@@ -7,34 +7,49 @@
   <tr>
     <th pdf colspan="1">
       <div titles>Set #</div>
+<mat-divider></mat-divider>
+
     </th>
     <th pdf colspan="1">
       <div titles>Room Label</div>
+<mat-divider></mat-divider>
     </th>
       <th pdf colspan="2">
-        <div class="text-center">Rough Opening
+        <div class="text-center">
+          Rough Opening
       <div row>
-      <div>Width (ins)</div>
-      <div>Height (ins)</div>
+      <div>Width (ins)
+<mat-divider></mat-divider>
+      </div>
+      <div>Height (ins)
+<mat-divider></mat-divider>
+
+      </div>
       </div>
     </div>
       </th>
     <th pdf colspan="3">
       <div titles>Configuration</div>
+<mat-divider></mat-divider>
+
     </th>
     <th pdf colspan="1">
       <div titles>Left</div>
+<mat-divider></mat-divider>
+
     </th>
     <th pdf colspan="1">
       <div titles>Right</div>
+<mat-divider></mat-divider>
+
     </th>
     <th pdf colspan="1">
       <div titles>Active Panel</div>
+<mat-divider></mat-divider>
+
     </th>
   </tr>
-  <mat-divider></mat-divider>
 </thead>
-
       <tbody formArrayName="rows">
       @for(rowControl of rows.controls; let i = $index; track rowControl){
                 <tr [formGroupName]="i">

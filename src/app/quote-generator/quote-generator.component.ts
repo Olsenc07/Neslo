@@ -103,7 +103,6 @@ export class QuoteGeneratorComponent implements OnInit {
     }
 
     initializeForm(params: any): void {
-      console.log('2', params);
       if (!params) {
         console.error('No form data received');
         return;
@@ -115,7 +114,6 @@ export class QuoteGeneratorComponent implements OnInit {
         }
       });
     }
-    
  
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);

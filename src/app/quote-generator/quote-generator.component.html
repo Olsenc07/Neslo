@@ -1,5 +1,5 @@
 <div id="quote">
-<header class="p-3" >
+<header class="p-3">
   <div  class="container">
     <div class="row align-items-center">
         <!-- Company Details -->
@@ -32,7 +32,7 @@
   </div>
 </header>
 
-    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()">
+    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()" [@fadeIn]>
           <!-- <div class="row justify-content-center"> -->
           <!-- Dealer Information Section -->
       
@@ -169,6 +169,7 @@
           Download PDF
         </button> 
       } @else {
+        Creating PDF
         <mat-spinner [diameter]="50"></mat-spinner>
       }
       </div>

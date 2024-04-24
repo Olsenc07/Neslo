@@ -25,7 +25,6 @@ router.post('/generator', async (req: Request, res: Response) => {
     await page.goto(`http://localhost:${port}/quotes?${formDataSecure}&${gridDataSecure}` , { waitUntil: 'networkidle0' });
     await page.waitForFunction('window.getAllAngularTestabilities().findIndex(x => !x.isStable()) === -1');
     const styles = join(__dirname, '../../browser/pdf-creation.css')
-    console.log('styles', styles);
     await page.addStyleTag({ path: styles });
     // IDs to ignore
     const idsToIgnore = ['ignore0', 'ignore1'];
@@ -37,7 +36,6 @@ router.post('/generator', async (req: Request, res: Response) => {
         }
       });
     }, idsToIgnore);
-    await page.screenshot({path: 'debug_screenshot.png'});
 
     const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
     await browser.close();

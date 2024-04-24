@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -8,7 +8,8 @@ import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, state, stagger } from '@angular/animations';
+
 
 @Component({
   selector: 'app-intro',
@@ -17,10 +18,10 @@ import { trigger, transition, style, animate } from '@angular/animations';
   templateUrl: './intro.component.html',
   styleUrl: './intro.component.scss',
   animations: [
-    trigger('fadeInLeft', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(-100px)' }),
-        animate('500ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+    trigger('fadeIn', [
+      transition(':enter', [  // Use ':enter' to apply this when the element is added to the DOM
+        style({ opacity: 0, transform: 'translateX(-100%)' }),
+        animate('700ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
       ])
     ])
   ],
@@ -29,13 +30,15 @@ import { trigger, transition, style, animate } from '@angular/animations';
 export class IntroComponent implements OnInit {
 @Input() orientation: boolean = true
 
-  constructor(private router: Router,
-    private title:Title, @Inject(PLATFORM_ID) private platformId: Object,
-  ){}
-
+    constructor(
+      private router: Router, 
+      private el: ElementRef,
+      private title:Title, @Inject(PLATFORM_ID) private platformId: Object,
+      ){}
   ngOnInit(): void {
     this.title.setTitle('Neslo | Premium Windows and Doors')
   }
+
   // test nopt in
   requestQuote(): void {
     this.router.navigate(['/quotes']);
