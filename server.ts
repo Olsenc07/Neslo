@@ -29,15 +29,15 @@ const apiLimiter = rateLimit({
       });
   }
   });
+
 //  Create Express Servrt
    async function createServer(): Promise<express.Express> {
-
     const server = express();
      // Middleware
      server.use(cors());
      server.use(compression());
      server.use(express.json());
-     server.use(express.urlencoded({ extended: false }));
+     server.use(express.urlencoded({ extended: true }));
     server.set('view engine', 'html');
     server.set('views', browserDistFolder);
     

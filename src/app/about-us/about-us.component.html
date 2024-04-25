@@ -1,21 +1,21 @@
     <div class="info-container">
     <div class="d-flex justify-content-center">
-    <img src="{{img.img}}" class="img-fluid img" alt="{{img.alt}}">
+    <img src="{{img.img}}" class="img-fluid img" alt="Company Logo">
     </div>
     <h3 class="text-center mb-3">{{title}}</h3>
     <p class="text-center">{{intro}}</p>
    <div class="text-center">
     <p>
-        <a class="link-secondary" href="tel:`{{tel}}`">{{tel}}</a>
+        <a class="link-secondary" aria-label="Call us" href="tel:`{{tel}}`">{{tel}}</a>
     </p>
     <p>
-        <a class="link-secondary" href="mailto:`{{email}}`">
+        <a class="link-secondary" aria-label="Email us" href="mailto:`{{email}}`">
         {{email}}
         </a>
     </p>
     @if(fax){
     <p>
-        <a class="link-secondary">
+        <a class="link-secondary" aria-label="Fax us">
            Fax: {{fax}}
         </a>
     </p>

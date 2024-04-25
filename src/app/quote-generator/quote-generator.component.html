@@ -4,7 +4,7 @@
     <div class="row align-items-center">
         <!-- Company Details -->
         <div class="col text-center">
-          <img pdf src="../../assets/folding_sliding_doors_logo.png" class="img-fluid img" alt="Folding Sliding Doors Canada Ltd">
+          <img pdf src="../../assets/folding_sliding_doors_logo.png" class="img-fluid img" alt="Folding Sliding Doors Canada Ltd Logo">
         <h1 class="mt-1 pb-1 mb-0">Folding Sliding Doors Canada Ltd.</h1>
         <p pdf class="mb-1">105 - 1155 St. Paul Street</p>
         <p pdf class="mb-1">Kelowna, BC V1Y 2C6</p>
@@ -16,13 +16,13 @@
        </h2>
         <!-- Contact Information -->
         <p class="mb-1">
-          <a href="tel:12504486418" class="link-secondary">1(250)-448-6418</a>
+          <a href="tel:12504486418" class="link-secondary" aria-label="Call us at 1(250)-448-6418">1(250)-448-6418</a>
         </p>
         <p class="mb-1">
-          <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary">Email: sales&#64;foldingslidingdoors.ca</a>
+          <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary" aria-label="Email sales at Folding Sliding Doors Canada">Email: sales&#64;foldingslidingdoors.ca</a>
         </p>
         <p class="mb-1">
-          <a href="https://www.foldingslidingdoors.ca" class="link-secondary">Web: www.foldingslidingdoors.ca</a>
+          <a href="https://www.foldingslidingdoors.ca" class="link-secondary" aria-label="Visit Folding Sliding Doors Canada website">Web: www.foldingslidingdoors.ca</a>
         </p>
       </div>      
     </div>
@@ -32,7 +32,7 @@
   </div>
 </header>
 
-    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()" [@fadeIn]>
+    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()" >
           <!-- <div class="row justify-content-center"> -->
           <!-- Dealer Information Section -->
       
@@ -40,24 +40,24 @@
               <!-- Dealer Information Section -->
           <div class="d-flex flex-column flex-md-row">
           <div  class="my-2 mx-2 col-12 col-md-6">
-          <section class="py-3">
+          <section class="py-3" aria-labelledby="dealerInfo">
         <h2>Dealer Information
         <mat-divider></mat-divider>
         </h2>
         <!-- Dealer Name -->
-       <app-text-reuse [intro]="'Dealer Name'" [value]="quoteForm.get('dealerName')?.value"
+       <app-text-reuse [intro]="'Dealer Name'" id="dealerName" [value]="quoteForm.get('dealerName')?.value"
         [intValue]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
         <!-- Dealer Branch -->
-        <app-text-reuse [intro]="'Branch Name'" [value]="quoteForm.get('dealerBranch')?.value"
+        <app-text-reuse [intro]="'Branch Name'" id="dealerBranch" [value]="quoteForm.get('dealerBranch')?.value"
           (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
         <!-- Contact Name -->
-        <app-text-reuse  [intro]="'Contact Name'" [value]="quoteForm.get('contactName')?.value"
+        <app-text-reuse  [intro]="'Contact Name'" id="contactName" [value]="quoteForm.get('contactName')?.value"
          (valueChange)="updateField('contactName', $event)"></app-text-reuse>
         <!-- Contact Email -->
-        <app-text-reuse [intro]="'Contact Email'" [value]="quoteForm.get('contactEmail')?.value"
-         [intValue]="'Foldingslidingdoors.ab@gmail.com'" [types]="'email'" (valueChange)="updateField('jobName', $event)"></app-text-reuse>
+        <app-text-reuse [intro]="'Contact Email'" id="contactEmail" [value]="quoteForm.get('contactEmail')?.value"
+         [intValue]="'Foldingslidingdoors.ab@gmail.com'" [types]="'email'" (valueChange)="updateField('contactEmail', $event)"></app-text-reuse>
         <!-- Phone -->
-        <app-text-reuse [intro]="'Contact Phone'" [value]="quoteForm.get('contactPhone')?.value"
+        <app-text-reuse [intro]="'Contact Phone'" id="contactPhone" [value]="quoteForm.get('contactPhone')?.value"
           [intValue]="'403 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
         </section>
         </div>
@@ -74,13 +74,13 @@
             </p>
           </li>
           </ul>
-        <app-text-reuse  [intro]="'Job Name'" [value]="quoteForm.get('jobName')?.value"
+        <app-text-reuse  [intro]="'Job Name'" id="jobName" [value]="quoteForm.get('jobName')?.value"
          (valueChange)="updateField('jobName', $event)"></app-text-reuse>
-        <app-text-reuse  [intro]="'Site Address'" [value]="quoteForm.get('jobSiteAddress')?.value"
+        <app-text-reuse  [intro]="'Site Address'" id="jobSiteAddress" [value]="quoteForm.get('jobSiteAddress')?.value"
          (valueChange)="updateField('jobSiteAddress', $event)"></app-text-reuse>
-        <app-text-reuse  [intro]="'City'" [value]="quoteForm.get('jobCity')?.value"
+        <app-text-reuse  [intro]="'City'" id="jobCity" [value]="quoteForm.get('jobCity')?.value"
         (valueChange)="updateField('jobCity', $event)"></app-text-reuse>
-        <app-date-reuse  [intro]="'Date'" [value]="quoteForm.get('date')?.value"
+        <app-date-reuse  [intro]="'Date'" id="date" [value]="quoteForm.get('date')?.value"
         (valueChange)="updateField('date', $event)"></app-date-reuse>
         </section>
       </div>
@@ -104,38 +104,38 @@
             </ul>
             <!-- Column for the first set of options -->
             <div class="col-12 col-md-6">
-           <app-auto-search [intro]="'Door Model'" [value]="quoteForm.get('doorModel')?.value"
+           <app-auto-search [intro]="'Door Model'" id="doorModel" [value]="quoteForm.get('doorModel')?.value"
            [filler]="'FD27 PVCU'" [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
           </app-auto-search>
         <!-- Ext finish -->
-           <app-auto-search [intro]="'Exterior Finish'" [value]="quoteForm.get('exteriorFinish')?.value"
+           <app-auto-search [intro]="'Exterior Finish'" id="exteriorFinish" [value]="quoteForm.get('exteriorFinish')?.value"
            (valueChange)="updateField('exteriorFinish', $event)" [filler]="exteriorFinish[0]" [initialList]="exteriorFinish">
           </app-auto-search>
         <!-- Ext color -->
-           <app-text-reuse  [intro]="'Exterior Color'" [value]="quoteForm.get('exteriorColor')?.value"
+           <app-text-reuse  [intro]="'Exterior Color'" id="exteriorColor" [value]="quoteForm.get('exteriorColor')?.value"
            (valueChange)="updateField('exteriorColor', $event)">
           </app-text-reuse >
         <!-- Int finish -->
-           <app-auto-search [intro]="'Interior Finish'" [value]="quoteForm.get('interiorFinish')?.value"
+           <app-auto-search [intro]="'Interior Finish'" id="interiorFinish" [value]="quoteForm.get('interiorFinish')?.value"
             (valueChange)="updateField('interiorFinish', $event)"
            [filler]="interionFinish[0]" [initialList]="interionFinish">
           </app-auto-search>
         <!-- Int Color -->
-           <app-text-reuse  [intro]="'Interior Color'" [value]="quoteForm.get('interiorColor')?.value"
+           <app-text-reuse  [intro]="'Interior Color'" id="interiorColor" [value]="quoteForm.get('interiorColor')?.value"
            (valueChange)="updateField('interiorColor', $event)">
           </app-text-reuse >
         </div>
         <!-- Glass -->
         <div class="col-12 col-md-6">
-           <app-text-reuse [intro]="'Glass'" [value]="quoteForm.get('glass')?.value"
+           <app-text-reuse [intro]="'Glass'" id="glass" [value]="quoteForm.get('glass')?.value"
             (valueChange)="updateField('glass', $event)">
           </app-text-reuse>
         <!-- Handle Color -->
-           <app-text-reuse [intro]="'Handle Color'" [value]="quoteForm.get('handleColor')?.value"
+           <app-text-reuse [intro]="'Handle Color'" id="handleColor" [value]="quoteForm.get('handleColor')?.value"
             (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
            <!-- Additional Notes -->
-        <mat-form-field class="w-100"  appearance="fill">
+        <mat-form-field class="w-100" id="additionalNotes" appearance="fill">
           <mat-label>Additional notes...</mat-label>
         <textarea matInput formControlName="additionalNotes">
           @if(contactForm.get('additionalNotes')?.value){
@@ -150,7 +150,6 @@
       </section>
     </div>
     </div>
-
     @defer(on viewport){
     <app-grid-form (sendGrid)="grid($event)" [gridForm]="gridFormArray"></app-grid-form>
     } @placeholder {
@@ -161,20 +160,21 @@
       <div class="pdf col-12 col-md-6 justify-content-start">
         <!-- [disabled]="quoteForm.invalid" -->
         @if(!progress){
-        <button mat-fab extended
-        type="submit" class="btn btn-primary">
+        <button mat-fab extended type="submit" class="btn btn-primary">
           <mat-icon class="material-symbols-outlined">
           picture_as_pdf      
           </mat-icon>
           Download PDF
         </button> 
       } @else {
-        Creating PDF
-        <mat-spinner [diameter]="50"></mat-spinner>
+        <div class="justify-content-center d-flex align-items-center" aria-live="assertive">
+          <mat-spinner [diameter]="40"></mat-spinner>
+          <div class="px-3">Creating PDF</div>
+        </div>
       }
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-end ">
-        <button  mat-fab extended color="primary" type="button" class="btn btn-primary"
+        <button  mat-fab extended color="primary"  class="btn btn-primary"
         (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
         Email PDF
         <mat-icon class="material-symbols-outlined">

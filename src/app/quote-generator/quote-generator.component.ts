@@ -1,35 +1,32 @@
-import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
-import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
-import  { MatButtonModule } from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Title } from '@angular/platform-browser'
+import { TitleStrategy } from '@angular/router'
+
+import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
+import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
+import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
 import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
 import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
+
 import { Grid } from '../interfaces/grid'
-import { MatDividerModule } from '@angular/material/divider';
 import { OrientationService } from '../services/orientation.service';
 import { PdfService } from '../services/pdf.service';
-import { PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-
-import { Title } from '@angular/platform-browser'
-import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-
 
 @Component({
   standalone: true,
@@ -79,9 +76,8 @@ export class QuoteGeneratorComponent implements OnInit {
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
 
   constructor(private router: Router,
-    private fb: FormBuilder, private route: ActivatedRoute,
      private snackBar: MatSnackBar,
-    private title:Title, private http: HttpClient,
+    private title:Title, 
     protected orientationService: OrientationService, 
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService,
@@ -89,32 +85,12 @@ export class QuoteGeneratorComponent implements OnInit {
 
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
-      this.route.queryParams.subscribe(params => {
-        if (!isPlatformBrowser(this.platformId)) {   
-      console.log('0', this.route);
-      console.log('1', params);
-
-        this.initializeForm(params['formDataSecure']);
-        }
-      });
     }
+  
     returnHome(): void {
       this.router.navigate(['/home']);
     }
 
-    initializeForm(params: any): void {
-      if (!params) {
-        console.error('No form data received');
-        return;
-      }
-      Object.keys(this.quoteForm.controls).forEach(key => {
-        const control = this.quoteForm.get(key);
-        if (control && params[key] !== undefined) { 
-          control.setValue(params[key]);
-        }
-      });
-    }
- 
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
