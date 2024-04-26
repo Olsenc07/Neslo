@@ -5,10 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Form } from '../interfaces/form';
 import { Grid } from '../interfaces/grid';
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 
 export class PdfService {
   apiUrl = environment.apiUrl;
@@ -17,15 +14,11 @@ export class PdfService {
   
   generatePdf(quoteForm: Form, grid: Grid): Observable<Blob> {
     return this.http.post(`${this.apiUrl}/pdf/generator`, { quoteForm, grid }, 
-    {
-      responseType: 'blob'
-    }).pipe(
+    { responseType: 'blob' }).pipe(
       catchError(error => {
         // Log the error or perform other error handling steps
         console.error('Failed to generate PDF:', error);
         return throwError(() => new Error('A friendly error message.'));
       })
     );
-  }
-  
-  }
+  }}

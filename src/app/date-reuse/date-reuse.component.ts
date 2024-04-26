@@ -25,7 +25,11 @@ export class DateReuseComponent {
   input: FormControl<string | null> = new FormControl<string | null>('');
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private cdr: ChangeDetectorRef){}
+  constructor(private cdr: ChangeDetectorRef){
+    this.input.valueChanges.subscribe((value: string | null) => {
+      this.valueChange.emit(value || ''); 
+    });
+  }
 
   ngOnChanges(): void {
     this.input.setValue(this.value || '', { emitEvent: false });

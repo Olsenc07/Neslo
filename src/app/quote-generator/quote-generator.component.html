@@ -8,7 +8,7 @@
         <h1 class="mt-1 pb-1 mb-0">Folding Sliding Doors Canada Ltd.</h1>
         <p pdf class="mb-1">105 - 1155 St. Paul Street</p>
         <p pdf class="mb-1">Kelowna, BC V1Y 2C6</p>
-        <p pdf class="mb-1">1(250)-448-6418</p>
+        <p pdf class="mb-1">(250)-448-6418</p>
       </div>
       <div class="col text-center">
       <h2 quote class="mt-3">
@@ -16,7 +16,7 @@
        </h2>
         <!-- Contact Information -->
         <p class="mb-1">
-          <a href="tel:12504486418" class="link-secondary" aria-label="Call us at 1(250)-448-6418">1(250)-448-6418</a>
+          <a href="tel:12504486418" class="link-secondary" aria-label="Call us at (250)-448-6418">(250)-448-6418</a>
         </p>
         <p class="mb-1">
           <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary" aria-label="Email sales at Folding Sliding Doors Canada">Email: sales&#64;foldingslidingdoors.ca</a>
@@ -135,21 +135,19 @@
             (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
            <!-- Additional Notes -->
-        <mat-form-field class="w-100" id="additionalNotes" appearance="fill">
+           <div class="notes-container">
+        <mat-form-field class="notes-form"  id="additionalNotes" appearance="fill">
           <mat-label>Additional notes...</mat-label>
-        <textarea matInput formControlName="additionalNotes">
-          @if(contactForm.get('additionalNotes')?.value){
-              <button matSuffix mat-icon-button (click)="contactForm.get('additionalNotes')?.reset()">
-                <mat-icon class="material-symbols-outlined">cancel</mat-icon>
-              </button>
-            }
+        <textarea matInput formControlName="additionalNotes" class="notes">
         </textarea>
         </mat-form-field>
+      </div>
           </div>
           </div>
       </section>
     </div>
     </div>
+    <!-- /may need to removr on viewport for pdf generation -->
     @defer(on viewport){
     <app-grid-form (sendGrid)="grid($event)" [gridForm]="gridFormArray"></app-grid-form>
     } @placeholder {
@@ -160,21 +158,21 @@
       <div class="pdf col-12 col-md-6 justify-content-start">
         <!-- [disabled]="quoteForm.invalid" -->
         @if(!progress){
-        <button mat-fab extended type="submit" class="btn btn-primary">
+        <button mat-fab color="primary"  extended type="submit" class="btn btn-primary">
           <mat-icon class="material-symbols-outlined">
           picture_as_pdf      
           </mat-icon>
           Download PDF
         </button> 
       } @else {
-        <div class="justify-content-center d-flex align-items-center" aria-live="assertive">
+        <div class="spinner" aria-live="assertive">
           <mat-spinner [diameter]="40"></mat-spinner>
-          <div class="px-3">Creating PDF</div>
+          <div class="px-3 spin-text">Creating PDF</div>
         </div>
       }
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-end ">
-        <button  mat-fab extended color="primary"  class="btn btn-primary"
+        <button email mat-fab extended  class="btn btn-primary"
         (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
         Email PDF
         <mat-icon class="material-symbols-outlined">

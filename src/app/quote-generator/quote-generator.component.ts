@@ -52,7 +52,7 @@ export class QuoteGeneratorComponent implements OnInit {
     contactName: new FormControl<string>(''),
     contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com', [
       Validators.required]),
-    contactPhone: new FormControl<string>('403 994 - 1202', [
+    contactPhone: new FormControl<string>('(403) 994 - 1202', [
       Validators.required]),
     jobName: new FormControl<string>(''),
     jobSiteAddress: new FormControl<string>('', [
@@ -150,6 +150,7 @@ private downloadPDF(pdfBlob: Blob): void {
   window.URL.revokeObjectURL(url);
   a.remove();
 }
+
 contactForm(): void {
   const dialogRef = this.dialog.open(ContactDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {

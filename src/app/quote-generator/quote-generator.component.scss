@@ -11,9 +11,21 @@ button[back]{
     display: flex;
     justify-content: flex-end;
     button{
-    background-color: var(--wood);
     color: white;
     }
+}
+button[email]{
+    background-color: var(--wood);
+}
+.spin-text{
+    color: #0b5ed7;
+}
+.spinner{
+    border: 2px solid #0b5ed7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
 }
 .input-wrapper{
     display: flex;
@@ -30,4 +42,17 @@ header{
 }
 h2[quote]{
     color: #003e1d;
+}
+.notes-container {
+    width: 100%; 
+} 
+.notes-form {
+    width: 100%; 
+}  
+.notes {
+    width: 100%; 
+    height: auto; 
+    height: 250px; 
+    resize: none; 
+    overflow: hidden;
 }

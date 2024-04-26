@@ -1,5 +1,6 @@
 .img[pdf] {
   max-width: 35% !important;
+  box-shadow: none !important;
 }
 
 p[pdf], th[pdf] {
