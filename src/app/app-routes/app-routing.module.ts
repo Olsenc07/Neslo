@@ -6,14 +6,18 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () =>
       import('../home/home.component').then(
-        (mod) => mod.HomeComponent,
-      )
+        (mod) => mod.HomeComponent)
   },
   {
     path: 'quotes',
     loadComponent: () =>
       import('../quote-generator/quote-generator.component').then(
-        (mod) => mod.QuoteGeneratorComponent,
-      )
+        (mod) => mod.QuoteGeneratorComponent)
+  },
+  {
+    path: 'test',
+    loadComponent: () =>
+      import('../standard-config-size/standard-config-size.component').then(
+        (mod) => mod.StandardConfigSizeComponent)
   }
 ]

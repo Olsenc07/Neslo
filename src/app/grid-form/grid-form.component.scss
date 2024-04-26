@@ -45,13 +45,13 @@ mat-form-field {
     box-sizing: border-box; 
   }
 mat-form-field[blue]{
-    background-color: #1f3a3d;
+    background-color: var(--blueField);
 }
 mat-form-field[green]{
-    background-color: #6a9955;
+    background-color: var(--greenField);
 }
 mat-form-field[red]{
-    background-color: #ab4e52;
+    background-color: var(--red);
 }
 mat-form-field[purple]{
     background-color: #917c92;

@@ -1,4 +1,4 @@
-<form [formGroup]="doorConfigForm">
+<form [formGroup]="doorConfigForm" id="gridLayout">
   <mat-card>
   <div class="table-responsive-md">
     <table class="table d-block d-md-table">
@@ -7,8 +7,7 @@
   <tr>
     <th pdf colspan="1">
       <div titles>Set #</div>
-<mat-divider></mat-divider>
-
+  <mat-divider></mat-divider>
     </th>
     <th pdf colspan="1">
       <div titles>Room Label</div>
@@ -61,7 +60,7 @@
                 <mat-icon class="material-symbols-outlined">remove</mat-icon>
               </button>
               } @else {
-                <button mat-fab extended color="warn" (click)="addRow()">
+                <button mat-fab extended id="addRow" color="warn" (click)="addRow()">
                   <mat-icon class="material-symbols-outlined">add</mat-icon>
                     Row
               </button>
@@ -69,59 +68,59 @@
             </div>
               </td>
       <!-- Room Label -->
-      <td>
-        <mat-form-field id="roomLabel" blue appearance="fill">
-        <input matInput type="text" formControlName="roomLabel">
-      </mat-form-field>
-    </td>
-      <!-- Rough Opening -->
-      <td>
-        <mat-form-field green appearance="fill">
-          <input matInput type="text"  formControlName="width">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field green appearance="fill">
-          <input matInput type="text" formControlName="height">
-        </mat-form-field>
-      </td>
-      <td>
-      <!-- Configuration -->
-      <mat-form-field red appearance="fill">
-        <input matInput type="text" formControlName="configuration0">
-      </mat-form-field>
-      </td>
-      <td class="plus">+</td>
-      <td>
-        <mat-form-field red appearance="fill">
-        <input matInput type="text"  formControlName="configuration1">
-      </mat-form-field>
-    </td>
-    <td>
-      <!-- Left -->
-      <mat-form-field appearance="fill">
-        <input matInput type="text"  formControlName="left">
-      </mat-form-field>
-    </td>
-      <td>
-      <!-- Right -->
-      <mat-form-field appearance="fill">
-        <input matInput type="text" formControlName="right">
-      </mat-form-field>
-      </td>
   <td>
-      <!-- Active Panel -->
-      <mat-form-field purple appearance="fill">
-    <mat-select formControlName="activePanel">
+    <mat-form-field [id]="'roomLabel-' + i" blue appearance="fill">
+      <input matInput type="text" formControlName="roomLabel">
+    </mat-form-field>
+  </td>
+  <!-- Rough Opening Width -->
+  <td>
+    <mat-form-field [id]="'width-' + i" green appearance="fill">
+      <input matInput type="text" formControlName="width">
+    </mat-form-field>
+  </td>
+  <!-- Rough Opening Height -->
+  <td>
+    <mat-form-field [id]="'height-' + i" green appearance="fill">
+      <input matInput type="text" formControlName="height">
+    </mat-form-field>
+  </td>
+  <!-- Configuration0 -->
+  <td>
+    <mat-form-field [id]="'configuration0-' + i" red appearance="fill">
+      <input matInput type="text" formControlName="configuration0">
+    </mat-form-field>
+  </td>
+      <td class="plus">+</td>
+  <td>
+    <mat-form-field [id]="'configuration1-' + i" red appearance="fill">
+      <input matInput type="text" formControlName="configuration1">
+    </mat-form-field>
+  </td>
+  <!-- Left -->
+  <td>
+    <mat-form-field [id]="'left-' + i" appearance="fill">
+      <input matInput type="text" formControlName="left">
+    </mat-form-field>
+  </td>
+  <!-- Right -->
+  <td>
+    <mat-form-field [id]="'right-' + i" appearance="fill">
+      <input matInput type="text" formControlName="right">
+    </mat-form-field>
+  </td>
+  <!-- Active Panel -->
+  <td>
+    <mat-form-field [id]="'activePanel-' + i" purple appearance="fill">
+      <mat-select formControlName="activePanel">
         <mat-option value="Right">Right</mat-option>
         <mat-option value="Left">Left</mat-option>
-    </mat-select>
-  </mat-form-field>
+      </mat-select>
+    </mat-form-field>
     </td>
   </tr>
   }
 </tbody>
-
 </table>
 </div>
 </mat-card>

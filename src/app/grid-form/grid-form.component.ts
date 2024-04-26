@@ -7,8 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-grid-form',
@@ -35,33 +35,37 @@ export class GridFormComponent implements OnDestroy {
       this.initializeForm();
     }
   }
-  initializeForm(): void {
-  // Clear the existing form array to avoid duplication when re-initializing
-  if (this.doorConfigForm) {
-    const rowsArray = this.doorConfigForm.get('rows') as FormArray;
-    while (rowsArray.length !== 0) {
-      rowsArray.removeAt(0);
-    }
-  } else {
-    // If doorConfigForm is not yet initialized, do so here
+
+initializeForm(): void {
+  // Ensure doorConfigForm is initialized.
+  if (!this.doorConfigForm) {
     this.doorConfigForm = this.fb.group({
       rows: this.fb.array([])
     });
   }
-  // Set up the value changes subscription
-  this.doorConfigForm.valueChanges.pipe(
-    debounceTime(500),
-    distinctUntilChanged(),
-    takeUntil(this.unsubscribe$)
-  ).subscribe(value => {
-    this.sendGrid.emit(value.rows);
+
+  const rowsArray = this.doorConfigForm.get('rows') as FormArray;
+  // Clear existing rows.
+  rowsArray.clear();
+
+  // Populate the form with the data from gridForm input.
+  this.gridForm.controls.forEach(control => {
+    rowsArray.push(control);
   });
+
+  // Set up the value changes subscription.
+  this.doorConfigForm.valueChanges
+    .pipe(debounceTime(500), distinctUntilChanged(), 
+    takeUntil(this.unsubscribe$))
+    .subscribe(value => {
+      this.sendGrid.emit(value.rows);
+    });
 }
 
   get rows(): FormArray {
     return this.doorConfigForm.get('rows') as FormArray;
   }
-  
+
   addRow(gridData?: Grid): void {
     const rowForm = this.fb.group({
       roomLabel: [gridData?.roomLabel || ''],

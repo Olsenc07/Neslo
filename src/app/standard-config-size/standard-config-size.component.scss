@@ -1,0 +1,21 @@
+.full-page{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+p[warning]{
+    color: #ff0000;
+}
+th[grey], td[grey]{
+    background-color: var(--wood-light-grey);
+}
+th[red], td[red], p[red]{
+    background-color: var(--red); 
+}
+th[green], div[green], td[green], p[green]{
+    background-color: var(--greenField);
+}
+td {
+    text-align: center; 
+    padding: 3px; 
+  }

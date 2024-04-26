@@ -33,9 +33,7 @@
 </header>
 
     <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()" >
-          <!-- <div class="row justify-content-center"> -->
           <!-- Dealer Information Section -->
-      
           <div  class="container">
               <!-- Dealer Information Section -->
           <div class="d-flex flex-column flex-md-row">
@@ -91,7 +89,6 @@
       <div class="row justify-content-center">
         <div class="container
            col-12 col-md-6">
-      <!-- <div container class="my-2 col-12 col-md-6"> -->
       <section class="py-3">
         <h2>Specify your selection
         <mat-divider></mat-divider>
@@ -111,7 +108,7 @@
            <app-auto-search [intro]="'Exterior Finish'" id="exteriorFinish" [value]="quoteForm.get('exteriorFinish')?.value"
            (valueChange)="updateField('exteriorFinish', $event)" [filler]="exteriorFinish[0]" [initialList]="exteriorFinish">
           </app-auto-search>
-        <!-- Ext color -->
+        <!-- Ext color --> 
            <app-text-reuse  [intro]="'Exterior Color'" id="exteriorColor" [value]="quoteForm.get('exteriorColor')?.value"
            (valueChange)="updateField('exteriorColor', $event)">
           </app-text-reuse >

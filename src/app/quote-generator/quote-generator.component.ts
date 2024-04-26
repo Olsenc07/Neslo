@@ -97,6 +97,7 @@ export class QuoteGeneratorComponent implements OnInit {
   
   grid(values: Grid[]): void {  
     if (isPlatformBrowser(this.platformId)) {
+      this.gridFormArray.clear();
     values.forEach((gridRow: Grid) => {
       const rowGroup = new FormGroup({
         roomLabel: new FormControl(gridRow.roomLabel),
@@ -109,6 +110,7 @@ export class QuoteGeneratorComponent implements OnInit {
         activePanel: new FormControl(gridRow.activePanel),
       });
       this.gridFormArray.push(rowGroup); 
+      console.log('wow', this.gridFormArray)
     });
   }}
   generatePDF(): void {

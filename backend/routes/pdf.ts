@@ -2,7 +2,6 @@ import { Router, Request, Response } from 'express';
 import puppeteer, { Page } from 'puppeteer';
 import  { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Grid } from 'src/app/interfaces/grid';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const router = Router();
@@ -30,7 +29,6 @@ router.post('/generator', async (req: Request, res: Response) => {
       handleColor: '#handleColor',
       additionalNotes: '#additionalNotes'
     };
-  
     // start creating pdf
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -65,9 +63,9 @@ for (const [field, selector] of Object.entries(selectors)) {
         // Otherwise, use the same method as before for inputs
         await page.focus(fullSelector);
         await page.evaluate((selector, value) => {
-          const inputElement = document.querySelector(selector) as HTMLInputElement;
+          const inputElement: HTMLInputElement = document.querySelector(selector) as HTMLInputElement;
           inputElement.value = value;
-          const event = new Event('input', { bubbles: true });
+          const event: Event = new Event('input', { bubbles: true });
           inputElement.dispatchEvent(event);
         }, fullSelector, fieldValue);
         // If the field is one with a dropdown, press Escape to close it
@@ -75,7 +73,6 @@ for (const [field, selector] of Object.entries(selectors)) {
           await page.keyboard.press('Escape');
         }
       }
-       // Send Escape key to close the dropdown
     } 
   } catch (error: unknown) {
     // Assuming error is of type Error
@@ -86,38 +83,62 @@ for (const [field, selector] of Object.entries(selectors)) {
     }
   }
 }
-// Assuming 'page' is your Puppeteer page instance and 'gridFormArray' is already defined
-  async function fillGridForm(page: Page, gridFormArray: string | any[]) {
-    // Wait for the grid form to be ready
-    await page.waitForSelector('table thead'); // Selector for your table header to make sure the table is rendered
-  
-    for (let i = 0; i < gridFormArray.length; i++) {
-      const row = gridFormArray[i];
-      
-      // Add a new row if needed
-      if (i > 0) { // Assuming the first row is already present
-        await page.click('button[color="warn"]'); // Adjust selector as needed
-      }
-      // Fill in the form fields for the current row
-      await page.type(`input[formcontrolname="roomLabel"][name="rows.${i}.roomLabel"]`, row.roomLabel);
-      await page.type(`input[formcontrolname="width"][name="rows.${i}.width"]`, row.width.toString());
-      await page.type(`input[formcontrolname="height"][name="rows.${i}.height"]`, row.height.toString());
-      await page.type(`input[formcontrolname="configuration0"][name="rows.${i}.configuration0"]`, row.configuration0);
-      await page.type(`input[formcontrolname="configuration1"][name="rows.${i}.configuration1"]`, row.configuration1);
-      await page.type(`input[formcontrolname="left"][name="rows.${i}.left"]`, row.left);
-      await page.type(`input[formcontrolname="right"][name="rows.${i}.right"]`, row.right);
 
-      // For mat-select, you might need to click to open the dropdown and then click the option
-      await page.click(`mat-form-field[purple] mat-select[formcontrolname="activePanel"][name="rows.${i}.activePanel"]`);
-      await page.click(`mat-option[value="${row.activePanel}"]`);
-    }
+async function fillGridForm(page: Page, gridFormArray: string | any[]) {
+  // Wait for the form to be fully rendered
+  await page.waitForSelector('#gridLayout');
+  for (let i = 0; i < gridFormArray.length; i++) {
+    const row = gridFormArray[i];
+    // Dynamically generate selector IDs based on the index
+    const roomLabelSelector: string = `#roomLabel-${i} input`;
+    const widthSelector: string = `#width-${i} input`;
+    const heightSelector: string = `#height-${i} input`;
+    const config0Selector: string = `#configuration0-${i} input`;
+    const config1Selector: string = `#configuration1-${i} input`;
+    const leftSelector: string = `#left-${i} input`;
+    const rightSelector: string = `#right-${i} input`;
+    const activePanelSelector: string = `#activePanel-${i}`;
+    const activePanelValue: string = row.activePanel; // 'Right' or 'Left'
+    const activePanelOptionSelector: string = `mat-option[value="${activePanelValue}"]`;
+
+    // Ensure elements are available before typing
+    await page.waitForSelector(roomLabelSelector);
+    await page.type(roomLabelSelector, row.roomLabel);
+    await page.type(widthSelector, row.width.toString());
+    await page.type(heightSelector, row.height.toString());
+    await page.type(config0Selector, row.configuration0);
+    await page.type(config1Selector, row.configuration1);
+    await page.type(leftSelector, row.left);
+    await page.type(rightSelector, row.right);
+   if (['Right', 'Left'].includes(row.activePanel)) {
+    // Open the dropdown
+    await page.click(activePanelSelector);
+    await page.waitForSelector(`${activePanelOptionSelector}`, { visible: true });
+    // Click the specific option
+    await page.click(activePanelOptionSelector);
+    await page.keyboard.press('Escape');
+     // Wait for the dropdown to close after selection
+     await page.waitForFunction(
+      (value) => !document.querySelector(`mat-option[value="${value}"]`),
+      {},
+      activePanelValue
+    );
+  } else {
+    console.error(`Invalid active panel value: ${row.activePanel}`);
   }
-  
+    // Optionally, handle adding rows if your form requires dynamically adding them
+    if (i < gridFormArray.length - 1) {
+      await page.click('#addRow'); 
+  }}
+  // final escape?
+  await page.keyboard.press('Escape');
+
+}
+
   // Then call your function
    await fillGridForm(page, gridFormArray);
-
-    const idsToIgnore = ['ignore0', 'ignore1'];
-    await page.evaluate((ids) => {
+    const idsToIgnore: string[] = ['ignore0', 'ignore1'];
+    await page.evaluate((ids: string[]) => {
       ids.forEach(id => {
         const elem = document.querySelector(`#${id}`);
         if (elem) {
@@ -127,7 +148,7 @@ for (const [field, selector] of Object.entries(selectors)) {
     }, idsToIgnore);
 
     // send the same view as puppetter
-    const pdfBuffer = await page.pdf({
+    const pdfBuffer: Buffer = await page.pdf({
       width: viewport.width + 'px',
       height: viewport.height + 'px',
       printBackground: true

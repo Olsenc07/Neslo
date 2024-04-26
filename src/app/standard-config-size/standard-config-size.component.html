@@ -1,0 +1,46 @@
+<div class="full-page">
+    <h1 class="text-center">STANDARD SIZE CONFIGURATIONS</h1>
+    <p red class="text-center">RO Ht From Subfloor to Finished Opening for all <b> FD 72 & FD 73 </b> Std Size Doors Is: <b> 95 1/2</b>"</p>
+    <p green class="text-center">RO Ht From Subfloor to Finished Opening for all <b>FD 27</b> Std Size Doors is: <b>96</b>"</p>
+
+    <div>
+        <p>Rebate width with no screen: 4 1/4"</p>
+        <p>Rebate width with a screen: 5 1/2"</p>
+        <p>Sill Type: Recessed Track</p>
+        <p warning>All RO Ht. Dimensions assume 3/4" Flooring. If flooring thickness from subfloor is different than 3/4"
+        then the RO Ht. needs to be adjusted equally.</p>
+    </div>
+    <table class="table d-block d-md-table">
+        <thead>
+            <tr>
+              <th grey colspan="2" class="text-center">CONFIG</th>
+              <th red colspan="1">
+              <div red>FD 72 and 73 Panel Width:</div>
+              <div>33 1/2"</div>
+             FD72 & FD73 RO Width
+            </th>
+              <th green colspan="1">
+                <div green>
+                    FD 27 Panel Width:
+                </div>
+                <div>
+                    33 15/16"
+                </div>
+                FD 27 PVCU RO Width
+              </th>
+            </tr>
+          </thead>
+
+            <tbody>
+                @for(row of tableData; let i = $index; track row){
+              <tr>
+                <td grey>{{ row.config }}</td>
+                <td [innerHTML]="row.symbol"></td>
+                <td red>{{ row.fd72_73 }}</td>
+                <td green>{{ row.fd27 }}</td>
+              </tr>
+            }
+            </tbody>
+          </table>
+  </div>
+  
