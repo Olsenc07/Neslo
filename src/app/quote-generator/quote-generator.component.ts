@@ -114,6 +114,7 @@ export class QuoteGeneratorComponent implements OnInit {
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.progress = true;
+      console.log('send to service', this.gridFormArray.value);
         this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
         this.downloadPDF(pdfBlob);
@@ -150,7 +151,12 @@ private downloadPDF(pdfBlob: Blob): void {
   window.URL.revokeObjectURL(url);
   a.remove();
 }
-
+// notes
+resizeTextarea(event: Event): void {
+  const textarea = event.target as HTMLTextAreaElement;
+  textarea.style.height = 'auto'; 
+  textarea.style.height = `${textarea.scrollHeight}px`;  
+}
 contactForm(): void {
   const dialogRef = this.dialog.open(ContactDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {

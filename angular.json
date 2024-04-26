@@ -28,7 +28,8 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/pdf-creation.css"
+              "src/pdf-creation.css",
+              "src/"
             ],
             "allowedCommonJsDependencies": [
               "accepts",

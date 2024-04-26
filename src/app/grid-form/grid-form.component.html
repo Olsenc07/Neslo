@@ -56,12 +56,12 @@
                   <td class="bg-transparent">
                     <div class="align-items-center">
                     @if(i > 0){
-              <button mat-button close (click)="removeRow(i)">
+              <button mat-fab extended color="warn" (click)="removeRow(i)">
                   {{ i + 1}}
                 <mat-icon class="material-symbols-outlined">remove</mat-icon>
               </button>
               } @else {
-                <button mat-button add class="align-items-center" (click)="addRow()">
+                <button mat-fab extended color="warn" (click)="addRow()">
                   <mat-icon class="material-symbols-outlined">add</mat-icon>
                     Row
               </button>
@@ -70,7 +70,7 @@
               </td>
       <!-- Room Label -->
       <td>
-        <mat-form-field blue appearance="fill">
+        <mat-form-field id="roomLabel" blue appearance="fill">
         <input matInput type="text" formControlName="roomLabel">
       </mat-form-field>
     </td>

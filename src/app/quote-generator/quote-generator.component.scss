@@ -51,8 +51,7 @@ h2[quote]{
 }  
 .notes {
     width: 100%; 
-    height: auto; 
-    height: 250px; 
+    overflow: hidden; 
+    min-height: 175px; 
     resize: none; 
-    overflow: hidden;
-}
+  }

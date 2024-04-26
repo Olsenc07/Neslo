@@ -6,14 +6,13 @@ import { Form } from '../interfaces/form';
 import { Grid } from '../interfaces/grid';
 
 @Injectable({ providedIn: 'root' })
-
 export class PdfService {
   apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
   
-  generatePdf(quoteForm: Form, grid: Grid): Observable<Blob> {
-    return this.http.post(`${this.apiUrl}/pdf/generator`, { quoteForm, grid }, 
+  generatePdf(quoteForm: Form, gridFormArray: Grid): Observable<Blob> {
+    return this.http.post(`${this.apiUrl}/pdf/generator`, { quoteForm, gridFormArray }, 
     { responseType: 'blob' }).pipe(
       catchError(error => {
         // Log the error or perform other error handling steps

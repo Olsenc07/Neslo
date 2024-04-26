@@ -1,34 +1,16 @@
 import { Router, Request, Response } from 'express';
-import puppeteer from 'puppeteer';
+import puppeteer, { Page } from 'puppeteer';
 import  { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Grid } from 'src/app/interfaces/grid';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const router = Router();
 
 router.post('/generator', async (req: Request, res: Response) => {
   try {
-    const { quoteForm, gridFormArray } = req.body;  
-    console.log('q', quoteForm);
-    console.log('b', gridFormArray);
-
     const { protocol, headers } = req;
-    
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    const viewport = { width: 1400, height: 1600 };
-    await page.setViewport(viewport);;
-    const endpoint = `${protocol}://${headers.host}/quotes`;
-    console.log('Endpoint:', endpoint);
-
-    // Navigate to the endpoint
-    await page.goto(endpoint, { waitUntil: 'networkidle0' });
-    await page.waitForFunction('window.getAllAngularTestabilities().findIndex(x => !x.isStable()) === -1');
-    const styles = join(__dirname, '../../browser/pdf-creation.css')
-    await page.addStyleTag({ path: styles });
-
+    const { quoteForm, gridFormArray } = req.body;  
     const selectors = {
       dealerName: '#dealerName',
       dealerBranch: '#dealerBranch',
@@ -47,9 +29,21 @@ router.post('/generator', async (req: Request, res: Response) => {
       glass: '#glass',
       handleColor: '#handleColor',
       additionalNotes: '#additionalNotes'
-  };
+    };
+  
+    // start creating pdf
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    const viewport = { width: 1400, height: 1600 };
+    await page.setViewport(viewport);;
+    const endpoint = `${protocol}://${headers.host}/quotes`;
+    // Navigate to the endpoint
+    await page.goto(endpoint, { waitUntil: 'networkidle0' });
+    await page.waitForFunction('window.getAllAngularTestabilities().findIndex(x => !x.isStable()) === -1');
+    const styles = join(__dirname, '../../browser/pdf-creation.css')
+    await page.addStyleTag({ path: styles });
 
-  // Wait for the fields to be available and fill them out
+// Use function within loop
 for (const [field, selector] of Object.entries(selectors)) {
   try {
     const fullSelector = field === 'additionalNotes' ? `${selector} textarea` : `${selector} input`;
@@ -88,36 +82,40 @@ for (const [field, selector] of Object.entries(selectors)) {
     if (error instanceof Error) {
       console.log(`Error with field ${field}: ${error.message}`);
     } else {
-      console.log(`Error with field ${field}: An unknown error occurred`);
+      console.log(`Field ${field} has no value provided, skipping.`);
     }
   }
 }
+// Assuming 'page' is your Puppeteer page instance and 'gridFormArray' is already defined
+  async function fillGridForm(page: Page, gridFormArray: string | any[]) {
+    // Wait for the grid form to be ready
+    await page.waitForSelector('table thead'); // Selector for your table header to make sure the table is rendered
+  
+    for (let i = 0; i < gridFormArray.length; i++) {
+      const row = gridFormArray[i];
+      
+      // Add a new row if needed
+      if (i > 0) { // Assuming the first row is already present
+        await page.click('button[color="warn"]'); // Adjust selector as needed
+      }
+      // Fill in the form fields for the current row
+      await page.type(`input[formcontrolname="roomLabel"][name="rows.${i}.roomLabel"]`, row.roomLabel);
+      await page.type(`input[formcontrolname="width"][name="rows.${i}.width"]`, row.width.toString());
+      await page.type(`input[formcontrolname="height"][name="rows.${i}.height"]`, row.height.toString());
+      await page.type(`input[formcontrolname="configuration0"][name="rows.${i}.configuration0"]`, row.configuration0);
+      await page.type(`input[formcontrolname="configuration1"][name="rows.${i}.configuration1"]`, row.configuration1);
+      await page.type(`input[formcontrolname="left"][name="rows.${i}.left"]`, row.left);
+      await page.type(`input[formcontrolname="right"][name="rows.${i}.right"]`, row.right);
 
-  // Generate the rows for the grid based on gridFormArray data
-  let gridRowsHtml = '';
-  gridFormArray.forEach((row: Grid, index: number) => {
-    gridRowsHtml += `
-      <tr>
-        <td class="bg-transparent">${index + 1}</td>
-        <td>${row.roomLabel}</td>
-        <td>${row.width}</td>
-        <td>${row.height}</td>
-        <td>${row.configuration0}</td>
-        <td>+</td>
-        <td>${row.configuration1}</td>
-        <td>${row.left}</td>
-        <td>${row.right}</td>
-        <td>${row.activePanel}</td>
-      </tr>
-    `;
-  });
-  // Insert the generated grid rows into the table's tbody before generating the PDF
-  await page.evaluate((gridRowsHtml) => {
-    const tbody = document.querySelector('table tbody');
-    if (tbody) {
-      tbody.innerHTML = gridRowsHtml;
+      // For mat-select, you might need to click to open the dropdown and then click the option
+      await page.click(`mat-form-field[purple] mat-select[formcontrolname="activePanel"][name="rows.${i}.activePanel"]`);
+      await page.click(`mat-option[value="${row.activePanel}"]`);
     }
-  }, gridRowsHtml);
+  }
+  
+  // Then call your function
+   await fillGridForm(page, gridFormArray);
+
     const idsToIgnore = ['ignore0', 'ignore1'];
     await page.evaluate((ids) => {
       ids.forEach(id => {
@@ -128,6 +126,7 @@ for (const [field, selector] of Object.entries(selectors)) {
       });
     }, idsToIgnore);
 
+    // send the same view as puppetter
     const pdfBuffer = await page.pdf({
       width: viewport.width + 'px',
       height: viewport.height + 'px',

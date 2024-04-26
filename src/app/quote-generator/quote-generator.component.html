@@ -135,11 +135,10 @@
             (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
            <!-- Additional Notes -->
-           <div class="notes-container">
-        <mat-form-field class="notes-form"  id="additionalNotes" appearance="fill">
+      <div class="notes-container">
+        <mat-form-field class="notes-form" id="additionalNotes" appearance="fill">
           <mat-label>Additional notes...</mat-label>
-        <textarea matInput formControlName="additionalNotes" class="notes">
-        </textarea>
+          <textarea matInput formControlName="additionalNotes" class="notes" (input)="resizeTextarea($event)"></textarea>
         </mat-form-field>
       </div>
           </div>
@@ -147,7 +146,6 @@
       </section>
     </div>
     </div>
-    <!-- /may need to removr on viewport for pdf generation -->
     @defer(on viewport){
     <app-grid-form (sendGrid)="grid($event)" [gridForm]="gridFormArray"></app-grid-form>
     } @placeholder {

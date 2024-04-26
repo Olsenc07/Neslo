@@ -27,67 +27,57 @@ export class GridFormComponent implements OnDestroy {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.doorConfigForm = this.fb.group({
-      rows: this.fb.array([])
-    });
-    this.doorConfigForm.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        takeUntil(this.unsubscribe$) // This will unsubscribe when unsubscribe$ emits
-      )
-      .subscribe((value) => {
-        this.sendGrid.emit(value.rows);
-      }); 
-        this.addRow();
-
+    this.addRow();
   }
-  // PDf Creation 
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['gridForm'] && this.gridForm) {
+    if (changes['gridForm'] && changes['gridForm'].currentValue) {
       this.initializeForm();
     }
   }
-
   initializeForm(): void {
+  // Clear the existing form array to avoid duplication when re-initializing
+  if (this.doorConfigForm) {
+    const rowsArray = this.doorConfigForm.get('rows') as FormArray;
+    while (rowsArray.length !== 0) {
+      rowsArray.removeAt(0);
+    }
+  } else {
+    // If doorConfigForm is not yet initialized, do so here
     this.doorConfigForm = this.fb.group({
       rows: this.fb.array([])
     });
-
-    // Populate the form with existing data
-    this.gridForm.controls.forEach(gridItem => {
-      this.addRow(gridItem.value);
-    });
-
-    this.doorConfigForm.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged(),
-      takeUntil(this.unsubscribe$)
-    ).subscribe(value => {
-      this.sendGrid.emit(value.rows);
-    });
   }
-  // Normal
+  // Set up the value changes subscription
+  this.doorConfigForm.valueChanges.pipe(
+    debounceTime(500),
+    distinctUntilChanged(),
+    takeUntil(this.unsubscribe$)
+  ).subscribe(value => {
+    this.sendGrid.emit(value.rows);
+  });
+}
+
   get rows(): FormArray {
     return this.doorConfigForm.get('rows') as FormArray;
   }
-
-  addRow(gridData?: any): void {
+  
+  addRow(gridData?: Grid): void {
     const rowForm = this.fb.group({
-      roomLabel: gridData ? gridData.roomLabel : '',
-      width: gridData ? gridData.width : '',
-      height: gridData ? gridData.height : '',
-      configuration0: gridData ? gridData.configuration0 : '',
-      configuration1: gridData ? gridData.configuration1 : '',
-      left: gridData ? gridData.left : '',
-      right: gridData ? gridData.right : '',
-      activePanel: gridData ? gridData.activePanel : ''
+      roomLabel: [gridData?.roomLabel || ''],
+      width: [gridData?.width || ''],
+      height: [gridData?.height || ''],
+      configuration0: [gridData?.configuration0 || ''],
+      configuration1: [gridData?.configuration1 || ''],
+      left: [gridData?.left || ''],
+      right: [gridData?.right || ''],
+      activePanel: [gridData?.activePanel || ''],
     });
     this.rows.push(rowForm);
   }
   
   removeRow(index: number): void {
-    if (this.rows.length > 1) { // Prevent removing all rows
+    if (this.rows.length > 1) { 
       this.rows.removeAt(index);
     }
   }

@@ -2,7 +2,7 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
       "baseUrl": "./",
-      "outDir": "./dist/backend/routes",
+      "outDir": "./dist",
       "incremental": true,
       "esModuleInterop": true,
       "moduleResolution": "node",
