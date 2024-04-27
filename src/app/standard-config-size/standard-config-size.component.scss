@@ -1,21 +1,66 @@
+@mixin common{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
 .full-page{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin: 1% 3% 0% 3%;
+    border: 1px solid;
 }
-p[warning]{
+.heading-texts{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    div{
+    display: flex;
+    border: 1px solid;
+    }
+}
+.table{
+    margin-bottom: 0%;
+}
+.box-container{
+    @include common();
+    text-align: center;
+    border: 1px solid;
+}
+div[white]{
+    @include common();
+    background-color: white;
+}
+div[grey]{
+    @include common();
+    background-color: var(--wood-light-grey);
+}
+div[red]{
+    @include common();
+    background-color: var(--red); 
+}
+div[green]{
+    @include common();
+    background-color: var(--greenField);
+}
+div[warning]{
+    @include common();
     color: #ff0000;
 }
 th[grey], td[grey]{
     background-color: var(--wood-light-grey);
 }
-th[red], td[red], p[red]{
+td[red]{
     background-color: var(--red); 
 }
-th[green], div[green], td[green], p[green]{
+ td[green]{
     background-color: var(--greenField);
 }
 td {
     text-align: center; 
     padding: 3px; 
+  }
+  h3{
+    display: contents;
+    justify-content: center;
   }
