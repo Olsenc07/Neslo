@@ -27,6 +27,9 @@ button[email]{
     justify-content: center;
     border-radius: 25px;
 }
+.size-space{
+    padding-bottom: 3%;
+}
 .input-wrapper{
     display: flex;
     align-items: center;
@@ -43,12 +46,9 @@ header{
 h2[quote]{
     color: #003e1d;
 }
-.notes-container {
+.notes-container, .notes-form  {
     width: 100%; 
 } 
-.notes-form {
-    width: 100%; 
-}  
 .notes {
     width: 100%; 
     overflow: hidden; 

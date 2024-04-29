@@ -27,17 +27,18 @@ import { OrientationService } from '../services/orientation.service';
 import { PdfService } from '../services/pdf.service';
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { environment } from 'environments/environment';
+import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
 
 @Component({
-  standalone: true,
-  selector: 'app-quote-generator',
-  templateUrl: './quote-generator.component.html',
-  styleUrl: './quote-generator.component.scss',
-  imports: [AutoSearchComponent, ContactDialogComponent, MatProgressSpinnerModule,
-    MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
-    MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
-     MatSelectModule, TextReuseComponent, SkeletonFormFillComponent],
-     providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }]
+    standalone: true,
+    selector: 'app-quote-generator',
+    templateUrl: './quote-generator.component.html',
+    styleUrl: './quote-generator.component.scss',
+    providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
+    imports: [AutoSearchComponent, ContactDialogComponent, MatProgressSpinnerModule,
+        MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
+        MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
+        MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
 export class QuoteGeneratorComponent implements OnInit {
   apiUrl = environment.apiUrl;

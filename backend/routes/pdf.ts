@@ -32,7 +32,10 @@ router.post('/generator', async (req: Request, res: Response) => {
     // start creating pdf
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    const viewport = { width: 1400, height: 1600 };
+    const viewport: {
+      width: number;
+      height: number;
+  } = { width: 1200, height: 1400 };
     await page.setViewport(viewport);;
     const endpoint = `${protocol}://${headers.host}/quotes`;
     // Navigate to the endpoint
@@ -100,7 +103,6 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
     const activePanelSelector: string = `#activePanel-${i}`;
     const activePanelValue: string = row.activePanel; // 'Right' or 'Left'
     const activePanelOptionSelector: string = `mat-option[value="${activePanelValue}"]`;
-
     // Ensure elements are available before typing
     await page.waitForSelector(roomLabelSelector);
     await page.type(roomLabelSelector, row.roomLabel);
@@ -124,17 +126,22 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
       activePanelValue
     );
   } else {
-    console.error(`Invalid active panel value: ${row.activePanel}`);
+    console.error(`Active Panel not selected`);
   }
     // Optionally, handle adding rows if your form requires dynamically adding them
     if (i < gridFormArray.length - 1) {
       await page.click('#addRow'); 
   }}
-  // final escape?
-  await page.keyboard.press('Escape');
-
+  // Ensure no element is focused by the end
+  await page.evaluate(() => {
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
+  });
+  await page.keyboard.press('Tab');  
+  await page.keyboard.press('Escape')
 }
-
   // Then call your function
    await fillGridForm(page, gridFormArray);
     const idsToIgnore: string[] = ['ignore0', 'ignore1'];
@@ -146,7 +153,6 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
         }
       });
     }, idsToIgnore);
-
     // send the same view as puppetter
     const pdfBuffer: Buffer = await page.pdf({
       width: viewport.width + 'px',
@@ -167,5 +173,4 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
 });
 
 export default router;
-    // const quoteLastPg = join(__dirname, '../../browser/assets/fsd-sizes.pdf');
   

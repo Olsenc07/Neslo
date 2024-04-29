@@ -38,19 +38,25 @@
           <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
         </button>
       }
-<!-- make this fit properly -->
-<!-- @if(imageSrc && contactForm.get('file')?.value){ -->
-<div  class="thumbnail-container limit" [ngClass]="{'full-screen': isFullScreen}" (click)="toggleFullScreen()">
-<img [src]="imageSrc" 
-class="img-thumbnail img-fluid mx-auto d-block" 
-alt="Selected file thumbnail" />
-</div>
-<!-- } -->
 </textarea>
 </mat-form-field>
+<!-- make this fit properly -->
+@if(imageSrc && contactForm.get('file')?.value){
+  <div  class="thumbnail-container limit" [ngClass]="{'full-screen': isFullScreen}" 
+  (click)="toggleFullScreen()">
+    @if(this.fileType === 'application/pdf'){
+  <iframe [src]="imageSrc" 
+  class="img-thumbnail img-fluid mx-auto d-block" 
+  alt="File thumbnail" ></iframe>
+    } @else {
+      <img [src]="imageSrc"  class="img-thumbnail img-fluid mx-auto d-block" 
+      alt="File thumbnail">
+    }
+  </div>
+  }
 </div>
       <input type="file" formControlName="file"  (change)="onFileSelected($event)"
-      hidden #fileInput accept=".pdf, .doc, .docx, .jpg" multiple>
+      hidden #fileInput accept=".pdf, .doc, .docx, .jpg, .jpeg, .png" multiple>
       <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
         @if(!dialog){
         <div  class="pad col-12 col-md-6 file-wrapper">
@@ -58,25 +64,21 @@ alt="Selected file thumbnail" />
         <mat-icon class="material-symbols-outlined">
         @if(contactForm.get('file')?.value){
         file_download_done
-
         } @else {
         attach_file
-
         }
       </mat-icon>
    @if(contactForm.get('file')?.value){
     File attached successfully 
-
     } @else {
       Attach your request quote
-
     }
       </button>
       @if(contactForm.get('file')?.value){
         <div class="file">
-        {{ contactForm.get('file')?.value }}
+        {{ this.fileName }}
         </div>
-    <button matSuffix mat-icon-button (click)="contactForm.get('file')?.reset()">
+    <button matSuffix mat-icon-button (click)="removeAttachedFile()">
       <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
     </button>
       }

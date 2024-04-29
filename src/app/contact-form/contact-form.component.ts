@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { NgClass } from '@angular/common';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact-form',
@@ -27,11 +28,12 @@ import { NgClass } from '@angular/common';
 })
 export class ContactFormComponent {
   state: 'noFocus' | 'focus' = 'noFocus';
-  imageSrc: string | ArrayBuffer | null = null;
+  imageSrc: SafeUrl = '';
   isFullScreen: boolean = false;
   fillAttached: boolean = false;
   @Input() dialog: boolean = false;
   @Output() sentMsg: EventEmitter<string> = new EventEmitter<string>();
+  constructor(private sanitizer: DomSanitizer){}
   contactForm: FormGroup = new FormGroup({
     name: new FormControl<string | null>(null, Validators.required),
     email: new FormControl<string | null>(null, [
@@ -41,24 +43,29 @@ export class ContactFormComponent {
     message: new FormControl<string | null>(null, Validators.required),
     file: new FormControl<File | null>(null)
   });
+  fileName: string | null = null;
+  fileType: string | null = null;
   toggleFullScreen(): void {
     this.isFullScreen = !this.isFullScreen;
   }
-    onFileSelected(event: Event) {
-      const element = event.currentTarget as HTMLInputElement;
-      let fileList: FileList | null = element.files;
-      if (fileList) {
-        const file = fileList[0];
-        const reader = new FileReader();
-        reader.onload = e => this.imageSrc = reader.result;
-        reader.readAsDataURL(file);
-        this.fillAttached = true;
-      }
-      else{
-        this.fillAttached = false;
-      }
+  onFileSelected(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList) {
+      const file = fileList[0];
+      this.fileName = file.name; 
+      this.fileType = file.type;
+      const objectURL = URL.createObjectURL(file);
+      this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
+    } 
+  }
+    // To remove the attached file
+    removeAttachedFile() {
+      this.contactForm.patchValue({ file: null });
+      this.fileName = '';
+      this.imageSrc = '';
     }
-  
+
     onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
     }

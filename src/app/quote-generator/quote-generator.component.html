@@ -148,7 +148,7 @@
     } @placeholder {
       <app-skeleton-form-fill></app-skeleton-form-fill>
     }
-    <div id="ignore1" class="g-3 g-md-3 pb-3 container justify-content-md-between d-block d-md-flex">
+    <div id="ignore1" class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->
       <div class="pdf col-12 col-md-6 justify-content-start">
         <!-- [disabled]="quoteForm.invalid" -->
@@ -180,6 +180,10 @@
         </button>
       </div>
       </div>
+      @defer {
+        <div class="size-space">
+      <app-standard-config-size></app-standard-config-size>
+        </div>
+      }
     </form>
-
   </div>
