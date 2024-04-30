@@ -18,7 +18,6 @@ import { TitleStrategy } from '@angular/router'
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
 import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
-import { ContactDialogComponent } from '../contact-form/contact-dialog/contact-dialog.component';
 import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 
@@ -35,7 +34,7 @@ import { StandardConfigSizeComponent } from "../standard-config-size/standard-co
     templateUrl: './quote-generator.component.html',
     styleUrl: './quote-generator.component.scss',
     providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
-    imports: [AutoSearchComponent, ContactDialogComponent, MatProgressSpinnerModule,
+    imports: [AutoSearchComponent, MatProgressSpinnerModule,
         MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
         MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
@@ -53,8 +52,7 @@ export class QuoteGeneratorComponent implements OnInit {
     contactName: new FormControl<string>(''),
     contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com', [
       Validators.required]),
-    contactPhone: new FormControl<string>('(403) 994 - 1202', [
-      Validators.required]),
+    contactPhone: new FormControl<string>('(403) 994 - 1202'),
     jobName: new FormControl<string>(''),
     jobSiteAddress: new FormControl<string>('', [
       Validators.required]),
@@ -161,20 +159,11 @@ resizeTextarea(event: Event): void {
   textarea.style.height = `${textarea.scrollHeight}px`;  
 }
 contactForm(): void {
-  const dialogRef = this.dialog.open(ContactDialogComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'send') {
-    const snackBarRef = this.snackBar.open(
-      "Your message has been sent to sales@foldingslidingdoors.ca",
-      "We will get back to you shortly.",
-      {
-        duration: 3000
-      }
-    );
-      }
-      // handle send failure
-  });
-}
+  this.router.navigate(['/home']);
+  if (isPlatformBrowser(this.platformId)) {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+  }
   onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
     }

@@ -40,9 +40,8 @@ button[type="submit"]{
     align-items: center;
     // get larger on focus!!
     .img-thumbnail, iframe {
-      max-width: 85% !important; 
-      max-height: 85vh !important;
       transition: transform 0.3s ease; 
+      transform: scale(2.2);
     }
   }
   .thumbnail-container {
@@ -50,7 +49,7 @@ button[type="submit"]{
     transition: transform 0.3s ease;
   }
 .img-thumbnail, iframe {
-  max-width: 200px; 
-  max-height: 200px;
+  max-width: 20%;
+  max-height: 95%;
   transition: transform 0.3s ease; 
 }

@@ -13,11 +13,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('../quote-generator/quote-generator.component').then(
         (mod) => mod.QuoteGeneratorComponent)
-  },
-  {
-    path: 'test',
-    loadComponent: () =>
-      import('../standard-config-size/standard-config-size.component').then(
-        (mod) => mod.StandardConfigSizeComponent)
   }
+  // ,
+  // {
+  //   path: 'test',
+  //   loadComponent: () =>
+  //     import('../standard-config-size/standard-config-size.component').then(
+  //       (mod) => mod.StandardConfigSizeComponent)
+  // }
 ]
