@@ -25,7 +25,7 @@ button, input, select, textarea {
     color: saddlebrown;
   }
 
-  & h3, li, ul {
+  & h3{
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1em; 
   }
@@ -43,7 +43,7 @@ button, input, select, textarea {
       color: saddlebrown;
     }
 
-    & h3, li, ul {
+    & h3{
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.1em; 
     }
@@ -62,7 +62,7 @@ button, input, select, textarea {
       color: saddlebrown;
     }
 
-    & h3, li, ul {
+    & h3{
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.4vw; 
     }
@@ -112,3 +112,7 @@ p {
     font-size: 1.1em; 
   }
 }
+
+
+
+// add li and ul styles
