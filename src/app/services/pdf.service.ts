@@ -15,9 +15,8 @@ export class PdfService {
     return this.http.post(`${this.apiUrl}/pdf/generator`, { quoteForm, gridFormArray }, 
     { responseType: 'blob' }).pipe(
       catchError(error => {
-        // Log the error or perform other error handling steps
         console.error('Failed to generate PDF:', error);
-        return throwError(() => new Error('A friendly error message.'));
+        return throwError(() => new Error('Failed to generate PDF. Please try again.'));
       })
     );
   }}

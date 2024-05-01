@@ -1,6 +1,9 @@
-  form{
+  @mixin common{
     display: flex;
     flex-direction: column;
+  }
+  form{
+    @include common;
   }
 .intro{
     display: flex;
@@ -18,12 +21,10 @@
 .section-padding {
     padding: 60px 0;
 }
-
 h2[hidden]{
   display: none;
 }
 app-about-us {
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* The parent container must have a height for stretch to work */
+  @include common;
+  height: 100%; 
 }

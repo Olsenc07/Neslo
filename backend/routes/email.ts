@@ -3,12 +3,12 @@ import multer from 'multer';
 import sgMail from '@sendgrid/mail';
 const router = Router();
 
-const sendGridApiKey = process.env['SENDGRID_API_KEY'];
-if (!sendGridApiKey) {
-  throw new Error('SENDGRID_API_KEY is not defined');
-}
+// const sendGridApiKey = process.env['SENDGRID_API_KEY'];
+// if (!sendGridApiKey) {
+//   throw new Error('SENDGRID_API_KEY is not defined');
+// }
 
-sgMail.setApiKey(sendGridApiKey);
+// sgMail.setApiKey(sendGridApiKey);
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -42,7 +42,7 @@ router.post('/emit', upload.single('file'), async (req: Request, res: Response) 
     subject: `Neslo Quote Request - ${fromName}`,
     text: text,
     html: htmlText,
-    attachments: [] // Initialize as an empty array
+    attachments: [] 
   };
 
   if (req.file) {

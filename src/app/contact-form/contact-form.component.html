@@ -3,12 +3,7 @@
   <div class="row">
     <mat-form-field appearance="fill" >
     <mat-label class="form-label">Name</mat-label>
-    <input type="text" formControlName="name" matInput  placeholder="Your Name">
-    @if(contactForm.get('name')?.value){
-        <button matSuffix mat-icon-button (click)="contactForm.get('name')?.reset()">
-          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
-        </button>
-      }
+    <input type="text" required formControlName="name" matInput  placeholder="Your Name">
       @if(contactForm.get('name')?.errors?.['required']){
         <mat-error>Please supply your name</mat-error>
           }
@@ -17,27 +12,22 @@
 <div class="row">
     <mat-form-field  appearance="fill" >
     <mat-label class="form-label">Return Email</mat-label>
-    <input type="email" formControlName="email" matInput placeholder="name@mail.com">
-    @if(contactForm.get('email')?.value){
-        <button matSuffix mat-icon-button (click)="contactForm.get('email')?.reset()">
-          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
-        </button>
-      }
+    <input type="email" required formControlName="email" matInput placeholder="name@mail.com">
       @if(contactForm.get('email')?.errors?.['required']){
         <mat-error>Email is required</mat-error>
           }
+        @else if(contactForm.get('email')?.errors?.['email']){
+          <mat-error>
+            Please enter a valid email address.
+          </mat-error>
+        }
 </mat-form-field>
 </div>
 <div class="row">
     <mat-form-field appearance="fill">
     <mat-label for="message" class="form-label">Message</mat-label>
-    <textarea formControlName="message" matInput rows="2"
+    <textarea formControlName="message" matInput rows="2" required
     placeholder="I would like to acquire about...">
-      @if(contactForm.get('message')?.value){
-        <button matSuffix mat-icon-button (click)="contactForm.get('message')?.reset()">
-          <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
-        </button>
-      }
 </textarea>
 </mat-form-field>
 @if(imageSrc && contactForm.get('file')?.value){
@@ -54,10 +44,9 @@
   </div>
   }
 </div>
-      <input type="file" formControlName="file"  (change)="onFileSelected($event)"
+      <input type="file" formControlName="file" (change)="onFileSelected($event)"
       hidden #fileInput accept=".pdf, .doc, .docx, .jpg, .jpeg, .png" multiple>
       <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
-        @if(!dialog){
         <div  class="pad col-12 col-md-6 file-wrapper">
       <button mat-fab extended (click)="fileInput.click()" [ngClass]="contactForm.get('file')?.value ? 'file-added' : 'file-empty'">
         <mat-icon class="material-symbols-outlined">
@@ -82,12 +71,12 @@
     </button>
       }
     </div>
-  }
     <div class="col-12 col-md-6 justify-content-end d-flex">
 <button mat-fab extended type="submit" id="submitBtn" 
     (mouseover)="onHover(true)" (mouseleave)="onHover(false)" 
       [disabled]="contactForm.valid">
-      Send Email 
+      <!-- Send Email  -->
+      Coming Soon
       <mat-icon class="material-symbols-outlined">
     @switch (state) { 
         @case ('noFocus') { keyboard_arrow_right }
@@ -98,6 +87,5 @@
     </button>
     </div>
   </div>
-
 </section>
 </form>

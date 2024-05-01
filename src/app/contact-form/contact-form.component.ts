@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { NgClass } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact-form',
@@ -31,9 +32,10 @@ export class ContactFormComponent {
   imageSrc: SafeUrl = '';
   isFullScreen: boolean = false;
   fillAttached: boolean = false;
-  @Input() dialog: boolean = false;
-  @Output() sentMsg: EventEmitter<string> = new EventEmitter<string>();
-  constructor(private sanitizer: DomSanitizer){}
+
+  constructor(private sanitizer: DomSanitizer,
+    private snackBar: MatSnackBar
+  ){}
   contactForm: FormGroup = new FormGroup({
     name: new FormControl<string | null>(null, Validators.required),
     email: new FormControl<string | null>(null, [
@@ -70,24 +72,19 @@ export class ContactFormComponent {
       this.state = isHovered ? 'focus' : 'noFocus';
     }
     send(): void {
-      if(this.dialog){
-        this.sentMsg.emit('sent');
-      }
-      if(this.fillAttached)
-      {
+      this.snackBar.open('Direct messaging is not yet supported. Please try again soon.', 'Close', {
+        duration: 3000
+      });
+      // if(this.fillAttached)
+      // {
+      //   this.snackBar.open('Thank you for contacting Neslo. We will get back to you with a quote as soon as possible.', '✅', {
+      //     duration: 3000
+      //   });
+      // }else{
+      //   this.snackBar.open('Thank you for contacting Neslo. We will respond as soon as possible.', '✅', {
+      //     duration: 3000
+      //   });
+      // }
 
-      }else{
-        // create one based on the filled in info
-        // attach that to the email before sending!
-        // this.QuoteGeneratorComponent.generatePDF()
-      }
-      console.log('Message emailed');
-
-
-      // Gives message, this message will be mailed to redman.. 
-      // do you wish to continue?
-  
-      // display message
-      // thx for the messae, get back to u soon
   }
 }

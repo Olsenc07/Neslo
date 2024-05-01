@@ -1,10 +1,14 @@
+@mixin common{
+  color: white;
+  margin-bottom: 5%;
+}
 .file-empty{
     background-color: #4A2C2A;
-    color: white;
+    @include common;
   }
   .file-added{
     background-color: #5E4C5A;
-    color: white;
+    @include common;
   }
 button[type="submit"]{
     color: white;

@@ -75,12 +75,11 @@ export class QuoteGeneratorComponent implements OnInit {
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
 
   constructor(private router: Router,
-     private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private title:Title, 
     protected orientationService: OrientationService, 
    @Inject(PLATFORM_ID) private platformId: Object,
-    private pdfService: PdfService,
-    private dialog: MatDialog){}
+    private pdfService: PdfService){}
 
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');

@@ -16,17 +16,18 @@ button, input, select, textarea {
   // Base mobile styles
   & .mat-h1, & .mat-headline-5 {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1em; 
+    font-size: 1.6em; 
   }
 
   & .mat-h2, & h2 {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.8em; 
+    font-size: 1.3em; 
+    color: saddlebrown;
   }
 
-  & h3 {
+  & h3, li, ul {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 0.6em; 
+    font-size: 1em; 
   }
 
   // Tablet and up
@@ -42,7 +43,7 @@ button, input, select, textarea {
       color: saddlebrown;
     }
 
-    & h3 {
+    & h3, li, ul {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.1em; 
     }
@@ -61,7 +62,7 @@ button, input, select, textarea {
       color: saddlebrown;
     }
 
-    & h3 {
+    & h3, li, ul {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.4vw; 
     }
@@ -79,8 +80,11 @@ button, input, select, textarea {
   --greenField: #6a9955;
   --red: #da9694;
 }
+a{
+  color: var(--wood);
+}
 b {
-  color: var(--wood-dark);
+  color: var(--wood-light);
   }
 html, body {
     height: 100%;
