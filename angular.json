@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/Neslo",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -27,9 +27,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "src/pdf-creation.css"
             ],
-            
             "allowedCommonJsDependencies": [
               "accepts",
               "bytes",
@@ -54,18 +54,37 @@
               "dfa",
               "clone",
               "tiny-inflate",
-              "brotli/decompress.js",
+              "brotli/decompress",
               "base64-js",
-              "iconv-lite"
+              "iconv-lite",
+              "source-map-support",
+              "supports-color",
+              "chromium-bidi/lib/cjs/bidiMapper/BidiMapper.js",
+              "chromium-bidi/lib/cjs/protocol/protocol.js",
+              "ms",
+              "cosmiconfig",
+              "progress",
+              "extract-zip",
+              "tar-fs",
+              "unbzip2-stream",
+              "proxy-agent",
+              "semver",
+              "y18n",
+              "yargs-parser",
+              "cliui",
+              "escalade/sync",
+              "get-caller-file",
+              "require-directory",
+              "string-width"
             ],
-            
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-            ],
+              "src/styles.scss"            ],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true,
+            "prerender": {
+              "routesFile": "routes.txt"
+            },
             "ssr": {
               "entry": "server.ts"
             }
@@ -137,7 +156,6 @@
           "main": "src/test.ts", 
           "polyfills": "src/polyfills.ts",
           "tsConfig": "tsconfig.spec.json", 
-          "karmaConfig": "./karma.conf.js", 
           "assets": [
             "src/favicon.ico",
             "src/assets"

@@ -16,7 +16,7 @@
                 [message]="messageAB"></app-about-us>
                 </div>
             <!-- Primary Supplier -->
-            <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center" >
                 <app-about-us [img]="imgBC" [title]="'Primary Supplier'" 
                 [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
                 [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
@@ -39,9 +39,9 @@
     </ul>
     </li>
         </ul>
-        <div class="col-12 mt-4">
+        <div class="col-12 mt-2">
 @defer(on viewport){
-       <app-contact-form ></app-contact-form>
+       <app-contact-form></app-contact-form>
     }@placeholder { 
         <app-skeleton-form-fill ></app-skeleton-form-fill>
          }
@@ -51,7 +51,7 @@
 <footer class="text-center section-padding bg-dark text-light">
 <div class="container">
 <p>© 2024 Neslo Windows and Doors. All rights reserved.</p>
-<p>Follow us on social media for the latest updates and offers.</p>
+<p>Follow us on social media for the latest updates.</p>
 <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="text-light">
     Instagram: &#64;FoldingSlidingDoors_Erik
 </a>

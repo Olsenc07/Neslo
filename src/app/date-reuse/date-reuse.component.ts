@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
@@ -21,6 +21,18 @@ import { MatInputModule } from '@angular/material/input';
 export class DateReuseComponent {
   @Input() intro!: string;
   @Input() intValue?: string;
+  @Input() value?: string;
   input: FormControl<string | null> = new FormControl<string | null>('');
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private cdr: ChangeDetectorRef){
+    this.input.valueChanges.subscribe((value: string | null) => {
+      this.valueChange.emit(value || ''); 
+    });
+  }
+
+  ngOnChanges(): void {
+    this.input.setValue(this.value || '', { emitEvent: false });
+    this.cdr.detectChanges();
+  }
 }

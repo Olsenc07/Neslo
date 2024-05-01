@@ -1,12 +1,3 @@
-button[close]{
-    margin-top: 7%;
-    background-color: black;
-}
-button[add]{
-    margin-top: 7%;
-    background-color: var(--green);
-}
-
 div[titles]{
     display: flex;
     text-align: center;
@@ -19,14 +10,14 @@ div[row]{
     align-items: center;
 } 
 mat-card{
-    margin: 0% 2% 2% 2%;
+    margin: 0% 1% 2% 1%;
 }
 .plus {
     text-align: center; 
     vertical-align: middle; 
     font-size: 1.5rem; 
     background-color: transparent;
-  }
+}
 .table {
     width: 100%;
     max-width: 100%;
@@ -49,23 +40,21 @@ th{
     border: 1px;
     color: var(--green);
 }
-input, .mat-form-field {
+mat-form-field {
     width: 100%; 
     box-sizing: border-box; 
   }
 mat-form-field[blue]{
-    background-color: rgb(21, 35, 40);
+    background-color: var(--blueField);
 }
 mat-form-field[green]{
-    background-color: lightgreen;
+    background-color: var(--greenField);
 }
 mat-form-field[red]{
-    background-color: hwb(0 46% 14%);
+    background-color: var(--red);
 }
 mat-form-field[purple]{
-    background-color: rgb(224, 154, 224);
-    color: white;
+    background-color: #917c92;
     text-align: center;
     width: 100%;
 }
-

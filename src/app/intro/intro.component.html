@@ -1,22 +1,25 @@
-<div  class="intro-head">
+<div  class="intro-head" [@fadeIn]>
   <div>
     <div class="theeTitle">Welcome to Neslo</div>
     <h2 heading>Your trusted partner in premium windows and doors</h2>
   </div>
-    <div  [ngClass]="{'flex-column': orientation, 'flex-sm-row': orientation}" class="universal gap-2 ">
-        <button mat-fab extended [ngClass]="{'mobile': orientation}" class="btn btn-primary btn-lg" (click)="navigateToContact()">
+    <div [ngClass]="{'flex-column': orientation, 'flex-sm-row': orientation}" class="universal gap-2 ">
+        <button mat-fab extended  
+         [ngClass]="{'mobile': orientation}" class="btn btn-primary btn-lg" (click)="navigateToContact()">
             Contact a member
             <mat-icon class="material-symbols-outlined">
                 contact_mail
             </mat-icon>
         </button>
-        <button mat-fab extended [ngClass]="{'quoteDesk': !orientation, 'mobile': orientation}"  class=" btn btn-primary btn-lg px-4" (click)="requestQuote()">
+        <button mat-fab extended  
+        [ngClass]="{'quoteDesk': !orientation, 'mobile': orientation}"  class=" btn btn-primary btn-lg px-4" (click)="requestQuote()">
             Request a quote
               <mat-icon class="material-symbols-outlined">
                 attach_money
               </mat-icon>
         </button>
-        <button mat-fab extended [ngClass]="{'mobile': orientation}" class="btn btn-primary btn-lg" (click)="navigateToMsg()">
+        <button mat-fab extended
+        [ngClass]="{'mobile': orientation}" class="btn btn-primary btn-lg" (click)="navigateToMsg()">
             Send a message
               <mat-icon class="material-symbols-outlined">
                 send

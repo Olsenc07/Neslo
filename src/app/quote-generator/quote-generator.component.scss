@@ -11,9 +11,24 @@ button[back]{
     display: flex;
     justify-content: flex-end;
     button{
-    background-color: var(--wood);
     color: white;
     }
+}
+button[email]{
+    background-color: var(--wood);
+}
+.spin-text{
+    color: #0b5ed7;
+}
+.spinner{
+    border: 2px solid #0b5ed7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+}
+.size-space{
+    padding-bottom: 3%;
 }
 .input-wrapper{
     display: flex;
@@ -21,13 +36,22 @@ button[back]{
     flex-direction: column;
 }
 .img{
-    max-width: 15%;
+    max-width: 20%;
     border-radius: 50%;
     box-shadow: 2px 2px 2px rgb(0 0 0 / 26%);
 }
-form[container]{
-    background-color: #e0e3e88a;
+header{
+    background-color: #f5f5f5;
 }
 h2[quote]{
     color: #003e1d;
 }
+.notes-container, .notes-form  {
+    width: 100%; 
+} 
+.notes {
+    width: 100%; 
+    overflow: hidden; 
+    min-height: 175px; 
+    resize: none; 
+  }

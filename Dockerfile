@@ -20,4 +20,4 @@ COPY --from=build-step /app/package*.json ./
 EXPOSE 4200
 
 # Run the server
-CMD ["node", "dist/Neslo/server/server.mjs"]
+CMD ["node", "dist/server/server.mjs"]

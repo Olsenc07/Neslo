@@ -2,7 +2,7 @@ import {
   MatAutocomplete,
   MatAutocompleteModule
 } from '@angular/material/autocomplete';
-import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { BoldPipe } from 'src/app/pipes/bold.pipe';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,6 +32,7 @@ import { Observable, of } from 'rxjs';
 export class AutoSearchComponent implements OnChanges {
   @Input() filler!: string;
   @Input() intro!: string;
+  @Input() value?: string;
   @Input() initialList: string[] = [''];
   input: FormControl<string | null> = new FormControl<string | null>('');
   @ViewChild('auto') matAutocomplete!: MatAutocomplete;
@@ -39,11 +40,26 @@ export class AutoSearchComponent implements OnChanges {
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
   filteredList$: Observable<string[]> = new Observable<string[]>();
 
-  constructor(){}
+  constructor(private cdr: ChangeDetectorRef){}
   
-  ngOnChanges(): void {
-    const initialList$ = of(this.initialList);
+  ngOnInit(): void {
+    this.initializeFilteredList();
+    this.input.setValue(this.value || '', { emitEvent: false }); // Initialize with input value if available
+  }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value'] && changes['value'].currentValue !== changes['value'].previousValue) {
+      console.log('chazz', this.value);
+      this.input.setValue(this.value || '', { emitEvent: false });
+      this.cdr.detectChanges();
+    }
+    if (changes['initialList']) {
+      this.initializeFilteredList(); // Reinitialize the filtered list if the initial list changes
+    }
+  }
+
+  initializeFilteredList(): void {
+    const initialList$ = of(this.initialList);
     this.filteredList$ = this.input.valueChanges.pipe(
       debounceTime(200),
       distinctUntilChanged(),
@@ -51,18 +67,15 @@ export class AutoSearchComponent implements OnChanges {
       combineLatestWith(initialList$),
       map(([typed, list]) => {
         if(typed){
-        return list.filter(item => item && item.toLowerCase().includes(typed.toLowerCase()));
+        return list.filter(item => typed || item.toLowerCase().includes(typed.toLowerCase()))
         } else {
           return list
         }
       })
     );
   }
+
   emitSelectedChange(selectedValue: string): void {
     this.valueChange.emit(selectedValue);
-  }
-  reset(): void {
-    this.input.reset();
-    this.valueChange.emit('');
   }
 }
