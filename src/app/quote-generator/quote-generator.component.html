@@ -16,7 +16,7 @@
        </h2>
         <!-- Contact Information -->
         <p class="mb-1">
-          <a href="tel:12504486418" class="link-secondary" aria-label="Call us at (250)-448-6418">(250)-448-6418</a>
+          <a href="tel:+12504486418" class="link-secondary" aria-label="Call us at (250)-448-6418">(250)-448-6418</a>
         </p>
         <p class="mb-1">
           <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary" aria-label="Email sales at Folding Sliding Doors Canada">Email: sales&#64;foldingslidingdoors.ca</a>
@@ -26,7 +26,7 @@
         </p>
       </div>      
     </div>
-    <button id="ignore0" back mat-fab (click)="returnHome()">
+    <button id="ignore0" class="back-btn" mat-fab (click)="returnHome()">
       <mat-icon class="material-symbols-outlined">arrow_back</mat-icon>
     </button>
   </div>
@@ -102,11 +102,11 @@
             <!-- Column for the first set of options -->
             <div class="col-12 col-md-6">
            <app-auto-search [intro]="'Door Model'" id="doorModel" [value]="quoteForm.get('doorModel')?.value"
-           [filler]="'FD27 PVCU'" [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
+            [initialList]="doorModel" (valueChange)="updateField('doorModel', $event)">
           </app-auto-search>
         <!-- Ext finish -->
            <app-auto-search [intro]="'Exterior Finish'" id="exteriorFinish" [value]="quoteForm.get('exteriorFinish')?.value"
-           (valueChange)="updateField('exteriorFinish', $event)" [filler]="exteriorFinish[0]" [initialList]="exteriorFinish">
+           (valueChange)="updateField('exteriorFinish', $event)" [initialList]="exteriorFinish">
           </app-auto-search>
         <!-- Ext color --> 
            <app-text-reuse  [intro]="'Exterior Color'" id="exteriorColor" [value]="quoteForm.get('exteriorColor')?.value"
@@ -114,8 +114,7 @@
           </app-text-reuse >
         <!-- Int finish -->
            <app-auto-search [intro]="'Interior Finish'" id="interiorFinish" [value]="quoteForm.get('interiorFinish')?.value"
-            (valueChange)="updateField('interiorFinish', $event)"
-           [filler]="interionFinish[0]" [initialList]="interionFinish">
+            (valueChange)="updateField('interiorFinish', $event)" [initialList]="interionFinish">
           </app-auto-search>
         <!-- Int Color -->
            <app-text-reuse  [intro]="'Interior Color'" id="interiorColor" [value]="quoteForm.get('interiorColor')?.value"
@@ -124,9 +123,9 @@
         </div>
         <!-- Glass -->
         <div class="col-12 col-md-6">
-           <app-text-reuse [intro]="'Glass'" id="glass" [value]="quoteForm.get('glass')?.value"
+           <app-auto-search [intro]="'Glass'" id="glass" [value]="quoteForm.get('glass')?.value"
             (valueChange)="updateField('glass', $event)">
-          </app-text-reuse>
+          </app-auto-search>
         <!-- Handle Color -->
            <app-text-reuse [intro]="'Handle Color'" id="handleColor" [value]="quoteForm.get('handleColor')?.value"
             (valueChange)="updateField('handleColor', $event)">

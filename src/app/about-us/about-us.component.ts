@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'app-about-us',
   standalone: true,

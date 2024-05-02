@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { trigger, transition, style, animate, state, stagger } from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 
 @Component({
@@ -20,8 +20,8 @@ import { trigger, transition, style, animate, state, stagger } from '@angular/an
   animations: [
     trigger('fadeIn', [
       transition(':enter', [  // Use ':enter' to apply this when the element is added to the DOM
-        style({ opacity: 0, transform: 'translateX(-100%)' }),
-        animate('700ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+        style({ opacity: 0, transform: 'translateY(-50%)' }),
+        animate('700ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ])
   ],

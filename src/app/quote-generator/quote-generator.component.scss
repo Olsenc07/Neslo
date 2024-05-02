@@ -1,11 +1,16 @@
-button[back]{
+.back-btn{
         position: fixed;
-        top: 20px; 
-        left: 20px; 
+        bottom: 20px;  
+        left: 50%; 
         z-index: 10; 
         opacity: .5;
         background-color: var(--wood-light-grey);    
         color: black;
+    @media (min-width: 601px) {
+            top: 20px; 
+            left: 20px; 
+            bottom: unset;
+            }
 }
 .pdf{
     display: flex;

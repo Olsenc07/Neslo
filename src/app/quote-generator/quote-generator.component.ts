@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { PLATFORM_ID } from '@angular/core';
@@ -114,7 +113,6 @@ export class QuoteGeneratorComponent implements OnInit {
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.progress = true;
-      console.log('send to service', this.gridFormArray.value);
         this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
         this.downloadPDF(pdfBlob);
@@ -168,6 +166,8 @@ contactForm(): void {
     }
 
   doorModel: string[] = [
+    'FD72 TB Aluminum',
+    'FD73 Ali-Clad',
     'FD27 PVCU'
     ]
     exteriorFinish: string[] = [
