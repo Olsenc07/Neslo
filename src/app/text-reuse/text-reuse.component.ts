@@ -36,18 +36,13 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   updateValidatorsAndValue(): void {
-    const validators = [Validators.required]; // All fields are required
+    const validators = [Validators.required]; 
     if (this.types === 'email') {
       validators.push(Validators.email);
-    } else if (this.types === 'tel') {
-      // Example regex for phone numbers; adapt as necessary
-      validators.push(Validators.pattern(/^(\+?\d{1,3}[- ]?)?\d{10}$/));
-    }
-
+    } 
     this.input.setValidators(validators);
     this.input.updateValueAndValidity();
 
-    // Update the form control value only if it is not manually set or input type changes
     if (!this.input.value || this.input.pristine) {
       this.input.setValue(this.intValue || this.value || '', { emitEvent: false });
       this.cdr.detectChanges();

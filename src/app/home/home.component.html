@@ -3,7 +3,7 @@
    ></app-intro>
 </header>
 <section class="my-3">
-    <div container class="container bg-light">
+    <div #borders [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container">
         <h2 class="text-center mb-4 pt-3" id="contacts">
             About Us
         <mat-divider></mat-divider>
@@ -26,34 +26,39 @@
 </section>
 
 <section class="my-3">
-    <div container class="container py-3 bg-light">
+    <div class="container py-3 bg-light">
         <h2 class="text-center mb-4" >
             Contact Us
             <mat-divider></mat-divider>
         </h2>
-        <ul class="mt-4">
-<li>For a quick message, please text or call (403) 994 – 1202 </li>
-<li>Emails sent through this form will be directed to 
-<ul class="mt-2">
-<li>Erik Olsen: <a href="mailto:Foldingslidingdoors.ab@gmail.com" class="link-secondary">FoldingSlidingDoors.ab{{atSymbol}}gmail.com</a></li>
-    </ul>
-    </li>
-        </ul>
+        <div class="mt-4">
+            <div class="contact-item">
+               * For a quick message, please text or call <a href="tel:+14039941202">(403) 994 – 1202</a>
+            </div>
+            <div class="contact-item mt-2">
+               * Emails sent through this form will be directed to
+                <div class="contact-subitem mt-1">
+                    Erik Olsen: <a href="mailto:Foldingslidingdoors.ab@gmail.com" class="link-secondary">FoldingSlidingDoors.ab{{atSymbol}}gmail.com</a>
+                </div>
+            </div>
+        </div>
+        
         <div class="col-12 mt-2">
-@defer(on viewport){
+<!-- @defer(on viewport){ -->
        <app-contact-form></app-contact-form>
-    }@placeholder { 
+    <!-- }@placeholder { 
         <app-skeleton-form-fill ></app-skeleton-form-fill>
-         }
+         } -->
     </div>
     </div>
 </section>
 <footer class="text-center section-padding bg-dark text-light">
 <div class="container">
-<p>© 2024 Neslo Windows and Doors. All rights reserved.</p>
-<p>Follow us on social media for the latest updates.</p>
+<p>© 2024 Neslo. All rights reserved.</p>
+<p>Join us on social media to adventure with Neslo:</p>
 <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="text-light">
-    Instagram: &#64;FoldingSlidingDoors_Erik
+    <fa-icon [icon]="faInstagramSquare"></fa-icon>
+     &#64;FoldingSlidingDoors_Erik
 </a>
 </div>
 </footer> 

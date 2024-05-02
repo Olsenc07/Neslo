@@ -6,10 +6,22 @@
   box-sizing: border-box;
   font-family: 'Josefin Sans', sans-serif;
 }
+:root {
+  --wood: #8B4513;
+  --wood-dark: #5c471f; 
+  --wood-light: #bd9865;
+  --wood-light-grey: #d3d3d385;
+  --wood-red: #CC9966;
+  --blue: #007bff;
+  --blue-grey: #6b757d;
+  --blue-field: #1f3a3d;
+  --green: #008643;
+  --green-field: #6a9955;
+  --red: #da9694;
+}
 button, input, select, textarea {
   font-family: 'Josefin Sans', sans-serif;
 }
-
 .mat-typography {
   font-family: 'Josefin Sans', sans-serif;
   
@@ -22,7 +34,7 @@ button, input, select, textarea {
   & .mat-h2, & h2 {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.3em; 
-    color: saddlebrown;
+    color: var(--blue-grey);
   }
 
   & h3{
@@ -40,7 +52,7 @@ button, input, select, textarea {
     & .mat-h2, & h2 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 1.3em; 
-      color: saddlebrown;
+      color: var(--blue-grey);
     }
 
     & h3{
@@ -59,7 +71,7 @@ button, input, select, textarea {
     & .mat-h2, & h2 {
       font-family: 'Josefin Sans', sans-serif;
       font-size: 2vw; 
-      color: saddlebrown;
+      color: var(--blue-grey);
     }
 
     & h3{
@@ -68,20 +80,8 @@ button, input, select, textarea {
     }
   }
 }
-:root {
-  --wood: #8B4513;
-  --wood-dark: #5c471f; 
-  --wood-light: #bd9865;
-  --wood-light-grey: #d3d3d385;
-  --wood-red: #CC9966;
-  --blue: #007bff;
-  --blueField: #1f3a3d;
-  --green: #008643;
-  --greenField: #6a9955;
-  --red: #da9694;
-}
 a{
-  color: var(--wood);
+  color: var(--blue-grey);
 }
 b {
   color: var(--wood-light);
@@ -91,10 +91,7 @@ html, body {
     margin: 0;
     font-size: 1.4vw;
 }
-div[container]{
-  border-radius: 25px;
-  border: 1px groove;
-}
+
 /* Base font size for mobile */
 p {
   font-size: .7em; 
@@ -112,7 +109,3 @@ p {
     font-size: 1.1em; 
   }
 }
-
-
-
-// add li and ul styles

@@ -30,7 +30,6 @@ import { Observable, of } from 'rxjs';
   styleUrl: './auto-search.component.scss'
 })
 export class AutoSearchComponent implements OnChanges {
-  @Input() filler!: string;
   @Input() intro!: string;
   @Input() value?: string;
   @Input() initialList: string[] = [''];
@@ -49,7 +48,6 @@ export class AutoSearchComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['value'] && changes['value'].currentValue !== changes['value'].previousValue) {
-      console.log('chazz', this.value);
       this.input.setValue(this.value || '', { emitEvent: false });
       this.cdr.detectChanges();
     }
