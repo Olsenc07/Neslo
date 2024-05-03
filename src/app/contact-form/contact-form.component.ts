@@ -12,6 +12,7 @@ import  { MatButtonModule } from '@angular/material/button';
 import { NgClass } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OrientationService } from '../services/orientation.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -27,6 +28,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss'
 })
+
 export class ContactFormComponent {
   state: 'noFocus' | 'focus' = 'noFocus';
   imageSrc: SafeUrl = '';
@@ -34,6 +36,7 @@ export class ContactFormComponent {
   fillAttached: boolean = false;
 
   constructor(private sanitizer: DomSanitizer,
+    protected orientationService: OrientationService,
     private snackBar: MatSnackBar
   ){}
   contactForm: FormGroup = new FormGroup({

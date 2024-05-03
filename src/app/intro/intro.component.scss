@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    height: 44vh;
+    height: 50vh;
   }
 .btn-primary {
     transition: background-image .3s ease-in-out; 
@@ -61,10 +61,7 @@
         }
       }
 h2[heading] {
-  color: white !important ;
-  @media only screen and (min-width: 600px) {
-    color: white !important;
-  }
+    color: var(--bs-body-bg) !important;
     text-align: center; 
     word-wrap: break-word; 
   }

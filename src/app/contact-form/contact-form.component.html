@@ -56,10 +56,10 @@
         attach_file
         }
       </mat-icon>
-   @if(contactForm.get('file')?.value){
+   @if(contactForm.get('file')?.value && !this.orientationService.screen()){
     File attached successfully 
     } @else {
-      Attach your request quote
+      Attach your request quote 
     }
       </button>
       @if(contactForm.get('file')?.value){

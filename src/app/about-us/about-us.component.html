@@ -6,17 +6,20 @@
     <p class="text-center" [innerHTML]="intro"></p>
    <div class="text-center">
     <p>
-        <a class="link-secondary" aria-label="Call us" href="tel: +`{{tel}}`">Phone: {{tel}}</a>
+        Phone:
+        <a class="link-secondary" aria-label="Call us" href="tel: +`{{tel}}`">{{tel}}</a>
     </p>
     <p>
+        Email:
         <a class="link-secondary" aria-label="Email us" href="mailto:`{{email}}`">
-        Email: {{email}}
+         {{email}}
         </a>
     </p>
     @if(fax){
     <p>
+        Fax:
         <a class="link-secondary" aria-label="Fax us">
-           Fax: {{fax}}
+            {{fax}}
         </a>
     </p>
 }

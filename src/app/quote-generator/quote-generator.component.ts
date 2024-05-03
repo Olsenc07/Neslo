@@ -107,7 +107,6 @@ export class QuoteGeneratorComponent implements OnInit {
         activePanel: new FormControl(gridRow.activePanel),
       });
       this.gridFormArray.push(rowGroup); 
-      console.log('wow', this.gridFormArray)
     });
   }}
   generatePDF(): void {

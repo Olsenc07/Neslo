@@ -83,29 +83,27 @@ button, input, select, textarea {
 a{
   color: var(--blue-grey);
 }
-b {
+b{
   color: var(--wood-light);
-  }
+}
+b[fsdc]{
+  color: var( --green-field) !important;
+}
 html, body {
     height: 100%;
     margin: 0;
     font-size: 1.4vw;
 }
-
-/* Base font size for mobile */
 p {
   font-size: .7em; 
 }
-/* Slightly larger text for tablets */
 @media (min-width: 600px) {
   p {
     font-size: .9em; 
   }
 }
-
-/* Even larger text for desktops */
 @media (min-width: 1024px) {
   p {
-    font-size: 1.1em; 
+    font-size: 1.2em; 
   }
 }

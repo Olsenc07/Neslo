@@ -3,11 +3,12 @@
    ></app-intro>
 </header>
 <section class="my-3">
-    <div #borders [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container">
-        <h2 class="text-center mb-4 pt-3" id="contacts">
-            About Us
-        <mat-divider></mat-divider>
-        </h2>
+    <div #borders [ngClass]="this.orientationService.screen() ? 'container-border' : 'bg-light' " class="container">
+            <div class="text-center mb-4 pt-3" id="contacts">
+                <h2>Neslo Partnerships</h2>
+                <mat-divider></mat-divider>
+            </div>
+    
         <div class="row">
             <!-- Alberta's Distributor -->
             <div class="col-12 col-md-6 d-flex flex-column align-items-center">
@@ -25,13 +26,13 @@
     </div>
 </section>
 
-<section class="my-3">
-    <div class="container py-3 bg-light">
+<section class="my-3 ">
+    <div [ngClass]="this.orientationService.screen() ? 'container-border' : 'container'" class="py-3 container-common">
         <h2 class="text-center mb-4" >
-            Contact Us
+            Contact Neslo
             <mat-divider></mat-divider>
         </h2>
-        <div class="mt-4">
+        <div class="mt-4"> 
             <div class="contact-item">
                * For a quick message, please text or call <a href="tel:+14039941202">(403) 994 – 1202</a>
             </div>
@@ -55,9 +56,10 @@
 <footer class="text-center section-padding bg-dark text-light">
 <div class="container">
 <p>© 2024 Neslo. All rights reserved.</p>
-<p>Join us on social media to adventure with Neslo:</p>
+<p>Join us on social media to adventure with Neslo</p>
+<fa-icon [icon]="faInstagramSquare"></fa-icon>
+&#160;
 <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="text-light">
-    <fa-icon [icon]="faInstagramSquare"></fa-icon>
      &#64;FoldingSlidingDoors_Erik
 </a>
 </div>

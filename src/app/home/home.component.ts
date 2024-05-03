@@ -34,6 +34,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
+
 export class HomeComponent {
 atSymbol: string = '@';
 faInstagramSquare = faInstagramSquare;
@@ -44,31 +45,38 @@ introAB: SafeHtml;
 
 imgBC: {img: string, alt: string } = {img:'../../assets/folding_sliding_doors_logo.png', alt: 'Folding Sliding Doors Canada Ltd.' }
 messageBC: SafeHtml;
-
-introBC: string = `<b fsdc> Folding Sliding Doors Canada</b> is the proud supplier for <b>Neslo</b>.`
+introBC: SafeHtml;
   
 @ViewChild('imgChild', { static: false }) imgChild!: ElementRef<HTMLImageElement>;
 @ViewChild('borders', { static: false }) borders!: ElementRef<HTMLImageElement>;
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     protected orientationService: OrientationService) {
+      this.introAB = this.sanitizer.bypassSecurityTrustHtml(
+        `Alberta's premier destination for the delivery and installation of <br>
+         <b fsdc>Folding Sliding Doors Canada</b>.`
+      );
       this.messageAB = this.sanitizer.bypassSecurityTrustHtml(`
       Rooted in Central Alberta, we bring over 30 years of expertise as journeyman carpenters and custom home builders to your door and window installations. 
       Specializing in custom solutions, we ensure top-quality craftsmanship specifically to your home's needs. 
-      <br> <b> Stay up to date:</b><br>
+      <br> Keep connected and stay informed by following us. <br> 
+      <br>
+      Instagram:
       <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="styled-link">
-     Instagram: @foldingslidingdoors_erik</a>`
+       @foldingslidingdoors_erik</a>`
     );
   
-    this.introAB = this.sanitizer.bypassSecurityTrustHtml(
-      `Alberta's premier destination for the delivery and installation of <b fsdc>Folding Sliding Doors Canada</b>.`
+    this.introBC = this.sanitizer.bypassSecurityTrustHtml(
+      `<br><b fsdc> Folding Sliding Doors Canada</b> is the proud supplier for <b>Neslo</b>.`
     );
     this.messageBC = this.sanitizer.bypassSecurityTrustHtml(`
       <b>Neslo</b> specializes in the installation of folding sliding doors from Kelowna, BC.
       <br>
-      Check out our latest projects at Folding Sliding Doors Canada: 
+      Check out our latest projects at Folding Sliding Doors Canada. 
       <br>
-      <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link">Website: Folding Sliding Doors Canada</a>`
+      <br>
+      Website:
+      <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link"> Folding Sliding Doors Canada</a>`
     );
     }
   
@@ -77,7 +85,6 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     const scrollPosition: number = window.scrollY;
     console.log('scrollPosition', scrollPosition);
     const height: number = window.innerHeight;
-    console.log('height', height);
     const blurValue: number = Math.min(30, (scrollPosition / (height) * 10)); 
     // no zoom for mobile
     const zoomFactor: number = (1 + scrollPosition / height) * 100; 
@@ -86,8 +93,6 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     this.renderer.setStyle(this.imgChild.nativeElement, 'filter', `blur(${blurValue}px)`);
     if(!this.orientationService.screen()){
     this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', `${zoomFactor}%`);
-    this.renderer.setStyle(this.borders.nativeElement, 'border-radius', `25px`);
-    this.renderer.setStyle(this.borders.nativeElement, 'border', `1px groove`);
     // reset
     if(scrollPosition < 3) {
       this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', 'cover');

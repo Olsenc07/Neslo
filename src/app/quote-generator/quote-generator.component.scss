@@ -1,16 +1,17 @@
 .back-btn{
         position: fixed;
-        bottom: 20px;  
+        bottom: 45px;  
         left: 50%; 
         z-index: 10; 
-        opacity: .5;
-        background-color: var(--wood-light-grey);    
-        color: black;
+        background-color: var(--wood-light);    
+        color: black;    
     @media (min-width: 601px) {
             top: 20px; 
             left: 20px; 
             bottom: unset;
-            }
+            opacity: .5;
+            background-color: var(--wood-light-grey);    
+        }
 }
 .pdf{
     display: flex;
@@ -41,7 +42,10 @@ button[email]{
     flex-direction: column;
 }
 .img{
-    max-width: 20%;
+    max-width: 50%;
+    @media (min-width: 601px) {
+        max-width: 20%;
+    }
     border-radius: 50%;
     box-shadow: 2px 2px 2px rgb(0 0 0 / 26%);
 }
