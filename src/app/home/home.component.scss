@@ -18,16 +18,21 @@
     background-position: 50% 75%;
     height: 100%;
 }
-
+.container-common{
+  background-image: linear-gradient(1deg, transparent, #e9e9e9, transparent);
+  border-radius: 25px;
+}
+.container-border{
+  border-radius: 25px;
+}
 .contact-item {
   margin-bottom: 8px; 
+  margin-left: 25px;
 }
-
 .contact-subitem {
-  margin-left: 20px; 
+  margin-left: 25px; 
   margin-top: 4px; 
 }
-
 .section-padding {
     padding: 60px 0;
 }
