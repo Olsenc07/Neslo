@@ -83,7 +83,6 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
   @HostListener('window:scroll', ['$event']) 
   handleScroll(): void {
     const scrollPosition: number = window.scrollY;
-    console.log('scrollPosition', scrollPosition);
     const height: number = window.innerHeight;
     const blurValue: number = Math.min(30, (scrollPosition / (height) * 10)); 
     // no zoom for mobile
