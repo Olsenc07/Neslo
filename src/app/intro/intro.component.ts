@@ -9,12 +9,12 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
-
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-intro',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, NgClass],
+  imports: [MatButtonModule, MatDividerModule, MatIconModule, NgClass],
   templateUrl: './intro.component.html',
   styleUrl: './intro.component.scss',
   animations: [

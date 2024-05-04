@@ -1,4 +1,4 @@
-<header #imgChild class="intro">
+<header #imgChild class="intro" [ngClass]="this.orientationService.screen() ? 'color' : 'image'">
    <app-intro [orientation]="this.orientationService.screen()" 
    ></app-intro>
 </header>
@@ -12,13 +12,13 @@
         <div class="row">
             <!-- Alberta's Distributor -->
             <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-                <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" 
+                <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
                 [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
                 [message]="messageAB"></app-about-us>
                 </div>
             <!-- Primary Supplier -->
             <div class="col-12 col-md-6 d-flex flex-column align-items-center" >
-                <app-about-us [img]="imgBC" [title]="'Primary Supplier'" 
+                <app-about-us [img]="imgBC" [title]="'Primary Supplier'" [customColor]="false"
                 [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
                 [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
             </div>

@@ -1,5 +1,5 @@
 import { Component, HostListener, Renderer2, 
-  ElementRef, ViewChild} from '@angular/core';
+  ElementRef, ViewChild } from '@angular/core';
 import { NgClass } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
@@ -79,7 +79,7 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
       <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link"> Folding Sliding Doors Canada</a>`
     );
     }
-  
+
   @HostListener('window:scroll', ['$event']) 
   handleScroll(): void {
     const scrollPosition: number = window.scrollY;
@@ -94,7 +94,5 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', `${zoomFactor}%`);
     // reset
     if(scrollPosition < 3) {
-      this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', 'cover');
-    }}}
-}
+    }}}}
 }

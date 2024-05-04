@@ -1,10 +1,5 @@
 .back-btn{
-        position: fixed;
-        bottom: 45px;  
-        left: 50%; 
-        z-index: 10; 
-        background-color: var(--wood-light);    
-        color: black;    
+    display: none;
     @media (min-width: 601px) {
             top: 20px; 
             left: 20px; 
@@ -64,3 +59,8 @@ h2[quote]{
     min-height: 175px; 
     resize: none; 
   }
+  .navbar.fixed-bottom {
+    padding: 10px 0;
+    box-shadow: 0 -4px 6px var(--wood-light-grey);
+  }
+  

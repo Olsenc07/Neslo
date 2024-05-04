@@ -144,7 +144,7 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
 }
   // Then call your function
    await fillGridForm(page, gridFormArray);
-    const idsToIgnore: string[] = ['ignore0', 'ignore1'];
+    const idsToIgnore: string[] = ['ignore0', 'ignore1', 'ignore2'];
     await page.evaluate((ids: string[]) => {
       ids.forEach(id => {
         const elem = document.querySelector(`#${id}`);

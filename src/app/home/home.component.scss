@@ -10,13 +10,17 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: url('../../../src/assets/Erik_Red_Working.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    transition: opacity 0.85s;
-    background-position: 50% 75%;
     height: 100%;
+}
+.color{
+  background-image: linear-gradient(178deg, var(--blue-grey), white);
+}
+.image {
+  background-image: url("../../../src/assets/Erik_Red_Working.jpg"); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 75%;
 }
 .container-common{
   background-image: linear-gradient(1deg, transparent, #e9e9e9, transparent);
