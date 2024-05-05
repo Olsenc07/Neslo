@@ -1,4 +1,4 @@
-name: Build and Deploy to Heroku
+name: Build, Test, and Deploy to Heroku
 
 on:
   push:
@@ -6,9 +6,30 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  test:
     runs-on: ubuntu-latest
-    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.20.2'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v3
+        with:
+          start: npm run serve
+          wait-on: 'http://localhost:4200'  
+          wait-on-timeout: 60  
+
+  build-and-deploy:
+    needs: test  
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
