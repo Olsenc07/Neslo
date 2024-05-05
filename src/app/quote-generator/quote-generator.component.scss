@@ -81,7 +81,15 @@ h2[quote]{
   }
 
 .nav-btn{
-    width: 100%;
+    position: fixed; /* Fixed positioning to stick to the viewport */
+    bottom: 0; /* Aligns the navigation bar at the bottom */
+    left: 0; /* Aligns the navigation bar to the left */
+    width: 100%; /* Ensures it spans the full width of the viewport */
+    display: flex;
+    justify-content: center; /* Centers the button inside the nav */
+    padding: 10px 0; /* Adds some vertical padding for aesthetics */
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1); /* Optional: Adds a subtle shadow for better separation from page content */
+    z-index: 1000; 
     @media (min-width: 601px) {
         display: none !important;
             }

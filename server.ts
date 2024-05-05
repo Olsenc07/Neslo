@@ -72,14 +72,6 @@ const apiLimiter = rateLimit({
         next();
       }
     });
-
-     server.get('*', (req, res, next) => {
-        if (req.hostname === 'neslo.ca') {
-          res.redirect(301, 'https://www.neslo.ca' + req.originalUrl);
-        } else {
-          next();
-        }
-      });
       
     server.set('view engine', 'html');
     server.set('views', browserDistFolder);
