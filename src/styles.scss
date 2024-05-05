@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: 'Josefin Sans', sans-serif;
 }
+
 :root {
   --wood: #8B4513;
   --wood-dark: #5c471f; 
@@ -28,18 +29,18 @@ button, input, select, textarea {
   // Base mobile styles
   & .mat-h1, & .mat-headline-5 {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1.6em; 
+    font-size: 2.1em ; 
   }
 
   & .mat-h2, & h2 {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1.3em; 
+    font-size: 1.9em; 
     color: var(--blue-grey);
   }
 
   & h3{
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 1em; 
+    font-size: 1.7em ; 
   }
 
   // Tablet and up
@@ -95,15 +96,15 @@ html, body {
     font-size: 1.4vw;
 }
 p {
-  font-size: .7em; 
+  font-size: 1.1em; 
 }
 @media (min-width: 600px) {
   p {
-    font-size: .9em; 
+    font-size: 1.2em; 
   }
 }
 @media (min-width: 1024px) {
   p {
-    font-size: 1.2em; 
+    font-size: 1.3em; 
   }
 }

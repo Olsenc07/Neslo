@@ -7,6 +7,26 @@ import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import helmet from 'helmet';
+const corsOptions = {
+    origin: 'https://www.neslo.ca',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
+
+const cspConfig = {
+    directives: {
+      defaultSrc: ["'self'"], // Default policy for loading HTML content
+      scriptSrc: ["'self'", "'unsafe-inline'"], // Allows scripts from the same origin and inline scripts
+      imgSrc: ["'self'", 'data:', 'https://www.neslo.ca'], // Allow images from the same origin, data URLs, and images from www.neslo.ca
+      styleSrc: ["'self'", "'unsafe-inline'"], // Allows styles from the same origin and inline styles
+      connectSrc: ["'self'"], // Limits the origins to which you can connect (via XHR, WebSockets, and EventSource)
+      fontSrc: ["'self'", 'https:', 'data:'], // Allows fonts to be loaded from the same origin, over HTTPS, or from data URLs
+      objectSrc: ["'none'"], // Disallows plugins (Flash, Silverlight, etc.)
+      upgradeInsecureRequests: [], // Upgrade HTTP to HTTPS
+    },
+    reportOnly: false
+};
+  
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -25,7 +45,7 @@ const apiLimiter = rateLimit({
     max: 3, // limit each IP to 3 requests per windowMs
     handler: (req: Request, res: Response, next) => {
       res.status(429).json({
-          error: 'Please don"t spam emails, try again after 30 minutes'
+          error: `Please don't spam emails, try again after 30 minutes.`
       });
   }
   });
@@ -33,11 +53,34 @@ const apiLimiter = rateLimit({
 //  Create Express Servrt
    async function createServer(): Promise<express.Express> {
     const server = express();
+    server.use(helmet({
+      contentSecurityPolicy: cspConfig,
+    }));
+     server.use(cors(corsOptions));
+
      // Middleware
-     server.use(cors());
+    //  server.use(cors()); //dev
      server.use(compression());
+
      server.use(express.json());
      server.use(express.urlencoded({ extended: true }));
+
+     server.use((req, res, next) => {
+      if (req.protocol === 'http') {
+        res.redirect(`https://${req.headers.host}${req.url}`);
+      } else {
+        next();
+      }
+    });
+
+     server.get('*', (req, res, next) => {
+        if (req.hostname === 'neslo.ca') {
+          res.redirect(301, 'https://www.neslo.ca' + req.originalUrl);
+        } else {
+          next();
+        }
+      });
+      
     server.set('view engine', 'html');
     server.set('views', browserDistFolder);
     
@@ -49,7 +92,7 @@ const apiLimiter = rateLimit({
      const pdfRoute = (await import(pdfRoutePath)).default;
      server.use("/api/email", apiLimiter, emailRoute);
      server.use("/api/pdf", pdfRoute);
-
+      
     // All regular routes use the Angular engine
     server.get('*', async (req: Request, res: Response) => {
         try {

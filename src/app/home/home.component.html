@@ -1,24 +1,24 @@
-<header #imgChild class="intro">
+<header #imgChild class="intro" [ngClass]="this.orientationService.screen() ? 'color' : 'image'">
    <app-intro [orientation]="this.orientationService.screen()" 
    ></app-intro>
 </header>
 <section class="my-3">
     <div #borders [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
             <div class="text-center mb-4 pt-3" id="contacts">
-                <h2>Neslo Partnerships</h2>
+                <h2 heading>Neslo Partnerships</h2>
                 <mat-divider></mat-divider>
             </div>
     
         <div class="row">
             <!-- Alberta's Distributor -->
             <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-                <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" 
+                <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
                 [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
                 [message]="messageAB"></app-about-us>
                 </div>
             <!-- Primary Supplier -->
             <div class="col-12 col-md-6 d-flex flex-column align-items-center" >
-                <app-about-us [img]="imgBC" [title]="'Primary Supplier'" 
+                <app-about-us [img]="imgBC" [title]="'Primary Supplier'" [customColor]="false"
                 [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
                 [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
             </div>
@@ -28,13 +28,14 @@
 
 <section class="my-3 ">
     <div [ngClass]="this.orientationService.screen() ? 'container-border' : 'container'" class="py-3 container-common">
-        <h2 class="text-center mb-4" >
+        <h2 class="text-center mb-4" heading>
             Contact Neslo
             <mat-divider></mat-divider>
         </h2>
         <div class="mt-4"> 
             <div class="contact-item">
-               * For a quick message, please text or call <a href="tel:+14039941202">(403) 994 – 1202</a>
+               * Mobile number
+                <a href="tel:+14039941202">(403) 994 – 1202</a>
             </div>
             <div class="contact-item mt-2">
                * Emails sent through this form will be directed to

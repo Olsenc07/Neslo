@@ -1,4 +1,5 @@
     <div class="info-container">
+    <div [ngStyle]="{'background-image': customColor ? 'linear-gradient(1deg, #b9a99691, transparent)' : 'linear-gradient(1deg, #9cd2967d, transparent)'}" class="info-container">
     <div class="d-flex justify-content-center">
     <img src="{{img.img}}" class="img-fluid img" alt="{{img.alt}}">
     </div>
@@ -25,4 +26,6 @@
 }
     <p class="text-center" [innerHTML]="message">
     </p> 
+</div> 
+</div>
 </div> 
