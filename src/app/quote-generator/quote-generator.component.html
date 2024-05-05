@@ -5,10 +5,13 @@
         <!-- Company Details -->
         <div class="col text-center">
           <img pdf src="../../assets/folding_sliding_doors_logo.png" class="img-fluid img" alt="Folding Sliding Doors Canada Ltd Logo">
-        <h1 class="mt-1 pb-1 mb-0">Folding Sliding Doors Canada Ltd.</h1>
+        <h1 class="mt-1 pb-1 mb-0 text">Folding Sliding Doors Canada Ltd.</h1>
         <p pdf class="mb-1">105 - 1155 St. Paul Street</p>
         <p pdf class="mb-1">Kelowna, BC V1Y 2C6</p>
         <p pdf class="mb-1">(250)-448-6418</p>
+        <button id="ignore0" class="back-btn" mat-fab (click)="returnHome()">
+          <mat-icon class="material-symbols-outlined">arrow_back</mat-icon>
+        </button>  
       </div>
       <div class="col text-center">
       <h2 quote class="mt-3">
@@ -16,20 +19,22 @@
        </h2>
         <!-- Contact Information -->
         <p class="mb-1">
+          Phone:
           <a href="tel:+12504486418" class="link-secondary" aria-label="Call us at (250)-448-6418">(250)-448-6418</a>
         </p>
         <p class="mb-1">
-          <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary" aria-label="Email sales at Folding Sliding Doors Canada">Email: sales&#64;foldingslidingdoors.ca</a>
+          Email:
+          <a href="mailto:sales@foldingslidingdoors.ca" class="link-secondary" aria-label="Email sales at Folding Sliding Doors Canada">sales&#64;foldingslidingdoors.ca</a>
         </p>
         <p class="mb-1">
-          <a href="https://www.foldingslidingdoors.ca" class="link-secondary" aria-label="Visit Folding Sliding Doors Canada website">Web: www.foldingslidingdoors.ca</a>
+          Web:
+          <a href="https://www.foldingslidingdoors.ca" class="link-secondary" aria-label="Visit Folding Sliding Doors Canada website">www.foldingslidingdoors.ca</a>
         </p>
-      </div>      
+      </div> 
     </div>
-    <button id="ignore0" class="back-btn" mat-fab (click)="returnHome()">
-      <mat-icon class="material-symbols-outlined">arrow_back</mat-icon>
-    </button>
-  </div>
+         
+    </div>
+ 
 </header>
 
     <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()" >
@@ -144,7 +149,7 @@
     @defer(on viewport){
     <app-grid-form (sendGrid)="grid($event)" [gridForm]="gridFormArray"></app-grid-form>
     } @placeholder {
-      <app-skeleton-form-fill></app-skeleton-form-fill>
+      <app-skeleton-form-fill class="d-flex justify-content-center"></app-skeleton-form-fill>
     }
     <div id="ignore1" class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
       <!-- Submit Button -->
@@ -177,12 +182,11 @@
           </mat-icon>
         </button>
       </div>
-      <nav class="navbar fixed-bottom navbar-light bg-light justify-content-center d-flex" id="ignore2" >
-          <button mat-button color="primary" class="btn btn-outline-primary" (click)="returnHome()" role="button">
-            Previous Page
+      <nav class="bg-light nav-btn" id="ignore2" >
+          <button mat-raised-button  (click)="returnHome()" >
+            Home Page
           </button>
       </nav>
-      
       </div>
       @defer {
         <div class="size-space">

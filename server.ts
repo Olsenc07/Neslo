@@ -12,7 +12,20 @@ const corsOptions = {
     origin: 'https://www.neslo.ca',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   };
-  
+
+const cspConfig = {
+    directives: {
+      defaultSrc: ["'self'"], // Default policy for loading HTML content
+      scriptSrc: ["'self'", "'unsafe-inline'"], // Allows scripts from the same origin and inline scripts
+      imgSrc: ["'self'", 'data:', 'https://www.neslo.ca'], // Allow images from the same origin, data URLs, and images from www.neslo.ca
+      styleSrc: ["'self'", "'unsafe-inline'"], // Allows styles from the same origin and inline styles
+      connectSrc: ["'self'"], // Limits the origins to which you can connect (via XHR, WebSockets, and EventSource)
+      fontSrc: ["'self'", 'https:', 'data:'], // Allows fonts to be loaded from the same origin, over HTTPS, or from data URLs
+      objectSrc: ["'none'"], // Disallows plugins (Flash, Silverlight, etc.)
+      upgradeInsecureRequests: [], // Upgrade HTTP to HTTPS
+    },
+    reportOnly: false
+};
   
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,14 +53,25 @@ const apiLimiter = rateLimit({
 //  Create Express Servrt
    async function createServer(): Promise<express.Express> {
     const server = express();
-    server.use(helmet());
+    server.use(helmet({
+      contentSecurityPolicy: cspConfig,
+    }));
+     server.use(cors(corsOptions));
+
      // Middleware
-     //  server.use(cors()); only for dev
+    //  server.use(cors()); //dev
      server.use(compression());
-     server.use(cors(corsOptions)); // production
 
      server.use(express.json());
      server.use(express.urlencoded({ extended: true }));
+
+     server.use((req, res, next) => {
+      if (req.protocol === 'http') {
+        res.redirect(`https://${req.headers.host}${req.url}`);
+      } else {
+        next();
+      }
+    });
 
      server.get('*', (req, res, next) => {
         if (req.hostname === 'neslo.ca') {

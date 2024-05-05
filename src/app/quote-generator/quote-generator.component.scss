@@ -1,12 +1,21 @@
 .back-btn{
     display: none;
     @media (min-width: 601px) {
-            top: 20px; 
-            left: 20px; 
-            bottom: unset;
-            opacity: .5;
-            background-color: var(--wood-light-grey);    
+        display: flex;
+        top: 20px; 
+        left: 20px; 
+        bottom: unset;
+        opacity: .5;
+        background-color: var(--blue-field);    
+        position: absolute;
         }
+}
+.text{
+    display: none;
+    @media (min-width: 601px) {
+    display: flex;
+    justify-content: center;
+    }
 }
 .pdf{
     display: flex;
@@ -47,6 +56,17 @@ button[email]{
 header{
     background-color: #f5f5f5;
 }
+
+h2{
+    word-wrap: break-word; 
+    font-size: 1.9em; 
+  @media (min-width: 601px) {
+    font-size: 2.1em; 
+  }
+  @media (min-width: 1025px) {
+    font-size: 2vw; 
+  }
+  }
 h2[quote]{
     color: #003e1d;
 }
@@ -59,8 +79,10 @@ h2[quote]{
     min-height: 175px; 
     resize: none; 
   }
-  .navbar.fixed-bottom {
-    padding: 10px 0;
-    box-shadow: 0 -4px 6px var(--wood-light-grey);
-  }
-  
+
+.nav-btn{
+    width: 100%;
+    @media (min-width: 601px) {
+        display: none !important;
+            }
+}

@@ -5,7 +5,7 @@
 <section class="my-3">
     <div #borders [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
             <div class="text-center mb-4 pt-3" id="contacts">
-                <h2>Neslo Partnerships</h2>
+                <h2 heading>Neslo Partnerships</h2>
                 <mat-divider></mat-divider>
             </div>
     
@@ -28,13 +28,14 @@
 
 <section class="my-3 ">
     <div [ngClass]="this.orientationService.screen() ? 'container-border' : 'container'" class="py-3 container-common">
-        <h2 class="text-center mb-4" >
+        <h2 class="text-center mb-4" heading>
             Contact Neslo
             <mat-divider></mat-divider>
         </h2>
         <div class="mt-4"> 
             <div class="contact-item">
-               * For a quick message, please text or call <a href="tel:+14039941202">(403) 994 – 1202</a>
+               * Mobile number
+                <a href="tel:+14039941202">(403) 994 – 1202</a>
             </div>
             <div class="contact-item mt-2">
                * Emails sent through this form will be directed to
