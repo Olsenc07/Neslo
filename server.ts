@@ -64,14 +64,6 @@ const apiLimiter = rateLimit({
 
      server.use(express.json());
      server.use(express.urlencoded({ extended: true }));
-
-     server.use((req, res, next) => {
-      if (req.protocol === 'http') {
-        res.redirect(`https://${req.headers.host}${req.url}`);
-      } else {
-        next();
-      }
-    });
       
     server.set('view engine', 'html');
     server.set('views', browserDistFolder);
