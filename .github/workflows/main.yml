@@ -29,8 +29,8 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v3
         with:
-          wait-on: 'http://localhost:4200'
-          wait-on-timeout: 60  # Wait 1 minute for the server to start
+          wait-on: 'https://www.neslo.ca'
+          wait-on-timeout: 60 
 
   deploy:
     needs: build-and-test
