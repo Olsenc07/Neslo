@@ -18,7 +18,10 @@ const browserDistFolder = join(__dirname, '../browser');
 // SSR entry
 const bootstrapPath = join(__dirname, '../server/main.server.mjs');
 const indexHtml = join(__dirname, 'index.server.html');
-// Backend routes
+
+
+//  test these paths!!!
+// Backend routes 
 const emailRoutePath = join(__filename, '../../backend/routes/email.js');
 const pdfRoutePath = join(__filename, '../../backend/routes/pdf.js');
 
@@ -49,7 +52,8 @@ const helmetOptions = isProduction ? {
             fontSrc: ["'self'", "https:", "data:"], 
             objectSrc: ["'none'"], 
             upgradeInsecureRequests: [],
-            scriptSrcAttr: ["'unsafe-inline'"]
+            scriptSrcAttr: ["'unsafe-inline'"],
+            'script-src-attr': ["'unsafe-inline'", "'unsafe-hashes'"]
         }
     }
 } : {
