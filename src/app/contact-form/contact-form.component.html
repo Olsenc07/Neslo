@@ -33,6 +33,14 @@
 @if(imageSrc && contactForm.get('file')?.value){
   <div  class="thumbnail-container limit" [ngClass]="{'full-screen': isFullScreen}" 
   (click)="toggleFullScreen()">
+
+  <div class="thumbnail-header">
+    <button matSuffix mat-icon-button (click)="removeAttachedFile()" class="remove-file-btn">
+      <mat-icon class="material-symbols-outlined">cancel</mat-icon>
+    </button>
+  </div>
+
+
     @if(this.fileType === 'application/pdf'){
   <iframe [src]="imageSrc" 
   class="img-thumbnail img-fluid mx-auto d-block" 
@@ -62,21 +70,12 @@
       Attach your request quote 
     }
       </button>
-      @if(contactForm.get('file')?.value){
-        <div class="file">
-        {{ this.fileName }}
-        </div>
-    <button matSuffix mat-icon-button (click)="removeAttachedFile()">
-      <mat-icon  class="material-symbols-outlined">cancel</mat-icon>
-    </button>
-      }
     </div>
     <div class="col-12 col-md-6 justify-content-end d-flex">
 <button mat-fab extended type="submit" id="submitBtn" 
     (mouseover)="onHover(true)" (mouseleave)="onHover(false)" 
       [disabled]="contactForm.valid">
-      <!-- Send Email  -->
-      Coming Soon
+      Send Email 
       <mat-icon class="material-symbols-outlined">
     @switch (state) { 
         @case ('noFocus') { keyboard_arrow_right }

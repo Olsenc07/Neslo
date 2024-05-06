@@ -9,7 +9,7 @@
       <mat-divider></mat-divider>
         }
       </h1>
-    <h2 heading>Your trusted partner in premium windows and doors</h2>
+    <h2 heading>Central Alberta's trusted partner in premium windows and doors</h2>
   </div>
   @if(orientation){
   <div class="d-flex justify-content-center flex-column align-items-center  ">
@@ -17,19 +17,25 @@
     <img src="../assets/door.png" class="img gap-2" alt="Neslo Door">
     </div>
     <div class="d-flex flex-column ">
-      <button mat-raised-button  
-        class="mobile" (click)="navigateToContact()">
+      <button mat-fab extended class="mobile" (click)="navigateToContact()">
           Learn about us
+          <mat-icon class="material-symbols-outlined">
+          local_library
+        </mat-icon>
       </button>
       <div>
-      <button mat-fab class="msg-icon"  (click)="navigateToMsg()">
-              <mat-icon class="material-symbols-outlined">
-                mail
-              </mat-icon>
+      <button mat-fab extended class="msg-icon" (click)="navigateToMsg()">
+        <mat-icon class="material-symbols-outlined">
+          contact_mail
+      </mat-icon>
+          Contact info
       </button>
     </div>
-      <button mat-raised-button class="mobile-request" (click)="requestQuote()">
+      <button mat-fab extended  class="mobile-request" (click)="requestQuote()">
           Request a quote
+          <mat-icon class="material-symbols-outlined">
+            description
+          </mat-icon>
       </button>
     </div>
   </div>
@@ -39,21 +45,21 @@
             class="btn btn-primary btn-lg" (click)="navigateToContact()">
             Learn about us
             <mat-icon class="material-symbols-outlined">
-                contact_mail
+              local_library
             </mat-icon>
         </button>
         <button mat-fab extended  
          class="btn btn-primary btn-lg px-4 quoteDesk" (click)="requestQuote()">
             Request a quote
               <mat-icon class="material-symbols-outlined">
-                attach_money
+                description
               </mat-icon>
         </button>
         <button mat-fab extended
     class="btn btn-primary btn-lg" (click)="navigateToMsg()">
-            Send a message
+              Contact info
               <mat-icon class="material-symbols-outlined">
-                mail
+                contact_mail
               </mat-icon>
         </button>
     </div>
