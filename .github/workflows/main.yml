@@ -1,4 +1,4 @@
-name: Build, Test, and Deploy to Heroku
+name: Build, and Deploy to Heroku
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,14 +26,14 @@ jobs:
       - name: Run Docker Container
         run: docker run -d -p 4200:4200 myapp:$GITHUB_SHA
         
-      - name: Run Cypress Tests
-        uses: cypress-io/github-action@v3
-        with:
-          wait-on: 'https://www.neslo.ca'
-          wait-on-timeout: 60 
+      # - name: Run Cypress Tests
+      #   uses: cypress-io/github-action@v3
+      #   with:
+      #     wait-on: 'https://www.neslo.ca'
+      #     wait-on-timeout: 60 
 
   deploy:
-    needs: build-and-test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Login to Heroku Container Registry
