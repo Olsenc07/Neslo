@@ -24,17 +24,19 @@ const indexHtml = join(__dirname, 'index.server.html');
 // Backend routes 
 const emailRoutePath = join(__filename, '../../backend/routes/email.js');
 const pdfRoutePath = join(__filename, '../../backend/routes/pdf.js');
+console.log("Email Route Path:", emailRoutePath);
+console.log("PDF Route Path:", pdfRoutePath);
 
 // Rate limiting middleware
-const apiLimiter = rateLimit({
-    windowMs: 30 * 60 * 1000, // 30 minutes
-    max: isProduction ? 3 : 1000, // limit each IP to 3 requests per windowMs
-    handler: (req: Request, res: Response, next) => {
-      res.status(429).json({
-          error: `Please don't spam emails, try again after 30 minutes.`
-      });
-  }
-  });
+// const apiLimiter = rateLimit({
+//     windowMs: 30 * 60 * 1000, // 30 minutes
+//     max: isProduction ? 3 : 1000, // limit each IP to 3 requests per windowMs
+//     handler: (req: Request, res: Response, next) => {
+//       res.status(429).json({
+//           error: `Please don't spam emails, try again after 30 minutes.`
+//       });
+//   }
+//   });
    //  Create Express Servrt
    async function createServer(): Promise<express.Express> {
 
@@ -62,14 +64,15 @@ const helmetOptions = isProduction ? {
 
     // server.use(helmet(helmetOptions));
     
-    const corsOptions = isProduction ? {
-        origin: 'https://www.neslo.ca',
-        optionsSuccessStatus: 200
-    } : {
-        origin: '*',
-        optionsSuccessStatus: 200
-    };
-    server.use(cors(corsOptions));
+    // const corsOptions = isProduction ? {
+    //     origin: 'https://www.neslo.ca',
+    //     optionsSuccessStatus: 200
+    // } : {
+    //     origin: '*',
+    //     optionsSuccessStatus: 200
+    // };
+    // server.use(cors(corsOptions));
+    server.use(cors())
 
      // Middleware
      server.use(compression());
@@ -96,8 +99,8 @@ const helmetOptions = isProduction ? {
      // Backend routes
      const emailRoute = (await import(emailRoutePath)).default;
      const pdfRoute = (await import(pdfRoutePath)).default;
-     server.use("/api/email", apiLimiter, emailRoute);
-     server.use("/api/pdf", pdfRoute);
+    server.use("/api/email", emailRoute);
+    server.use("/api/pdf", pdfRoute);
       
     // All regular routes use the Angular engine
     server.get('*', async (req: Request, res: Response) => {

@@ -65,7 +65,10 @@ button[type="submit"]{
 
 .thumbnail-header {
   position: absolute;
-  top: 0;
+  top: -14px;
+  border: outset;
   right: 0;
-  z-index: 7; 
+  background-color: var(--bs-body-bg);
+  z-index: 7;
+  border-radius: 25px;
 }
