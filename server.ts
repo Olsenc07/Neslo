@@ -48,7 +48,8 @@ const helmetOptions = isProduction ? {
             connectSrc: ["'self'"], 
             fontSrc: ["'self'", "https:", "data:"], 
             objectSrc: ["'none'"], 
-            upgradeInsecureRequests: [] 
+            upgradeInsecureRequests: [],
+            scriptSrcAttr: ["'unsafe-inline'"]
         }
     }
 } : {
