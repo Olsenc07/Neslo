@@ -37,7 +37,6 @@ const apiLimiter = rateLimit({
   });
    //  Create Express Servrt
    async function createServer(): Promise<express.Express> {
-    const server = express();
 
     // Security settings
   // Security settings
@@ -59,8 +58,9 @@ const helmetOptions = isProduction ? {
 } : {
     // Development-specific CSP or other security settings
 };
+    const server = express();
 
-    server.use(helmet(helmetOptions));
+    // server.use(helmet(helmetOptions));
     
     const corsOptions = isProduction ? {
         origin: 'https://www.neslo.ca',
