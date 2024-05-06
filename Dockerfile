@@ -19,11 +19,5 @@ COPY --from=build-step /app/package*.json ./
 
 EXPOSE 4200
 
-# Argument to accept the commit SHA
-# ARG GITHUB_SHA
-
-# Use the GITHUB_SHA to tag the server or use it within the application
-# ENV GITHUB_SHA_ENV=$GITHUB_SHA
-
 # Run the server
 CMD ["node", "dist/server/server.mjs"]

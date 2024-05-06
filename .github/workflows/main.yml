@@ -1,4 +1,4 @@
-name: Build, and Deploy to Heroku
+name: Docker Build and Deploy to Heroku
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -26,10 +26,6 @@ jobs:
       - name: Run Docker Container
         run: docker run -d -p 4200:4200 neslo:latest
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Login to Heroku Container Registry
         run: heroku container:login
         env:
