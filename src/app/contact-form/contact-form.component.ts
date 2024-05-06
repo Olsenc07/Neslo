@@ -48,7 +48,6 @@ export class ContactFormComponent {
     message: new FormControl<string | null>(null, Validators.required),
     file: new FormControl<File | null>(null)
   });
-  fileName: string | null = null;
   fileType: string | null = null;
   toggleFullScreen(): void {
     this.isFullScreen = !this.isFullScreen;
@@ -58,7 +57,6 @@ export class ContactFormComponent {
     let fileList: FileList | null = element.files;
     if (fileList) {
       const file = fileList[0];
-      this.fileName = file.name; 
       this.fileType = file.type;
       const objectURL = URL.createObjectURL(file);
       this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
@@ -67,7 +65,6 @@ export class ContactFormComponent {
     // To remove the attached file
     removeAttachedFile() {
       this.contactForm.patchValue({ file: null });
-      this.fileName = '';
       this.imageSrc = '';
     }
 

@@ -1,8 +1,10 @@
 import { Router, Request, Response } from 'express';
 import multer from 'multer';
 import sgMail from '@sendgrid/mail';
-const router = Router();
+import dotenv from 'dotenv';
+dotenv.config();
 
+const router = Router();
 const sendGridApiKey = process.env['SENDGRID_API_KEY'];
 if (!sendGridApiKey) {
   throw new Error('SENDGRID_API_KEY is not defined');
@@ -17,6 +19,7 @@ const upload = multer({ storage: storage });
 interface EmailWithAttachments {
   to: string | undefined;
   from: string;
+  reply_to: string;
   subject: string;
   text: string;
   html: string;
@@ -37,14 +40,14 @@ router.post('/emit', upload.single('file'), async (req: Request, res: Response) 
 
   // Declare msg as EmailWithAttachments to include attachments
   const msg: EmailWithAttachments = {
-    to: process.env['RECEIVER_EMAIL'],
-    from: `"${fromName}" <${fromEmail}>`,
-    subject: `Neslo Quote Request - ${fromName}`,
+    to: process.env['email'],
+    from: `info@neslo.ca`,
+    reply_to: `<${fromEmail}> `, 
+    subject: `New Contact Request from ${fromName}`,
     text: text,
     html: htmlText,
     attachments: [] 
   };
-
   if (req.file) {
     const attachment: Attachment = {
       content: req.file.buffer.toString('base64'),

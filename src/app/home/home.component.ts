@@ -84,15 +84,16 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
   handleScroll(): void {
     const scrollPosition: number = window.scrollY;
     const height: number = window.innerHeight;
-    const blurValue: number = Math.min(30, (scrollPosition / (height) * 10)); 
+    // const blurValue: number = Math.min(30, (scrollPosition / (height) * 10)); 
     // no zoom for mobile
     const zoomFactor: number = (1 + scrollPosition / height) * 100; 
      // Calculate new size percentage
   if (this.imgChild && this.imgChild.nativeElement) {
-    this.renderer.setStyle(this.imgChild.nativeElement, 'filter', `blur(${blurValue}px)`);
+    // this.renderer.setStyle(this.imgChild.nativeElement, 'filter', `blur(${blurValue}px)`);
     if(!this.orientationService.screen()){
     this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', `${zoomFactor}%`);
     // reset
     if(scrollPosition < 3) {
+      this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', `cover`);
     }}}}
 }

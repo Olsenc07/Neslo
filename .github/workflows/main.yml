@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,31 +20,32 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build Docker Image
+        run: |
+          docker build -t myapp:$GITHUB_SHA .
+        
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v3
         with:
-          start: npm run serve
-          wait-on: 'http://localhost:4200'  
-          wait-on-timeout: 60  
+          start: 'docker run -p 4200:4200 myapp:$GITHUB_SHA'
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 60
 
-  build-and-deploy:
-    needs: test  
+  deploy:
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Login to Heroku Container Registry
         run: heroku container:login
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
-      - name: Build and Push Unified Docker Image to Heroku
+      - name: Tag and Push to Heroku
         run: |
-          docker build -t registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web .
+          docker tag myapp:$GITHUB_SHA registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web
           docker push registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web
 
-      - name: Release Unified Docker Image
+      - name: Release Docker Image on Heroku
         run: heroku container:release web --app ${{ secrets.HEROKU_FS_NESLO }}
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
