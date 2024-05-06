@@ -21,15 +21,16 @@ jobs:
         run: npm install
 
       - name: Build Docker Image
-        run: |
-          docker build -t myapp:$GITHUB_SHA .
+        run: docker build --build-arg GITHUB_SHA=$GITHUB_SHA -t myapp:$GITHUB_SHA .
+
+      - name: Run Docker Container
+        run: docker run -d -p 4200:4200 myapp:$GITHUB_SHA
         
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v3
         with:
-          start: 'docker run -p 4200:4200 myapp:$GITHUB_SHA'
           wait-on: 'http://localhost:4200'
-          wait-on-timeout: 60
+          wait-on-timeout: 60  # Wait 1 minute for the server to start
 
   deploy:
     needs: build-and-test
