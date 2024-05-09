@@ -53,7 +53,7 @@
   }
 </div>
       <input type="file" formControlName="file" (change)="onFileSelected($event)"
-      hidden #fileInput accept=".pdf, .doc, .docx, .jpg, .jpeg, .png" multiple>
+      hidden #fileInput accept=".pdf, .jpg, .jpeg," multiple>
       <div class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
         <div  class="pad col-12 col-md-6 file-wrapper">
       <button mat-fab extended (click)="fileInput.click()" [ngClass]="contactForm.get('file')?.value ? 'file-added' : 'file-empty'">

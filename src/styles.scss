@@ -6,7 +6,11 @@
   box-sizing: border-box;
   font-family: 'Josefin Sans', sans-serif;
 }
-
+p.headings{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 :root {
   --wood: #8B4513;
   --wood-dark: #5c471f; 

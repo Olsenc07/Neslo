@@ -6,19 +6,25 @@
     <h3 class="text-center mb-3" heading>{{title}}</h3>
     <p class="text-center" [innerHTML]="intro"></p>
    <div class="text-center">
-    <p>
-        Phone:
+    <p class="headings">
+        <span class="material-symbols-outlined">
+            call
+            </span>
         <a class="link-secondary" aria-label="Call us" href="tel: +`{{tel}}`">{{tel}}</a>
     </p>
-    <p>
-        Email:
+    <p class="headings">
+        <span class="material-symbols-outlined">
+            mail
+            </span>
         <a class="link-secondary" aria-label="Email us" href="mailto:`{{email}}`">
          {{email}}
         </a>
     </p>
     @if(fax){
-    <p>
-        Fax:
+    <p class="headings">
+        <span class="material-symbols-outlined">
+            fax
+            </span>
         <a class="link-secondary" aria-label="Fax us">
             {{fax}}
         </a>
@@ -26,6 +32,7 @@
 }
     <p class="text-center" [innerHTML]="message">
     </p> 
+    
 </div> 
 </div>
 </div> 

@@ -61,9 +61,13 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
       Specializing in custom solutions, we ensure top-quality craftsmanship specifically to your home's needs. 
       <br> Keep connected and stay informed by following us. <br> 
       <br>
-      Instagram:
+      <p class="headings">
+      <span class="material-symbols-outlined">
+        share
+      </span>
       <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="styled-link">
-       @foldingslidingdoors_erik</a>`
+       @foldingslidingdoors_erik</a>
+       </p>`
     );
   
     this.introBC = this.sanitizer.bypassSecurityTrustHtml(
@@ -75,8 +79,12 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
       Check out our latest projects at Folding Sliding Doors Canada. 
       <br>
       <br>
-      Website:
-      <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link"> Folding Sliding Doors Canada</a>`
+      <p class="headings">
+      <span class="material-symbols-outlined">
+            web
+        </span>
+      <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link"> Folding Sliding Doors Canada</a>
+      </div>`
     );
     }
 

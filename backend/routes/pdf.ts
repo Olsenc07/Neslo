@@ -10,6 +10,9 @@ router.post('/generator', async (req: Request, res: Response) => {
   try {
     const { protocol, headers } = req;
     const { quoteForm, gridFormArray } = req.body;  
+    console.log('quote form', quoteForm);
+    console.log('grid form array', gridFormArray);
+
     const selectors = {
       dealerName: '#dealerName',
       dealerBranch: '#dealerBranch',
@@ -168,6 +171,7 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
 
     } catch (error) {
       console.error('Error generating PDF:', error);
+      res.setHeader('Content-Type', 'application/json');
       res.status(500).send('Failed to generate PDF');
     } 
 });

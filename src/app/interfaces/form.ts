@@ -17,4 +17,3 @@ export interface Form {
     handleColor: string;
     additionalNotes: string;
   }
-  

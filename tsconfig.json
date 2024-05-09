@@ -21,8 +21,8 @@
     "lib": ["ES2022", "dom"]
   },
   "exclude": [
-    "**/*.spec.ts",
-    "src/test.ts",
+    // "**/*.spec.ts",
+    // "src/test.ts",
     "**/node_modules/**"
   ],
   "angularCompilerOptions": {
