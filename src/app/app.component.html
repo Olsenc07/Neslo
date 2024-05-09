@@ -1,5 +1,12 @@
 @defer { 
   <router-outlet></router-outlet> 
+  @if(showScrollButton){
+  <button class="scroll-to-top" (click)="scrollToTop()" aria-label="Scroll to top">
+    <span class="material-symbols-outlined">
+      expand_less
+      </span>
+  </button>
+}
 }
 @loading (minimum 1.2s) { 
   <div class="initial-icon">   

@@ -21,7 +21,7 @@ import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 
 import { Grid } from '../interfaces/grid'
-import { OrientationService } from '../services/orientation.service';
+
 import { PdfService } from '../services/pdf.service';
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { environment } from 'environments/environment';
@@ -76,7 +76,6 @@ export class QuoteGeneratorComponent implements OnInit {
   constructor(private router: Router,
     private snackBar: MatSnackBar,
     private title:Title, 
-    protected orientationService: OrientationService, 
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService){}
 

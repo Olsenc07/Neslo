@@ -6,10 +6,11 @@
         left: 20px; 
         bottom: unset;
         opacity: .5;
-        background-color: var(--blue-field);    
+        background-color: #007bff;    
         position: absolute;
         }
 }
+
 .text{
     display: none;
     @media (min-width: 601px) {
@@ -60,6 +61,8 @@ header{
 h2{
     word-wrap: break-word; 
     font-size: 1.9em; 
+    font-weight: bold;
+    color: black;
   @media (min-width: 601px) {
     font-size: 2.1em; 
   }

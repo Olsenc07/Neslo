@@ -12,5 +12,6 @@ export default defineConfig({
     },
     baseUrl: 'http://localhost:4200',
     responseTimeout: 40000,
+    specPattern: 'cypress/e2e/*.cy.{js,jsx,ts,tsx}'
   }
 });

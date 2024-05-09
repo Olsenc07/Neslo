@@ -11,14 +11,16 @@
     "baseUrl": "./"
   },
   "files": [
-    "server.ts"
+    "server.ts",
+    "src/app/services/pdf.service.spec.ts",
+    "src/test.ts"
   ],
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "**/*.spec.ts"
   ],    
   "exclude": [
-    "**/*.spec.ts",
-    "src/test.ts",
+    // "src/test.ts",
     "**/node_modules/**"
   ]
 }

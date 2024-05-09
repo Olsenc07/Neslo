@@ -25,3 +25,11 @@ h3[heading] {
     font-size: 1.4vw; 
   }
 }
+.info-container {
+  transition: transform 0.3s ease-in-out; 
+  transform: translateY(0); 
+}
+
+.info-container:hover {
+  transform: translateY(-7px); 
+}

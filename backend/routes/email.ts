@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const router = Router();
+
 const sendGridApiKey = process.env['SENDGRID_API_KEY'];
+
 if (!sendGridApiKey) {
   throw new Error('SENDGRID_API_KEY is not defined');
 }
@@ -35,6 +37,7 @@ interface Attachment {
 }
 
 router.post('/emit', upload.single('file'), async (req: Request, res: Response) => {
+  try{
   const { text, fromName, fromEmail } = req.body;
   const htmlText = text.replace(/\n/g, '<br>');
 
@@ -71,6 +74,10 @@ router.post('/emit', upload.single('file'), async (req: Request, res: Response) 
       }
     res.status(500).send('Failed to send email');
   }
+} catch (error ) {
+    console.error('Failed to send email:', error);
+    // Sending error details in the response; consider security implications in production
+    res.status(500).send(`Failed to send email: ${error}`);
+  }
 });
-
 export default router;
