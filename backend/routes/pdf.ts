@@ -40,8 +40,7 @@ router.post('/generator', async (req: Request, res: Response) => {
         '--disable-dev-shm-usage',
         '--single-process' // running on a limited memory environment like Heroku
     ],
-
-    executablePath: puppeteer.executablePath(),
+    executablePath: process.env['CHROME_BIN'] || puppeteer.executablePath(),
     headless: true
     });
     const page = await browser.newPage();
