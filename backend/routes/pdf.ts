@@ -33,7 +33,17 @@ router.post('/generator', async (req: Request, res: Response) => {
       additionalNotes: '#additionalNotes'
     };
     // start creating pdf
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--single-process' // running on a limited memory environment like Heroku
+    ],
+
+    executablePath: puppeteer.executablePath(),
+    headless: true
+    });
     const page = await browser.newPage();
     const viewport: {
       width: number;
@@ -177,4 +187,3 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
 });
 
 export default router;
-  
