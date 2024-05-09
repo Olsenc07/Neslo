@@ -1,21 +1,20 @@
 <div  class="intro-head" [@fadeIn]>
   <div>
-      <h1 class="the-title">
-        <span class="extra-text">
-        Welcome to 
-        </span>
-        Neslo
         @if(orientation){
+          <div class="door-image">
+            <img src="./../favicon.ico" class="img gap-2" alt="Neslo Door">
+            </div>
       <mat-divider></mat-divider>
-        }
+        } @else {
+      <h1 class="the-title">
+        Welcome To Neslo
       </h1>
+        }
     <h2 heading>Central Alberta's trusted partner in premium windows and doors</h2>
   </div>
   @if(orientation){
   <div class="d-flex justify-content-center flex-column align-items-center  ">
-    <div class="door-image">
-    <img src="../assets/door.png" class="img gap-2" alt="Neslo Door">
-    </div>
+   
     <div class="d-flex flex-column ">
       <button mat-fab extended class="mobile" (click)="navigateToContact()">
           Learn about us
