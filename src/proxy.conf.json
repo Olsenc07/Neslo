@@ -1,0 +1,13 @@
+{
+    "/api": {
+      "target": "https://neslo.ca",
+      "secure": true,
+      "changeOrigin": true
+    },
+    "/assets/pdf": {
+      "target": "https://neslo.ca",
+      "secure": true,
+      "changeOrigin": true
+    }
+  }
+  
