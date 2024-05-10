@@ -47,14 +47,13 @@ const helmetOptions = isProduction ? {
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"], 
-            scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "'unsafe-inline'"], 
-            styleSrc: ["'self'", "https://cdn.jsdelivr.net", "'unsafe-inline'"], 
+            scriptSrc: ["'self'", "https://cdn.jsdelivr.net"], 
+            styleSrc: ["'self'", "https://cdn.jsdelivr.net"], 
             imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net",'blob:'], 
             connectSrc: ["'self'"], 
             fontSrc: ["'self'", "https:", "data:"], 
             objectSrc: ["'none'"], 
-            upgradeInsecureRequests: [],
-            scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"]
+            scriptSrcAttr: ["'none'"] 
         }
     }
 } : {
