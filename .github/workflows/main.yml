@@ -34,7 +34,7 @@ jobs:
 
       - name: Tag and Push to Heroku
         run: |
-          docker tag neslo:latest registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web
+          docker tag neslo:${{ github.sha }} registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web
           docker push registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web
 
       - name: Release Docker Image on Heroku
