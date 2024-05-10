@@ -14,25 +14,27 @@ import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fi
 import { OrientationService } from 'src/app/services/orientation.service';
 import { IntroComponent } from 'src/app/intro/intro.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 
 
 @Component({
-  standalone: true,
-  selector: 'app-home',
-  imports: [
-    AboutUsComponent,
-    ContactFormComponent,
-    MatButtonModule, 
-    MatDividerModule,
-    MatIconModule,
-    FontAwesomeModule,
-    NgClass,
-    // SkeletonFormComponent,
-    SkeletonFormFillComponent,
-    IntroComponent
-  ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+    standalone: true,
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss',
+    imports: [
+        AboutUsComponent,
+        ContactFormComponent,
+        MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
+        FontAwesomeModule,
+        NgClass,
+        // SkeletonFormComponent,
+        SkeletonFormFillComponent,
+        IntroComponent,
+        InstaCarouselComponent
+    ]
 })
 
 export class HomeComponent {
