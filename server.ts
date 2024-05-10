@@ -12,6 +12,8 @@ import helmet from 'helmet';
 const isProduction = process.env['NODE_ENV'] === 'production';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+console.log('file name', __filename);
+console.log('dir name', __dirname);
 
 // static files
 const browserDistFolder = join(__dirname, '../browser');
@@ -20,10 +22,9 @@ const bootstrapPath = join(__dirname, '../server/main.server.mjs');
 const indexHtml = join(__dirname, 'index.server.html');
 
 
-//  test these paths!!!
 // Backend routes 
-const emailRoutePath = join(__filename, '../../backend/routes/email.js');
-const pdfRoutePath = join(__filename, '../../backend/routes/pdf.js');
+const emailRoutePath = join(__dirname, '../backend/routes/email.js');
+const pdfRoutePath = join(__dirname, '../backend/routes/pdf.js');
 console.log("Email Route Path:", emailRoutePath);
 console.log("PDF Route Path:", pdfRoutePath);
 
@@ -53,8 +54,7 @@ const helmetOptions = isProduction ? {
             fontSrc: ["'self'", "https:", "data:"], 
             objectSrc: ["'none'"], 
             upgradeInsecureRequests: [],
-            scriptSrcAttr: ["'unsafe-inline'"],
-            'script-src-attr': ["'unsafe-inline'", "'unsafe-hashes'"]
+            scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"]
         }
     }
 } : {
@@ -62,17 +62,16 @@ const helmetOptions = isProduction ? {
 };
     const server = express();
     
-    // server.use(helmet(helmetOptions));
+    server.use(helmet(helmetOptions));
     
-    // const corsOptions = isProduction ? {
-    //     origin: 'https://www.neslo.ca',
-    //     optionsSuccessStatus: 200
-    // } : {
-    //     origin: '*',
-    //     optionsSuccessStatus: 200
-    // };
-    // server.use(cors(corsOptions));
-    server.use(cors())
+    const corsOptions = isProduction ? {
+        origin: 'https://www.neslo.ca',
+        optionsSuccessStatus: 200
+    } : {
+        origin: '*',
+        optionsSuccessStatus: 200
+    };
+    server.use(cors(corsOptions));
 
      // Middleware
      server.use(compression());
