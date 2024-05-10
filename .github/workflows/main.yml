@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - staging
 
 jobs:
   build-and-deploy:
@@ -21,10 +22,10 @@ jobs:
         run: npm install
 
       - name: Build Docker Image
-        run: docker build -t neslo:latest . 
+        run: docker build -t neslo:${{ github.sha }} .
 
       - name: Run Docker Container
-        run: docker run -d -p 4200:4200 neslo:latest
+        run: docker run -d -p 4200:4200 neslo:${{ github.sha }} .
 
       - name: Login to Heroku Container Registry
         run: heroku container:login
@@ -40,3 +41,6 @@ jobs:
         run: heroku container:release web --app ${{ secrets.HEROKU_FS_NESLO }}
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+env:
+  HEROKU_APP_NAME: ${{ github.ref == 'refs/heads/master' && 'neslo-fs' || github.ref == 'refs/heads/staging' && 'neslo-staging' }}
+  
