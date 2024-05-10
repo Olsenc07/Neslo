@@ -32,15 +32,20 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
+      - name: Determine HEROKU_APP_NAME
+        run: |
+           if [[ "${{ github.ref }}" == 'refs/heads/master' ]]; then
+             echo "HEROKU_APP_NAME=${{ secrets.HEROKU_FS_NESLO }}" >> $GITHUB_ENV
+           else
+             echo "HEROKU_APP_NAME=${{ secrets.HEROKU_STAGING_NESLO }}" >> $GITHUB_ENV
+           fi
+
       - name: Tag and Push to Heroku
         run: |
-          docker tag neslo:${{ github.sha }} registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web
-          docker push registry.heroku.com/${{ secrets.HEROKU_FS_NESLO }}/web
+          docker tag neslo:${{ github.sha }} registry.heroku.com/${{ env.HEROKU_APP_NAME }}/web
+          docker push registry.heroku.com/${{ env.HEROKU_APP_NAME }}/web
 
       - name: Release Docker Image on Heroku
-        run: heroku container:release web --app ${{ secrets.HEROKU_FS_NESLO }}
+        run: heroku container:release web --app ${{ env.HEROKU_APP_NAME }}
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-env:
-  HEROKU_APP_NAME: ${{ github.ref == 'refs/heads/master' && 'neslo-fs' || github.ref == 'refs/heads/staging' && 'neslo-staging' }}
-  
