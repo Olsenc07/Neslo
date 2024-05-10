@@ -32,6 +32,7 @@ router.post('/generator', async (req: Request, res: Response) => {
       handleColor: '#handleColor',
       additionalNotes: '#additionalNotes'
     };
+
     // start creating pdf
     const browser = await puppeteer.launch({
       args: [
@@ -44,6 +45,7 @@ router.post('/generator', async (req: Request, res: Response) => {
     headless: true
     });
     const page = await browser.newPage();
+
     const viewport: {
       width: number;
       height: number;

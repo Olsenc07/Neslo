@@ -1,0 +1,12 @@
+<carousel>
+    @for(post of instagramPosts; let i = $index; track post){
+    <slide>
+      <img [src]="post.media_url" alt="Instagram post" style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>{{ post.username }}</h5>
+        <p>{{ post.caption }}</p>
+      </div>
+    </slide>
+}
+  </carousel>
+  
