@@ -7,7 +7,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import helmet from 'helmet';
+import helmet, { HelmetOptions } from 'helmet';
 
 const isProduction = process.env['NODE_ENV'] === 'production';
 const __filename = fileURLToPath(import.meta.url);
@@ -39,26 +39,40 @@ console.log("PDF Route Path:", pdfRoutePath);
 //   }
 //   });
    //  Create Express Servrt
-   async function createServer(): Promise<express.Express> {
-
-    // Security settings
-  // Security settings
-const helmetOptions = isProduction ? {
+async function createServer(): Promise<express.Express> {
+const helmetOptions: HelmetOptions = isProduction ? {
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"], 
             scriptSrc: ["'self'", "https://cdn.jsdelivr.net"], 
             styleSrc: ["'self'", "https://cdn.jsdelivr.net"], 
-            imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net",'blob:'], 
+            imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net", 'blob:'], 
             connectSrc: ["'self'"], 
             fontSrc: ["'self'", "https:", "data:"], 
             objectSrc: ["'none'"], 
             scriptSrcAttr: ["'none'"] 
         }
-    }
+    },
+    frameguard: {
+        action: 'sameorigin'
+    },
+    hidePoweredBy: true,
+    dnsPrefetchControl: {
+        allow: false
+    },
+    noSniff: true
 } : {
-    // Development-specific CSP or other security settings
+    contentSecurityPolicy: false, // Disable CSP in development to allow all headers
+    frameguard: {
+        action: 'sameorigin'
+    },
+    hidePoweredBy: true,
+    dnsPrefetchControl: {
+        allow: true
+    },
+    noSniff: false
 };
+
     const server = express();
     
     server.use(helmet(helmetOptions));
