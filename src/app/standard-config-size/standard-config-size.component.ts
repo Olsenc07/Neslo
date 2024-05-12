@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-standard-config-size',
   standalone: true,
-  imports: [MatDividerModule],
+  imports: [],
   templateUrl: './standard-config-size.component.html',
   styleUrl: './standard-config-size.component.scss'
 })

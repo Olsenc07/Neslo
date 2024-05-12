@@ -13,6 +13,8 @@ import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
@@ -33,8 +35,8 @@ import { StandardConfigSizeComponent } from "../standard-config-size/standard-co
     templateUrl: './quote-generator.component.html',
     styleUrl: './quote-generator.component.scss',
     providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
-    imports: [AutoSearchComponent, MatProgressSpinnerModule,
-        MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule,
+    imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule,
+        MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
         MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
@@ -76,6 +78,7 @@ export class QuoteGeneratorComponent implements OnInit {
   constructor(private router: Router,
     private snackBar: MatSnackBar,
     private title:Title, 
+    public dialog: MatDialog,
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService){}
 
@@ -162,7 +165,9 @@ contactForm(): void {
   onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
     }
-
+standard(): void {
+   this.dialog.open(StandardConfigSizeComponent);
+}
   doorModel: string[] = [
     'FD72 TB Aluminum',
     'FD73 Ali-Clad',
