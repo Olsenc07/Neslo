@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-standard-config-size',
   standalone: true,
-  imports: [],
+  imports: [MatDividerModule],
   templateUrl: './standard-config-size.component.html',
   styleUrl: './standard-config-size.component.scss'
 })
@@ -29,6 +30,4 @@ export class StandardConfigSizeComponent {
     { config: '8+0', symbol: '&#95;&#47;&#92;&#47;&#92;&#47;&#92;&#47; &#95;', fd72_73: '276 1/4', fd27: '-' },
     { config: '9+0', symbol: '&#95;&#47;&#92;&#47;&#92;&#47;&#92;&#47;&#92; &#95;', fd72_73: '311 1/4', fd27: '-' },
   ];
-  
-  
 }

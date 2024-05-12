@@ -48,18 +48,17 @@ div[grey]{
     background-color: #f5f5f5;
     border: 1px solid;
 }
-div[red]{
+div[blue]{
     @include common();
-    background-color: var(--red);
-    border: 1px solid; 
+    background-color: #d0e4f7;
 }
 div[green]{
     @include common();
-    background-color: var(--green-field);
+    background-color: #D4EED1;
 }
 div[warning]{
     @include common();
-    color: var(--red);
+    color: #d93934;
 }
 th{
     border: 1px solid;
@@ -70,11 +69,11 @@ th[grey], td[grey]{
     text-align: center;
     border: 1px solid;
 }
-td[red]{
-    background-color: var(--red); 
+td[blue]{
+    background-color: #d0e4f7; 
 }
  td[green]{
-    background-color: var(--greenField);
+    background-color: #D4EED1;
 }
 td{
     text-align: center; 
@@ -86,8 +85,8 @@ h3{
     text-align: center;
     justify-content: center;
     margin-bottom: 0%;
-    &[red]{
-        background-color: var(--red); 
+    &[blue]{
+        background-color: #d0e4f7; 
     }
     &[green]{
         background-color: var(--greenField); 
