@@ -38,8 +38,7 @@ router.post('/generator', async (req: Request, res: Response) => {
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--single-process' // running on a limited memory environment like Heroku
+        '--disable-dev-shm-usage'
     ],
     executablePath: process.env['CHROME_BIN'] || puppeteer.executablePath(),
     headless: true
