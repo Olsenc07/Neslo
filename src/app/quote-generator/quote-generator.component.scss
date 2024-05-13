@@ -1,5 +1,8 @@
 .bottom-card{
-    width: 77%;
+    max-width: 90%;
+}
+.btm-pad{
+margin-bottom: 10%;
 }
 .text{
     display: none;
@@ -14,9 +17,6 @@
     button{
     color: white;
     }
-}
-button[email]{
-    background-color: var(--wood);
 }
 .spin-text{
     color: #0b5ed7;
@@ -72,19 +72,9 @@ h2[quote]{
     min-height: 175px; 
     resize: none; 
   }
-.nav-btn{
-        display: flex;
-        bottom: 40px; 
-        right: 20px; 
-        bottom: unset;
-        background-color: #007bff;    
-        position: absolute;
+mat-card-actions{
+    justify-content: space-between;
 }
-.back-btn{
-        display: flex;
-        top: 20px; 
-        left: 20px; 
-        bottom: unset;
-        background-color: #007bff;    
-        position: absolute;
+form{
+    padding-bottom: 1%;
 }

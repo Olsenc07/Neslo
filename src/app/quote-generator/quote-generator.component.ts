@@ -28,6 +28,7 @@ import { PdfService } from '../services/pdf.service';
 import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { environment } from 'environments/environment';
 import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
+import { OrientationService } from '../services/orientation.service';
 
 @Component({
     standalone: true,
@@ -77,6 +78,7 @@ export class QuoteGeneratorComponent implements OnInit {
 
   constructor(private router: Router,
     private snackBar: MatSnackBar,
+    protected orientationService: OrientationService,
     private title:Title, 
     public dialog: MatDialog,
    @Inject(PLATFORM_ID) private platformId: Object,
@@ -84,10 +86,6 @@ export class QuoteGeneratorComponent implements OnInit {
 
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
-    }
-  
-    returnHome(): void {
-      this.router.navigate(['/home']);
     }
 
   updateField(fieldName: string, value: string): void {

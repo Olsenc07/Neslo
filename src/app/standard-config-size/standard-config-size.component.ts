@@ -1,13 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, HostListener, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
+import { MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-standard-config-size',
   standalone: true,
-  imports: [],
+  imports: [MatDividerModule,
+    MatIconModule,
+    MatButtonModule
+  ],
   templateUrl: './standard-config-size.component.html',
-  styleUrl: './standard-config-size.component.scss'
+  styleUrl: './standard-config-size.component.scss',
 })
 export class StandardConfigSizeComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<StandardConfigSizeComponent>
+  ) {}
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
   readonly tableData = [
     { config: '1+0', symbol: '&#95;&#47;', fd72_73: '40 1/4', fd27: '40 3/8' },
     { config: '1+1', symbol: '&#95;&#47; &#92;&#95;', fd72_73: '74 1/8', fd27: '74 3/4' },

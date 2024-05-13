@@ -27,6 +27,11 @@ p.headings{
 button, input, select, textarea {
   font-family: 'Josefin Sans', sans-serif;
 }
+// dialog pop up container
+.cdk-overlay-pane {
+  overflow-y: auto;
+  max-height: 77%;
+}
 .mat-typography {
   font-family: 'Josefin Sans', sans-serif;
   
