@@ -9,11 +9,8 @@
         <p pdf class="mb-1 headings">105 - 1155 St. Paul Street</p>
         <p pdf class="mb-1 headings">Kelowna, BC V1Y 2C6</p>
         <p pdf class="mb-1 headings">(250)-448-6418</p>
-        <button id="ignore0" class="back-btn" mat-fab (click)="returnHome()">
-          <mat-icon class="material-symbols-outlined">arrow_back</mat-icon>
-        </button>  
       </div>
-      <div class="col text-center">
+      <div blackIcons class="col text-center">
       <h2 quote class="mt-3">
         Quote Request
        </h2>
@@ -38,12 +35,10 @@
         </p>
       </div> 
     </div>
-         
     </div>
- 
 </header>
 
-    <form [formGroup]="quoteForm" (ngSubmit)="generatePDF()" >
+    <form [formGroup]="quoteForm" >
           <!-- Dealer Information Section -->
           <div  class="container">
               <!-- Dealer Information Section -->
@@ -157,47 +152,72 @@
     } @placeholder {
       <app-skeleton-form-fill class="d-flex justify-content-center"></app-skeleton-form-fill>
     }
-    <div id="ignore1" class="g-3 g-md-3 container justify-content-md-between d-block d-md-flex">
-      <!-- Submit Button -->
-      <div class="pdf col-12 col-md-6 justify-content-start">
-        <!-- [disabled]="quoteForm.invalid" -->
-        @if(!progress){
-        <button mat-fab color="primary"  extended type="submit" class="btn btn-primary">
-          <mat-icon class="material-symbols-outlined">
-          picture_as_pdf      
-          </mat-icon>
-          Download PDF
-        </button> 
-      } @else {
-        <div class="spinner" aria-live="assertive">
-          <mat-spinner [diameter]="40"></mat-spinner>
-          <div class="px-3 spin-text">Creating PDF</div>
-        </div>
-      }
-      </div>
-      <div class="col-12 col-md-6 d-flex justify-content-end ">
-        <button email mat-fab extended  class="btn btn-primary"
-        (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
-        Email PDF
-        <mat-icon class="material-symbols-outlined">
-          @switch (state) { 
-              @case ('noFocus') { keyboard_arrow_right }
-              @case ('focus') { arrow_right_alt }
-             @default { keyboard_arrow_right }
-            }
-          </mat-icon>
-        </button>
-      </div>
-      <nav class="bg-light nav-btn-wrapper" id="ignore2" >
-          <button mat-raised-button clas="nav-btn"  (click)="returnHome()" >
-            Home Page
-          </button>
-      </nav>
-      </div>
-      @defer {
+    <div id="ignore1" class="g-3 g-md-3 btm-pad container justify-content-md-between">
+        <mat-card class="bottom-card">
+          <mat-card-header>
+            <mat-card-title>Reference Forms</mat-card-title>
+          </mat-card-header> 
+          <mat-card-content>
         <div class="size-space">
-      <app-standard-config-size></app-standard-config-size>
+          <button mat-fab extended color="warn" (click)="standard()">Standard Size Configurations
+            <mat-icon class="material-symbols-outlined">
+              select_window
+            </mat-icon>
+          </button>
         </div>
-      }
-    </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+<!-- Submit Button -->
+      <div class="pdf">
+  <!-- [disabled]="quoteForm.invalid" -->
+  @if(!progress){
+    @if(this.orientationService.screen()){
+    <button mat-fab  color="primary" (click)="generatePDF()" aria-label="Pdf generator button">
+      <mat-icon  class="material-symbols-outlined">
+        picture_as_pdf      
+        </mat-icon>
+    </button>
+  }@else{
+  <button mat-fab color="primary" extended (click)="generatePDF()"
+  aria-label="Pdf generator button and label"  class="btn btn-primary">
+    <mat-icon class="material-symbols-outlined">
+    picture_as_pdf      
+    </mat-icon>
+    Download PDF
+  </button> 
+}
+} @else {
+  <div class="spinner" aria-live="assertive">
+    <mat-spinner [diameter]="40"></mat-spinner>
+    <div class="px-3 spin-text">Creating PDF</div>
   </div>
+}
+      </div>
+      <div>
+        @if(this.orientationService.screen()){
+          <button mat-fab  color="primary" (click)="contactForm()" aria-label="Message navigation button">
+            <mat-icon  class="material-symbols-outlined">
+              mail      
+              </mat-icon>
+          </button>
+        } @else{
+          <button mat-fab extended color="primary"  class="btn btn-primary" aria-label="Message navigation button"
+          (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
+          Email PDF
+          <mat-icon class="material-symbols-outlined">
+            @switch (state) { 
+                @case ('noFocus') { keyboard_arrow_right }
+                @case ('focus') { arrow_right_alt }
+               @default { keyboard_arrow_right }
+              }
+            </mat-icon>
+          </button>
+        }
+</div>
+</mat-card-actions>
+</mat-card>
+
+    </div>
+    </form>
+  

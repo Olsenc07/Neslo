@@ -15,16 +15,20 @@ need oauth values
     
         <div class="row">
             <!-- Alberta's Distributor -->
-            <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-                <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center" #banner0>
+                @defer(on viewport(banner0)){
+                <app-about-us [@dropIn] [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
                 [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
                 [message]="messageAB"></app-about-us>
+                }
                 </div>
             <!-- Primary Supplier -->
-            <div class="col-12 col-md-6 d-flex flex-column align-items-center" >
-                <app-about-us [img]="imgBC" [title]="'Primary Supplier'" [customColor]="false"
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center" #banner1 >
+                @defer(on viewport(banner1)){
+                <app-about-us [@dropIn] [img]="imgBC" [title]="'Primary Supplier'" [customColor]="false"
                 [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
                 [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
+                }
             </div>
         </div>
     </div>
@@ -62,7 +66,7 @@ need oauth values
 <div class="container">
 <p>© 2024 Neslo. All rights reserved.</p>
 <p>Join us on social media to adventure with Neslo</p>
-<fa-icon [icon]="faInstagramSquare"></fa-icon>
+<i class="bi bi-instagram"></i>
 &#160;
 <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="text-light">
      &#64;FoldingSlidingDoors_Erik

@@ -1,7 +1,13 @@
 @defer { 
   <router-outlet></router-outlet> 
+  @if(!isHomeRoute && !showScrollButton){
+  <button id="ignore0"   class="nav-buttons" mat-fab (click)="returnHome()"
+  aria-label="Navigate to home page">
+    <mat-icon class="material-symbols-outlined">navigate_before</mat-icon>
+  </button>  
+}
   @if(showScrollButton){
-  <button class="scroll-to-top" (click)="scrollToTop()" aria-label="Scroll to top">
+  <button class="nav-buttons" [@rotateInOut] (click)="scrollToTop()" aria-label="Scroll to top">
     <span class="material-symbols-outlined">
       expand_less
       </span>

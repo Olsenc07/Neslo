@@ -4,8 +4,6 @@ import { NgClass } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faInstagramSquare } from '@fortawesome/free-brands-svg-icons';
 
 import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
 import { AboutUsComponent } from 'src/app/about-us/about-us.component';
@@ -15,6 +13,7 @@ import { OrientationService } from 'src/app/services/orientation.service';
 import { IntroComponent } from 'src/app/intro/intro.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
@@ -28,18 +27,25 @@ import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.compone
         MatButtonModule,
         MatDividerModule,
         MatIconModule,
-        FontAwesomeModule,
         NgClass,
         // SkeletonFormComponent,
         SkeletonFormFillComponent,
         IntroComponent,
         InstaCarouselComponent
+    ],
+    animations: [
+      trigger('dropIn', [
+        state('void', style({ opacity: 0.3, transform: 'translateY(-50px)' })), 
+        state('*', style({ opacity: 1, transform: 'translateY(0)' })),
+        transition('void => *', [
+          animate('0.8s .3s ease-out') 
+        ])
+      ])
     ]
 })
 
 export class HomeComponent {
 atSymbol: string = '@';
-faInstagramSquare = faInstagramSquare;
 
 imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.jpg', alt: 'Neslo Ltd.' }
 messageAB: SafeHtml;
@@ -64,9 +70,7 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
       <br> Keep connected and stay informed by following us. <br> 
       <br>
       <p class="headings">
-      <span class="material-symbols-outlined">
-        share
-      </span>
+      <i class="bi bi-instagram px-1"></i>
       <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="styled-link">
        @foldingslidingdoors_erik</a>
        </p>`
@@ -84,7 +88,7 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
       <p class="headings">
       <span class="material-symbols-outlined">
             web
-        </span>
+       </span>
       <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link"> Folding Sliding Doors Canada</a>
       </div>`
     );
