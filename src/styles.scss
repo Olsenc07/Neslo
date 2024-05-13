@@ -24,6 +24,20 @@ p.headings{
   --green-field: #6a9955;
   --red: #da9694;
 }
+footer{
+.bi-instagram {
+  font-size: 24px; 
+  color: white; 
+}}
+.material-symbols-outlined {
+  padding-right: 1%;
+  color: white; 
+}
+div[blackIcons]{
+  .material-symbols-outlined {
+      color: black ;
+  }
+  }
 button, input, select, textarea {
   font-family: 'Josefin Sans', sans-serif;
 }
