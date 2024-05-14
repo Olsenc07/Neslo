@@ -23,7 +23,7 @@ h2{
   height: 100px; 
   border-radius: 50%;
   z-index: -1; 
-  animation: growShadow 1.2s ease-in-out forwards; 
+  animation: growShadow 1.2s ease-out; 
 }
 
 @keyframes growShadow {

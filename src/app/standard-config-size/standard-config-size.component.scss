@@ -8,8 +8,6 @@
     position: absolute;
     top: 10px; 
     right: 10px; 
-    border: outset;
-    background-color: var(--bs-body-bg);
   }
 .sub-heading{
     padding: 1% 0% 0%;
@@ -18,7 +16,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: 0% 1%;
+    margin: 1%;
     position: relative;
     overflow-y: auto;
 }
@@ -37,7 +35,6 @@
     flex-direction: column;
     div{
     display: flex;
-    border: 1px solid;
     }
 }
 .table{
@@ -53,12 +50,10 @@ b{
 div[white]{
     @include common();
     background-color: white;
-    border: 1px solid;
 }
 div[grey]{
     @include common();
     background-color: #f5f5f5;
-    border: 1px solid;
 }
 div[blue]{
     @include common();

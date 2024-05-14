@@ -40,7 +40,6 @@
     </button>
   </div>
 
-
     @if(this.fileType === 'application/pdf'){
   <iframe [src]="imageSrc" 
   class="img-thumbnail img-fluid mx-auto d-block" 
@@ -75,7 +74,7 @@
 <button mat-fab extended type="submit" id="submitBtn" 
     (mouseover)="onHover(true)" (mouseleave)="onHover(false)" 
       [disabled]="contactForm.valid">
-      Send Email 
+      Send 
       <mat-icon class="material-symbols-outlined">
     @switch (state) { 
         @case ('noFocus') { keyboard_arrow_right }
