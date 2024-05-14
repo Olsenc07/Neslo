@@ -2,7 +2,7 @@ import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, RouterModule, TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './services/title-strategy.service';
 import { MatIconModule } from '@angular/material/icon';
-import { trigger, transition, animate, style } from '@angular/animations';
+import { trigger, transition, animate, style, state } from '@angular/animations';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -14,22 +14,23 @@ import { isPlatformBrowser } from '@angular/common';
   providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
   animations: [
     trigger('rotateInOut', [
-      // Animation for entering the view
-      transition(':enter', [   
-        style({ transform: 'rotate(-90deg)' }), 
-        animate('0.7s ease-out', style({ transform: 'rotate(0deg)' })) 
+      // Define states if specific styles are required for each
+      state('down', style({ transform: 'rotate(0deg)' })),  // Assuming 'down' is the initial state
+      state('up', style({ transform: 'rotate(180deg)' })),
+  
+      // Define transitions between states
+      transition('down => up', [
+        animate('0.7s ease-out', style({ transform: 'rotate(180deg)' }))
       ]),
-      // Animation for leaving the view
-      transition(':leave', [
-        style({ transform: 'rotate(0deg)' }), 
-        animate('0.7s ease-out', style({ transform: 'rotate(-90deg)' })) 
+      transition('up => down', [
+        animate('0.7s ease-out', style({ transform: 'rotate(0deg)' }))  // Rotates back to initial position
       ])
     ])
   ]
 })
 export class AppComponent {
   title: string = 'Neslo';
-
+  view: 'up' | 'down' = 'down';
   showScrollButton = false;
 
 constructor(public router: Router,
@@ -38,21 +39,26 @@ constructor(public router: Router,
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    if (isPlatformBrowser(this.platformId)) {
     const yOffset = window.scrollY;
     const scrollTopThreshold = 100;
     this.showScrollButton = yOffset > scrollTopThreshold;
-    }
+    this.view = this.showScrollButton ? 'up' :  'down';
   }
-  returnHome(): void {
+
+  nav(): void {
+    if (isPlatformBrowser(this.platformId)) {
+    if(this.view === 'down'){
+      window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+      this.view = 'up';
+    } else if (this.view === 'up'){
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      this.view = 'down';
+    } }
+  }
+  back(): void{
     this.router.navigate(['/home']);
   }
-  scrollToTop() {
-    if (isPlatformBrowser(this.platformId)) {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-  }
-  get isHomeRoute() {
+  get isHomeRoute(): boolean {
     return this.router.url === '/' || this.router.url === '/home';
   }
 }

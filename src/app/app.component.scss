@@ -6,6 +6,15 @@
   height: 75vh;
   overflow: hidden;
 }
+.btn-container {
+  display: flex;
+  justify-content: space-around; /* Distributes space evenly between the buttons */
+  align-items: center; /* Aligns buttons centrally vertically within the container */
+  padding: 10px; /* Adds some padding around the container */
+  background: rgba(0, 0, 0, 0.1); /* Subtle background to the button container */
+  border-radius: 10px; /* Rounded edges for the container */
+  border: 1px solid #ccc; /* Subtle border around the container */
+}
 img{
   border-radius: 50%;
   z-index: 1;
@@ -42,6 +51,7 @@ h2{
   position: fixed;
   right: 20px;
   bottom: 150px;
+  opacity: .5;
   background-color: #007bff; 
   color: white;
   border: none;
@@ -55,5 +65,8 @@ h2{
   z-index: 10; 
   &:hover {
     background-color: darken(#007bff, 5%);
+  }
+  @media (min-width: 601px) {
+    opacity: 1;
   }
 }
