@@ -45,7 +45,6 @@ ngOnChanges(changes: SimpleChanges): void {
 
     if (!this.input.value || this.input.pristine) {
       this.input.setValue(this.intValue || this.value || '', { emitEvent: false });
-      this.cdr.detectChanges();
     }
 
 }}

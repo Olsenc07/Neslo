@@ -1,5 +1,5 @@
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +29,7 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { environment } from 'environments/environment';
 import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
 import { OrientationService } from '../services/orientation.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     standalone: true,
@@ -41,7 +42,7 @@ import { OrientationService } from '../services/orientation.service';
         MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
-export class QuoteGeneratorComponent implements OnInit {
+export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   apiUrl = environment.apiUrl;
   progress: boolean = false;
   state: 'noFocus' | 'focus' = 'noFocus';
@@ -75,19 +76,44 @@ export class QuoteGeneratorComponent implements OnInit {
   });
 
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
-
+  private formChangeSubscription: Subscription | undefined;
+  
   constructor(private router: Router,
     private snackBar: MatSnackBar,
     protected orientationService: OrientationService,
     private title:Title, 
     public dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
    @Inject(PLATFORM_ID) private platformId: Object,
-    private pdfService: PdfService){}
+    private pdfService: PdfService){
+      // if (isPlatformBrowser(this.platformId)) {
+      //   this.loadForm();
+      // }
+    }
 
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
+      // pre set formcontrol values
+      // this.quoteForm.valueChanges.subscribe(values => {
+      //   console.log('form value', values);
+      //   sessionStorage.setItem('quoteFormData', JSON.stringify(values));
+      // });
     }
-
+  
+    // private loadForm(): void {
+    //   try{
+    //   const savedForm = sessionStorage.getItem('quoteFormData');
+    //   if (savedForm) {
+    //     const formData = JSON.parse(savedForm);
+    //     console.log('Loaded form data:', formData);
+    //     this.quoteForm.patchValue(formData, { emitEvent: false });
+    //     this.cdr.detectChanges();
+    //   }
+    // } catch (e) {
+    //   console.error('Error parsing form data', e);
+    // }
+    // }
+    
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
@@ -156,15 +182,23 @@ resizeTextarea(event: Event): void {
 }
 contactForm(): void {
   this.router.navigate(['/home']);
-  if (isPlatformBrowser(this.platformId)) {
-    window.scrollTo(0, document.body.scrollHeight);
-  }
+  // if (isPlatformBrowser(this.platformId)) {
+  //   window.scrollTo({
+  //     top: document.body.scrollHeight,
+  //     behavior: 'smooth'
+  //   });
+// }
   }
   onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
     }
 standard(): void {
    this.dialog.open(StandardConfigSizeComponent);
+}
+
+ngOnDestroy(): void {
+  // Unsubscribe to ensure no memory leaks
+  // this.formChangeSubscription?.unsubscribe();
 }
   doorModel: string[] = [
     'FD72 TB Aluminum',

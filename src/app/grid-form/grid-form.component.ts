@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, OnDestroy, Input, SimpleChanges } from
 import { FormArray, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { Grid } from '../interfaces/grid';
-import  { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'app-grid-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatIconModule, MatSelectModule, MatCardModule,
+  imports: [ ReactiveFormsModule, MatIconModule, MatSelectModule, MatCardModule,
     MatDividerModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './grid-form.component.html',
   styleUrl: './grid-form.component.scss',

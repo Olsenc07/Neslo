@@ -38,7 +38,8 @@ router.post('/generator', async (req: Request, res: Response) => {
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage'
+        '--disable-dev-shm-usage',
+        '--user-data-dir=/tmp'
     ],
     executablePath: process.env['CHROME_BIN'] || puppeteer.executablePath(),
     headless: true

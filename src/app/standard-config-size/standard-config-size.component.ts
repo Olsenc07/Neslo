@@ -1,28 +1,23 @@
-import { Component, ElementRef, ViewChild, HostListener, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component} from '@angular/core';
 import {MatDividerModule} from '@angular/material/divider';
 import { MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { CloseDialogDirective } from '../directives/close-dialog.directive';
 
 @Component({
   selector: 'app-standard-config-size',
   standalone: true,
   imports: [MatDividerModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    CloseDialogDirective
   ],
   templateUrl: './standard-config-size.component.html',
   styleUrl: './standard-config-size.component.scss',
 })
 export class StandardConfigSizeComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<StandardConfigSizeComponent>
-  ) {}
-
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
+  constructor() {}
 
   readonly tableData = [
     { config: '1+0', symbol: '&#95;&#47;', fd72_73: '40 1/4', fd27: '40 3/8' },
