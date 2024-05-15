@@ -38,7 +38,7 @@ h2{
   }
 }
 .top-btn{
-  bottom: 212px;
+  bottom: 220px;
 }
 .btm-btn{
   bottom: 150px;
@@ -52,12 +52,6 @@ h2{
   background-color: var(--wood-light);
   border-radius: 50%;
   border: solid;
-  width: 41px;
-  height: 41px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
   z-index: 10; 
   @media (min-width: 601px) {
     opacity: 1;

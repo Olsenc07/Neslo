@@ -87,35 +87,31 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
    @Inject(PLATFORM_ID) private platformId: Object,
-    private pdfService: PdfService){
-      // if (isPlatformBrowser(this.platformId)) {
-      //   this.loadForm();
-      // }
-    }
+    private pdfService: PdfService){}
 
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
-      // pre set formcontrol values
-      // this.quoteForm.valueChanges.subscribe(values => {
-      //   console.log('form value', values);
-      //   sessionStorage.setItem('quoteFormData', JSON.stringify(values));
-      // });
+      this.loadFormData();
+
+      if (isPlatformBrowser(this.platformId)) {
+      this.quoteForm.valueChanges.subscribe(values => {
+        console.log('form value', values);
+        sessionStorage.setItem('quoteFormData', JSON.stringify(values));
+      });
+    }}
+
+    private loadFormData() {
+      try{
+      const savedForm = sessionStorage.getItem('quoteFormData');
+      console.log('saved?', savedForm);
+      if (savedForm) {
+        this.quoteForm.setValue(JSON.parse(savedForm), { emitEvent: false });
+        this.cdr.detectChanges();
+      }
+    } catch (e) {
+      console.error('Error parsing form data', e);
     }
-  
-    // private loadForm(): void {
-    //   try{
-    //   const savedForm = sessionStorage.getItem('quoteFormData');
-    //   if (savedForm) {
-    //     const formData = JSON.parse(savedForm);
-    //     console.log('Loaded form data:', formData);
-    //     this.quoteForm.patchValue(formData, { emitEvent: false });
-    //     this.cdr.detectChanges();
-    //   }
-    // } catch (e) {
-    //   console.error('Error parsing form data', e);
-    // }
-    // }
-    
+    }
   updateField(fieldName: string, value: string): void {
     this.quoteForm.get(fieldName)?.setValue(value);
   }
@@ -208,6 +204,12 @@ contactForm(): void {
 standard(): void {
    this.dialog.open(StandardConfigSizeComponent);
 }
+clearForm(): void{
+  this.quoteForm.reset(); 
+  sessionStorage.removeItem('quoteFormData');
+  console.log('hi', this.quoteForm);
+}
+
 
 ngOnDestroy(): void {
   // Unsubscribe to ensure no memory leaks

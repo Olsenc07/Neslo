@@ -6,13 +6,14 @@ import { trigger, transition, animate, style, state } from '@angular/animations'
 import { isPlatformBrowser } from '@angular/common';
 import { HideFocusService } from './services/hide-focus.service';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [MatIconModule, RouterModule, MatTooltipModule],
+  imports: [MatIconModule, RouterModule, MatTooltipModule, MatButtonModule],
   providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
   animations: [
     trigger('rotateInOut', [
