@@ -73,8 +73,10 @@ button[type="submit"]{
   z-index: 7;
   border-radius: 25px;
 }
-.remover-file-btn{
+.remove-file-btn{
     position: absolute;
     top: 0px; 
     right: 0px; 
+    opacity: .3;
+    background-color: black;
 }
