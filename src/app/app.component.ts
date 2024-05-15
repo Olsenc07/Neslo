@@ -1,42 +1,55 @@
-import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
-import { Router, RouterModule, TitleStrategy } from '@angular/router'
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './services/title-strategy.service';
 import { MatIconModule } from '@angular/material/icon';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { isPlatformBrowser } from '@angular/common';
+import { HideFocusService } from './services/hide-focus.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [MatIconModule, RouterModule],
+  imports: [MatIconModule, RouterModule, MatTooltipModule],
   providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
   animations: [
     trigger('rotateInOut', [
-      // Define states if specific styles are required for each
-      state('down', style({ transform: 'rotate(0deg)' })),  // Assuming 'down' is the initial state
+      state('down', style({ transform: 'rotate(0deg)' })), 
       state('up', style({ transform: 'rotate(180deg)' })),
-  
-      // Define transitions between states
       transition('down => up', [
         animate('0.7s ease-out', style({ transform: 'rotate(180deg)' }))
       ]),
       transition('up => down', [
-        animate('0.7s ease-out', style({ transform: 'rotate(0deg)' }))  // Rotates back to initial position
+        animate('0.7s ease-out', style({ transform: 'rotate(0deg)' })) 
       ])
     ])
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string = 'Neslo';
   view: 'up' | 'down' = 'down';
-  showScrollButton = false;
+  showScrollButton: boolean = false;
+  isHomeRoute: boolean = true;
 
 constructor(public router: Router,
+  protected hideFocusService: HideFocusService,
   @Inject(PLATFORM_ID) private platformId: Object
 ){}
 
+ngOnInit(): void {
+  this.router.events.subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      this.updateHomeRouteStatus();
+    }
+  });
+  this.updateHomeRouteStatus();
+}
+
+private updateHomeRouteStatus(): void {
+  this.isHomeRoute = this.router.url === '/' || this.router.url === '/home';
+}
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     const yOffset = window.scrollY;
@@ -58,7 +71,5 @@ constructor(public router: Router,
   back(): void{
     this.router.navigate(['/home']);
   }
-  get isHomeRoute(): boolean {
-    return this.router.url === '/' || this.router.url === '/home';
-  }
+  
 }

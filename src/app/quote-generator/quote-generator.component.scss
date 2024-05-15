@@ -40,6 +40,9 @@ margin-bottom: 10%;
     max-width: 50%;
     margin-bottom: 3%;
     @media (min-width: 601px) {
+        max-width: 35%;
+    }
+    @media (min-width: 1025px) {
         max-width: 20%;
     }
     border-radius: 50%;

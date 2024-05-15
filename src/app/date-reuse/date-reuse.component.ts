@@ -6,13 +6,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { HideFocusDirective } from '../directives/hide-focus.directive';
 
 @Component({
   selector: 'app-date-reuse',
   standalone: true,
   imports: [
     MatDatepickerModule, MatButtonModule, MatFormFieldModule,
-    MatIconModule, MatInputModule, ReactiveFormsModule
+    HideFocusDirective, MatIconModule, MatInputModule, ReactiveFormsModule
   ],
   providers:[provideNativeDateAdapter()],
   templateUrl: './date-reuse.component.html',

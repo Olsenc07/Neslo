@@ -38,7 +38,7 @@
     </div>
 </header>
 
-    <form [formGroup]="quoteForm" >
+    <form [formGroup]="quoteForm" #formElement>
           <!-- Dealer Information Section -->
           <div  class="container">
               <!-- Dealer Information Section -->
@@ -139,7 +139,8 @@
         <div class="notes-container">
           <mat-form-field class="notes-form" id="additionalNotes" appearance="fill">
           <mat-label>Additional notes...</mat-label>
-          <textarea matInput formControlName="additionalNotes" class="notes" (input)="resizeTextarea($event)"></textarea>
+          <textarea matInput appHideFocus formControlName="additionalNotes" class="notes" 
+          (input)="resizeTextarea($event)"></textarea>
         </mat-form-field>
         </div>
           </div>
@@ -179,7 +180,7 @@
         </mat-icon>
     </button>
   }@else{
-  <button mat-fab color="primary" extended (click)="generatePDF()"
+  <button mat-fab color="primary" extended (click)="generatePDF()" matTooltip="Download quote form"
   aria-label="Pdf generator button and label"  class="btn btn-primary">
     <mat-icon class="material-symbols-outlined">
     picture_as_pdf      
@@ -202,7 +203,7 @@
               </mat-icon>
           </button>
         } @else{
-          <button mat-fab extended color="primary"  class="btn btn-primary" aria-label="Message navigation button"
+          <button mat-fab extended color="primary" class="btn btn-primary" aria-label="Message navigation button"
           (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
           Create a message
           <mat-icon class="material-symbols-outlined">

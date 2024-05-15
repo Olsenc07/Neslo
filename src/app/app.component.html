@@ -1,21 +1,23 @@
 @defer { 
   <router-outlet></router-outlet> 
-  <div class="btn-container" id="ignore0">
+  @if(!this.hideFocusService.focused()){
+  <ng-container id="ignore0">
     @if(!isHomeRoute){
-  <button class="nav-buttons" mat-fab (click)="back()"
-  aria-label="Navigate home">
+  <button class="nav-buttons top-btn" mat-fab (click)="back()"
+  matTooltip="Home page" aria-label="Navigate home">
   <mat-icon class="material-symbols-outlined">
     keyboard_arrow_left
   </mat-icon>
   </button>  
     }
-  <button class="nav-buttons" mat-fab [@rotateInOut]="view" (click)="nav()"
-         aria-label="Navigate button">
+  <button class="nav-buttons btm-btn" mat-fab [@rotateInOut]="view" (click)="nav()"
+      matTooltip="Scroll {{view}}" aria-label="Navigate button">
       <mat-icon class="material-symbols-outlined">
         keyboard_arrow_down
       </mat-icon>
   </button>  
-</div>
+</ng-container>
+  }
 }
 @loading (minimum 1.2s) { 
   <div class="initial-icon">   
