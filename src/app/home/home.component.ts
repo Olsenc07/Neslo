@@ -15,7 +15,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-
 @Component({
     standalone: true,
     selector: 'app-home',

@@ -38,16 +38,21 @@ margin-bottom: 10%;
 }
 .img{
     max-width: 50%;
+    margin-bottom: 3%;
     @media (min-width: 601px) {
+        max-width: 35%;
+    }
+    @media (min-width: 1025px) {
         max-width: 20%;
     }
     border-radius: 50%;
     box-shadow: 2px 2px 2px rgb(0 0 0 / 26%);
+    background-color: white;
+    padding: 5px;
 }
 header{
-    background-color: #18263a2e;
+    background-color: #18263a0a;
 }
-
 h2{
     word-wrap: break-word; 
     font-size: 1.9em; 

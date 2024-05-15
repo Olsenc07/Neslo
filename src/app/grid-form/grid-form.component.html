@@ -70,49 +70,49 @@
       <!-- Room Label -->
   <td>
     <mat-form-field [id]="'roomLabel-' + i" blue appearance="fill">
-      <input matInput type="text" formControlName="roomLabel">
+      <input matInput type="text" formControlName="roomLabel" appHideFocus>
     </mat-form-field>
   </td>
   <!-- Rough Opening Width -->
   <td>
     <mat-form-field [id]="'width-' + i" green appearance="fill">
-      <input matInput type="text" formControlName="width">
+      <input matInput type="text" formControlName="width" appHideFocus>
     </mat-form-field>
   </td>
   <!-- Rough Opening Height -->
   <td>
     <mat-form-field [id]="'height-' + i" green appearance="fill">
-      <input matInput type="text" formControlName="height">
+      <input matInput type="text" formControlName="height" appHideFocus>
     </mat-form-field>
   </td>
   <!-- Configuration0 -->
   <td>
     <mat-form-field [id]="'configuration0-' + i" red appearance="fill">
-      <input matInput type="text" formControlName="configuration0">
+      <input matInput type="text" formControlName="configuration0" appHideFocus>
     </mat-form-field>
   </td>
       <td class="plus">+</td>
   <td>
     <mat-form-field [id]="'configuration1-' + i" red appearance="fill">
-      <input matInput type="text" formControlName="configuration1">
+      <input matInput type="text" formControlName="configuration1" appHideFocus>
     </mat-form-field>
   </td>
   <!-- Left -->
   <td>
     <mat-form-field [id]="'left-' + i" appearance="fill">
-      <input matInput type="text" formControlName="left">
+      <input matInput type="text" formControlName="left" appHideFocus>
     </mat-form-field>
   </td>
   <!-- Right -->
   <td>
     <mat-form-field [id]="'right-' + i" appearance="fill">
-      <input matInput type="text" formControlName="right">
+      <input matInput type="text" formControlName="right"appHideFocus>
     </mat-form-field>
   </td>
   <!-- Active Panel -->
   <td>
     <mat-form-field [id]="'activePanel-' + i" purple appearance="fill">
-      <mat-select formControlName="activePanel">
+      <mat-select formControlName="activePanel" appHideFocus>
         <mat-option value="Right">Right</mat-option>
         <mat-option value="Left">Left</mat-option>
       </mat-select>

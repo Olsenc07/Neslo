@@ -5,7 +5,7 @@
       }
       <mat-form-field appearance="fill">
             <input [attr.type]="types" matInput [formControl]="input" [attr.required]="need"
-                   [placeholder]="intValue ? intValue : ''">
+            appHideFocus [placeholder]="intValue ? intValue : ''">
                    @if(input.hasError('required')){
                    <mat-error>
                     This field is required.

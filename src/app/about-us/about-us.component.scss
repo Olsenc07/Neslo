@@ -11,7 +11,9 @@
     border-radius: 50%;
     max-width: 20vh;
     margin-bottom: 2%;
-    box-shadow: 2px 2px 2px rgb(0 0 0 / 26%);
+    box-shadow: 2px 2px 2px #00000042;
+    background-color: #fff;
+    padding: 5px;
   }
 .parent-container {
   display: flex;
@@ -34,9 +36,10 @@ h3[heading] {
   transition: transform 0.3s ease-in-out; 
   transform: translateY(0); 
 }
-
+@media (hover: hover) {
 .info-container:hover {
   transform: translateY(-7px); 
+}
 }
 @keyframes dropDown {
   0% {

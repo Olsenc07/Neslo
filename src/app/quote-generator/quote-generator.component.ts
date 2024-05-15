@@ -1,5 +1,5 @@
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +15,7 @@ import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
@@ -30,6 +31,7 @@ import { environment } from 'environments/environment';
 import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
 import { OrientationService } from '../services/orientation.service';
 import { Subscription } from 'rxjs';
+import { HideFocusDirective } from '../directives/hide-focus.directive';
 
 @Component({
     standalone: true,
@@ -37,9 +39,9 @@ import { Subscription } from 'rxjs';
     templateUrl: './quote-generator.component.html',
     styleUrl: './quote-generator.component.scss',
     providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
-    imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule,
+    imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule, HideFocusDirective,
         MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
-        MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent,
+        MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent, MatTooltipModule,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
 export class QuoteGeneratorComponent implements OnInit, OnDestroy {
@@ -77,7 +79,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
   private formChangeSubscription: Subscription | undefined;
-  
+  @ViewChild('formElement') formElement!: ElementRef;
   constructor(private router: Router,
     private snackBar: MatSnackBar,
     protected orientationService: OrientationService,
@@ -137,6 +139,8 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   }}
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
+      if (this.quoteForm.invalid) {
+        this.scrollToFirstInvalidControl();
       this.progress = true;
         this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
@@ -162,7 +166,18 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     this.snackBar.open('PDF generation is only available in a browser environment.', '❌', {
       duration: 3000
     });
-  }}
+  }}};
+  private scrollToFirstInvalidControl(): void {
+    for (const key of Object.keys(this.quoteForm.controls)) {
+      if (this.quoteForm.controls[key].invalid) {
+        const invalidControl: HTMLElement = this.formElement.nativeElement.querySelector(`#${key}`);
+        if (invalidControl) {
+          invalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          break;
+        }
+      }
+    }
+  }
 // download 
 private downloadPDF(pdfBlob: Blob): void {
   const url = window.URL.createObjectURL(pdfBlob);

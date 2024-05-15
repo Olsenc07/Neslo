@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { combineLatestWith, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { HideFocusDirective } from '../directives/hide-focus.directive';
 
 @Component({
   selector: 'app-auto-search',
@@ -24,6 +25,7 @@ import { Observable, of } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    HideFocusDirective,
     ReactiveFormsModule
   ],
   templateUrl: './auto-search.component.html',

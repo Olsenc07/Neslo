@@ -13,6 +13,9 @@ import { NgClass } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrientationService } from '../services/orientation.service';
+import { HideFocusService } from '../services/hide-focus.service';
+import { HideFocusDirective } from '../directives/hide-focus.directive';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-contact-form',
@@ -21,6 +24,8 @@ import { OrientationService } from '../services/orientation.service';
     MatButtonModule,
     MatIconModule, 
     MatInputModule,
+    MatTooltipModule,
+    HideFocusDirective,
     ReactiveFormsModule,
     MatFormFieldModule,
     NgClass
@@ -36,6 +41,7 @@ export class ContactFormComponent {
   fillAttached: boolean = false;
 
   constructor(private sanitizer: DomSanitizer,
+    protected hideFocusService: HideFocusService,
     protected orientationService: OrientationService,
     private snackBar: MatSnackBar
   ){}

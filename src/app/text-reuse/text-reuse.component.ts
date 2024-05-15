@@ -4,12 +4,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { HideFocusService } from '../services/hide-focus.service';
+import { OrientationService } from '../services/orientation.service';
+import { HideFocusDirective } from '../directives/hide-focus.directive';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-text-reuse',
   standalone: true,
   imports: [MatButtonModule, MatInputModule, MatIconModule,  
-  MatFormFieldModule, ReactiveFormsModule],
+    HideFocusDirective, MatFormFieldModule, ReactiveFormsModule],
   providers: [],
   templateUrl: './text-reuse.component.html',
   styleUrl: './text-reuse.component.scss'
@@ -21,12 +25,26 @@ export class TextReuseComponent {
 @Input() value?: string;
 @Input() types: 'text' | 'tel' | 'email' = 'text';
 input: FormControl<string | null> = new FormControl<string | null>('');
+private unsubscribe$ = new Subject<void>();
 @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
-constructor(private cdr: ChangeDetectorRef) {
-  this.input.valueChanges.subscribe((value: string | null) => {
+constructor(protected hideFocusService: HideFocusService,
+  protected orientationService: OrientationService
+) {
+  this.input.valueChanges.pipe(
+    debounceTime(200),
+    distinctUntilChanged()   ,
+    takeUntil(this.unsubscribe$)   
+  )
+  .subscribe((value: string | null) => {
     this.valueChange.emit(value || ''); 
   });
+}
+
+focusChanged(isFocused: boolean): void {
+  if(this.orientationService.screen()){
+  this.hideFocusService.setInputFocus(isFocused);
+  }
 }
 
 ngOnChanges(changes: SimpleChanges): void {
@@ -47,4 +65,9 @@ ngOnChanges(changes: SimpleChanges): void {
       this.input.setValue(this.intValue || this.value || '', { emitEvent: false });
     }
 
-}}
+}
+ngOnDestroy(): void {
+  this.unsubscribe$.next(); // Emit a value
+  this.unsubscribe$.complete(); // Complete the Subject to clean up
+}
+}
