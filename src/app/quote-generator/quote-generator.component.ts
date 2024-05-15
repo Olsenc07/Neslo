@@ -141,7 +141,11 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       if (this.quoteForm.invalid) {
         this.scrollToFirstInvalidControl();
-      this.progress = true;
+        this.snackBar.open('Please fill out required fields and try again.', '', {
+          duration: 3000
+        });
+      }else{
+        this.progress = true;
         this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
         this.downloadPDF(pdfBlob);
@@ -159,14 +163,8 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
       complete: () => {
       this.progress = false;
         console.log('PDF generation process is complete.');
-      }
-  })
-  } else {
-    console.warn('PDF generation is not supported on this platform.');
-    this.snackBar.open('PDF generation is only available in a browser environment.', '❌', {
-      duration: 3000
-    });
-  }}};
+      }});
+  }}}
   private scrollToFirstInvalidControl(): void {
     for (const key of Object.keys(this.quoteForm.controls)) {
       if (this.quoteForm.controls[key].invalid) {

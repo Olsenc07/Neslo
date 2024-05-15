@@ -36,7 +36,8 @@
   <div  class="thumbnail-container limit" [ngClass]="{'full-screen': isFullScreen}" 
   (click)="toggleFullScreen()">
   <div class="thumbnail-header">
-    <button matSuffix mat-icon-button (click)="removeAttachedFile()" class="remove-file-btn">
+    <button mat-icon-button (click)="removeAttachedFile()"
+    matTooltip="Remove file" aria-label="Remove file" class="remove-file-btn">
       <mat-icon class="material-symbols-outlined">cancel</mat-icon>
     </button>
   </div>
@@ -46,7 +47,7 @@
   class="img-thumbnail img-fluid mx-auto d-block" 
   alt="File thumbnail" ></iframe>
     } @else {
-      <img [src]="imageSrc"  class="img-thumbnail img-fluid mx-auto d-block" 
+      <img [src]="imageSrc" class="img-thumbnail img-fluid mx-auto d-block" 
       alt="File thumbnail">
     }
   </div>
