@@ -12,8 +12,6 @@ import helmet, { HelmetOptions } from 'helmet';
 const isProduction = process.env['NODE_ENV'] === 'production';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-console.log('file name', __filename);
-console.log('dir name', __dirname);
 
 // static files
 const browserDistFolder = join(__dirname, '../browser');
@@ -25,8 +23,6 @@ const indexHtml = join(__dirname, 'index.server.html');
 // Backend routes 
 const emailRoutePath = join(__dirname, '../backend/routes/email.js');
 const pdfRoutePath = join(__dirname, '../backend/routes/pdf.js');
-console.log("Email Route Path:", emailRoutePath);
-console.log("PDF Route Path:", pdfRoutePath);
 
 // Rate limiting middleware
 // const apiLimiter = rateLimit({

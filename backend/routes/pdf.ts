@@ -10,8 +10,7 @@ router.post('/generator', async (req: Request, res: Response) => {
   try {
     const { protocol, headers } = req;
     const { quoteForm, gridFormArray } = req.body;  
-    console.log('quote form', quoteForm);
-    console.log('grid form array', gridFormArray);
+
 
     const selectors = {
       dealerName: '#dealerName',
