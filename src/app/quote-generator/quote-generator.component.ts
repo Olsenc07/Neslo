@@ -30,7 +30,7 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { environment } from 'environments/environment';
 import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
 import { OrientationService } from '../services/orientation.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription} from 'rxjs';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 
 @Component({
@@ -49,37 +49,12 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   progress: boolean = false;
   state: 'noFocus' | 'focus' = 'noFocus';
   
-  // add disabled button on invalid fields
-  quoteForm: FormGroup = new FormGroup({
-    dealerName: new FormControl<string>('Erik Olsen', [
-      Validators.required]),
-    dealerBranch: new FormControl<string>(''),
-    contactName: new FormControl<string>(''),
-    contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com', [
-      Validators.required]),
-    contactPhone: new FormControl<string>('(403) 994 - 1202'),
-    jobName: new FormControl<string>(''),
-    jobSiteAddress: new FormControl<string>('', [
-      Validators.required]),
-    jobCity: new FormControl<string>('', [
-      Validators.required]),
-    date: new FormControl<string>('', [
-      Validators.required]),
-    doorModel: new FormControl<string>('', [
-      Validators.required]),
-    exteriorFinish: new FormControl<string>(''),
-    exteriorColor: new FormControl<string>(''),
-    interiorFinish: new FormControl<string>(''),
-    interiorColor: new FormControl<string>(''),
-    glass: new FormControl<string>('', [
-      Validators.required]),
-    handleColor: new FormControl<string>(''),
-    additionalNotes: new FormControl<string>('')
-  });
-
+  quoteForm: FormGroup;
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
+  private unsubscribe$: Subject<void> = new Subject<void>();
   private formChangeSubscription: Subscription | undefined;
   @ViewChild('formElement') formElement!: ElementRef;
+
   constructor(private router: Router,
     private snackBar: MatSnackBar,
     protected orientationService: OrientationService,
@@ -88,38 +63,45 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService){
-      // if (isPlatformBrowser(this.platformId)) {
-      //   this.loadForm();
-      // }
+      this.quoteForm = new FormGroup({
+        dealerName: new FormControl<string>('Erik Olsen'),
+        dealerBranch: new FormControl<string>(''),
+        contactName: new FormControl<string>(''),
+        contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com'),
+        contactPhone: new FormControl<string>('(403) 994 - 1202'),
+        jobName: new FormControl<string>(''),
+        jobSiteAddress: new FormControl<string>('', [
+          Validators.required]),
+        jobCity: new FormControl<string>('', [
+          Validators.required]),
+        date: new FormControl<string>('', [
+          Validators.required]),
+        doorModel: new FormControl<string>('', [
+          Validators.required]),
+        exteriorFinish: new FormControl<string>(''),
+        exteriorColor: new FormControl<string>(''),
+        interiorFinish: new FormControl<string>(''),
+        interiorColor: new FormControl<string>(''),
+        glass: new FormControl<string>('', [
+          Validators.required]),
+        handleColor: new FormControl<string>(''),
+        additionalNotes: new FormControl<string>('')
+      });
     }
 
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
-      // pre set formcontrol values
-      // this.quoteForm.valueChanges.subscribe(values => {
-      //   console.log('form value', values);
-      //   sessionStorage.setItem('quoteFormData', JSON.stringify(values));
-      // });
     }
-  
-    // private loadForm(): void {
-    //   try{
-    //   const savedForm = sessionStorage.getItem('quoteFormData');
-    //   if (savedForm) {
-    //     const formData = JSON.parse(savedForm);
-    //     console.log('Loaded form data:', formData);
-    //     this.quoteForm.patchValue(formData, { emitEvent: false });
-    //     this.cdr.detectChanges();
-    //   }
-    // } catch (e) {
-    //   console.error('Error parsing form data', e);
-    // }
-    // }
+
+    updateField(fieldName: string, value: string): void {
+      const control = this.quoteForm.get(fieldName);
+      if (control) {
+        control.setValue(value, { emitEvent: true });
+      } else {
+        console.error('Field does not exist:', fieldName);
+      }
+    }
     
-  updateField(fieldName: string, value: string): void {
-    this.quoteForm.get(fieldName)?.setValue(value);
-  }
-  
   grid(values: Grid[]): void {  
     if (isPlatformBrowser(this.platformId)) {
       this.gridFormArray.clear();
@@ -141,7 +123,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       if (this.quoteForm.invalid) {
         this.scrollToFirstInvalidControl();
-        this.snackBar.open('Please fill out required fields and try again.', '', {
+        this.snackBar.open('Please fill out required fields and try again.', '❌', {
           duration: 3000
         });
       }else{
@@ -195,12 +177,12 @@ resizeTextarea(event: Event): void {
 }
 contactForm(): void {
   this.router.navigate(['/home']);
-  // if (isPlatformBrowser(this.platformId)) {
-  //   window.scrollTo({
-  //     top: document.body.scrollHeight,
-  //     behavior: 'smooth'
-  //   });
-// }
+  if (isPlatformBrowser(this.platformId)) {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+}
   }
   onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
@@ -208,9 +190,33 @@ contactForm(): void {
 standard(): void {
    this.dialog.open(StandardConfigSizeComponent);
 }
+clearForm(): void{
+   this.quoteForm.reset({
+    dealerName: 'Erik Olsen',
+    dealerBranch: '',
+    contactName: '',
+    contactEmail: 'Foldingslidingdoors.ab@gmail.com',
+    contactPhone: '(403) 994 - 1202',
+    jobName: '',
+    jobSiteAddress: '',
+    jobCity: '',
+    date: '',
+    doorModel: '',
+    exteriorFinish: '',
+    exteriorColor: '',
+    interiorFinish: '',
+    interiorColor: '',
+    glass: '',
+    handleColor: '',
+    additionalNotes: ''
+  });
+  this.cdr.detectChanges();
+  console.log('hi', this.quoteForm);
+}
 
 ngOnDestroy(): void {
-  // Unsubscribe to ensure no memory leaks
+  this.unsubscribe$.next(); 
+  this.unsubscribe$.complete(); 
   // this.formChangeSubscription?.unsubscribe();
 }
   doorModel: string[] = [

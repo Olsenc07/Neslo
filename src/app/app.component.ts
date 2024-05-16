@@ -1,18 +1,22 @@
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router'
-import { CustomTitleStrategy } from './services/title-strategy.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { isPlatformBrowser } from '@angular/common';
+
+import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [MatIconModule, RouterModule, MatTooltipModule],
+  imports: [MatIconModule, RouterModule, MatTooltipModule, MatButtonModule],
   providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
   animations: [
     trigger('rotateInOut', [
@@ -35,6 +39,7 @@ export class AppComponent implements OnInit {
 
 constructor(public router: Router,
   protected hideFocusService: HideFocusService,
+  private dialog: MatDialog,
   @Inject(PLATFORM_ID) private platformId: Object
 ){}
 
@@ -52,6 +57,10 @@ private updateHomeRouteStatus(): void {
 }
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
+    if (this.dialog.openDialogs.length > 0) {
+      console.log('console')
+      return; // Exit if a dialog is open
+    }
     const yOffset = window.scrollY;
     const scrollTopThreshold = 100;
     this.showScrollButton = yOffset > scrollTopThreshold;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,7 +25,7 @@ export class TextReuseComponent {
 @Input() value?: string;
 @Input() types: 'text' | 'tel' | 'email' = 'text';
 input: FormControl<string | null> = new FormControl<string | null>('');
-private unsubscribe$ = new Subject<void>();
+private unsubscribe$: Subject<void> = new Subject<void>();
 @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
 constructor(protected hideFocusService: HideFocusService,
@@ -33,7 +33,7 @@ constructor(protected hideFocusService: HideFocusService,
 ) {
   this.input.valueChanges.pipe(
     debounceTime(200),
-    distinctUntilChanged()   ,
+    distinctUntilChanged(),
     takeUntil(this.unsubscribe$)   
   )
   .subscribe((value: string | null) => {
@@ -54,20 +54,21 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   updateValidatorsAndValue(): void {
-    const validators = [Validators.required]; 
+    const validators = [Validators.required];
     if (this.types === 'email') {
       validators.push(Validators.email);
-    } 
+    }
     this.input.setValidators(validators);
     this.input.updateValueAndValidity();
-
+  }
+  
+  updateValue(newValue: string): void {
     if (!this.input.value || this.input.pristine) {
       this.input.setValue(this.intValue || this.value || '', { emitEvent: false });
     }
-
-}
+  }
 ngOnDestroy(): void {
-  this.unsubscribe$.next(); // Emit a value
-  this.unsubscribe$.complete(); // Complete the Subject to clean up
+  this.unsubscribe$.next(); 
+  this.unsubscribe$.complete(); 
 }
 }

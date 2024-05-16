@@ -1,5 +1,5 @@
 <div id="quote">
-<header class="p-3">
+<header class="p-3" #quote>
   <div  class="container">
     <div class="row align-items-center">
         <!-- Company Details -->
@@ -74,7 +74,7 @@
         <ul>
           <li>
             <p>
-          All Configurations are `Viewed from the inside`.
+          All Configurations are ‘Viewed from the inside’.
             </p>
           </li>
           </ul>
@@ -148,11 +148,11 @@
       </section>
     </div>
     </div>
-    @defer(on viewport){
+    @defer(on viewport(quote)){
     <app-grid-form (sendGrid)="grid($event)" [gridForm]="gridFormArray"></app-grid-form>
     } @placeholder {
       <app-skeleton-form-fill class="d-flex justify-content-center"></app-skeleton-form-fill>
-    }
+    } 
     <div id="ignore1" class="g-3 g-md-3 btm-pad container justify-content-md-between">
         <mat-card class="bottom-card">
           <mat-card-header>
@@ -167,7 +167,6 @@
           </button>
         </div>
       </mat-card-content>
-
       <mat-card-actions>
 <!-- Submit Button -->
       <div class="pdf">
@@ -180,37 +179,48 @@
         </mat-icon>
     </button>
   }@else{
-  <button mat-fab color="primary" extended (click)="generatePDF()" matTooltip="Download quote form"
-  aria-label="Pdf generator button and label"  class="btn btn-primary">
+  <button mat-fab color="primary" extended (click)="generatePDF()" matTooltip="Download your quote"
+  aria-label="Pdf generator button and label">
     <mat-icon class="material-symbols-outlined">
     picture_as_pdf      
     </mat-icon>
     Download Quote
   </button> 
-}
-} @else {
+}} @else {
   <div class="spinner" aria-live="assertive">
     <mat-spinner [diameter]="40"></mat-spinner>
     <div class="px-3 spin-text">Creating PDF</div>
   </div>
 }
-      </div>
-      <div>
-        @if(this.orientationService.screen()){
-          <button mat-fab  color="primary" (click)="contactForm()" aria-label="Message navigation button">
+
+<!-- @if(this.orientationService.screen()){
+  <button mat-fab clear (click)="clearForm()"  aria-label="Clear form button">
+    <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
+  </button>
+}@else{
+<button mat-fab clear extended (click)="clearForm()"  matTooltip="Clear your form"
+aria-label="Clear form button and label">
+<mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
+  Clear quote form
+</button> 
+} -->
+
+  @if(this.orientationService.screen()){
+          <button mat-fab  color="primary" (click)="contactForm()"
+          matTooltip="Navigate to contact form" aria-label="Message navigation button">
             <mat-icon  class="material-symbols-outlined">
               mail      
               </mat-icon>
           </button>
         } @else{
-          <button mat-fab extended color="primary" class="btn btn-primary" aria-label="Message navigation button"
+          <button mat-fab extended color="primary" aria-label="Message navigation button"
           (click)="contactForm()"  (mouseover)="onHover(true)" (mouseleave)="onHover(false)">
           Create a message
           <mat-icon class="material-symbols-outlined">
             @switch (state) { 
-                @case ('noFocus') { keyboard_arrow_right }
+                @case ('noFocus') { create }
                 @case ('focus') { arrow_right_alt }
-               @default { keyboard_arrow_right }
+               @default { create }
               }
             </mat-icon>
           </button>
