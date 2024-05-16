@@ -50,7 +50,7 @@
         </h2>
         <!-- Dealer Name -->
        <app-text-reuse [intro]="'Dealer Name'" id="dealerName" [value]="quoteForm.get('dealerName')?.value"
-        [intValue]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
+        [intValue]="'Erik Olsen'" [need]="false" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
         <!-- Dealer Branch -->
         <app-text-reuse [intro]="'Branch Name'" id="dealerBranch" [value]="quoteForm.get('dealerBranch')?.value"
           (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
@@ -59,10 +59,10 @@
          (valueChange)="updateField('contactName', $event)"></app-text-reuse>
         <!-- Contact Email -->
         <app-text-reuse [intro]="'Contact Email'" id="contactEmail" [value]="quoteForm.get('contactEmail')?.value"
-         [intValue]="'Foldingslidingdoors.ab@gmail.com'" [types]="'email'" (valueChange)="updateField('contactEmail', $event)"></app-text-reuse>
+         [intValue]="'Foldingslidingdoors.ab@gmail.com'" [need]="false" [types]="'email'" (valueChange)="updateField('contactEmail', $event)"></app-text-reuse>
         <!-- Phone -->
         <app-text-reuse [intro]="'Contact Phone'" id="contactPhone" [value]="quoteForm.get('contactPhone')?.value"
-          [intValue]="'(403) 994 - 1202'" [types]="'tel'" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
+          [intValue]="'(403) 994 - 1202'" [types]="'tel'" [need]="false" (valueChange)="updateField('contactPhone', $event)"></app-text-reuse>
         </section>
         </div>
       <!-- Job Information -->

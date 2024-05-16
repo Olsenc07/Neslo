@@ -79,6 +79,12 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     && apt-get update \
     && apt-get install -y google-chrome-stable
 
+# Install Puppeteer
+RUN npm install puppeteer
+
+# Set the Chrome executable path for Puppeteer
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
+
 # Expose port 4200 to the outside once the container has launched
 EXPOSE 4200
 
