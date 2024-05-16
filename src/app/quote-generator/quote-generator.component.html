@@ -74,7 +74,7 @@
         <ul>
           <li>
             <p>
-          All Configurations are `Viewed from the inside`.
+          All Configurations are ‘Viewed from the inside’.
             </p>
           </li>
           </ul>
@@ -192,12 +192,13 @@
     <div class="px-3 spin-text">Creating PDF</div>
   </div>
 }
+
 @if(this.orientationService.screen()){
-  <button mat-fab clear (click)="clearForm()" aria-label="Clear form button">
+  <button mat-fab clear (click)="clearForm()"  aria-label="Clear form button">
     <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
   </button>
 }@else{
-<button mat-fab clear extended (click)="clearForm()" matTooltip="Clear your form"
+<button mat-fab clear extended (click)="clearForm()"  matTooltip="Clear your form"
 aria-label="Clear form button and label">
 <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
   Clear quote form

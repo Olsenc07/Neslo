@@ -1,12 +1,14 @@
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router'
-import { CustomTitleStrategy } from './services/title-strategy.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { isPlatformBrowser } from '@angular/common';
+
+import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   standalone: true,
