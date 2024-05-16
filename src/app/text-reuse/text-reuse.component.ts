@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
@@ -54,7 +54,11 @@ ngOnChanges(changes: SimpleChanges): void {
   }
 
   updateValidatorsAndValue(): void {
-    const validators = [Validators.required];
+    const validators: ValidatorFn[] = [];
+
+    if (this.need) {
+      validators.push(Validators.required);
+    }
     if (this.types === 'email') {
       validators.push(Validators.email);
     }
@@ -62,11 +66,7 @@ ngOnChanges(changes: SimpleChanges): void {
     this.input.updateValueAndValidity();
   }
   
-  updateValue(newValue: string): void {
-    if (!this.input.value || this.input.pristine) {
-      this.input.setValue(this.intValue || this.value || '', { emitEvent: false });
-    }
-  }
+ 
 ngOnDestroy(): void {
   this.unsubscribe$.next(); 
   this.unsubscribe$.complete(); 

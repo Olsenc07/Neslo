@@ -58,7 +58,6 @@ private updateHomeRouteStatus(): void {
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     if (this.dialog.openDialogs.length > 0) {
-      console.log('console')
       return; // Exit if a dialog is open
     }
     const yOffset = window.scrollY;

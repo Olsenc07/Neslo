@@ -9,7 +9,6 @@ export class CloseDialogDirective {
   constructor(private dialogRef: MatDialogRef<Component>) { }
 
   @HostListener('click') onClick() {
-    console.log('click')
     this.dialogRef.close();
   }
 }
