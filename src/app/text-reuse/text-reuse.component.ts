@@ -19,7 +19,7 @@ import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
   styleUrl: './text-reuse.component.scss'
 })
 export class TextReuseComponent {
-@Input() need?:boolean = true;
+@Input() need?:boolean = false;
 @Input() intValue?: string;
 @Input() intro!: string;
 @Input() value?: string;

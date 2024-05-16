@@ -86,7 +86,7 @@ for (const [field, selector] of Object.entries(selectors)) {
           inputElement.dispatchEvent(event);
         }, fullSelector, fieldValue);
         // If the field is one with a dropdown, press Escape to close it
-        if (['exteriorFinish', 'interiorFinish', 'doorModel'].includes(field)) {
+        if (['doorModel', 'exteriorFinish', 'interiorFinish', 'glass'].includes(field)) {
           await page.keyboard.press('Escape');
         }
       }
