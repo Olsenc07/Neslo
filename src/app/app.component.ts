@@ -8,6 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
 
 constructor(public router: Router,
   protected hideFocusService: HideFocusService,
+  private dialog: MatDialog,
   @Inject(PLATFORM_ID) private platformId: Object
 ){}
 
@@ -55,6 +57,10 @@ private updateHomeRouteStatus(): void {
 }
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
+    if (this.dialog.openDialogs.length > 0) {
+      console.log('console')
+      return; // Exit if a dialog is open
+    }
     const yOffset = window.scrollY;
     const scrollTopThreshold = 100;
     this.showScrollButton = yOffset > scrollTopThreshold;

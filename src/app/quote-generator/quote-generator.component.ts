@@ -64,12 +64,10 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService){
       this.quoteForm = new FormGroup({
-        dealerName: new FormControl<string>('Erik Olsen', [
-          Validators.required]),
+        dealerName: new FormControl<string>('Erik Olsen'),
         dealerBranch: new FormControl<string>(''),
         contactName: new FormControl<string>(''),
-        contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com', [
-          Validators.required]),
+        contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com'),
         contactPhone: new FormControl<string>('(403) 994 - 1202'),
         jobName: new FormControl<string>(''),
         jobSiteAddress: new FormControl<string>('', [
