@@ -47,7 +47,7 @@ router.post('/generator', async (req: Request, res: Response) => {
     const viewport: {
       width: number;
       height: number;
-  } = { width: 1200, height: 1400 };
+  } = { width: 1400, height: 1600 };
     await page.setViewport(viewport);;
     const endpoint = `${protocol}://${headers.host}/quotes`;
     // Navigate to the endpoint
