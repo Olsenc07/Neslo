@@ -22,6 +22,14 @@ button[clear]{
     color: white;
     }
 }
+.power-column {
+    flex-direction: column !important;
+  
+    @media (min-width: 601px) {
+      flex-direction: row !important;
+    }
+  }
+   
 .spin-text{
     color: #0b5ed7;
 }
@@ -68,7 +76,7 @@ h2{
     font-size: 2vw; 
   }
   }
-h2[quote]{
+h1, h2[quote]{
     color: var(--wood-light);
 }
 .notes-container, .notes-form  {

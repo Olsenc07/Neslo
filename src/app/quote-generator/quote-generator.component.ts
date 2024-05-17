@@ -10,13 +10,13 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha';
+import { RecaptchaV3Module } from 'ng-recaptcha';
 
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
@@ -44,13 +44,14 @@ import { RecaptchaService } from '../services/validation.service';
     ],
 
     imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule, HideFocusDirective,
-      RecaptchaV3Module, MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
+      DatePipe, RecaptchaV3Module, MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
        MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent, MatTooltipModule,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
 export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   apiUrl = environment.apiUrl;
   progress: boolean = false;
+  currentDateTime: Date = new Date(); 
   state: 'noFocus' | 'focus' = 'noFocus';
   quoteForm: FormGroup;
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
@@ -95,6 +96,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
+      this.currentDateTime = new Date();
     }
 
     updateField(fieldName: string, value: string): void {
