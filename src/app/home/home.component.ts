@@ -13,6 +13,7 @@ import { OrientationService } from 'src/app/services/orientation.service';
 import { IntroComponent } from 'src/app/intro/intro.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
+
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({

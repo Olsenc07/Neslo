@@ -1,10 +1,11 @@
 <header #imgChild class="intro" [ngClass]="this.orientationService.screen() ? 'image-mobile' : 'image'">
+  <link rel="preload" href="https://www.neslo.ca/assets/Erik_Red_Working.jpg" as="image">
    <app-intro [orientation]="this.orientationService.screen()" 
    ></app-intro>
 </header>
 <!-- <section>
 need oauth values
-    <app-insta-carousel></app-insta-carousel>
+    <app-insta-carousel id="gallery"></app-insta-carousel>
 </section> -->
 <section class="my-3">
     <div #borders [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
@@ -68,14 +69,14 @@ need oauth values
         
         <div class="col-12 mt-2">
 <!-- @defer(on viewport){ -->
-       <app-contact-form #borders></app-contact-form>
+       <app-contact-form  #borders></app-contact-form>
     <!-- }@placeholder { 
         <app-skeleton-form-fill ></app-skeleton-form-fill>
          } -->
     </div>
     </div>
 </section>
-<footer class="text-center section-padding bg-dark text-light">
+<footer  class="text-center section-padding bg-dark text-light">
 <div class="container">
 <p>© 2024 Neslo. All rights reserved.</p>
 <p>Join us on social media to adventure with Neslo</p>
