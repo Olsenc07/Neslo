@@ -28,8 +28,7 @@ button[clear]{
     @media (min-width: 601px) {
       flex-direction: row !important;
     }
-  }
-   
+  }  
 .spin-text{
     color: #0b5ed7;
 }
@@ -49,10 +48,7 @@ button[clear]{
     flex-direction: column;
 }
 .img{
-    max-width: 50%;
-    @media (min-width: 601px) {
-        max-width: 35%;
-    }
+    max-width: 35%;
     @media (min-width: 1025px) {
         max-width: 20%;
     }

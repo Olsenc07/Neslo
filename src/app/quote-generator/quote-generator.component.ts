@@ -52,6 +52,9 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   apiUrl = environment.apiUrl;
   progress: boolean = false;
   currentDateTime: Date = new Date(); 
+  private datePipe: DatePipe = new DatePipe('en-US');
+
+  quoteNumber: string = '';
   state: 'noFocus' | 'focus' = 'noFocus';
   quoteForm: FormGroup;
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
@@ -97,6 +100,14 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
       this.currentDateTime = new Date();
+      this.generateQuoteNumber();
+    }
+
+    generateQuoteNumber(): void {
+      const now = new Date();
+      const datePart = this.datePipe.transform(now, 'ddHHmmss') || '';
+      const randomPart = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+      this.quoteNumber = `${datePart}-${randomPart}`;
     }
 
     updateField(fieldName: string, value: string): void {

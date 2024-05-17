@@ -3,37 +3,36 @@
   <div  class="container">
     <div class="row align-items-center power-column">
         <!-- Company Details -->
-        <div class="col text-center">
+        <div blackIcons  class="col text-center">
           <img pdf src="../../assets/Neslo.jpg" class="img-fluid img" alt="Neslo logo">
         <h1 class="mt-1 pb-1 mb-0 text headings">Neslo Premium Windows and Doors</h1>
-        <p pdf class="mb-1 headings">Olds, AB</p>
-        <p pdf class="mb-1 headings">Erik Olsen</p>
+        <p class="mb-1 headings">
+          <span class="material-symbols-outlined">
+            call
+            </span>
+        <a href="tel:+4039941202" matTooltip="Open FaceTime" class="link-secondary" aria-label="Call us at (403)-994-1202">(403)-994-1202</a>
+      </p>
+      <p class="mb-1 headings">
+        <span class="material-symbols-outlined">
+          mail
+          </span>
+        <a href="mailto:Foldingslidingdoors.ab@gmail.com" class="link-secondary" matTooltip="Open Email" aria-label="Email Erik at Neslo Windows and Doors">Foldingslidingdoors.ab&#64;gmail.com
+        </a>
+      </p>
+      <p class="mb-1 headings">
+        <i class="bi bi-instagram"></i>
+        &#160;
+        <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="link-secondary" matTooltip="Visit our instagram" 
+        aria-label="Neslo Instagram Link"> &#64;FoldingSlidingDoors_Erik</a>
+      </p>
       </div>
-      <div blackIcons class="col text-center">
+      <div class="col text-center">
       <h2 quote class="mt-3">
         Quote Request
        </h2>
-        <!-- Contact Information -->
-        <p class="mb-1 headings">
-            <span class="material-symbols-outlined">
-              call
-              </span>
-          <a href="tel:+4039941202" matTooltip="Open FaceTime" class="link-secondary" aria-label="Call us at (403)-994-1202">(403)-994-1202</a>
-        </p>
-        <p class="mb-1 headings">
-          <span class="material-symbols-outlined">
-            mail
-            </span>
-          <a href="mailto:Foldingslidingdoors.ab@gmail.com" class="link-secondary" matTooltip="Open Email" aria-label="Email Erik at Neslo Windows and Doors">Foldingslidingdoors.ab&#64;gmail.com
-          </a>
-        </p>
-        <p class="mb-1 headings">
-          <i class="bi bi-instagram"></i>
-          &#160;
-          <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="link-secondary" matTooltip="Visit our instagram" 
-          aria-label="Neslo Instagram Link"> &#64;FoldingSlidingDoors_Erik</a>
-        </p>
-        <p >{{ currentDateTime | date: 'fullDate' }}</p>
+        <p class="headings">{{ quoteForm.get('jobName')?.value }}</p>
+        <p>{{ currentDateTime | date: 'fullDate' }}</p>
+        <p>Quote Number: {{ quoteNumber }}</p>
       </div> 
     </div>
     </div>
