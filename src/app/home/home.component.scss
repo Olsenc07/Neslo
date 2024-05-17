@@ -25,6 +25,7 @@ form{
 }
 .image-mobile{
   @include img;
+  background-attachment: fixed;
 }
 .image {
   @include img;

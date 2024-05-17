@@ -68,7 +68,6 @@ const helmetOptions: HelmetOptions = isProduction ? {
     },
     noSniff: false
 };
-
     const server = express();
     
     server.use(helmet(helmetOptions));
