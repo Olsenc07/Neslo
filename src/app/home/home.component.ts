@@ -55,8 +55,7 @@ imgBC: {img: string, alt: string } = {img:'../../assets/folding_sliding_doors_lo
 messageBC: SafeHtml;
 introBC: SafeHtml;
   
-@ViewChild('imgChild', { static: false }) imgChild!: ElementRef<HTMLImageElement>;
-@ViewChild('borders', { static: false }) borders!: ElementRef<HTMLImageElement>;
+@ViewChild('imgChild', { static: false }) imgChild?: ElementRef<HTMLImageElement>;
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     protected orientationService: OrientationService) {
