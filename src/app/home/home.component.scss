@@ -2,11 +2,7 @@
     display: flex;
     flex-direction: column;
   }
-@mixin img{
-  background-image: url("https://www.neslo.ca/assets/Erik_Red_Working.jpg"); 
-  background-repeat: no-repeat;
-  z-index: -1;
- } 
+
 .extra-style{
   padding-left: 0% !important;
   padding-right: 0% !important;
@@ -22,15 +18,32 @@ form{
     text-align: center;
     height: 100%;
 }
+
+.intro-content {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .image-mobile{
-  @include img;
-  background-attachment: scroll;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -3;
 }
 .image {
-  @include img;
+  background-image: url("https://www.neslo.ca/assets/Erik_Red_Working.jpg"); 
+  background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 75%;
+  z-index: -1;
 }
 .container-common{
   background-image: linear-gradient(1deg, transparent, #e9e9e9, transparent);
