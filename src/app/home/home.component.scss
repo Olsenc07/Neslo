@@ -5,7 +5,6 @@
 @mixin img{
   background-image: url("https://www.neslo.ca/assets/Erik_Red_Working.jpg"); 
   background-repeat: no-repeat;
-  background-attachment: fixed;
   z-index: -1;
  } 
 .extra-style{
@@ -25,9 +24,11 @@ form{
 }
 .image-mobile{
   @include img;
+  background-attachment: scroll;
 }
 .image {
   @include img;
+  background-attachment: fixed;
   background-size: cover;
   background-position: 50% 75%;
 }
