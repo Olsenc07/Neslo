@@ -133,7 +133,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
         });
       } else {
         grecaptcha.ready(() => {
-          (grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit' }) as Promise<string>)
+          (grecaptcha.execute('6Ld7EdcpAAAAAP5b51ypqU3cFb5fvgQ7JxfMbGBf', { action: 'submit' }) as Promise<string>)
             .then((token) => {
               if (token) {
                 console.log('token', token);
