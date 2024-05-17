@@ -1,11 +1,16 @@
-<header #imgChild [ngClass]="this.orientationService.screen() ? 'image-mobile' : 'image' " class="intro ">
-   <app-intro [orientation]="this.orientationService.screen()" 
-   ></app-intro>
+@if(this.orientationService.screen() ){
+<header #imgChild class="intro">
+    <img src="https://www.neslo.ca/assets/Erik_Red_Working.jpg" alt="Neslo background image" class="image-mobile">
+    <div class="intro-content">
+   <app-intro [orientation]="true" ></app-intro>
+    </div>
 </header>
-<!-- <section>
-need oauth values
-    <app-insta-carousel id="gallery"></app-insta-carousel>
-</section> -->
+} @else{
+    <header #imgChild [ngClass]="this.orientationService.screen() ? '' : 'image' " class="intro image">
+        <app-intro [orientation]="false" 
+        ></app-intro>
+     </header>
+}
 <section class="my-3">
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
             <div class="text-center mb-4 pt-3" id="contacts">
@@ -85,3 +90,7 @@ need oauth values
 </a>
 </div>
 </footer> 
+<!-- <section>
+need oauth values
+    <app-insta-carousel id="gallery"></app-insta-carousel>
+</section> -->
