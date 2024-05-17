@@ -1,5 +1,5 @@
-import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
-import { Router, RouterModule, TitleStrategy } from '@angular/router'
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router'
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   standalone: true,
@@ -30,7 +32,7 @@ import { HideFocusService } from './services/hide-focus.service';
     ])
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title: string = 'Neslo';
   view: 'up' | 'down' = 'down';
   showScrollButton: boolean = false;
@@ -41,6 +43,15 @@ constructor(public router: Router,
   private dialog: MatDialog,
   @Inject(PLATFORM_ID) private platformId: Object
 ){}
+
+ngOnInit(): void {
+  this.router.events.pipe(
+    filter((event: any) => event instanceof NavigationEnd)
+  ).subscribe((event: NavigationEnd) => {
+    this.isHomeRoute = (event.urlAfterRedirects === '/home' || event.urlAfterRedirects === '/');
+  });
+}
+
 
   @HostListener('window:scroll', [])
   onWindowScroll(): void {

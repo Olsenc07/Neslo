@@ -22,6 +22,13 @@ button[clear]{
     color: white;
     }
 }
+.power-column {
+    flex-direction: column !important;
+  
+    @media (min-width: 601px) {
+      flex-direction: row !important;
+    }
+  }  
 .spin-text{
     color: #0b5ed7;
 }
@@ -41,11 +48,7 @@ button[clear]{
     flex-direction: column;
 }
 .img{
-    max-width: 50%;
-    margin-bottom: 3%;
-    @media (min-width: 601px) {
-        max-width: 35%;
-    }
+    max-width: 35%;
     @media (min-width: 1025px) {
         max-width: 20%;
     }
@@ -69,7 +72,7 @@ h2{
     font-size: 2vw; 
   }
   }
-h2[quote]{
+h1, h2[quote]{
     color: var(--wood-light);
 }
 .notes-container, .notes-form  {
