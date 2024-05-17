@@ -70,7 +70,7 @@ h2{
   }
   }
 h2[quote]{
-    color: #003e1d;
+    color: var(--wood-light);
 }
 .notes-container, .notes-form  {
     width: 100%; 
