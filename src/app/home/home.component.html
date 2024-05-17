@@ -1,14 +1,7 @@
-@if(this.orientationService.screen()){
-<header class="intro image-mobile">
-   <app-intro [orientation]="true" 
+<header #imgChild [ngClass]="this.orientationService.screen() ? 'image-mobile' : 'image' " class="intro ">
+   <app-intro [orientation]="this.orientationService.screen()" 
    ></app-intro>
 </header>
-}@else {
-    <header #imgChild class="intro image">
-        <app-intro [orientation]="false" 
-        ></app-intro>
-     </header>
-}
 <!-- <section>
 need oauth values
     <app-insta-carousel id="gallery"></app-insta-carousel>
@@ -75,7 +68,7 @@ need oauth values
         
         <div class="col-12 mt-2">
 <!-- @defer(on viewport){ -->
-       <app-contact-form  ></app-contact-form>
+       <app-contact-form></app-contact-form>
     <!-- }@placeholder { 
         <app-skeleton-form-fill ></app-skeleton-form-fill>
          } -->
