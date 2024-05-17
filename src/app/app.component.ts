@@ -1,15 +1,14 @@
-import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router'
+import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Router, RouterModule, TitleStrategy } from '@angular/router'
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { isPlatformBrowser } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
-import { MatDialog } from '@angular/material/dialog';
-
 
 @Component({
   standalone: true,
@@ -31,30 +30,18 @@ import { MatDialog } from '@angular/material/dialog';
     ])
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title: string = 'Neslo';
   view: 'up' | 'down' = 'down';
   showScrollButton: boolean = false;
   isHomeRoute: boolean = true;
-
+  
 constructor(public router: Router,
   protected hideFocusService: HideFocusService,
   private dialog: MatDialog,
   @Inject(PLATFORM_ID) private platformId: Object
 ){}
 
-ngOnInit(): void {
-  this.router.events.subscribe(event => {
-    if (event instanceof NavigationEnd) {
-      this.updateHomeRouteStatus();
-    }
-  });
-  this.updateHomeRouteStatus();
-}
-
-private updateHomeRouteStatus(): void {
-  this.isHomeRoute = this.router.url === '/' || this.router.url === '/home';
-}
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     if (this.dialog.openDialogs.length > 0) {
@@ -79,5 +66,4 @@ private updateHomeRouteStatus(): void {
   back(): void{
     this.router.navigate(['/home']);
   }
-  
 }

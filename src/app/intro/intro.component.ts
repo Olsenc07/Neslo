@@ -9,12 +9,11 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-intro',
   standalone: true,
-  imports: [MatButtonModule, MatDividerModule, MatIconModule, NgClass],
+  imports: [MatButtonModule, MatIconModule, NgClass],
   templateUrl: './intro.component.html',
   styleUrl: './intro.component.scss',
   animations: [
@@ -50,7 +49,8 @@ export class IntroComponent implements OnInit {
 
   navigateToMsg(): void {
       if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo(0, document.body.scrollHeight);
+        window.scrollTo(0, document.body.scrollHeight);
+        // document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -12,7 +12,7 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  sendEmail(formData: FormData): Observable<any> {
+  sendEmail(formData: FormData): Observable<object> {
     // You may want to adjust the headers and responseType as needed
     return this.http.post(`${this.apiUrl}/email/emit`, formData).pipe(
       catchError(this.handleError) 

@@ -16,6 +16,7 @@ import { TitleStrategy } from '@angular/router'
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module, ReCaptchaV3Service } from 'ng-recaptcha';
 
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
 import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
@@ -32,15 +33,18 @@ import { StandardConfigSizeComponent } from "../standard-config-size/standard-co
 import { OrientationService } from '../services/orientation.service';
 import { Subject, Subscription} from 'rxjs';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
+import { RecaptchaService } from '../services/validation.service';
 
 @Component({
     standalone: true,
     selector: 'app-quote-generator',
     templateUrl: './quote-generator.component.html',
     styleUrl: './quote-generator.component.scss',
-    providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
+    providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }
+    ],
+
     imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule, HideFocusDirective,
-        MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
+      RecaptchaV3Module, MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
         MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent, MatTooltipModule,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
@@ -48,7 +52,6 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   apiUrl = environment.apiUrl;
   progress: boolean = false;
   state: 'noFocus' | 'focus' = 'noFocus';
-  
   quoteForm: FormGroup;
   gridFormArray: FormArray = new FormArray<FormGroup>([]);
   private unsubscribe$: Subject<void> = new Subject<void>();
@@ -58,7 +61,9 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private snackBar: MatSnackBar,
     protected orientationService: OrientationService,
-    private title:Title, 
+    private title:Title,   
+
+    protected recaptchaService: RecaptchaService,
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
    @Inject(PLATFORM_ID) private platformId: Object,
@@ -119,6 +124,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
       this.gridFormArray.push(rowGroup); 
     });
   }}
+  
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
       if (this.quoteForm.invalid) {
@@ -127,24 +133,24 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
           duration: 3000
         });
       }else{
-        this.progress = true;
-        this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
+                    this.progress = true;
+                    this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
-        this.downloadPDF(pdfBlob);
-        this.snackBar.open('Quote has been generated successfully.', '✅', {
-          duration: 3000
-        });
-      },
+                        this.downloadPDF(pdfBlob);
+                        this.snackBar.open('Quote has been generated successfully.', '✅', {
+                          duration: 3000
+                        });
+                      },
       error: (error: any) => {
-      this.progress = false;
-        console.error('PDF generator failed:', error);
-        this.snackBar.open('Error generating PDF. Please try again.', '❌', {
-          duration: 3000
-        });
-      },
-      complete: () => {
-      this.progress = false;
-        console.log('PDF generation process is complete.');
+                        this.progress = false;
+                        console.error('PDF generator failed:', error);
+                        this.snackBar.open('Error generating PDF. Please try again.', '❌', {
+                          duration: 3000
+                        });
+                      },
+                      complete: () => {
+                        this.progress = false;
+                        console.log('PDF generation process is complete.');
       }});
   }}}
   private scrollToFirstInvalidControl(): void {

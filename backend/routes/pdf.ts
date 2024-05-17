@@ -11,7 +11,6 @@ router.post('/generator', async (req: Request, res: Response) => {
     const { protocol, headers } = req;
     const { quoteForm, gridFormArray } = req.body;  
 
-
     const selectors = {
       dealerName: '#dealerName',
       dealerBranch: '#dealerBranch',

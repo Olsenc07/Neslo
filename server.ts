@@ -20,7 +20,7 @@ const bootstrapPath = join(__dirname, '../server/main.server.mjs');
 const indexHtml = join(__dirname, 'index.server.html');
 
 
-// Backend routes 
+// Backend paths
 const emailRoutePath = join(__dirname, '../backend/routes/email.js');
 const pdfRoutePath = join(__dirname, '../backend/routes/pdf.js');
 
@@ -107,8 +107,9 @@ const helmetOptions: HelmetOptions = isProduction ? {
      // Backend routes
      const emailRoute = (await import(emailRoutePath)).default;
      const pdfRoute = (await import(pdfRoutePath)).default;
-    server.use("/api/email", emailRoute);
-    server.use("/api/pdf", pdfRoute);
+
+     server.use("/api/email", emailRoute);
+     server.use("/api/pdf", pdfRoute);
       
     // All regular routes use the Angular engine
     server.get('*', async (req: Request, res: Response) => {
