@@ -1,13 +1,20 @@
-<header #imgChild class="intro" [ngClass]="this.orientationService.screen() ? 'image-mobile' : 'image'">
-   <app-intro [orientation]="this.orientationService.screen()" 
+@if(this.orientationService.screen()){
+<header class="intro image-mobile">
+   <app-intro [orientation]="true" 
    ></app-intro>
 </header>
+}@else {
+    <header #imgChild class="intro image">
+        <app-intro [orientation]="false" 
+        ></app-intro>
+     </header>
+}
 <!-- <section>
 need oauth values
     <app-insta-carousel id="gallery"></app-insta-carousel>
 </section> -->
 <section class="my-3">
-    <div #borders [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
+    <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
             <div class="text-center mb-4 pt-3" id="contacts">
                 <h2 heading>Neslo Partnerships</h2>
                 <mat-divider></mat-divider>
@@ -68,7 +75,7 @@ need oauth values
         
         <div class="col-12 mt-2">
 <!-- @defer(on viewport){ -->
-       <app-contact-form  #borders></app-contact-form>
+       <app-contact-form  ></app-contact-form>
     <!-- }@placeholder { 
         <app-skeleton-form-fill ></app-skeleton-form-fill>
          } -->
