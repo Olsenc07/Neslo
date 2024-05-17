@@ -31,7 +31,7 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { environment } from 'environments/environment';
 import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
 import { OrientationService } from '../services/orientation.service';
-import { Subject, Subscription} from 'rxjs';
+import { Subject, Subscription, take} from 'rxjs';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 import { RecaptchaService } from '../services/validation.service';
 
@@ -45,7 +45,7 @@ import { RecaptchaService } from '../services/validation.service';
 
     imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule, HideFocusDirective,
       RecaptchaV3Module, MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
-        MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent, MatTooltipModule,
+       MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent, MatTooltipModule,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
 export class QuoteGeneratorComponent implements OnInit, OnDestroy {
@@ -60,10 +60,9 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
     private snackBar: MatSnackBar,
+    protected recaptchaService: RecaptchaService,
     protected orientationService: OrientationService,
     private title:Title,   
-
-    protected recaptchaService: RecaptchaService,
     public dialog: MatDialog,
     private cdr: ChangeDetectorRef,
    @Inject(PLATFORM_ID) private platformId: Object,
@@ -132,16 +131,24 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
         this.snackBar.open('Please fill out required fields and try again.', '❌', {
           duration: 3000
         });
-      }else{
+      } else {
+        grecaptcha.ready(() => {
+          (grecaptcha.execute('reCAPTCHA_site_key', { action: 'submit' }) as Promise<string>)
+            .then((token) => {
+              if (token) {
+                console.log('token', token);
+                this.recaptchaService.verifyToken(token).pipe(take(1)).subscribe((valid) => {
+                  if (valid) {
+                console.log('valid', valid);
                     this.progress = true;
                     this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
-      next: (pdfBlob: Blob) => {
+                      next: (pdfBlob: Blob) => {
                         this.downloadPDF(pdfBlob);
                         this.snackBar.open('Quote has been generated successfully.', '✅', {
                           duration: 3000
                         });
                       },
-      error: (error: any) => {
+                      error: (error: any) => {
                         this.progress = false;
                         console.error('PDF generator failed:', error);
                         this.snackBar.open('Error generating PDF. Please try again.', '❌', {
@@ -151,8 +158,29 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
                       complete: () => {
                         this.progress = false;
                         console.log('PDF generation process is complete.');
-      }});
-  }}}
+                      }
+                    });
+                  } else {
+                    this.snackBar.open('reCAPTCHA verification failed. Please try again.', '❌', {
+                      duration: 3000
+                    });
+                  }
+                });
+              } else {
+                console.error('Failed to receive reCAPTCHA token');
+              }
+            })
+            .catch((error) => {
+              console.error('reCAPTCHA execution error:', error);
+              this.snackBar.open('reCAPTCHA execution failed. Please try again.', '❌', {
+                duration: 3000
+              });
+            });
+        });
+      }
+    }
+  }
+
   private scrollToFirstInvalidControl(): void {
     for (const key of Object.keys(this.quoteForm.controls)) {
       if (this.quoteForm.controls[key].invalid) {
