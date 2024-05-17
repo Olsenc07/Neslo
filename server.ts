@@ -40,14 +40,14 @@ const helmetOptions: HelmetOptions = isProduction ? {
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"], 
-            scriptSrc: ["'self'", "https://cdn.jsdelivr.net"], 
-            styleSrc: ["'self'", "https://cdn.jsdelivr.net"], 
+            scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "https://www.google.com"],
+            styleSrc: ["'self'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
             imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net", 'blob:'], 
             connectSrc: ["'self'"], 
-            fontSrc: ["'self'", "https:", "data:"], 
+            fontSrc: ["'self'", "https:", "data:", "https://fonts.gstatic.com"], 
             objectSrc: ["'none'"], 
-            scriptSrcAttr: ["'none'"] 
-        }
+            scriptSrcAttr: ["'none'"]
+          }
     },
     frameguard: {
         action: 'sameorigin'
