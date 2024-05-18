@@ -61,7 +61,7 @@ export class AutoSearchComponent implements OnChanges {
   initializeFilteredList(): void {
     const initialList$ = of(this.initialList);
     this.filteredList$ = this.input.valueChanges.pipe(
-      debounceTime(200),
+      debounceTime(500),
       distinctUntilChanged(),
       startWith(''),
       combineLatestWith(initialList$),

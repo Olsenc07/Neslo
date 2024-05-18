@@ -1,4 +1,4 @@
-<form [formGroup]="contactForm" (ngSubmit)="send()">
+<form [formGroup]="contactForm">
   <section class="py-3">
   <div class="row">
     <mat-form-field appearance="fill" >
@@ -11,7 +11,7 @@
 </mat-form-field>
 </div>
 <div class="row">
-    <mat-form-field  appearance="fill" >
+    <mat-form-field  appearance="fill">
     <mat-label class="form-label">Return Email</mat-label>
     <input type="email" required formControlName="email" matInput
     appHideFocus placeholder="name@mail.com">
@@ -44,11 +44,11 @@
 
     @if(this.fileType === 'application/pdf'){
   <iframe [src]="imageSrc" 
-  class="img-thumbnail img-fluid mx-auto d-block" 
-  alt="File thumbnail" ></iframe>
+  class="img-thumbnail img-fluid mx-auto d-block thumbnail"
+  alt="Pdf file thumbnail" ></iframe>
     } @else {
-      <img [src]="imageSrc" class="img-thumbnail img-fluid mx-auto d-block" 
-      alt="File thumbnail">
+      <img [src]="imageSrc" class="img-thumbnail img-fluid mx-auto d-block thumbnail" 
+      alt="Image file thumbnail">
     }
   </div>
   }
@@ -69,14 +69,14 @@
    @if(contactForm.get('file')?.value && !this.orientationService.screen()){
     File attached successfully 
     } @else {
-      Attach your request quote 
+      Attach your quote request
     }
       </button>
     </div>
     <div class="col-12 col-md-6 justify-content-end d-flex">
-<button mat-fab extended type="submit" id="submitBtn" matTooltip="Send message to Erik"
+<button mat-fab extended type="button" id="submitBtn" matTooltip="Send message to Erik"
     (mouseover)="onHover(true)" (mouseleave)="onHover(false)" 
-      [disabled]="contactForm.valid">
+    (click)="send()" [disabled]="contactForm.valid">
       Send 
       <mat-icon class="material-symbols-outlined">
     @switch (state) { 
