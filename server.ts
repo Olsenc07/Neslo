@@ -44,12 +44,12 @@ const helmetOptions: HelmetOptions = isProduction ? {
             defaultSrc: ["'self'"], 
             scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "https://www.google.com", "https://www.gstatic.com"],
             styleSrc: ["'self'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
-            imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net", 'blob:'], 
-            connectSrc: ["'self'"], 
+            imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net", "https://www.gstatic.com", 'blob:'], 
+            connectSrc: ["'self'", "https://www.google.com"], 
             fontSrc: ["'self'", "https:", "data:", "https://fonts.gstatic.com"], 
             objectSrc: ["'none'"], 
             scriptSrcAttr: ["'none'"]
-          }
+          }   
     },
     frameguard: {
         action: 'sameorigin'
@@ -72,7 +72,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
 };
     const server = express();
     
-    // server.use(helmet(helmetOptions));
+    server.use(helmet(helmetOptions));
     
     const corsOptions = isProduction ? {
         origin: 'https://www.neslo.ca',
