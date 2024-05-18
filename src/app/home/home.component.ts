@@ -66,7 +66,7 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
       this.messageAB = this.sanitizer.bypassSecurityTrustHtml(`
       Rooted in Central Alberta, we bring over 30 years of expertise as journeyman carpenters and custom home builders to your door and window installations. 
       Specializing in custom solutions, we ensure top-quality craftsmanship specifically to your home's needs. 
-      <br> Keep connected and stay informed by following us. <br> 
+      <br> Keep connected and stay informed by following us on instagram. <br> 
       <br>
       <p class="headings">
       <i class="bi bi-instagram px-1"></i>
