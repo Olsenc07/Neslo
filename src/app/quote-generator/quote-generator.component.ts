@@ -24,7 +24,7 @@ import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
 import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 
-import { Grid } from '../interfaces/grid'
+import { Grid } from '../interfaces/grid';
 
 import { PdfService } from '../services/pdf.service';
 import { CustomTitleStrategy } from './../services/title-strategy.service';
@@ -33,7 +33,7 @@ import { StandardConfigSizeComponent } from "../standard-config-size/standard-co
 import { OrientationService } from '../services/orientation.service';
 import { Subject, Subscription, take} from 'rxjs';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
-import { RecaptchaService } from '../services/validation.service';
+import { RecaptchaService } from '../services/reCAPTCHA.service';
 
 @Component({
     standalone: true,
@@ -105,7 +105,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
     generateQuoteNumber(): void {
       const now = new Date();
-      const datePart = this.datePipe.transform(now, 'ddHHmmss') || '';
+      const datePart = this.datePipe.transform(now, 'ddHHmms') || '';
       const randomPart = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
       this.quoteNumber = `${datePart}-${randomPart}`;
     }

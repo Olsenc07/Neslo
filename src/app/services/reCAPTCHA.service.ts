@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable({
     providedIn: 'root'
