@@ -1,5 +1,6 @@
 import { Component, HostListener, Renderer2, 
-  ElementRef, ViewChild } from '@angular/core';
+  ElementRef, ViewChild, 
+  HostBinding} from '@angular/core';
 import { NgClass } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
@@ -35,9 +36,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ],
     animations: [
       trigger('dropIn', [
-        state('void', style({ opacity: 0.3, transform: 'translateY(-50px)' })), 
-        state('*', style({ opacity: 1, transform: 'translateY(0)' })),
-        transition('void => *', [
+        state('defer', style({ opacity: 0.3, transform: 'translateY(-50px)' })), 
+        state('welcome', style({ opacity: 1, transform: 'translateY(0)' })),
+        transition('defer => welcome', [
           animate('0.8s .3s ease-out') 
         ])
       ])
@@ -46,6 +47,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 export class HomeComponent {
 atSymbol: string = '@';
+@HostBinding('@dropIn') dropInState: string = 'defer';
 
 imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.jpg', alt: 'Neslo Ltd.' }
 messageAB: SafeHtml;
