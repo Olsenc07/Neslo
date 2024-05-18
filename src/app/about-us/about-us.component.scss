@@ -9,7 +9,13 @@
 .img{
     animation: dropDown 1s ease-out; 
     border-radius: 50%;
-    max-width: 20vh;
+    width: 40vw;
+    @media (min-width: 601px) {
+    width: 27vw;
+    }
+    @media (min-width: 1025px) {
+    width: 12vw;
+    }
     margin-bottom: 2%;
     box-shadow: 2px 2px 2px #00000042;
     background-color: #fff;

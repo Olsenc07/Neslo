@@ -17,7 +17,7 @@
                         [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
                         [message]="messageAB"></app-about-us>
                     }@else{
-                        <app-about-us [@dropIn] [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
+                        <app-about-us [@dropIn]="dropInState" [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
                         [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
                         [message]="messageAB"></app-about-us>
                     }
@@ -30,7 +30,7 @@
                         [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
                         [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
                     }@else{
-                <app-about-us [img]="imgBC" [@dropIn]  [title]="'Primary Supplier'" [customColor]="false"
+                <app-about-us [img]="imgBC" [@dropIn]="dropInState"  [title]="'Primary Supplier'" [customColor]="false"
                 [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
                 [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>
                     }
