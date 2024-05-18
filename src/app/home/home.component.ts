@@ -36,9 +36,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ],
     animations: [
       trigger('dropIn', [
-        state('defer', style({ opacity: 0.3, transform: 'translateY(-50px)' })), 
+        state('*', style({ opacity: 0.3, transform: 'translateY(-50px)' })), 
         state('welcome', style({ opacity: 1, transform: 'translateY(0)' })),
-        transition('defer => welcome', [
+        transition('* => welcome', [
           animate('0.8s .3s ease-out') 
         ])
       ])
@@ -47,7 +47,6 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 export class HomeComponent {
 atSymbol: string = '@';
-@HostBinding('@dropIn') dropInState: string = 'defer';
 
 imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.jpg', alt: 'Neslo Ltd.' }
 messageAB: SafeHtml;
