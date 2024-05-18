@@ -32,7 +32,7 @@ constructor(protected hideFocusService: HideFocusService,
   protected orientationService: OrientationService
 ) {
   this.input.valueChanges.pipe(
-    debounceTime(200),
+    debounceTime(500),
     distinctUntilChanged(),
     takeUntil(this.unsubscribe$)   
   )
