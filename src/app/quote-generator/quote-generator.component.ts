@@ -73,8 +73,8 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     private pdfService: PdfService){
       this.quoteForm = new FormGroup({
         dealerName: new FormControl<string>('Erik Olsen'),
-        dealerBranch: new FormControl<string>(''),
-        contactName: new FormControl<string>(''),
+        dealerBranch: new FormControl<string>('Neslo'),
+        // contactName: new FormControl<string>(''),
         contactEmail: new FormControl<string>('Foldingslidingdoors.ab@gmail.com'),
         contactPhone: new FormControl<string>('(403) 994 - 1202'),
         jobName: new FormControl<string>(''),
@@ -240,8 +240,8 @@ standard(): void {
 clearForm(): void{
    this.quoteForm.reset({
     dealerName: 'Erik Olsen',
-    dealerBranch: '',
-    contactName: '',
+    dealerBranch: 'Neslo',
+    // contactName: '',
     contactEmail: 'Foldingslidingdoors.ab@gmail.com',
     contactPhone: '(403) 994 - 1202',
     jobName: '',

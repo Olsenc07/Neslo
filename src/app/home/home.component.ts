@@ -1,6 +1,5 @@
 import { Component, HostListener, Renderer2, 
-  ElementRef, ViewChild, 
-  HostBinding} from '@angular/core';
+  ElementRef, ViewChild } from '@angular/core';
 import { NgClass } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
@@ -8,14 +7,12 @@ import {MatIconModule} from '@angular/material/icon';
 
 import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
 import { AboutUsComponent } from 'src/app/about-us/about-us.component';
-// import { SkeletonFormComponent } from 'src/app/about-us/skeleton-form/skeleton-form.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 import { OrientationService } from 'src/app/services/orientation.service';
 import { IntroComponent } from 'src/app/intro/intro.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
     standalone: true,
@@ -29,19 +26,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         MatDividerModule,
         MatIconModule,
         NgClass,
-        // SkeletonFormComponent,
         SkeletonFormFillComponent,
         IntroComponent,
         InstaCarouselComponent
-    ],
-    animations: [
-      trigger('dropIn', [
-        state('*', style({ opacity: 0.3, transform: 'translateY(-50px)' })), 
-        state('welcome', style({ opacity: 1, transform: 'translateY(0)' })),
-        transition('* => welcome', [
-          animate('0.8s .3s ease-out') 
-        ])
-      ])
     ]
 })
 

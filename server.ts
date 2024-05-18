@@ -72,7 +72,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
 };
     const server = express();
     
-    server.use(helmet(helmetOptions));
+    // server.use(helmet(helmetOptions));
     
     const corsOptions = isProduction ? {
         origin: 'https://www.neslo.ca',

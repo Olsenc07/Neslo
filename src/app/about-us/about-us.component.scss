@@ -7,7 +7,6 @@
   }
   }
 .img{
-    animation: dropDown 1s ease-out; 
     border-radius: 50%;
     width: 40vw;
     @media (min-width: 601px) {
@@ -46,14 +45,4 @@ h3[heading] {
 .info-container:hover {
   transform: translateY(-7px); 
 }
-}
-@keyframes dropDown {
-  0% {
-    transform: translateY(-100px); /* Start above the normal position */
-    opacity: 0; /* Start invisible if desired for effect */
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }

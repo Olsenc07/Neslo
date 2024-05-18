@@ -6,6 +6,11 @@
   <mat-form-field appearance="fill">
 <input type="text" matInput [matAutocomplete]="auto" [formControl]="input"
 appHideFocus required>
+@if(input.hasError('required')){
+  <mat-error>
+   This field is required.
+ </mat-error>
+   }
     <mat-autocomplete class="drop-down" #auto="matAutocomplete" >
       @for(options of (filteredList$ | async); let i = $index; track options){
         <mat-option [value]="options" (click)="emitSelectedChange(options)">
