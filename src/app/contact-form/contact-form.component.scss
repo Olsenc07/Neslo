@@ -10,7 +10,7 @@
     background-color: #5E4C5A;
     @include common;
   }
-button[type="submit"]{
+button[id="submitBtn"]{
     color: white;
     background-color: var(--wood);
   &:hover{
