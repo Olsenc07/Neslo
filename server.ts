@@ -42,7 +42,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"], 
-            scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "https://www.google.com"],
+            scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "https://www.google.com", "https://www.gstatic.com"],
             styleSrc: ["'self'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
             imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net", 'blob:'], 
             connectSrc: ["'self'"], 
