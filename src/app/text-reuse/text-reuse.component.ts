@@ -29,8 +29,7 @@ private unsubscribe$: Subject<void> = new Subject<void>();
 @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
 constructor(protected hideFocusService: HideFocusService,
-  protected orientationService: OrientationService
-) {
+  protected orientationService: OrientationService) {
   this.input.valueChanges.pipe(
     debounceTime(500),
     distinctUntilChanged(),
@@ -55,7 +54,6 @@ ngOnChanges(changes: SimpleChanges): void {
 
   updateValidatorsAndValue(): void {
     const validators: ValidatorFn[] = [];
-
     if (this.need) {
       validators.push(Validators.required);
     }
@@ -66,7 +64,6 @@ ngOnChanges(changes: SimpleChanges): void {
     this.input.updateValueAndValidity();
   }
   
- 
 ngOnDestroy(): void {
   this.unsubscribe$.next(); 
   this.unsubscribe$.complete(); 

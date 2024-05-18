@@ -14,7 +14,7 @@ router.post('/generator', async (req: Request, res: Response) => {
     const selectors = {
       dealerName: '#dealerName',
       dealerBranch: '#dealerBranch',
-      contactName: '#contactName',
+      // contactName: '#contactName',
       contactEmail: '#contactEmail',
       contactPhone: '#contactPhone',
       jobName: '#jobName',
