@@ -53,7 +53,7 @@
         [intValue]="'Erik Olsen'" (valueChange)="updateField('dealerName', $event)"></app-text-reuse>
         <!-- Dealer Branch -->
         <app-text-reuse [intro]="'Branch Name'" id="dealerBranch" [value]="quoteForm.get('dealerBranch')?.value"
-          (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
+        [intValue]="'Nslo'" (valueChange)="updateField('dealerBranch', $event)"></app-text-reuse>
         <!-- Contact Name -->
         <!-- <app-text-reuse  [intro]="'Contact Name'" id="contactName" [value]="quoteForm.get('contactName')?.value"
          (valueChange)="updateField('contactName', $event)"></app-text-reuse> -->
@@ -114,7 +114,7 @@
            (valueChange)="updateField('exteriorFinish', $event)" [initialList]="exteriorFinish">
           </app-auto-search>
         <!-- Ext color --> 
-           <app-text-reuse  [intro]="'Exterior Color'" id="exteriorColor" [value]="quoteForm.get('exteriorColor')?.value"
+           <app-text-reuse [need]="true" [intro]="'Exterior Color'" id="exteriorColor" [value]="quoteForm.get('exteriorColor')?.value"
            (valueChange)="updateField('exteriorColor', $event)">
           </app-text-reuse >
         <!-- Int finish -->
@@ -122,7 +122,7 @@
             (valueChange)="updateField('interiorFinish', $event)" [initialList]="interionFinish">
           </app-auto-search>
         <!-- Int Color -->
-           <app-text-reuse  [intro]="'Interior Color'" id="interiorColor" [value]="quoteForm.get('interiorColor')?.value"
+           <app-text-reuse [need]="true" [intro]="'Interior Color'" id="interiorColor" [value]="quoteForm.get('interiorColor')?.value"
            (valueChange)="updateField('interiorColor', $event)">
           </app-text-reuse >
         </div>
@@ -132,7 +132,7 @@
             (valueChange)="updateField('glass', $event)" [initialList]="glass">
           </app-auto-search>
         <!-- Handle Color -->
-           <app-text-reuse [intro]="'Handle Color'" id="handleColor" [value]="quoteForm.get('handleColor')?.value"
+           <app-text-reuse [need]="true" [intro]="'Handle Color'" id="handleColor" [value]="quoteForm.get('handleColor')?.value"
             (valueChange)="updateField('handleColor', $event)">
           </app-text-reuse>
            <!-- Additional Notes -->

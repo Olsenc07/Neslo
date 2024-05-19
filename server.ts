@@ -19,8 +19,7 @@ const browserDistFolder = join(__dirname, '../browser');
 const bootstrapPath = join(__dirname, '../server/main.server.mjs');
 const indexHtml = join(__dirname, 'index.server.html');
 
-
-// Backend paths
+// Backend Paths
 const emailRoutePath = join(__dirname, '../backend/routes/email.js');
 const pdfRoutePath = join(__dirname, '../backend/routes/pdf.js');
 const securityRoutePath = join(__dirname, '../backend/routes/security.js');
@@ -44,12 +43,12 @@ const helmetOptions: HelmetOptions = isProduction ? {
             defaultSrc: ["'self'"], 
             scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "https://www.google.com", "https://www.gstatic.com"],
             styleSrc: ["'self'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
-            imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net", 'blob:'], 
-            connectSrc: ["'self'"], 
+            imgSrc: ["'self'", "data:", "https://www.neslo.ca", "https://cdn.jsdelivr.net", "https://www.gstatic.com", 'blob:'], 
+            connectSrc: ["'self'", "https://www.google.com"], 
             fontSrc: ["'self'", "https:", "data:", "https://fonts.gstatic.com"], 
             objectSrc: ["'none'"], 
             scriptSrcAttr: ["'none'"]
-          }
+          }   
     },
     frameguard: {
         action: 'sameorigin'
@@ -72,7 +71,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
 };
     const server = express();
     
-    // server.use(helmet(helmetOptions));
+    server.use(helmet(helmetOptions));
     
     const corsOptions = isProduction ? {
         origin: 'https://www.neslo.ca',
@@ -110,7 +109,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
      const pdfRoute = (await import(pdfRoutePath)).default;
      const securityRoute = (await import(securityRoutePath)).default;
 
-
+    // API Routes
      server.use("/api/email", emailRoute);
      server.use("/api/pdf", pdfRoute);
      server.use("/api/security", securityRoute);
