@@ -19,8 +19,7 @@ const browserDistFolder = join(__dirname, '../browser');
 const bootstrapPath = join(__dirname, '../server/main.server.mjs');
 const indexHtml = join(__dirname, 'index.server.html');
 
-
-// Backend paths
+// Backend Paths
 const emailRoutePath = join(__dirname, '../backend/routes/email.js');
 const pdfRoutePath = join(__dirname, '../backend/routes/pdf.js');
 const securityRoutePath = join(__dirname, '../backend/routes/security.js');
@@ -110,7 +109,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
      const pdfRoute = (await import(pdfRoutePath)).default;
      const securityRoute = (await import(securityRoutePath)).default;
 
-
+    // API Routes
      server.use("/api/email", emailRoute);
      server.use("/api/pdf", pdfRoute);
      server.use("/api/security", securityRoute);
