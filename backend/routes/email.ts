@@ -44,7 +44,7 @@ router.post('/emit', upload.single('file'), async (req: Request, res: Response) 
   // Declare msg as EmailWithAttachments to include attachments
   const msg: EmailWithAttachments = {
     to: process.env['email'],
-    from: `info@neslo.ca`,
+    from: `erik@neslo.ca`,
     reply_to: `<${fromEmail}> `, 
     subject: `New Contact Request from ${fromName}`,
     text: text,

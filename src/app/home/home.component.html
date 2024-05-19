@@ -2,15 +2,14 @@
     <app-intro [orientation]="this.orientationService.screen()"></app-intro>
  </header>
 
-<section class="my-3">
+<section class="my-3" >
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
             <div class="text-center mb-4 pt-3" id="contacts">
                 <h2 heading>Neslo Partnerships</h2>
                 <mat-divider></mat-divider>
             </div>
-        <div class="row" #banners>
+        <div class="row">
             <!-- Alberta's Distributor -->
-            @defer(on viewport(banners)){
             <div class="col-12 col-md-6 d-flex flex-column align-items-center extra-style" >
                         <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
                         [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
@@ -22,7 +21,6 @@
                         [intro]="introBC" [tel]="'(250) 448 - 6418'" [email]="'sales@foldingslidingdoors.ca'"
                         [fax]="'(250) 448 – 6444'" [message]="messageBC"></app-about-us>       
             </div>
-        }
         </div>
     </div>
 </section>
