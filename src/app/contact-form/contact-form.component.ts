@@ -16,6 +16,7 @@ import { OrientationService } from '../services/orientation.service';
 import { HideFocusService } from '../services/hide-focus.service';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { EmailService } from '../services/email.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -42,6 +43,7 @@ export class ContactFormComponent {
 
   constructor(private sanitizer: DomSanitizer,
     protected hideFocusService: HideFocusService,
+    protected emailService: EmailService,
     protected orientationService: OrientationService,
     private snackBar: MatSnackBar
   ){}
@@ -78,19 +80,32 @@ export class ContactFormComponent {
       this.state = isHovered ? 'focus' : 'noFocus';
     }
     send(): void {
-      this.snackBar.open('Direct messaging is not yet supported. Please try again soon.', 'Close', {
+      // this.snackBar.open('Direct messaging is not yet supported. Please try again soon.', 'Close', {
+      //   duration: 3000
+      // });
+      console.log('values', this.contactForm.value);
+      this.emailService.sendEmail(this.contactForm.value)
+        .subscribe({
+    next: (response) => {
+      // Handle successful response
+      console.log('Email sent successfully:', response);
+      // Reset the form and show a success message
+      this.contactForm.reset();
+      this.snackBar.open('Email sent successfully!', 'Close', {
         duration: 3000
       });
-      // if(this.fillAttached)
-      // {
-      //   this.snackBar.open('Thank you for contacting Neslo. We will get back to you with a quote as soon as possible.', '✅', {
-      //     duration: 3000
-      //   });
-      // }else{
-      //   this.snackBar.open('Thank you for contacting Neslo. We will respond as soon as possible.', '✅', {
-      //     duration: 3000
-      //   });
-      // }
-
-  }
+    },
+    error: (error) => {
+      // Handle error
+      console.error('Error sending email:', error);
+      this.snackBar.open('Error sending email. Please try again later.', 'Close', {
+        duration: 3000
+      });
+    },
+    complete: () => {
+      // Optional: Handle completion
+    }
+  });
+  
+}
 }
