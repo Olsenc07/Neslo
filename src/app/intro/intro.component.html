@@ -1,17 +1,15 @@
 <div class="intro-head" [@fadeIn]>
   <div>
-        @if(orientation){
           <div class="image-container">
+        @if(orientation){
             <img src="./../favicon.ico" class="img gap-2" alt="Neslo Door">
+          } @else {
             <h1 class="the-title">
               Welcome To Neslo
             </h1>
+              }
             </div>
-        } @else {
-      <h1 class="the-title">
-        Welcome To Neslo
-      </h1>
-        }
+      
     <h2 heading>Central Alberta's trusted partner in premium windows and doors</h2>
   </div>
   @if(orientation){

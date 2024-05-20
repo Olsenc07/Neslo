@@ -34,6 +34,7 @@ import { OrientationService } from '../services/orientation.service';
 import { Subject, Subscription, take} from 'rxjs';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 import { RecaptchaService } from '../services/reCAPTCHA.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
     standalone: true,
@@ -105,7 +106,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
     generateQuoteNumber(): void {
       const now = new Date();
-      const datePart = this.datePipe.transform(now, 'ddHHmms') || '';
+      const datePart = this.datePipe.transform(now, 'ddHms') || '';
       const randomPart = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
       this.quoteNumber = `${datePart}-${randomPart}`;
     }
@@ -146,54 +147,62 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
         });
       } else {
         grecaptcha.ready(() => {
-          (grecaptcha.execute('6Ld7EdcpAAAAAP5b51ypqU3cFb5fvgQ7JxfMbGBf', { action: 'submit' }) as Promise<string>)
-            .then((token) => {
-              if (token) {
-                console.log('token', token);
-                this.recaptchaService.verifyToken(token).pipe(take(1)).subscribe((valid) => {
-                  if (valid) {
-                console.log('valid', valid);
-                    this.progress = true;
-                    this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
-                      next: (pdfBlob: Blob) => {
-                        this.downloadPDF(pdfBlob);
-                        this.snackBar.open('Quote has been generated successfully.', '✅', {
-                          duration: 3000
-                        });
-                      },
-                      error: (error: any) => {
-                        this.progress = false;
-                        console.error('PDF generator failed:', error);
-                        this.snackBar.open('Error generating PDF. Please try again.', '❌', {
-                          duration: 3000
-                        });
-                      },
-                      complete: () => {
-                        this.progress = false;
-                        console.log('PDF generation process is complete.');
-                      }
-                    });
+          grecaptcha.execute('6Ld7EdcpAAAAAP5b51ypqU3cFb5fvgQ7JxfMbGBf', { action: 'submit' }).then((token) => {
+            if (token) {
+              this.recaptchaService.verifyToken(token).pipe(take(1)).subscribe({
+                next: (response) => {
+                  if (response.success) {
+                    this.generatePdfDocument();
+                    if ( response.score < 0.3) {
+                      console.log('robot spotted');
+                    }
                   } else {
                     this.snackBar.open('reCAPTCHA verification failed. Please try again.', '❌', {
                       duration: 3000
                     });
                   }
-                });
-              } else {
-                console.error('Failed to receive reCAPTCHA token');
-              }
-            })
-            .catch((error) => {
-              console.error('reCAPTCHA execution error:', error);
-              this.snackBar.open('reCAPTCHA execution failed. Please try again.', '❌', {
+                },
+                error: (error) => {
+                  console.error('reCAPTCHA verification failed:', error);
+                  this.snackBar.open('An error occurred during reCAPTCHA verification. Please try again later.', '❌', {
+                    duration: 3000
+                  });
+                }
+              });
+            } else {
+              this.snackBar.open('reCAPTCHA verification failed. Please try again.', '❌', {
                 duration: 3000
               });
-            });
+            }
+          });
         });
       }
     }
   }
-
+  
+  generatePdfDocument(): void {
+    this.progress = true;
+    this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
+      next: (pdfBlob: Blob) => {
+        this.downloadPDF(pdfBlob);
+        this.snackBar.open('Quote has been generated successfully.', '✅', {
+          duration: 3000
+        });
+      },
+      error: (error: any) => {
+        this.progress = false;
+        console.error('PDF generator failed:', error);
+        this.snackBar.open('Error generating PDF. Please try again.', '❌', {
+          duration: 3000
+        });
+      },
+      complete: () => {
+        this.progress = false;
+        console.log('PDF generation process is complete.');
+      }
+    });
+  }
+  
   private scrollToFirstInvalidControl(): void {
     for (const key of Object.keys(this.quoteForm.controls)) {
       if (this.quoteForm.controls[key].invalid) {
