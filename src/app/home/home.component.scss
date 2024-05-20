@@ -33,8 +33,9 @@ form{
   justify-content: center;
   align-items: center;
 }
-.image-mobile{
+.image-mobile {
   @include img;
+  background-attachment: scroll;
 }
 .image {
   @include img; 
@@ -55,6 +56,13 @@ form{
 .contact-subitem {
   margin-left: 25px; 
   margin-top: 4px; 
+}
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20; 
 }
 .section-padding {
     padding: 60px 0;

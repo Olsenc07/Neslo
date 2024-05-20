@@ -30,8 +30,6 @@ router.post('/verify-recaptcha', (req: Request, res: Response) => {
         const response = JSON.parse(body);
         res.json({
           success: response.success,
-          score: response.score,
-          action: response.action,
           challenge_ts: response.challenge_ts,
           hostname: response.hostname,
           'error-codes': response['error-codes']
