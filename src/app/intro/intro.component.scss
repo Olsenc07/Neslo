@@ -76,17 +76,6 @@
     background-size: 200% 200%; 
     animation: gradient-flow 10s linear infinite; 
       }
-mat-divder {
-display: flex;
-border-top-width: 2px;
-border-radius: 25px;
-border-top-color: #985a2d87;
-border-top-style: solid;
-justify-content: center;
-align-items: center;
-margin: 0% 27%;
-}
-
 h2[heading] {
     color: var(--bs-body-bg) !important;
     text-align: center; 

@@ -106,8 +106,8 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
     generateQuoteNumber(): void {
       const now = new Date();
-      const datePart = this.datePipe.transform(now, 'ddHms') || '';
-      const randomPart = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+      const datePart = this.datePipe.transform(now, 'ddHmms') || '';
+      const randomPart = Math.floor(Math.random() * 10).toString().padStart(3, '0');
       this.quoteNumber = `${datePart}-${randomPart}`;
     }
 
