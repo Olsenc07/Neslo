@@ -26,8 +26,19 @@ router.post('/verify-recaptcha', (req: Request, res: Response) => {
       body += chunk;
     });
     resGoogle.on('end', () => {
-      const response = JSON.parse(body);
-      res.json({ success: response.success });
+      try {
+        const response = JSON.parse(body);
+        res.json({
+          success: response.success,
+          score: response.score,
+          action: response.action,
+          challenge_ts: response.challenge_ts,
+          hostname: response.hostname,
+          'error-codes': response['error-codes']
+        });
+      } catch (error) {
+        res.status(500).json({ success: false, error: 'Failed to parse response from Google reCAPTCHA API' });
+      }
     });
   });
 
@@ -39,4 +50,5 @@ router.post('/verify-recaptcha', (req: Request, res: Response) => {
   reqGoogle.write(data);
   reqGoogle.end();
 });
+
 export default router;

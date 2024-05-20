@@ -16,7 +16,7 @@ interface EmailData {
 export class EmailService {
   apiUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   sendEmail(formData: EmailData): Observable<object> {
     console.log('service', formData);
