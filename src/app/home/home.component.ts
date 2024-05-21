@@ -13,7 +13,6 @@ import { IntroComponent } from 'src/app/intro/intro.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 
-
 @Component({
     standalone: true,
     selector: 'app-home',
