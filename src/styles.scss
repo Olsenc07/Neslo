@@ -113,6 +113,10 @@ b{
 b[fsdc]{
   color: var( --green-field) !important;
 }
+html, body {
+    height: 100%;
+    margin: 0;
+}
 p {
   font-size: 1.1em; 
 }
