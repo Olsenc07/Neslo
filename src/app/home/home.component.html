@@ -25,8 +25,7 @@
     </div>
 </section>
 
-<section class="my-3 ">
-    <div [ngClass]="this.orientationService.screen() ? 'container-border' : 'container'" class="py-3 container-common">
+<section [ngClass]="this.orientationService.screen() ? 'container-border' : 'container'" class="container-common">
         <div class="text-center mb-4 pt-3">
         <h2 heading> Contact Neslo </h2>
             <mat-divider></mat-divider>
@@ -50,7 +49,6 @@
     }@placeholder { 
         <app-skeleton-form-fill ></app-skeleton-form-fill>
          }
-    </div>
     </div>
 </section>
 <footer  class="text-center section-padding bg-dark text-light">

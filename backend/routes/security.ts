@@ -5,6 +5,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 const router = Router();
 
+
+
+
+
 router.post('/verify-recaptcha', (req: Request, res: Response) => {
   const { token } = req.body;
   const secretKey = process.env['recaptchaSecretKey'];
@@ -20,12 +24,15 @@ router.post('/verify-recaptcha', (req: Request, res: Response) => {
     }
   };
 
+
+
   const reqGoogle = request(options, (resGoogle) => {
     let body = '';
     resGoogle.on('data', (chunk) => {
       body += chunk;
     });
     resGoogle.on('end', () => {
+      console.log('Google reCAPTCHA API response:', body); // Add this line
       try {
         const response = JSON.parse(body);
         res.json({
@@ -39,6 +46,8 @@ router.post('/verify-recaptcha', (req: Request, res: Response) => {
       }
     });
   });
+  
+
 
   reqGoogle.on('error', (error) => {
     console.error('Error verifying reCAPTCHA token:', error);
