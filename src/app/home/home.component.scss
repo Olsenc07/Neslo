@@ -53,6 +53,10 @@ form{
   top: 0;
   left: 0;
   width: 100%;
+  position: sticky; // added
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 .section-padding {
     padding: 60px 0;
