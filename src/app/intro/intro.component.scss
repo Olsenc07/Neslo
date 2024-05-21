@@ -10,27 +10,12 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    @media (min-width: 601px) {
-      .intro-head {
-          height: 15vw;
-      }
-    }
-    @media (min-width: 800px) {
-      height: 30vw;
-      }
+    height: auto;
       @media (min-width: 1000px) {
         height: 40vw;
         }
   }
 
-  .image-mobile {
-    background-image: url("https://www.neslo.ca/assets/Erik_Red_Working.jpg"); 
-    // background-image: url("../../assets/Erik_Red_Working.jpg"); 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-attachment: scroll;
-  }
 .btn-primary {
     transition: background-image .3s ease-in-out; 
     background-image: linear-gradient(45deg, var(--wood), var(--wood-light));
@@ -48,6 +33,14 @@
   }
   .img{
     max-width: 75%;
+  }
+  .image-mobile {
+    background-image: url("https://www.neslo.ca/assets/Erik_Red_Working.jpg"); 
+    // background-image: url("../../assets/Erik_Red_Working.jpg"); 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-attachment: scroll;
   }
   .msg-icon{
     background-image: linear-gradient(45deg, #b78f5d, #854615);
@@ -103,4 +96,7 @@ h2[heading] {
     justify-content: center;
     align-items: center;
     margin-top: 10%;
+  }
+  .vertical-btns{
+    margin-bottom: 5%;
   }
