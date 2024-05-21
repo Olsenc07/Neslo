@@ -146,40 +146,38 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
           duration: 3000
         });
       } else {
-        grecaptcha.ready(() => {
-          grecaptcha.execute('6Ld7EdcpAAAAAP5b51ypqU3cFb5fvgQ7JxfMbGBf', { action: 'submit' }).then((token) => {
-            if (token) {
-              this.recaptchaService.verifyToken(token).pipe(take(1)).subscribe({
-                next: (response) => {
-                  if (response.success) {
+        // grecaptcha.ready(() => {
+        //   grecaptcha.execute('6Ld7EdcpAAAAAP5b51ypqU3cFb5fvgQ7JxfMbGBf', { action: 'submit' }).then((token) => {
+        //     if (token) {
+        //       this.recaptchaService.verifyToken(token).pipe(take(1)).subscribe({
+        //         next: (response) => {
+        //           if (response.success) {
                     this.generatePdfDocument();
-                    if ( response.score < 0.3) {
-                      console.log('robot spotted');
-                    }
-                  } else {
-                    this.snackBar.open('reCAPTCHA verification failed. Please try again.', '❌', {
-                      duration: 3000
-                    });
-                  }
-                },
-                error: (error) => {
-                  console.error('reCAPTCHA verification failed:', error);
-                  this.snackBar.open('An error occurred during reCAPTCHA verification. Please try again later.', '❌', {
-                    duration: 3000
-                  });
-                }
-              });
-            } else {
-              this.snackBar.open('reCAPTCHA verification failed. Please try again.', '❌', {
-                duration: 3000
-              });
+                  //   if ( response.score < 0.3) {
+                  //     console.log('robot spotted');
+                  //   }
+                  // } else {
+                  //   this.snackBar.open('reCAPTCHA verification failed. Please try again.', '❌', {
+                  //     duration: 3000
+                  //   });
+                  // }
+                // },
+                // error: (error) => {
+                //   console.error('reCAPTCHA verification failed:', error);
+                //   this.snackBar.open('An error occurred during reCAPTCHA verification. Please try again later.', '❌', {
+                //     duration: 3000
+                //   });
+                // }
+              // });
+            // } else {
+            //   this.snackBar.open('reCAPTCHA verification failed. Please try again.', '❌', {
+            //     duration: 3000
+            //   });
             }
-          });
-        });
-      }
-    }
-  }
-  
+          }
+        }
+
+
   generatePdfDocument(): void {
     this.progress = true;
     this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
