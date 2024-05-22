@@ -47,7 +47,7 @@ router.post('/generator', async (req: Request, res: Response) => {
     const viewport: {
       width: number;
       height: number;
-  } = { width: 1400, height: 1600 };
+  } = { width: 1300, height: 1400 };
     await page.setViewport(viewport);;
     const endpoint = `${protocol}://${headers.host}/quotes`;
     // Navigate to the endpoint
@@ -55,6 +55,9 @@ router.post('/generator', async (req: Request, res: Response) => {
     await page.waitForFunction('window.getAllAngularTestabilities().findIndex(x => !x.isStable()) === -1');
     const styles = join(__dirname, '../../browser/pdf-creation.css')
     await page.addStyleTag({ path: styles });
+
+    // Trigger the generateQuoteNumber method
+    await page.click('#generateQuoteButton');
 
 // Use function within loop
 for (const [field, selector] of Object.entries(selectors)) {

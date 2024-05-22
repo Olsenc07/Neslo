@@ -101,12 +101,11 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
       this.title.setTitle('Neslo | Quote Request');
       this.currentDateTime = new Date();
-      this.generateQuoteNumber();
     }
 
     generateQuoteNumber(): void {
       const now = new Date();
-      const datePart = this.datePipe.transform(now, 'ddHmms') || '';
+      const datePart = this.datePipe.transform(now, 'dHHmm') || '';
       const randomPart = Math.floor(Math.random() * 10).toString().padStart(3, '0');
       this.quoteNumber = `${datePart}-${randomPart}`;
     }
