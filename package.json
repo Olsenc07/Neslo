@@ -50,6 +50,7 @@
     "ng-recaptcha": "^13.2.1",
     "ngx-bootstrap": "^12.0.0",
     "ngx-skeleton-loader": "^9.0.0",
+    "node-cache": "^5.1.2",
     "pdf-lib": "^1.17.1",
     "puppeteer": "^22.6.4",
     "recaptcha3": "^0.3.1",

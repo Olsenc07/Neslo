@@ -1,16 +1,36 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImagesService {
+  apiUrl: string = environment.apiUrl;
 
-  private imageFolder = signal<['']>([''])
-  folder = computed<boolean>(() => this.imageFolder())
+  private residentialImages = signal<string[]>([]);
+  private showcaseImages = signal<string[]>([]);
+  private nesloTeamImages = signal<string[]>([]);
 
-  constructor() { }
+  getResidentialImages = computed(() => this.residentialImages());
+  getShowcaseImages = computed(() => this.showcaseImages());
+  getNesloTeamImages = computed(() => this.nesloTeamImages());
 
-// when in view a specific route is called and fills the array
-// make 5 at a time until requested more
+  constructor(private http: HttpClient) { }
 
+  fetchImages(folder: 'Residential' | 'Showcase' | 'NesloTeam'): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/cloudinary?folder=${folder}`).pipe(
+      tap((images: string[]) => {
+        if (folder === 'Residential') {
+          this.residentialImages.set(images);
+        } else if (folder === 'Showcase') {
+          this.showcaseImages.set(images);
+        } else if (folder === 'NesloTeam') {
+          this.nesloTeamImages.set(images);
+        }
+      })
+    );
+  }
 }

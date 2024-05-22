@@ -1,12 +1,12 @@
-<div >
-    <div >
-        <!-- gets directly from signal -->
-        @for(image of this.imagesService.folder(); let i = $index; track image){
-      <div>
-        <img src="{{ image.url }}" class="d-block w-100" alt="{{ image.alt }}">
+<div class="container mt-5">
+  <h2>{{ heading }}</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+    @for(image of images; let i = $index; track image){
+      <div class="card">
+        <img [src]="image.url" class="card-img-top" alt="Image">
       </div>
     }
     </div>
-
   </div>
-  
+</div>

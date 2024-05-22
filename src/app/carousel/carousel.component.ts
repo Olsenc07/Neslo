@@ -11,16 +11,24 @@ import { ImagesService } from '../services/images.service';
   styleUrl: './carousel.component.scss'
 })
 export class CarouselComponent {
-  @Input() route: string = '';
-
+  @Input() route!: 'Residential' | 'Showcase' | 'NesloTeam';
+  @Input() heading: string = '';
+  images: string[] = [];
 
   constructor(private http: HttpClient,
     protected imagesService: ImagesService,
   ) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>(this.route);
+    this.loadImages();
   }
 
-
+  loadImages(): void {
+    this.imagesService.fetchImages(this.route).subscribe({
+      next: (images: string[]) => {
+        this.images = images;
+      },
+      error: error => console.error('Error fetching images:', error)
+    });
+  }
 }
