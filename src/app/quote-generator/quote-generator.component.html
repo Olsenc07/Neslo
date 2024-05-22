@@ -32,9 +32,7 @@
        </h2>
         <p class="headings">{{ quoteForm.get('jobName')?.value }}</p>
         <p>{{ currentDateTime | date: 'fullDate' }}</p>
-        <button id="generateQuoteButton" (click)="generateQuoteNumber()">Generate Quote Number</button>
-        <p>Quote Number: {{ quoteNumber }}</p>
-
+        <p id="quoteNumber">Quote Number: {{ quoteNumber }}</p>
       </div> 
     </div>
     </div>

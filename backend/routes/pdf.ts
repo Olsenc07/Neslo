@@ -12,6 +12,7 @@ router.post('/generator', async (req: Request, res: Response) => {
     const { quoteForm, gridFormArray } = req.body;  
 
     const selectors = {
+      quoteNumber: '#quoteNumber',
       dealerName: '#dealerName',
       dealerBranch: '#dealerBranch',
       // contactName: '#contactName',
@@ -55,9 +56,6 @@ router.post('/generator', async (req: Request, res: Response) => {
     await page.waitForFunction('window.getAllAngularTestabilities().findIndex(x => !x.isStable()) === -1');
     const styles = join(__dirname, '../../browser/pdf-creation.css')
     await page.addStyleTag({ path: styles });
-
-    // Trigger the generateQuoteNumber method
-    await page.click('#generateQuoteButton');
 
 // Use function within loop
 for (const [field, selector] of Object.entries(selectors)) {
@@ -157,6 +155,20 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
   await page.keyboard.press('Tab');  
   await page.keyboard.press('Escape')
 }
+
+
+
+   // Set the quote number in the specific <p> element
+   if (quoteForm.quoteNumber) {
+    await page.evaluate((quoteNumber) => {
+      const element = document.querySelector('#quoteNumber');
+      if (element) {
+        element.textContent = `Quote Number: ${quoteNumber}`;
+        const event = new Event('input', { bubbles: true });
+      }
+    }, quoteForm.quoteNumber);
+  }
+
   // Then call your function
    await fillGridForm(page, gridFormArray);
     const idsToIgnore: string[] = ['ignore0', 'ignore1', 'ignore2'];

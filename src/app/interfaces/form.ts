@@ -1,4 +1,5 @@
 export interface Form {
+    quoteNumber: string;
     dealerName: string;
     dealerBranch: string;
     contactName: string;

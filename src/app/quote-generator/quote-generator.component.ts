@@ -73,6 +73,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
    @Inject(PLATFORM_ID) private platformId: Object,
     private pdfService: PdfService){
       this.quoteForm = new FormGroup({
+        quoteNumber: new FormControl<string>(''),
         dealerName: new FormControl<string>('Erik Olsen'),
         dealerBranch: new FormControl<string>('Neslo'),
         // contactName: new FormControl<string>(''),
@@ -151,6 +152,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
         //       this.recaptchaService.verifyToken(token).pipe(take(1)).subscribe({
         //         next: (response) => {
         //           if (response.success) {
+                    this.generateQuoteNumber()
                     this.generatePdfDocument();
                   //   if ( response.score < 0.3) {
                   //     console.log('robot spotted');
