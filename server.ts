@@ -1,5 +1,6 @@
 import 'zone.js';
 import express, { Request, Response } from 'express';
+import httpsRedirect from 'https-redirect';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import compression from 'compression';
@@ -72,6 +73,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
     const server = express();
     
     server.use(helmet(helmetOptions));
+    server.use(httpsRedirect);
     
     const corsOptions = isProduction ? {
         origin: 'https://www.neslo.ca',
