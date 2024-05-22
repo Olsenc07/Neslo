@@ -5,6 +5,7 @@ import { Form } from '../interfaces/form';
 import { Grid } from '../interfaces/grid';
 
 const mockForm: Form = {
+  quoteNumber: "12345",
   dealerName: "Neslo",
   dealerBranch: "Downtown",
   contactName: "Erik Olsen",
