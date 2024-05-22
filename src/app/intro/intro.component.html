@@ -1,71 +1,4 @@
-<!-- <div class="intro-head" [@fadeIn]>
-  <div [ngClass]="orientation ? 'image-mobile' : '' ">
-  <div>
-        <div class="image-container">
-            <img src="./../favicon.ico" class="img gap-2" alt="Neslo Door">
-        @if(!orientation){
-            <h1 class="the-title">
-              Welcome To Neslo
-            </h1>
-          }
-        </div>
-    <h2 heading>Central Alberta's trusted partner in premium windows and doors</h2>
-  </div>
-  @if(orientation){
-  <div class="d-flex justify-content-center flex-column align-items-center">
-    <div class="d-flex flex-column ">
-      <button mat-fab extended class="mobile" (click)="navigateToContact()">
-          Learn about us
-          <mat-icon class="material-symbols-outlined">
-          local_library
-        </mat-icon>
-      </button>
-      <div>
-      <button mat-fab extended class="msg-icon" (click)="navigateToMsg()">
-        <mat-icon class="material-symbols-outlined">
-          contact_mail
-      </mat-icon>
-          Contact info
-      </button>
-    </div>
-      <button mat-fab extended  class="mobile-request" (click)="requestQuote()">
-          Request a quote
-          <mat-icon class="material-symbols-outlined">
-            description
-          </mat-icon>
-      </button>
-    </div>
-  </div>
-  } @else {
-    <div [ngClass]="{'flex-column': orientation, 'flex-sm-row': orientation}" class="universal gap-2 ">
-        <button mat-fab extended  
-            class="btn btn-primary btn-lg" (click)="navigateToContact()">
-            Learn about us
-            <mat-icon class="material-symbols-outlined">
-              local_library
-            </mat-icon>
-        </button>
-        <button mat-fab extended  
-         class="btn btn-primary btn-lg px-4 quoteDesk" (click)="requestQuote()">
-            Request a quote
-              <mat-icon class="material-symbols-outlined">
-                description
-              </mat-icon>
-        </button>
-        <button mat-fab extended
-    class="btn btn-primary btn-lg" (click)="navigateToMsg()">
-              Contact info
-              <mat-icon class="material-symbols-outlined">
-                contact_mail
-              </mat-icon>
-        </button>
-    </div>
-  }
-</div>
-</div>     -->
 
-
-<!-- new -->
 @if(orientation){
   <div class="intro-head image-mobile" >
     <div>
@@ -109,8 +42,7 @@
       </div>
   <h2 heading>Central Alberta's trusted partner in premium windows and doors</h2>
 </div>
-
-<div [ngClass]="{'flex-column': orientation, 'flex-sm-row': orientation}" class="universal gap-2 ">
+<div class="universal gap-2 ">
   <button mat-fab extended  
       class="btn btn-primary btn-lg" (click)="navigateToContact()">
       Learn about us
@@ -133,7 +65,5 @@ class="btn btn-primary btn-lg" (click)="navigateToMsg()">
         </mat-icon>
   </button>
 </div>
-
-
 </div>
 }

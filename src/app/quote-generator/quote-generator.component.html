@@ -10,7 +10,7 @@
           <span class="material-symbols-outlined">
             call
             </span>
-        <a href="tel:+4039941202" matTooltip="Open FaceTime" class="link-secondary" aria-label="Call us at (403)-994-1202">(403)-994-1202</a>
+        <a href="tel:+14039941202" matTooltip="Open FaceTime" class="link-secondary" aria-label="Call us at (403)-994-1202">(403)-994-1202</a>
       </p>
       <p class="mb-1 headings">
         <span class="material-symbols-outlined">
@@ -32,13 +32,15 @@
        </h2>
         <p class="headings">{{ quoteForm.get('jobName')?.value }}</p>
         <p>{{ currentDateTime | date: 'fullDate' }}</p>
+        <button id="generateQuoteButton" (click)="generateQuoteNumber()">Generate Quote Number</button>
         <p>Quote Number: {{ quoteNumber }}</p>
+
       </div> 
     </div>
     </div>
 </header>
 
-    <form [formGroup]="quoteForm" #formElement>
+<form [formGroup]="quoteForm" #formElement>
           <!-- Dealer Information Section -->
           <div  class="container">
               <!-- Dealer Information Section -->
@@ -169,8 +171,7 @@
       </mat-card-content>
       <mat-card-actions>
 <!-- Submit Button -->
-      <div class="pdf">
-  <!-- [disabled]="quoteForm.invalid" -->
+  <div class="pdf">
   @if(!progress){
     @if(this.orientationService.screen()){
     <button mat-fab color="primary" (click)="generatePDF()" aria-label="Pdf generator button">
@@ -225,10 +226,9 @@ aria-label="Clear form button and label">
             </mat-icon>
           </button>
         }
-</div>
-</mat-card-actions>
-</mat-card>
-
     </div>
-    </form>
-  </div>
+    </mat-card-actions>
+    </mat-card>
+    </div>
+</form>
+</div>
