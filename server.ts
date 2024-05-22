@@ -1,6 +1,5 @@
 import 'zone.js';
 import express, { Request, Response } from 'express';
-import httpsRedirect from 'https-redirect';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import compression from 'compression';
@@ -71,9 +70,16 @@ const helmetOptions: HelmetOptions = isProduction ? {
     noSniff: false
 };
     const server = express();
+    server.enable('trust proxy');
     
     server.use(helmet(helmetOptions));
-    server.use(httpsRedirect);
+    // Middleware to force HTTPS
+    server.use((req, res, next) => {
+    if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
+        return next();
+    }
+    res.redirect(`https://${req.headers.host}${req.url}`);
+});
     
     const corsOptions = isProduction ? {
         origin: 'https://www.neslo.ca',
