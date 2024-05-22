@@ -1,0 +1,12 @@
+<div >
+    <div >
+        <!-- gets directly from signal -->
+        @for(image of this.imagesService.folder(); let i = $index; track image){
+      <div>
+        <img src="{{ image.url }}" class="d-block w-100" alt="{{ image.alt }}">
+      </div>
+    }
+    </div>
+
+  </div>
+  

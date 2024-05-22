@@ -23,6 +23,8 @@ const indexHtml = join(__dirname, 'index.server.html');
 const emailRoutePath = join(__dirname, '../backend/routes/email.js');
 const pdfRoutePath = join(__dirname, '../backend/routes/pdf.js');
 const securityRoutePath = join(__dirname, '../backend/routes/security.js');
+const imagesRoutePath = join(__dirname, '../backend/routes/images.js');
+
 
 
 // Rate limiting middleware
@@ -116,11 +118,15 @@ const helmetOptions: HelmetOptions = isProduction ? {
      const emailRoute = (await import(emailRoutePath)).default;
      const pdfRoute = (await import(pdfRoutePath)).default;
      const securityRoute = (await import(securityRoutePath)).default;
+     const imagesRoute = (await import(imagesRoutePath)).default;
+
 
     // API Routes
      server.use("/api/email", emailRoute);
      server.use("/api/pdf", pdfRoute);
      server.use("/api/security", securityRoute);
+     server.use("/api/images", imagesRoute);
+
 
       
     // All regular routes use the Angular engine
