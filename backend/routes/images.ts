@@ -10,7 +10,7 @@ const checkPeriod = 3600; // 1 hr
 const myCache = new NodeCache({ stdTTL: cacheDuration, checkperiod: checkPeriod });
 
 cloudinary.v2.config({
-  cloud_name: 'neslo',
+  cloud_name: process.env['cloudinaryName'],
   api_key: process.env['cloudinaryApiKey'],
   api_secret: process.env['cloudinaryApiSecret']
 });
