@@ -12,7 +12,6 @@ router.post('/generator', async (req: Request, res: Response) => {
     const { quoteForm, gridFormArray } = req.body;  
 
     const selectors = {
-      quoteNumber: '#quoteNumber',
       dealerName: '#dealerName',
       dealerBranch: '#dealerBranch',
       // contactName: '#contactName',
@@ -156,18 +155,15 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
   await page.keyboard.press('Escape')
 }
 
-
-
-   // Set the quote number in the specific <p> element
-   if (quoteForm.quoteNumber) {
+  if (quoteForm.quoteNumber) {
     await page.evaluate((quoteNumber) => {
       const element = document.querySelector('#quoteNumber');
       if (element) {
         element.textContent = `Quote Number: ${quoteNumber}`;
-        const event = new Event('input', { bubbles: true });
       }
-    }, quoteForm.quoteNumber);
+    }, quoteForm.quoteNumber);  // Pass quoteForm.quoteNumber to the browser context
   }
+
 
   // Then call your function
    await fillGridForm(page, gridFormArray);

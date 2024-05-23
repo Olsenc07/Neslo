@@ -1,0 +1,12 @@
+<div class="container mt-5">
+  <h2>{{ heading }}</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+    @for(image of images; let i = $index; track image){
+      <div class="card">
+        <img [src]="image" class="card-img-top" alt="Image">
+      </div>
+    }
+    </div>
+  </div>
+</div>
