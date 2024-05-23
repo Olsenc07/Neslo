@@ -6,17 +6,16 @@ import NodeCache from 'node-cache';
 dotenv.config();
 
 const router = Router();
+
 const cacheDuration = 1209600; // (fortnight) in seconds
 const checkPeriod = 86400; // 24 hr in seconds
 const myCache = new NodeCache({ stdTTL: cacheDuration, checkperiod: checkPeriod });
 
-const cloudinaryName = process.env['CLOUDINARY_NAME'];
-const cloudinaryApiKey = process.env['CLOUDINARY_API_KEY'];
-const cloudinaryApiSecret = process.env['CLOUDINARY_API_SECRET'];
-
-if (!cloudinaryName || !cloudinaryApiKey || !cloudinaryApiSecret) {
-  throw new Error('Cloudinary configuration variables are not set in the environment.');
-}
+const cloudinaryName = process.env['cloudinaryName'];
+const cloudinaryApiKey = process.env['cloudinaryApiKey'];
+const cloudinaryApiSecret = process.env['cloudinaryApiSecret'];
+// Console log these values
+console.log("Cloudinary Name:", cloudinaryName);
 
 router.get('/cloudinary', async (req: Request, res: Response) => {
   const folder = req.query['folder'] as string;

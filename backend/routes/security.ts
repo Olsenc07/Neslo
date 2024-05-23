@@ -1,13 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { request } from 'http';
 import dotenv from 'dotenv';
-
 dotenv.config();
+
 const router = Router();
-
-
-
-
 
 router.post('/verify-recaptcha', (req: Request, res: Response) => {
   const { token } = req.body;
@@ -24,9 +20,7 @@ router.post('/verify-recaptcha', (req: Request, res: Response) => {
     }
   };
 
-
-
-  const reqGoogle = request(options, (resGoogle) => {
+const reqGoogle = request(options, (resGoogle) => {
     let body = '';
     resGoogle.on('data', (chunk) => {
       body += chunk;
