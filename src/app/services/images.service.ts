@@ -12,24 +12,20 @@ export class ImagesService {
 
   private residentialImages = signal<string[]>([]);
   private showcaseImages = signal<string[]>([]);
-  private nesloTeamImages = signal<string[]>([]);
 
   getResidentialImages = computed(() => this.residentialImages());
   getShowcaseImages = computed(() => this.showcaseImages());
-  getNesloTeamImages = computed(() => this.nesloTeamImages());
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  fetchImages(folder: 'Residential' | 'Showcase' | 'NesloTeam'): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/cloudinary?folder=${folder}`).pipe(
+  fetchImages(folder: 'Residential' | 'Showcase', limit: number = 10): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/cloudinary?folder=${folder}&limit=${limit}`).pipe(
       tap((images: string[]) => {
         if (folder === 'Residential') {
           this.residentialImages.set(images);
         } else if (folder === 'Showcase') {
           this.showcaseImages.set(images);
-        } else if (folder === 'NesloTeam') {
-          this.nesloTeamImages.set(images);
-        }
+        } 
       })
     );
   }

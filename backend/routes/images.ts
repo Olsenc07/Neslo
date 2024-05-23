@@ -5,8 +5,8 @@ import NodeCache from 'node-cache';
 dotenv.config();
 
 const router = Router();
-const cacheDuration = 86400; // 24 hr
-const checkPeriod = 3600; // 1 hr
+const cacheDuration = 1209600 // (fortnight)
+const checkPeriod = 86400; // 24 hr
 const myCache = new NodeCache({ stdTTL: cacheDuration, checkperiod: checkPeriod });
 
 cloudinary.v2.config({
