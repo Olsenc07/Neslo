@@ -11,7 +11,7 @@ import { ImagesService } from '../services/images.service';
   styleUrl: './carousel.component.scss'
 })
 export class CarouselComponent {
-  @Input() route!: 'Residential' | 'Showcase' | 'NesloTeam';
+  @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
   images: string[] = [];
 

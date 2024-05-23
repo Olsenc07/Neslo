@@ -1,7 +1,6 @@
 describe('PDF Generation API Route', () => {
     const apiUrl = '/api/pdf/generator'; 
   
-   
   it('successfully generates a PDF', () => {
     cy.request('POST', apiUrl, {
       quoteForm: {

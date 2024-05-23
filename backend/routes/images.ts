@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-const cloudinary = require('cloudinary').v2;
+import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
 dotenv.config();
@@ -9,7 +9,7 @@ const cacheDuration = 86400; // 24 hr
 const checkPeriod = 3600; // 1 hr
 const myCache = new NodeCache({ stdTTL: cacheDuration, checkperiod: checkPeriod });
 
-cloudinary.config({
+cloudinary.v2.config({
   cloud_name: 'neslo',
   api_key: process.env['cloudinaryApiKey'],
   api_secret: process.env['cloudinaryApiSecret']
@@ -17,7 +17,8 @@ cloudinary.config({
 
 router.get('/cloudinary', async (req: Request, res: Response) => {
   const folder = req.query['folder'] as string;
-  const validFolders = ['Residential', 'Showcase', 'NesloTeam'];
+  const validFolders = ['Residential', 'Showcase'];
+  const limit = parseInt(req.query['limit'] as string) || 10;
 
   if (!validFolders.includes(folder)) {
     res.status(400).send('Invalid folder name');
@@ -33,12 +34,18 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
   }
 
   try {
-    const resources = await cloudinary.search
-      .expression(`folder:${folder}`)
+    const searchParams: any = {
+      expression: `folder:${folder}`,
+      max_results: limit
+    };
+
+    const resources = await cloudinary.v2.search
+      .expression(searchParams.expression)
+      .max_results(searchParams.max_results)
       .execute();
     
-    myCache.set(cacheKey, resources.resources);
-    res.json(resources.resources);
+    myCache.set(cacheKey, resources);
+    res.json(resources);
   } catch (error) {
     console.error(`Failed to fetch images from folder ${folder}:`, error);
     res.status(500).send(`Failed to fetch images from folder ${folder}: ${error}`);
