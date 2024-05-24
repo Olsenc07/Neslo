@@ -44,36 +44,42 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
   const folder = req.query['folder'] as string;
   const validFolders = ['Residential', 'Showcase'];
   const limit = 10;
+ 
+    if (!validFolders.includes(folder)) {
+      res.status(400).send('Invalid folder name');
+      return;
+    }
   
-  // Fetch images from the folder
-  cloudinary.search
-    .expression(`folder:${folder}`)
-    .max_results(limit)
-    .execute()
-    .then((result) => {
+    const cacheKey = `images_${folder}`;
+    const cachedImages = myCache.get<string[]>(cacheKey);
+  
+    if (cachedImages) {
+      res.json(cachedImages);
+      return;
+    }
+  
+    try {
+      const result = await cloudinary.search
+        .expression(`folder:${folder}`)
+        .max_results(limit)
+        .execute();
+  
       const images = result.resources.map((resource: CloudinaryInterface) => resource.secure_url);
-      console.log('images', images);
-    })
-    .catch((error) => {
+      myCache.set(cacheKey, images);
+      res.json(images);
+    } catch (error: unknown) {
       console.error('Error fetching images:', error);
-    });
-
-
-  if (!validFolders.includes(folder)) {
-    res.status(400).send('Invalid folder name');
-    return;
-  }
-
-  const cacheKey = `images_${folder}`;
-  const cachedImages = myCache.get<string[]>(cacheKey);
-
-
-  if (cachedImages) {
-    res.json(cachedImages);
-    return;
-  }
-
+      if (error instanceof Error) {
+        if (error.message) {
+          console.error('Error message:', error.message);
+        }
+        if (typeof (error as any).response?.res?.text === 'string') {
+          console.error('Full error response:', (error as any).response.res.text);
+        }
+      }
   
+      res.status(500).send('An error occurred while fetching images from Cloudinary');
+    }
 });
 
 export default router;
