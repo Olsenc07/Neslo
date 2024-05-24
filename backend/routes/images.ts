@@ -1,11 +1,30 @@
 import { Router, Request, Response } from 'express';
-import axios from 'axios';
+
 import dotenv from 'dotenv';
 import NodeCache from 'node-cache';
+import {v2 as cloudinary} from 'cloudinary';
 
 dotenv.config();
 
 const router = Router();
+
+interface CloudinaryInterface {
+asset_id: string;
+public_id: string;
+format: string;
+version: number;
+resource_type: string;
+type: string;
+created_at: string;
+bytes: number;
+width: number;
+height: number;
+backup: boolean;
+access_mode: string;
+url: string;
+secure_url: string;
+}
+
 
 const cacheDuration = 1209600; // (fortnight) in seconds
 const checkPeriod = 86400; // 24 hr in seconds
@@ -14,12 +33,31 @@ const myCache = new NodeCache({ stdTTL: cacheDuration, checkperiod: checkPeriod 
 const cloudinaryName = process.env['cloudinaryName'];
 const cloudinaryApiKey = process.env['cloudinaryApiKey'];
 const cloudinaryApiSecret = process.env['cloudinaryApiSecret'];
-// Console log these values
-console.log("Cloudinary Name:", cloudinaryName);
+
+cloudinary.config({
+  cloud_name: cloudinaryName,
+  api_key: cloudinaryApiKey,
+  api_secret: cloudinaryApiSecret,
+});
+
 router.get('/cloudinary', async (req: Request, res: Response) => {
   const folder = req.query['folder'] as string;
   const validFolders = ['Residential', 'Showcase'];
-  const limit = parseInt(req.query['limit'] as string, 10) || 10;
+  const limit = 10;
+  
+  // Fetch images from the folder
+  cloudinary.search
+    .expression(`folder:${folder}`)
+    .max_results(limit)
+    .execute()
+    .then((result) => {
+      const images = result.resources.map((resource: CloudinaryInterface) => resource.secure_url);
+      console.log('images', images);
+    })
+    .catch((error) => {
+      console.error('Error fetching images:', error);
+    });
+
 
   if (!validFolders.includes(folder)) {
     res.status(400).send('Invalid folder name');
@@ -27,30 +65,15 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
   }
 
   const cacheKey = `images_${folder}`;
-  const cachedImages = myCache.get(cacheKey);
+  const cachedImages = myCache.get<string[]>(cacheKey);
+
 
   if (cachedImages) {
     res.json(cachedImages);
     return;
   }
 
-  try {
-    const url = `https://api.cloudinary.com/v1_1/${cloudinaryName}/resources/search?expression=folder:${folder}&max_results=${limit}`;
-    const options = {
-      headers: {
-        Authorization: `Basic ${Buffer.from(`${cloudinaryApiKey}:${cloudinaryApiSecret}`).toString('base64')}`
-      }
-    };
-
-    const response = await axios.get(url, options);
-    const resources = response.data.resources;
-    res.setHeader('Content-Type', 'application/json');
-    myCache.set(cacheKey, resources);
-    res.json(resources);
-  } catch (error) {
-    console.error(`Failed to fetch images from folder ${folder}:`, error);
-    res.status(500).send(`Failed to fetch images from folder ${folder}: ${error}`);
-  }
+  
 });
 
 export default router;
