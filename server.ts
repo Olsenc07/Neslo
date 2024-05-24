@@ -25,8 +25,6 @@ const pdfRoutePath = join(__dirname, '../backend/routes/pdf.js');
 const securityRoutePath = join(__dirname, '../backend/routes/security.js');
 const imagesRoutePath = join(__dirname, '../backend/routes/images.js');
 
-
-
 // Rate limiting middleware
 // const apiLimiter = rateLimit({
 //     windowMs: 30 * 60 * 1000, // 30 minutes

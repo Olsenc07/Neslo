@@ -19,7 +19,7 @@ export class ImagesService {
   constructor(private http: HttpClient) {}
 
   fetchImages(folder: string): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/cloudinary/${folder}`).pipe(
+    return this.http.get<string[]>(`${this.apiUrl}/images/cloudinary/${folder}`).pipe(
       tap((images: string[]) => {
         if (folder === 'Residential') {
           this.residentialImages.set(images);
