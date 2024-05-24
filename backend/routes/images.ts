@@ -50,13 +50,13 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
       return;
     }
   
-    const cacheKey = `images_${folder}`;
-    const cachedImages = myCache.get<string[]>(cacheKey);
+    // const cacheKey = `images_${folder}`;
+    // const cachedImages = myCache.get<string[]>(cacheKey);
   
-    if (cachedImages) {
-      res.json(cachedImages);
-      return;
-    }
+    // if (cachedImages) {
+    //   res.json(cachedImages);
+    //   return;
+    // }
   
     try {
       const result = await cloudinary.search
@@ -65,8 +65,9 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
         .execute();
   
       const images = result.resources.map((resource: CloudinaryInterface) => resource.secure_url);
-      myCache.set(cacheKey, images);
-      res.json(images);
+      // myCache.set(cacheKey, images);
+      console.log('images array I hope', images);
+      res.send(images);
     } catch (error: unknown) {
       console.error('Error fetching images:', error);
       if (error instanceof Error) {
