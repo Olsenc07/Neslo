@@ -16,7 +16,6 @@ const cloudinaryApiKey = process.env['cloudinaryApiKey'];
 const cloudinaryApiSecret = process.env['cloudinaryApiSecret'];
 // Console log these values
 console.log("Cloudinary Name:", cloudinaryName);
-
 router.get('/cloudinary', async (req: Request, res: Response) => {
   const folder = req.query['folder'] as string;
   const validFolders = ['Residential', 'Showcase'];
@@ -45,7 +44,7 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
 
     const response = await axios.get(url, options);
     const resources = response.data.resources;
-
+    res.setHeader('Content-Type', 'application/json');
     myCache.set(cacheKey, resources);
     res.json(resources);
   } catch (error) {
