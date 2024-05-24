@@ -18,8 +18,8 @@ export class ImagesService {
 
   constructor(private http: HttpClient) {}
 
-  fetchImages(folder: 'Residential' | 'Showcase', limit: number = 10): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/cloudinary?folder=${folder}&limit=${limit}`).pipe(
+  fetchImages(folder: 'Residential' | 'Showcase'): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/cloudinary?folder=${folder}`).pipe(
       tap((images: string[]) => {
         if (folder === 'Residential') {
           this.residentialImages.set(images);
