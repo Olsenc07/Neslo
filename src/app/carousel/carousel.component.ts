@@ -18,9 +18,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   images: string[] = [];
   intervalId: NodeJS.Timeout | undefined;
   
-  constructor(private http: HttpClient,
-    protected imagesService: ImagesService,
-  ) {}
+  constructor(protected imagesService: ImagesService) {}
 
   ngOnInit(): void {
     this.loadImages();
@@ -44,13 +42,24 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
       const container = this.carouselContainer.nativeElement as HTMLElement;
       const imageElements = container.getElementsByClassName('carousel-image');
       const activeElement = container.querySelector('.carousel-image.active') as HTMLElement;
+  
+      // Ensure activeElement is not null
+      if (!activeElement) {
+        // If no active element found, set the first element as active
+        if (imageElements.length > 0) {
+          (imageElements[0] as HTMLElement).classList.add('active');
+        }
+        return;
+      }
+  
       let activeIndex = Array.from(imageElements).indexOf(activeElement);
       const nextIndex = (activeIndex + 1) % imageElements.length;
-
+  
       activeElement.classList.remove('active');
       (imageElements[nextIndex] as HTMLElement).classList.add('active');
     }, 3000);
   }
+
 
   stopCarousel(): void {
     clearInterval(this.intervalId);

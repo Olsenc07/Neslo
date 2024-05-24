@@ -3,8 +3,8 @@
     <div #carouselContainer class="carousel-container">
       @if(images.length > 0){
     @for(image of images; let i = $index; track image){
-      <div class="carousel-item active">
-        <img [src]="image" class="card-img-top" alt="Image"
+      <div class="carousel-item active carousel-image" [class.active]="i === 0">
+        <img [src]="image" class="carousel-img" alt="Image"
         (click)="stopCarousel()" (mouseover)="stopCarousel()" (mouseout)="startCarousel()">
       </div>
     }
