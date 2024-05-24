@@ -1,0 +1,18 @@
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+  
+  .carousel-item {
+    flex-shrink: 0;
+    width: 200px; 
+    margin-right: 20px; 
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-item.active {
+    transform: scale(1.2); /* Increase size of active image */
+    z-index: 1; /* Bring active image to front */
+  }
+  

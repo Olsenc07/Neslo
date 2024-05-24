@@ -25,7 +25,6 @@ url: string;
 secure_url: string;
 }
 
-
 const cacheDuration = 1209600; // (fortnight) in seconds
 const checkPeriod = 86400; // 24 hr in seconds
 const myCache = new NodeCache({ stdTTL: cacheDuration, checkperiod: checkPeriod });
@@ -41,9 +40,6 @@ cloudinary.config({
 });
 
 router.get('/cloudinary', async (req: Request, res: Response) => {
-  console.log('made it');
-  console.log('made it yooo', req.query);
-
   const folder = req.query['folder'] as string;
   const validFolders = ['Residential', 'Showcase'];
   const limit = 10;
@@ -64,12 +60,12 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
     try {
       const result = await cloudinary.search
         .expression(`folder:${folder}`)
+        .sort_by('public_id', 'asc')
         .max_results(limit)
         .execute();
   
       const images = result.resources.map((resource: CloudinaryInterface) => resource.secure_url);
-      // myCache.set(cacheKey, images);
-      console.log('images array I hope', images);
+      myCache.set(cacheKey, images);
       res.json(images);
     } catch (error: unknown) {
       console.error('Error fetching images:', error);
@@ -81,7 +77,7 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
           console.error('Full error response:', (error as any).response.res.text);
         }
       }
-  
+
       res.status(500).send('An error occurred while fetching images from Cloudinary');
     }
 });

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImagesService } from '../services/images.service';
 
@@ -10,17 +10,24 @@ import { ImagesService } from '../services/images.service';
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss'
 })
-export class CarouselComponent {
+export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
-  images: string[] = [];
+  @ViewChild('carouselContainer') carouselContainer!: ElementRef;
 
+  images: string[] = [];
+  intervalId: NodeJS.Timeout | undefined;
+  
   constructor(private http: HttpClient,
     protected imagesService: ImagesService,
   ) {}
 
   ngOnInit(): void {
     this.loadImages();
+  }
+
+  ngAfterViewInit(): void {
+    this.startCarousel();
   }
 
   loadImages(): void {
@@ -31,4 +38,26 @@ export class CarouselComponent {
       error: error => console.error('Error fetching images:', error)
     });
   }
+
+  startCarousel(): void {
+    this.intervalId = setInterval(() => {
+      const container = this.carouselContainer.nativeElement as HTMLElement;
+      const imageElements = container.getElementsByClassName('carousel-image');
+      const activeElement = container.querySelector('.carousel-image.active') as HTMLElement;
+      let activeIndex = Array.from(imageElements).indexOf(activeElement);
+      const nextIndex = (activeIndex + 1) % imageElements.length;
+
+      activeElement.classList.remove('active');
+      (imageElements[nextIndex] as HTMLElement).classList.add('active');
+    }, 3000);
+  }
+
+  stopCarousel(): void {
+    clearInterval(this.intervalId);
+  }
+
+  ngOnDestroy(): void {
+    this.stopCarousel();
+  }
+
 }
