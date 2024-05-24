@@ -41,6 +41,9 @@ cloudinary.config({
 });
 
 router.get('/cloudinary', async (req: Request, res: Response) => {
+  console.log('made it');
+  console.log('made it yooo', req.query);
+
   const folder = req.query['folder'] as string;
   const validFolders = ['Residential', 'Showcase'];
   const limit = 10;
