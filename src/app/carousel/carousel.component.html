@@ -1,17 +1,15 @@
-<div class="container mt-5">
+<div class="container">
   <h2>{{ heading }}</h2>
-  <div class="row">
-    <div class="col-md-4 mb-4">
+    <div #carouselContainer class="carousel-container">
       @if(images.length > 0){
     @for(image of images; let i = $index; track image){
-      <div class="card">
-        <img [src]="image" class="card-img-top" alt="Image">
+      <div class="carousel-item active">
+        <img [src]="image" class="card-img-top" alt="Image"
+        (click)="stopCarousel()" (mouseover)="stopCarousel()" (mouseout)="startCarousel()">
       </div>
     }
-  } @else {
-   <h3>Arriving Soon</h3> 
-  }
+  }  @else {
+    <h3> Arriving Soon </h3> 
+   } 
  </div>
-  
-  </div>
 </div>
