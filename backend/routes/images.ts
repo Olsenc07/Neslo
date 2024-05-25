@@ -64,7 +64,12 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
         .max_results(limit)
         .execute();
   
-      const images = result.resources.map((resource: CloudinaryInterface) => resource.secure_url);
+        // include public_id in what is included in images 
+        const images = result.resources.pipe.map((resource: CloudinaryInterface) => ({
+          secure_url: resource.secure_url,
+          public_id: resource.public_id
+        }));
+
       myCache.set(cacheKey, images);
       res.json(images);
     } catch (error: unknown) {

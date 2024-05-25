@@ -32,8 +32,8 @@
 
 @defer(on viewport(aboutUs)){
     <!-- Carousel Cloudinary -->
-<section class="container mt-5">
-    <div class="row">
+<section class="my-3">
+    <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
       <div class="col-md-6 mb-4">
         <div class="card">
           <div class="card-body">

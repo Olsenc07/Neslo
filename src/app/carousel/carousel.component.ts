@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
 import { ImagesService } from '../services/images.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -36,7 +34,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() heading: string = '';
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
 
-  images: string[] = [];
+  images: { secure_url: string, public_id: string }[] = [];
   activeImageIndex: number = 0;
   intervalId: NodeJS.Timeout | undefined;
   
@@ -52,14 +50,14 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
 
   loadImages(): void {
     this.imagesService.fetchImages(this.route).subscribe({
-      next: (images: string[]) => {
+      next: (images: { secure_url: string, public_id: string }[]) => {
         this.images = images;
       },
       error: error => console.error('Error fetching images:', error)
     });
   }
 
- 
+
 
   activateImage(index: number): void {
     this.activeImageIndex = index;
@@ -81,7 +79,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
         this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
         this.activateImage(this.activeImageIndex);
         iterations++;
-    }, 7000);
+    }, 8000);
 }
 
   //when activeImageIndex hits the last index value, restart the cycle
@@ -93,9 +91,6 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
     this.stopCarousel();
   }
 
-  get currentImage(): string {
-    return this.images[this.activeImageIndex];
-  }
-
+ 
 }
 

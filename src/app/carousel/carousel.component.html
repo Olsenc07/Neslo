@@ -5,9 +5,10 @@
       <!-- include the get functions you made -->
     @for(image of images; let i = $index; track image){
       @if(i === activeImageIndex){
+        {{image.public_id}}
       <div class="active-image-container">
         <div class="active-image active" @activeImage>
-          <img [src]="image" class="active-image-img" alt="Image"
+          <img [src]="image.secure_url" class="active-image-img" alt="Image"
           (click)="stopCarousel()" (mouseover)="stopCarousel()" (mouseout)="startCarousel()"
           (click)="activateImage(i)">
         </div>
@@ -15,7 +16,7 @@
       }@else{
       <div class="smaller-images-container carousel-container">
           <div class="smaller-image" @smallerImage>
-            <img [src]="image" class="smaller-image-img" alt="Image"
+            <img [src]="image.secure_url" class="smaller-image-img" alt="Image"
             (click)="stopCarousel()" (mouseover)="stopCarousel()" (mouseout)="startCarousel()"
             (click)="activateImage(i)">
           </div>
