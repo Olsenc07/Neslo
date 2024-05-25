@@ -19,15 +19,19 @@ export class ImagesService {
   constructor(private http: HttpClient) {}
 
   fetchImages(folder: string): Observable<{ secure_url: string, public_id: string }[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/images/cloudinary?folder=${folder}`).pipe(
-      map((images: string[]) => images.map(image => ({ secure_url: image, public_id: '' }))), // Map to the desired object structure
+    return this.http.get<{ secure_url: string, public_id: string }[]>(`${this.apiUrl}/images/cloudinary?folder=${folder}`).pipe(
+      map((images: { secure_url: string, public_id: string }[]) => images.map(image => ({
+        secure_url: image.secure_url,
+        public_id: image.public_id
+      }))), 
       tap((images: { secure_url: string, public_id: string }[]) => {
         if (folder === 'Residential') {
           this.residentialImages.set(images);
         } else if (folder === 'Showcase') {
           this.showcaseImages.set(images);
-        } 
+        }
       })
     );
   }
+  
 }
