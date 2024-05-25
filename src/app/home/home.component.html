@@ -15,7 +15,7 @@
             </div>
         <div class="row">
             <!-- Alberta's Distributor -->
-            <div class="col-12 col-md-6 d-flex flex-column align-items-center extra-style" >
+            <div class="col-12 col-md-6 d-flex flex-column align-items-center extra-style">
                         <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
                         [intro]="introAB" [tel]="'(403) 994 – 1202'" [email]="'Foldingslidingdoors.ab@gmail.com'"
                         [message]="messageAB"></app-about-us>
@@ -34,20 +34,18 @@
     <!-- Carousel Cloudinary -->
 <section class="my-3">
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <app-carousel [heading]="'Home Essentials'" [route]="'Residential'"></app-carousel>
-          </div>
+        <div class="text-center mb-4 pt-3" id="showcase">
+            <h2 heading>Showcase</h2>
+            <mat-divider></mat-divider>
         </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <app-carousel [heading]="'Premium Selection'" [route]="'Showcase'"></app-carousel>
-          </div>
+        <div class="row">
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+        <app-carousel [heading]="'Home Essentials'" [route]="'Residential'"></app-carousel>
         </div>
-      </div>
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+        <app-carousel [heading]="'Premium Selection'" [route]="'Showcase'"></app-carousel>
+        </div>
+        </div>
     </div>
 </section>
 }

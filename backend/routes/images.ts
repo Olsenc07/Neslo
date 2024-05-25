@@ -64,10 +64,15 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
         .max_results(limit)
         .execute();
   
-        const images = result.resources.map((resource: CloudinaryInterface) => ({
-          secure_url: resource.secure_url,
-          public_id: resource.public_id
-        }));
+        const images = result.resources.map((resource: CloudinaryInterface) => {
+            // remove folder name 
+          const filename = resource.public_id.split('/').pop();
+
+          return {
+            secure_url: resource.secure_url,
+            public_id: filename 
+          };
+        });
 
       myCache.set(cacheKey, images);
       res.json(images);

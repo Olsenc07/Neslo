@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ImagesService } from '../services/images.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-carousel',
@@ -11,20 +12,20 @@ import { trigger, transition, style, animate } from '@angular/animations';
   animations: [
     trigger('activeImage', [
       transition(':enter', [
-        style({ transform: 'scale(1)', opacity: 0.8 }),
-        animate('0.5s ease-in-out', style({ transform: 'scale(1.2)', opacity: 1 })),
+        style({ transform: 'scale(0.8)', opacity: 0.8 }),
+        animate('0.5s ease-in-out', style({ transform: 'scale(1)', opacity: 1 })),
       ]),
       transition(':leave', [
-        animate('0.5s ease-in-out', style({ transform: 'scale(1)', opacity: 0.8 })),
+        animate('0.5s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.8 })),
       ]),
     ]),
     trigger('smallerImage', [
       transition(':enter', [
         style({ transform: 'scale(1)', opacity: 0.5 }),
-        animate('0.5s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.8 })),
+        animate('0.5s ease-in-out', style({ transform: 'scale(0.6)', opacity: 0.8 })),
       ]),
       transition(':leave', [
-        animate('0.5s ease-in-out', style({ transform: 'scale(1)', opacity: 0.5 })),
+        animate('0.5s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.5 })),
       ]),
     ]),
   ],
@@ -41,21 +42,15 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   constructor(protected imagesService: ImagesService) {}
 
   ngOnInit(): void {
-    this.loadImages();
+    this.imagesService.fetchImages(this.route).pipe(
+      take(1)
+    ).subscribe((images) => {
+      this.images = images;
+    });
   }
 
   ngAfterViewInit(): void {
     this.startCarousel();
-  }
-
-  loadImages(): void {
-    this.imagesService.fetchImages(this.route)
-    
-    if(this.route == 'Residential'){
-      this.images = this.imagesService.getResidentialImages();
-    }else{
-        this.images = this.imagesService.getShowcaseImages();
-      }
   }
 
   activateImage(index: number): void {

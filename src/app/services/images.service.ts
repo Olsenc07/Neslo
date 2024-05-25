@@ -10,11 +10,11 @@ import { map, tap } from 'rxjs/operators';
 export class ImagesService {
   apiUrl: string = environment.apiUrl;
 
-  private residentialImages = signal<{ secure_url: string, public_id: string }[]>([]);
-  private showcaseImages = signal<{ secure_url: string, public_id: string }[]>([]);
+  // private residentialImages = signal<{ secure_url: string, public_id: string }[]>([]);
+  // private showcaseImages = signal<{ secure_url: string, public_id: string }[]>([]);
 
-  getResidentialImages = computed(() => this.residentialImages());
-  getShowcaseImages = computed(() => this.showcaseImages());
+  // getResidentialImages = computed(() => this.residentialImages());
+  // getShowcaseImages = computed(() => this.showcaseImages());
 
   constructor(private http: HttpClient) {}
 
@@ -23,14 +23,7 @@ export class ImagesService {
       map((images: { secure_url: string, public_id: string }[]) => images.map(image => ({
         secure_url: image.secure_url,
         public_id: image.public_id
-      }))), 
-      tap((images: { secure_url: string, public_id: string }[]) => {
-        if (folder === 'Residential') {
-          this.residentialImages.set(images);
-        } else if (folder === 'Showcase') {
-          this.showcaseImages.set(images);
-        }
-      })
+      })))
     );
   }
   
