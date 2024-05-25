@@ -2,13 +2,34 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ImagesService } from '../services/images.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
   imports: [],
   templateUrl: './carousel.component.html',
-  styleUrl: './carousel.component.scss'
+  styleUrl: './carousel.component.scss',
+  animations: [
+    trigger('activeImage', [
+      transition(':enter', [
+        style({ transform: 'scale(1)', opacity: 0.8 }),
+        animate('0.5s ease-in-out', style({ transform: 'scale(1.2)', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('0.5s ease-in-out', style({ transform: 'scale(1)', opacity: 0.8 })),
+      ]),
+    ]),
+    trigger('smallerImage', [
+      transition(':enter', [
+        style({ transform: 'scale(1)', opacity: 0.5 }),
+        animate('0.5s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.8 })),
+      ]),
+      transition(':leave', [
+        animate('0.5s ease-in-out', style({ transform: 'scale(1)', opacity: 0.5 })),
+      ]),
+    ]),
+  ],
 })
 export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() route!: 'Residential' | 'Showcase';
@@ -16,6 +37,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
 
   images: string[] = [];
+  activeImageIndex: number = 0;
   intervalId: NodeJS.Timeout | undefined;
   
   constructor(protected imagesService: ImagesService) {}
@@ -37,30 +59,32 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  startCarousel(): void {
-    this.intervalId = setInterval(() => {
-      const container = this.carouselContainer.nativeElement as HTMLElement;
-      const imageElements = container.getElementsByClassName('carousel-image');
-      const activeElement = container.querySelector('.carousel-image.active') as HTMLElement;
-  
-      // Ensure activeElement is not null
-      if (!activeElement) {
-        // If no active element found, set the first element as active
-        if (imageElements.length > 0) {
-          (imageElements[0] as HTMLElement).classList.add('active');
-        }
-        return;
-      }
-  
-      let activeIndex = Array.from(imageElements).indexOf(activeElement);
-      const nextIndex = (activeIndex + 1) % imageElements.length;
-  
-      activeElement.classList.remove('active');
-      (imageElements[nextIndex] as HTMLElement).classList.add('active');
-    }, 3000);
+ 
+
+  activateImage(index: number): void {
+    this.activeImageIndex = index;
+    // Move the clicked image to the first position
+    this.images.splice(index, 1);
+    this.images.unshift(this.images[index]);
+    this.startCarousel();
   }
 
+  startCarousel(): void {
+    let iterations = 0;
+    const maxIterations = this.images.length * 3; 
 
+    this.intervalId = setInterval(() => {
+        if (iterations >= maxIterations) {
+            clearInterval(this.intervalId);
+            return;
+        }
+        this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
+        this.activateImage(this.activeImageIndex);
+        iterations++;
+    }, 7000);
+}
+
+  //when activeImageIndex hits the last index value, restart the cycle
   stopCarousel(): void {
     clearInterval(this.intervalId);
   }
@@ -69,4 +93,9 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
     this.stopCarousel();
   }
 
+  get currentImage(): string {
+    return this.images[this.activeImageIndex];
+  }
+
 }
+

@@ -72,7 +72,7 @@ const helmetOptions: HelmetOptions = isProduction ? {
     const server = express();
     server.enable('trust proxy');
     
-    server.use(helmet(helmetOptions));
+    // server.use(helmet(helmetOptions));
     // Middleware to force HTTPS
     server.use((req, res, next) => {
     if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
