@@ -39,20 +39,20 @@
   
   .active-image {
     width: 100%;
-    height: 400px; /* Adjust the height as needed */
+    height: auto; 
     border: 2px solid #ccc;
   }
   
   .smaller-images-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: row;
     cursor: pointer;
   }
   
   .smaller-image {
     width: 100px;
-    height: 100px; /* Adjust the height as needed */
+    height: 100px; 
+    gap: 10px;
     border: 1px solid #ccc;
   }
   @keyframes activeImage {

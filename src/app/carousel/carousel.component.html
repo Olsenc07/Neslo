@@ -7,17 +7,15 @@
       @if(i === activeImageIndex){
         {{image.public_id}}
       <div class="active-image-container">
-        <div class="active-image active" @activeImage>
+        <div class="active-image active" [@activeImage]>
           <img [src]="image.secure_url" class="active-image-img" alt="Image"
-          (click)="stopCarousel()" (mouseover)="stopCarousel()" (mouseout)="startCarousel()"
           (click)="activateImage(i)">
         </div>
       </div>
       }@else{
       <div class="smaller-images-container carousel-container">
-          <div class="smaller-image" @smallerImage>
+          <div class="smaller-image" [@smallerImage]>
             <img [src]="image.secure_url" class="smaller-image-img" alt="Image"
-            (click)="stopCarousel()" (mouseover)="stopCarousel()" (mouseout)="startCarousel()"
             (click)="activateImage(i)">
           </div>
       </div>

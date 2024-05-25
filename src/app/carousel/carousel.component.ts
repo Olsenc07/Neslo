@@ -29,7 +29,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
-export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CarouselComponent implements OnInit, AfterViewInit {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
@@ -45,13 +45,14 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.startCarousel();
+    // this.startCarousel();
   }
 
   loadImages(): void {
     this.imagesService.fetchImages(this.route).subscribe({
       next: (images: { secure_url: string, public_id: string }[]) => {
         this.images = images;
+        console.log('Images loaded:', this.images);
       },
       error: error => console.error('Error fetching images:', error)
     });
@@ -79,17 +80,5 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
         this.activateImage(this.activeImageIndex);
         iterations++;
     }, 8000);
+} 
 }
-
-  //when activeImageIndex hits the last index value, restart the cycle
-  stopCarousel(): void {
-    clearInterval(this.intervalId);
-  }
-
-  ngOnDestroy(): void {
-    this.stopCarousel();
-  }
-
- 
-}
-
