@@ -1,37 +1,78 @@
+.active-image {
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
+  }
+  
+.active-image.active {
+    transform: scale(1.2); 
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
 .carousel-container {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
   }
   
-  .carousel-item {
+.carousel-item {
     flex-shrink: 0;
     width: 200px; 
     margin-right: 20px; 
     transition: transform 0.5s ease-in-out;
   }
   
-  .carousel-item.active {
+.carousel-item.active {
     transform: scale(1.2); /* Increase size of active image */
     z-index: 1; /* Bring active image to front */
   }
-  .carousel-container {
+.carousel-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px; /* Add gap between carousel items */
   }
   
-  .carousel-image {
+  .active-image-container {
     position: relative;
-    overflow: hidden;
-    flex: 1 1 calc(33.333% - 20px); /* Adjust the width and account for the gap */
-    box-sizing: border-box;
-    margin-bottom: 10px; /* Add margin at the bottom to create space between rows */
+    margin-bottom: 20px;
   }
   
-  .carousel-img {
+  .active-image {
     width: 100%;
-    height: 300px; /* Set a fixed height */
-    object-fit: cover; /* Ensures images cover the container, maintaining aspect ratio */
+    height: 400px; /* Adjust the height as needed */
+    border: 2px solid #ccc;
   }
   
+  .smaller-images-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  .smaller-image {
+    width: 100px;
+    height: 100px; /* Adjust the height as needed */
+    border: 1px solid #ccc;
+  }
+  @keyframes activeImage {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes smallerImage {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0.8;
+    }
+  }

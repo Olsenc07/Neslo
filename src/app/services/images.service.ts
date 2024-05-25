@@ -2,7 +2,7 @@ import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +10,18 @@ import { tap } from 'rxjs/operators';
 export class ImagesService {
   apiUrl: string = environment.apiUrl;
 
-  private residentialImages = signal<string[]>([]);
-  private showcaseImages = signal<string[]>([]);
+  private residentialImages = signal<{ secure_url: string, public_id: string }[]>([]);
+  private showcaseImages = signal<{ secure_url: string, public_id: string }[]>([]);
 
   getResidentialImages = computed(() => this.residentialImages());
   getShowcaseImages = computed(() => this.showcaseImages());
 
   constructor(private http: HttpClient) {}
 
-  fetchImages(folder: string): Observable<string[]> {
+  fetchImages(folder: string): Observable<{ secure_url: string, public_id: string }[]> {
     return this.http.get<string[]>(`${this.apiUrl}/images/cloudinary?folder=${folder}`).pipe(
-      tap((images: string[]) => {
+      map((images: string[]) => images.map(image => ({ secure_url: image, public_id: '' }))), // Map to the desired object structure
+      tap((images: { secure_url: string, public_id: string }[]) => {
         if (folder === 'Residential') {
           this.residentialImages.set(images);
         } else if (folder === 'Showcase') {
