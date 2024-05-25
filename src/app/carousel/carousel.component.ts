@@ -45,19 +45,18 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.startCarousel();
+    this.startCarousel();
   }
 
   loadImages(): void {
-    this.imagesService.fetchImages(this.route).subscribe({
-      next: (images: { secure_url: string, public_id: string }[]) => {
-        this.images = images;
-        console.log('Images loaded:', this.images);
-      },
-      error: error => console.error('Error fetching images:', error)
-    });
+    this.imagesService.fetchImages(this.route)
+    
+    if(this.route == 'Residential'){
+      this.images = this.imagesService.getResidentialImages();
+    }else{
+        this.images = this.imagesService.getShowcaseImages();
+      }
   }
-
 
   activateImage(index: number): void {
     this.activeImageIndex = index;
