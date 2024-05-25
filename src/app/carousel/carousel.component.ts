@@ -58,7 +58,6 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-
   activateImage(index: number): void {
     this.activeImageIndex = index;
     // Move the clicked image to the first position
