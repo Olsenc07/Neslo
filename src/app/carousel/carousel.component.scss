@@ -1,78 +1,25 @@
 .active-image {
     transition: transform 0.5s ease-in-out;
-    cursor: pointer;
-  }
-  
-.active-image.active {
-    transform: scale(1.2); 
-    z-index: 1;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    border: 2px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
   }
 
-.carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-  }
-  
-.carousel-item {
-    flex-shrink: 0;
-    width: 200px; 
-    margin-right: 20px; 
-    transition: transform 0.5s ease-in-out;
-  }
-  
-.carousel-item.active {
-    transform: scale(1.2); /* Increase size of active image */
-    z-index: 1; /* Bring active image to front */
-  }
-.carousel-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px; /* Add gap between carousel items */
-  }
-  
-  .active-image-container {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .active-image {
-    width: 100%;
-    height: auto; 
-    border: 2px solid #ccc;
-  }
-  
-  .smaller-images-container {
+.loop-container{
     display: flex;
     flex-direction: row;
+    overflow-x: auto;
     cursor: pointer;
-  }
-  
-  .smaller-image {
-    width: 100px;
-    height: 100px; 
-    gap: 10px;
-    border: 1px solid #ccc;
-  }
-  @keyframes activeImage {
-    0% {
-      transform: scale(1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(1.2);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes smallerImage {
-    0% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-    100% {
-      transform: scale(0.8);
-      opacity: 0.8;
-    }
-  }
+    scroll-behavior: smooth;
+    max-width: 80%;
+}
+.image-stack{
+    display: flex;
+    flex-direction: column;
+    
+}
+.img{
+    aspect-ratio: 16 / 9;
+}

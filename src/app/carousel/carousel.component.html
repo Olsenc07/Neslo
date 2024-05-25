@@ -1,28 +1,25 @@
-<div class="container">
+<div>
   <h2>{{ heading }}</h2>
-    <div>
+  {{images[activeImageIndex].public_id}}
+
     @if(images.length > 0){
       <!-- include the get functions you made -->
-    @for(image of images; let i = $index; track image){
-      @if(i === activeImageIndex){
-        {{image.public_id}}
-      <div class="active-image-container">
-        <div class="active-image active" [@activeImage]>
-          <img [src]="image.secure_url" class="active-image-img" alt="Image"
-          (click)="activateImage(i)">
+      <div class="image-stack">
+        <div class="active-image" [@activeImage]>
+          <img [src]="images[activeImageIndex].secure_url" class="active-image" alt="Main Image">
         </div>
-      </div>
-      }@else{
-      <div class="smaller-images-container carousel-container">
-          <div class="smaller-image" [@smallerImage]>
-            <img [src]="image.secure_url" class="smaller-image-img" alt="Image"
-            (click)="activateImage(i)">
+        <!-- <div class="loop-container">
+        @for(image of images; let i = $index; track image){
+          @if(i !== activeImageIndex){
+            <div class="img">
+            <img [src]="image.secure_url"  alt="Image"
+            [@smallerImage]  (click)="activateImage(i)">
           </div>
-      </div>
+      }
         }
-    }
+      </div> -->
+    </div>
   }  @else {
     <h3> Arriving Soon </h3> 
    } 
- </div>
 </div>
