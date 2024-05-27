@@ -20,9 +20,9 @@ form{
 .image {
   background-image: url("https://www.neslo.ca/assets/Erik_Red_Working.jpg"); 
 // background-image: url("../../assets/Erik_Red_Working.jpg"); 
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   background-position: 50% 75%;
   z-index: -1;
 }
@@ -36,13 +36,12 @@ background-size: cover;
 .container-border{
   border-radius: 25px;
 }
-
 .contact-subitem {
   margin-left: 25px; 
   margin-top: 4px; 
 }
 .section-padding {
-    padding: 60px 0;
+  padding: 60px 0;
 }
 .home-wrapper{
   height: 100%;
@@ -60,7 +59,7 @@ h2[heading]{
     font-size: 2.8vw; 
   }
 }
-app-about-us {
+app-about-us, app-carousel {
   @include common;
   height: 100%; 
 }

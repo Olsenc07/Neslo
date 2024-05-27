@@ -6,20 +6,83 @@
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
     cursor: pointer;
   }
-
-.loop-container{
+  
+.loop-container .img{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    filter: contrast(1.2);
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+    scroll-behavior: smooth;
+    max-width: 80%;
+}
+.loop-container .img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+.loop-container {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
     cursor: pointer;
     scroll-behavior: smooth;
-    max-width: 80%;
-}
+    max-width: 97%;
+  }
 .image-stack{
     display: flex;
     flex-direction: column;
-    
+    align-items: center;
 }
-.img{
+.img-row {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    cursor: pointer;
+    scroll-behavior: smooth;
+    max-width: 100%;
+  }
+.carousel-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .carousel-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .image-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .img {
     aspect-ratio: 16 / 9;
-}
+    margin: 0 10px;
+    max-height: max-content;
+  }
+  
+  .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .carousel-controls-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .carousel-status {
+    margin-left: 10px;
+  }
+  
