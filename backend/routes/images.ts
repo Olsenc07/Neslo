@@ -65,14 +65,14 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
         .execute();
   
         const images = result.resources.map((resource: CloudinaryInterface) => {
-            // remove folder name 
           const filename = resource.public_id.split('/').pop();
-
+          console.log('filename', filename);
           return {
             secure_url: resource.secure_url,
             public_id: filename 
           };
         });
+        console.log('images', images);
 
       myCache.set(cacheKey, images);
       res.json(images);
@@ -86,7 +86,6 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
           console.error('Full error response:', (error as any).response.res.text);
         }
       }
-
       res.status(500).send('An error occurred while fetching images from Cloudinary');
     }
 });

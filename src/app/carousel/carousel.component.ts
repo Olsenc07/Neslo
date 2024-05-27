@@ -2,11 +2,12 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChi
 import { ImagesService } from '../services/images.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { take } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [
