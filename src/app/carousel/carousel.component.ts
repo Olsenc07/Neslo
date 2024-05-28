@@ -12,6 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-in-out', style({ opacity: 1 }))
+      ])
+    ]),
     trigger('activeImage', [
       transition(':enter', [
         style({ transform: 'scale(0.8)', opacity: 0.8 }),

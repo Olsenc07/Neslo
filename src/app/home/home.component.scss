@@ -62,6 +62,7 @@ h2[heading]{
 app-about-us, app-carousel {
   @include common;
   height: 100%; 
+  max-width: 100%;
 }
 fa-icon{
   font-size: x-large;
