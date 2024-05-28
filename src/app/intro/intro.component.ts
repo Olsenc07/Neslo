@@ -47,10 +47,14 @@ export class IntroComponent implements OnInit {
     }
   }
 
-  navigateToMsg(): void {
+  navigateToShowcase(): void {
       if (isPlatformBrowser(this.platformId)) {
+        if(document.getElementById('showcase')){
+        document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' });
+        }else{
         window.scrollTo(0, document.body.scrollHeight);
-        // document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
+
+        }
     }
   }
 }
