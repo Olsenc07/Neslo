@@ -4,26 +4,36 @@
     justify-content: center;
     text-align: center;
 }
+
 .close-button {
     position: absolute;
     top: 0px; 
     right: 0px; 
     opacity: .3;
     background-color: black;
+    justify-content: flex-end;
   }
-  .sticky-header {
+
+.sticky-header {
     position: sticky;
     top: 0;
-    z-index: 20;
+    z-index: 12;
   }
 .sub-heading{
     padding: 1% 0% 0%;
 }
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 .full-page{
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin: 1%;
+    max-height: 100vh;
     position: relative;
     overflow-y: auto;
 }
@@ -32,6 +42,7 @@
     flex-grow: 1;
     padding-top: 2%;
     width: 100%;
+    align-items: center;
     justify-content: center;
     text-align: center;
     background-color: #f5f5f5; 

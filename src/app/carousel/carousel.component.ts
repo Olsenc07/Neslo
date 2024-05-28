@@ -4,11 +4,12 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { take } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel.component';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, SkeletonFormFillComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [
