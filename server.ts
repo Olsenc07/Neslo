@@ -35,7 +35,7 @@ const imagesRoutePath = join(__dirname, '../backend/routes/images.js');
 //       });
 //   }
 //   });
-   //  Create Express Servrt
+   //  Create Express Server
 async function createServer(): Promise<express.Express> {
 const helmetOptions: HelmetOptions = isProduction ? {
     contentSecurityPolicy: {

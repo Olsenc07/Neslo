@@ -25,6 +25,5 @@ export class ImagesService {
         public_id: image.public_id
       })))
     );
-  }
-  
+  } 
 }

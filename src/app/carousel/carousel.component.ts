@@ -1,41 +1,41 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ImagesService } from '../services/images.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { take } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule, MatButtonModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms ease-in-out', style({ opacity: 1 }))
+      ])
+    ]),
     trigger('activeImage', [
       transition(':enter', [
         style({ transform: 'scale(0.8)', opacity: 0.8 }),
-        animate('0.5s ease-in-out', style({ transform: 'scale(1)', opacity: 1 })),
+        animate('1s ease-in-out', style({ transform: 'scale(1)', opacity: 1 })),
       ]),
       transition(':leave', [
-        animate('0.5s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.8 })),
+        animate('1s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.8 })),
       ]),
-    ]),
-    trigger('smallerImage', [
-      transition(':enter', [
-        style({ transform: 'scale(1)', opacity: 0.5 }),
-        animate('0.5s ease-in-out', style({ transform: 'scale(0.6)', opacity: 0.8 })),
-      ]),
-      transition(':leave', [
-        animate('0.5s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.5 })),
-      ]),
-    ]),
+    ])
   ],
 })
-export class CarouselComponent implements OnInit, AfterViewInit {
+export class CarouselComponent implements OnInit {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
 
-  images: { secure_url: string, public_id: string }[] = [];
+  images: { secure_url: string, public_id: string }[] 
+  = [{ secure_url: '', public_id: '' }];
   activeImageIndex: number = 0;
   intervalId: NodeJS.Timeout | undefined;
   
@@ -44,21 +44,18 @@ export class CarouselComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.imagesService.fetchImages(this.route).pipe(
       take(1)
-    ).subscribe((images) => {
-      this.images = images;
+    ).subscribe((arrayObject: { secure_url: string, public_id: string }[]) => {
+      this.images = arrayObject;
+      this.startCarousel();
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.startCarousel();
   }
 
   activateImage(index: number): void {
     this.activeImageIndex = index;
+    // reasign focused image but no chnages to view smaller
     // Move the clicked image to the first position
-    this.images.splice(index, 1);
-    this.images.unshift(this.images[index]);
-    this.startCarousel();
+    // this.images.splice(index, 1);
+    // this.images.unshift(this.images[index]);
   }
 
   startCarousel(): void {
@@ -75,4 +72,8 @@ export class CarouselComponent implements OnInit, AfterViewInit {
         iterations++;
     }, 8000);
 } 
+
+
+
+
 }

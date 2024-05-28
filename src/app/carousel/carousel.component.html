@@ -1,25 +1,40 @@
-<div>
+<!-- new -->
+<!-- @defer(loading){ -->
+<div class="carousel-container">
+  <div class="carousel-header">
   <h2>{{ heading }}</h2>
-  <!-- {{images[activeImageIndex].public_id}} -->
+  <h3>{{images[activeImageIndex].public_id}}</h3>
+  </div>
 
-    @if(images.length > 0){
-      <!-- include the get functions you made -->
-      <div class="image-stack">
-        <div class="active-image" [@activeImage]>
-          <img [src]="images[activeImageIndex].secure_url" class="active-image" alt="Main Image">
-        </div>
-        <!-- <div class="loop-container">
-        @for(image of images; let i = $index; track image){
-          @if(i !== activeImageIndex){
-            <div class="img">
-            <img [src]="image.secure_url"  alt="Image"
-            [@smallerImage]  (click)="activateImage(i)">
-          </div>
-      }
-        }
-      </div> -->
+  <div class="image-stack">
+    <div class="active-image" [@activeImage]>
+      <img [src]="images[activeImageIndex].secure_url" class="img-main" alt="Main Image">
     </div>
-  }  @else {
-    <h3> Arriving Soon </h3> 
-   } 
+  <div class="loop-container" [@fadeIn]>
+    @for(image of images; let i = $index; track image){
+    <div class="list-image" >
+      <img [src]="image.secure_url" class="img-small" alt="Image" (click)="activateImage(i)">
+   </div>
+    }
+    </div>
+  </div>
+  <footer class="carousel-footer">
+  <div class="carousel-controls">
+    <button mat-icon-button (click)="activateImage(activeImageIndex - 1)">
+      <mat-icon class="material-symbols-outlined">chevron_left</mat-icon>
+    </button>
+    <div class="carousel-status">
+      <span>{{ activeImageIndex + 1 }} / {{ images.length }}</span>
+    </div>
+    <button mat-icon-button (click)="activateImage(activeImageIndex + 1)">
+      <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
+    </button>
+  </div>
+ 
+</footer>
 </div>
+<!-- }@placeholder {
+   <app-skeleton-carousel-fill></app-skeleton-carousel-fill>
+
+} -->
+<!-- } -->

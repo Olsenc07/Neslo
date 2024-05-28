@@ -11,6 +11,11 @@
     opacity: .3;
     background-color: black;
   }
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
 .sub-heading{
     padding: 1% 0% 0%;
 }
