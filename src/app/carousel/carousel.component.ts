@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ImagesService } from '../services/images.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { take } from 'rxjs';
@@ -13,27 +13,17 @@ import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('500ms ease-in-out', style({ opacity: 1 }))
-      ])
-    ]),
     trigger('activeImage', [
       transition(':enter', [
         style({ transform: 'scale(0.8)', opacity: 0.8 }),
         animate('1s ease-in-out', style({ transform: 'scale(1)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('1s ease-in-out', style({ transform: 'scale(0.8)', opacity: 0.8 })),
-      ]),
-    ])
+      ])
+    ]),
   ],
 })
 export class CarouselComponent implements OnInit {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
-  @ViewChild('carouselContainer') carouselContainer!: ElementRef;
 
   images: { secure_url: string, public_id: string }[] 
   = [{ secure_url: '', public_id: '' }];
@@ -71,7 +61,7 @@ export class CarouselComponent implements OnInit {
         this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
         this.activateImage(this.activeImageIndex);
         iterations++;
-    }, 8000);
+    }, 10000);
 } 
 
 

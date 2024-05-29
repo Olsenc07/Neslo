@@ -3,14 +3,14 @@
 <div class="carousel-container">
   <div class="carousel-header">
   <h2>{{ heading }}</h2>
-  <h3>{{images[activeImageIndex].public_id}}</h3>
+  <h3 >{{images[activeImageIndex].public_id}}</h3>
   </div>
 
   <div class="image-stack">
     <div class="active-image" [@activeImage]>
       <img [src]="images[activeImageIndex].secure_url" class="img-main" alt="Main Image">
     </div>
-  <div class="loop-container" [@fadeIn]>
+  <div class="loop-container">
     @for(image of images; let i = $index; track image){
     <div class="list-image" >
       <img [src]="image.secure_url" class="img-small" alt="Image" (click)="activateImage(i)">
@@ -33,6 +33,6 @@
  
 </footer>
 </div>
-}@loading {
+}@loading(minimum 0.7s) {
    <app-skeleton-carousel></app-skeleton-carousel>
 } 
