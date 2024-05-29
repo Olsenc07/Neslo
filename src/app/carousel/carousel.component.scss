@@ -65,6 +65,7 @@
     margin: 0 auto;
     background-color: #f5f5f5;
     padding: 20px;
+    margin: 2%;
     border-radius: 10px;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
   }
@@ -97,5 +98,16 @@ button{
   
 .carousel-status {
     margin-left: 10px;
+  }
+  .carousel-header h3 {
+    animation: smoothAnimation 1s ease-in-out;
+  }
+  
+  .image-stack .active-image {
+    animation: activeImage 1s ease-in-out;
+  }
+  
+  .loop-container {
+    animation: fadeIn 500ms ease-in-out;
   }
   

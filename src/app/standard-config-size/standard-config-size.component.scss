@@ -10,26 +10,24 @@
     top: 0px; 
     right: 0px; 
     opacity: .3;
-    background-color: black;
+    background-color: rgb(106, 106, 106);
     justify-content: flex-end;
   }
 
-.sticky-header {
+ th[mat-header-cell]  {
     position: sticky;
     top: 0;
     z-index: 12;
+    box-shadow: 0 4px 6px -6px rgba(0, 0, 0, 0.2);
   }
 .sub-heading{
     padding: 1% 0% 0%;
 }
-.flex-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
+
 .full-page{
-    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
     margin: 1%;
@@ -53,11 +51,10 @@
     flex-direction: column;
     div{
     display: flex;
+    flex-direction: column;
     }
 }
-.table{
-    margin-bottom: 0%;
-}
+
 b{
     color: black;
 }
@@ -75,22 +72,27 @@ div[grey]{
 }
 div[blue]{
     @include common();
-    background-color: #d0e4f7;
+    padding: 2%;
+    background-color: #e4ebf1;
 }
+th[blue]{
+    background-color: #e4ebf1;
+}
+
 div[green]{
     @include common();
-    background-color: #D4EED1;
+    padding: 2%;
+    background-color: #e3ebe2;
 }
 div[warning]{
     @include common();
     color: #d93934;
 }
-th{
-    border: 1px solid;
-    padding: 0%;
+th, tbody{
+    text-align: center;
 }
 th[green]{
-    background-color: #D4EED1;
+    background-color: #e3ebe2;
 }
 th[grey], td[grey]{
     background-color: var(--wood-light-grey);
