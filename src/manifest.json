@@ -1,0 +1,21 @@
+{
+    "name": "Neslo | Premium Windows and Doors",
+    "short_name": "Neslo",
+    "description": "Rooted in Central Alberta, we bring over 30 years of expertise as journeyman carpenters and custom home builders to your door and window installations.",
+    "icons": [
+      {
+        "src": "favicon.ico",
+        "sizes": "16x16 32x32 48x48 64x64 96x96 128x128 144x144 152x152 192x192 256x256 384x384 512x512",
+        "type": "image/x-icon"
+      },
+      {
+        "src": "../../assets/Neslo.png",
+        "sizes": "180x180",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "theme_color": "#007bff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+  }
