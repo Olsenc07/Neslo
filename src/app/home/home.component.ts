@@ -36,7 +36,7 @@ import { CarouselComponent } from '../carousel/carousel.component';
 export class HomeComponent {
 atSymbol: string = '@';
 
-imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.jpg', alt: 'Neslo Ltd.' }
+imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.png', alt: 'Neslo Ltd.' }
 messageAB: SafeHtml;
 introAB: SafeHtml;
 
