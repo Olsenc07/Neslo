@@ -5,11 +5,13 @@ import { take } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, SkeletonFormFillComponent],
+  imports: [MatIconModule, MatButtonModule,NgxSkeletonLoaderModule,
+     SkeletonFormFillComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [
@@ -21,7 +23,7 @@ import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel
     ]),
     trigger('enterLeftToRight', [
       transition(':enter', [
-        style({ transform: 'translateX(-10px)' }),
+        style({ transform: 'translateX(-24px)' }),
         animate('1s ease-in-out', style({ transform: 'translateX(0px)'}))
       ])
     ])

@@ -30,7 +30,7 @@
     </div>
 </section >
 
-@defer(on viewport(aboutUs)){
+@defer{
     <!-- Carousel Cloudinary -->
 <section class="my-3" id="showcase">
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
@@ -69,7 +69,7 @@
     </div>
         
         <div class="col-12 mt-2">
-@defer(on viewport){
+@defer{
        <app-contact-form></app-contact-form>
     }@placeholder { 
         <app-skeleton-form-fill ></app-skeleton-form-fill>
