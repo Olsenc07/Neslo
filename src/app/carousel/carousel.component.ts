@@ -15,10 +15,16 @@ import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel
   animations: [
     trigger('activeImage', [
       transition(':enter', [
-        style({ transform: 'scale(0.8)', opacity: 0.8 }),
-        animate('1s ease-in-out', style({ transform: 'scale(1)', opacity: 1 })),
+        style({ opacity: 0.8 }),
+        animate('1s ease-in-out', style({ opacity: 1 })),
       ])
     ]),
+    trigger('enterLeftToRight', [
+      transition(':enter', [
+        style({ transform: 'translateX(-10px)' }),
+        animate('1s ease-in-out', style({ transform: 'translateX(0px)'}))
+      ])
+    ])
   ],
 })
 export class CarouselComponent implements OnInit {
@@ -42,26 +48,27 @@ export class CarouselComponent implements OnInit {
   }
 
   activateImage(index: number): void {
+    if(index >= this.images.length) {
+      this.activeImageIndex = 0;
+    }
+    console.log(index)
     this.activeImageIndex = index;
-    // reasign focused image but no chnages to view smaller
-    // Move the clicked image to the first position
-    // this.images.splice(index, 1);
-    // this.images.unshift(this.images[index]);
+   
   }
 
   startCarousel(): void {
     let iterations = 0;
-    const maxIterations = this.images.length * 3; 
+    // const maxIterations = this.images.length * 3; 
 
-    this.intervalId = setInterval(() => {
-        if (iterations >= maxIterations) {
-            clearInterval(this.intervalId);
-            return;
-        }
-        this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
-        this.activateImage(this.activeImageIndex);
-        iterations++;
-    }, 10000);
+    // this.intervalId = setInterval(() => {
+    //     if (iterations >= maxIterations) {
+    //         clearInterval(this.intervalId);
+    //         return;
+    //     }
+    //     this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
+    //     this.activateImage(this.activeImageIndex);
+    //     iterations++;
+    // }, 10000);
 } 
 
 

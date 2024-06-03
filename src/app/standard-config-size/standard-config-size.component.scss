@@ -33,6 +33,11 @@
     position: relative;
     overflow-y: auto;
 }
+table {
+    ng-container{
+    max-height: none !important;
+    }
+  }
 
 .title{
     flex-grow: 1;
@@ -85,6 +90,7 @@ div[green]{
 div[warning]{
     @include common();
     color: #d93934;
+    padding: 0% 1%;
 }
 th, tbody{
     text-align: center;
