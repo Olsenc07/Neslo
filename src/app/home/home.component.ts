@@ -1,9 +1,9 @@
 import { Component, HostListener, Renderer2, 
   ElementRef, ViewChild } from '@angular/core';
 import { NgClass } from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
 import { AboutUsComponent } from 'src/app/about-us/about-us.component';
@@ -20,16 +20,16 @@ import { CarouselComponent } from '../carousel/carousel.component';
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     imports: [
-        AboutUsComponent,
-        CarouselComponent,
-        ContactFormComponent,
-        MatButtonModule,
-        MatDividerModule,
-        MatIconModule,
-        NgClass,
-        SkeletonFormFillComponent,
-        IntroComponent,
-        InstaCarouselComponent
+      AboutUsComponent,
+      CarouselComponent,
+      ContactFormComponent,
+      MatButtonModule,
+      MatDividerModule,
+      MatIconModule,
+      NgClass,
+      SkeletonFormFillComponent,
+      IntroComponent,
+      InstaCarouselComponent
     ]
 })
 

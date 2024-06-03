@@ -7,13 +7,15 @@
   </div>
 
   <div class="image-stack">
+    @if("images[activeImageIndex].secure_url"){
     <div class="active-image" [@activeImage]>
-      <img [src]="images[activeImageIndex].secure_url" class="img-main" alt="Main Image">
+      <img  [src]="images[activeImageIndex].secure_url" class="img-main" alt="Main Image">
     </div>
+  }
   <div class="loop-container">
     @for(image of images; let i = $index; track image){
-    <div class="list-image" >
-      <img [src]="image.secure_url" class="img-small" alt="Image" (click)="activateImage(i)">
+    <div class="list-image" [@enterLeftToRight]>
+      <img loading="lazy"  [src]="image.secure_url" class="img-small" alt="Image" (click)="activateImage(i)">
    </div>
     }
     </div>
@@ -33,6 +35,6 @@
  
 </footer>
 </div>
-}@loading(minimum 0.7s) {
+}@loading {
    <app-skeleton-carousel></app-skeleton-carousel>
 } 
