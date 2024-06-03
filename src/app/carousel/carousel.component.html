@@ -1,5 +1,4 @@
 <!-- new -->
-@defer{
 <div class="carousel-container">
   <div class="carousel-header">
   <h2>{{ heading }}</h2>
@@ -7,17 +6,27 @@
   </div>
 
   <div class="image-stack">
-    @if("images[activeImageIndex].secure_url"){
     <div class="active-image" [@activeImage]>
-      <img  [src]="images[activeImageIndex].secure_url" class="img-main" alt="Main Image">
+    @if("images[activeImageIndex].secure_url"){
+      <img  [src]="images[activeImageIndex].secure_url" class="img-main">
+        }@else{
+      <ngx-skeleton-loader [theme]="{ height: '100px', width: '100px' }" appearance="circle" class="skeleton-circle"></ngx-skeleton-loader>
+        }
     </div>
-  }
   <div class="loop-container">
+  @if(images.length > 0){
     @for(image of images; let i = $index; track image){
     <div class="list-image" [@enterLeftToRight]>
-      <img loading="lazy"  [src]="image.secure_url" class="img-small" alt="Image" (click)="activateImage(i)">
+      <img [src]="image.secure_url" class="img-small" alt="Image" (click)="activateImage(i)">
    </div>
     }
+       }@else {
+    <div class="d-flex flex-row align-items-center justify-content-between">
+      <ngx-skeleton-loader [theme]="{ height: '40px', width: '40px', 'border-radius': '50%' }" appearance="circle"></ngx-skeleton-loader>
+      <ngx-skeleton-loader count="1" [theme]="{ height: '40px', width: '70px', 'border-radius': '15px' }" appearance="line"></ngx-skeleton-loader>
+      <ngx-skeleton-loader [theme]="{ height: '40px', width: '40px', 'border-radius': '50%' }" appearance="circle"></ngx-skeleton-loader>
+    </div>
+  }
     </div>
   </div>
   <footer class="carousel-footer">
@@ -35,6 +44,3 @@
  
 </footer>
 </div>
-}@loading {
-   <app-skeleton-carousel></app-skeleton-carousel>
-} 
