@@ -1,11 +1,16 @@
 <div class="home-wrapper">
+    <div #header (visibilityChange)="onVisibilityChange()">
 @if(this.orientationService.screen()){
         <app-intro [orientation]="true" class="image-mobile"></app-intro>
 }@else {
-    <header #imgChild class="intro image">
+    <header #imgChild class="intro image" >
         <app-intro [orientation]="false" ></app-intro>
     </header>
 }
+</div>
+<!-- Sticky Header -->
+<!-- move to outer app.component and se eif that fixes scrolling glitch -->
+<app-nav-header [ngClass]="headerShow ? 'head-nav' : 'head-hidden'"></app-nav-header>
 <!-- About Us -->
 <section class="my-3" #aboutUs>
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
@@ -29,7 +34,6 @@
         </div>
     </div>
 </section >
-
 @defer{
     <!-- Carousel Cloudinary -->
 <section class="my-3" id="showcase">

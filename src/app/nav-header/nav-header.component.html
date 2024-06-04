@@ -1,0 +1,31 @@
+<mat-toolbar class="header-container">
+      <!-- Logo -->
+      <div>
+        <button mat-icon-button routerLink="/">
+          <img src="./../favicon.ico" class="img-fluid " alt="Neslo logo">
+        </button>
+      </div>
+      
+      <!-- Nav Buttons -->
+      <div class="nav-buttons">
+        <button mat-icon-button (click)="navigateToContact()">
+          <mat-icon class="material-symbols-outlined">local_library</mat-icon>
+        </button>
+        <button mat-icon-button (click)="navigateToShowcase()">
+          <mat-icon class="material-symbols-outlined">imagesmode</mat-icon>
+        </button>
+        <button mat-icon-button  (click)="requestQuote()">
+          <mat-icon class="material-symbols-outlined">description</mat-icon>
+        </button>
+      </div>
+  </mat-toolbar>
+  
+
+ <!-- Search Bar -->
+        <!-- need exmaple pics before making drop down -->
+        <!-- <div class="col-auto ml-auto">
+          <mat-form-field appearance="outline">
+            <mat-label>Search</mat-label>
+            <input matInput type="text" placeholder="Search products or configurations">
+          </mat-form-field>
+        </div> -->

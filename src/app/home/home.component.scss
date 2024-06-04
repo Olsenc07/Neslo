@@ -22,6 +22,7 @@ form{
   background-position: 50% 75%;
   z-index: -1;
 }
+
 .container-common{
   margin-top: 1%;
   padding-top: 1%;
@@ -37,6 +38,24 @@ form{
 }
 .section-padding {
   padding: 60px 0;
+}
+// work on it staying fixed!
+.head-nav, .head-hidden {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  height: 64px; 
+  display: flex;
+  align-items: center;
+  transition: opacity 0.5s ease-in-out;
+}
+.head-nav {
+  opacity: 1;
+}
+.head-hidden {
+  opacity: 0;
 }
 .home-wrapper{
   height: 100%;

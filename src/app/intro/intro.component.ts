@@ -1,14 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import { MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
-import { Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-intro',
@@ -30,31 +28,22 @@ export class IntroComponent implements OnInit {
 @Input() orientation: boolean = true
 
     constructor(
-      private router: Router, 
-      private title:Title, @Inject(PLATFORM_ID) private platformId: Object){}
+      private navigationService: NavigationService,
+      private title:Title){}
 
   ngOnInit(): void {
     this.title.setTitle('Neslo | Premium Windows and Doors')
   }
 
-  // test nopt in
+
   requestQuote(): void {
-    this.router.navigate(['/quotes']);
+    this.navigationService.requestQuote();
   }
   navigateToContact(): void {
-    if (isPlatformBrowser(this.platformId)) {
-    document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' });
-    }
+   this.navigationService.navigateToContact();
   }
 
   navigateToShowcase(): void {
-      if (isPlatformBrowser(this.platformId)) {
-        if(document.getElementById('showcase')){
-        document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' });
-        }else{
-        window.scrollTo(0, document.body.scrollHeight);
-
-        }
-    }
+     this.navigationService.navigateToShowcase();
   }
 }
