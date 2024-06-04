@@ -6,21 +6,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
   imports: [MatIconModule, MatButtonModule,NgxSkeletonLoaderModule,
-     SkeletonFormFillComponent],
+    NgOptimizedImage, SkeletonFormFillComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [
-    trigger('activeImage', [
-      transition(':enter', [
-        style({ opacity: 0.8 }),
-        animate('1s ease-in-out', style({ opacity: 1 })),
-      ])
-    ]),
     trigger('enterLeftToRight', [
       transition(':enter', [
         style({ transform: 'translateX(-24px)' }),
@@ -32,6 +27,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 export class CarouselComponent implements OnInit {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
+  imageLoaded: boolean = false;
+  loadedImages: boolean[] = [];
 
   images: { secure_url: string, public_id: string }[] 
   = [{ secure_url: '', public_id: '' }];
@@ -48,13 +45,17 @@ export class CarouselComponent implements OnInit {
       this.startCarousel();
     });
   }
+  onImageLoad(): void {
+    this.imageLoaded = true;
+  }
 
   activateImage(index: number): void {
-    if(index >= this.images.length) {
-      this.activeImageIndex = 0;
-    }
+    if(index !== this.images.length) {
+      this.activeImageIndex = index;
+    } else {
     console.log(index)
-    this.activeImageIndex = index;
+    this.activeImageIndex = 0;
+    }
    
   }
 
@@ -72,8 +73,4 @@ export class CarouselComponent implements OnInit {
     //     iterations++;
     // }, 10000);
 } 
-
-
-
-
 }

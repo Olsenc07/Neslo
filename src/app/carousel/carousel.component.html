@@ -1,4 +1,5 @@
 <!-- new -->
+@defer(on immediate){
 <div class="carousel-container">
   <div class="carousel-header">
   <h2>{{ heading }}</h2>
@@ -6,41 +7,42 @@
   </div>
 
   <div class="image-stack">
-    <div class="active-image" [@activeImage]>
     @if("images[activeImageIndex].secure_url"){
-      <img  [src]="images[activeImageIndex].secure_url" class="img-main">
-        }@else{
-      <ngx-skeleton-loader [theme]="{ height: '100px', width: '100px' }" appearance="circle" class="skeleton-circle"></ngx-skeleton-loader>
-        }
+    <div class="active-image" >
+      <img [ngSrc]="images[activeImageIndex].secure_url" priorty
+      (load)="onImageLoad()" [class.loaded]="imageLoaded" class="img-main">
     </div>
+  }@else{ 
+    <ngx-skeleton-loader count="1" [theme]="{ height: '225px', width: '400px' }" appearance="line"></ngx-skeleton-loader>
+  }
   <div class="loop-container">
   @if(images.length > 0){
     @for(image of images; let i = $index; track image){
-    <div class="list-image" [@enterLeftToRight]>
-      <img [src]="image.secure_url" class="img-small" alt="Image" (click)="activateImage(i)">
+    <div class="list-image" >
+      @if(loadedImages[i] ){
+        <ngx-skeleton-loader count="1" [theme]="{ height: '40px', width: '50px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
+        } 
+      <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
+       (click)="activateImage(i)">
    </div>
-    }
-       }@else {
-    <div class="d-flex flex-row align-items-center justify-content-between">
-      <ngx-skeleton-loader [theme]="{ height: '40px', width: '40px', 'border-radius': '50%' }" appearance="circle"></ngx-skeleton-loader>
-      <ngx-skeleton-loader count="1" [theme]="{ height: '40px', width: '70px', 'border-radius': '15px' }" appearance="line"></ngx-skeleton-loader>
-      <ngx-skeleton-loader [theme]="{ height: '40px', width: '40px', 'border-radius': '50%' }" appearance="circle"></ngx-skeleton-loader>
-    </div>
+  }
   }
     </div>
+  
   </div>
   <footer class="carousel-footer">
   <div class="carousel-controls">
-    <button mat-icon-button (click)="activateImage(activeImageIndex - 1)">
+    <button mat-fab (click)="activateImage(activeImageIndex - 1)">
       <mat-icon class="material-symbols-outlined">chevron_left</mat-icon>
     </button>
     <div class="carousel-status">
       <span>{{ activeImageIndex + 1 }} / {{ images.length }}</span>
     </div>
-    <button mat-icon-button (click)="activateImage(activeImageIndex + 1)">
+    <button mat-fab (click)="activateImage(activeImageIndex + 1)">
       <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
     </button>
   </div>
  
 </footer>
 </div>
+}

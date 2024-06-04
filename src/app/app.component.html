@@ -1,4 +1,4 @@
-@defer { 
+ @defer { 
   <router-outlet></router-outlet> 
   @if(!this.hideFocusService.focused()){
   <ng-container id="ignore0">
@@ -10,6 +10,7 @@
   </mat-icon>
   </button>  
     }
+    
   <button class="nav-buttons btm-btn" mat-fab [@rotateInOut]="view" (click)="nav()"
       matTooltip="Scroll {{view}}" aria-label="Navigate button">
       <mat-icon class="material-symbols-outlined">
@@ -17,15 +18,15 @@
       </mat-icon>
   </button>  
 </ng-container>
-  }
+  } 
 
 <!-- second security -->
-<!-- @if(showEmailRecaptchaCheckbox){
+ <!-- @if(showEmailRecaptchaCheckbox){
   <div class="g-recaptcha" data-sitekey="6Ld7EdcpAAAAAP5b51ypqU3cFb5fvgQ7JxfMbGBf"></div>
-} -->
-}
-@loading (minimum 1.2s) { 
+}  -->
+ }
+@loading (minimum 1.2s) {  
   <div class="initial-icon">   
-    <img src="../favicon.ico" alt="Neslo Logo">
+   <img ngSrc="../favicon.ico" width="auto" height="auto" priority>
   </div>
   }

@@ -4,7 +4,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { trigger, transition, animate, style, state } from '@angular/animations';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 
 import { CustomTitleStrategy } from './services/title-strategy.service';
@@ -17,7 +17,7 @@ import { filter } from 'rxjs/operators';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [MatIconModule, RouterModule, MatTooltipModule, MatButtonModule],
+  imports: [MatIconModule, RouterModule, MatTooltipModule, MatButtonModule, NgOptimizedImage],
   providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
   animations: [
     trigger('rotateInOut', [

@@ -106,9 +106,9 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
     generateQuoteNumber(): void {
       const now = new Date();
-      const datePart = this.datePipe.transform(now, 'dHHmm') || '';
-      const randomPart = Math.floor(Math.random() * 10).toString().padStart(3, '0');
-      this.quoteNumber = `${datePart}-${randomPart}`;
+      const datePart: string = this.datePipe.transform(now, 'dHHmm') || '';
+      const randomPart:string = Math.floor(Math.random() * 10).toString().padStart(3, '0');
+      this.quoteForm.get(this.quoteNumber)?.setValue(`${datePart}-${randomPart}`, { emitEvent: true });
     }
 
     updateField(fieldName: string, value: string): void {
@@ -140,6 +140,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
   
   generatePDF(): void {
     if (isPlatformBrowser(this.platformId)) {
+      this.generateQuoteNumber()
       if (this.quoteForm.invalid) {
         this.scrollToFirstInvalidControl();
         this.snackBar.open('Please fill out required fields and try again.', '❌', {
@@ -152,8 +153,10 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
         //       this.recaptchaService.verifyToken(token).pipe(take(1)).subscribe({
         //         next: (response) => {
         //           if (response.success) {
-                    this.generateQuoteNumber()
                     this.generatePdfDocument();
+                    this.snackBar.open('This may take a second', '...', {
+                      duration: 3000
+                    });
                   //   if ( response.score < 0.3) {
                   //     console.log('robot spotted');
                   //   }

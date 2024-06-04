@@ -47,7 +47,7 @@ router.post('/generator', async (req: Request, res: Response) => {
     const viewport: {
       width: number;
       height: number;
-  } = { width: 1300, height: 1900 };
+  } = { width: 1800, height: 1900 };
     await page.setViewport(viewport);;
     const endpoint = `${protocol}://${headers.host}/quotes`;
     // Navigate to the endpoint
@@ -158,6 +158,7 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
   if (quoteForm.quoteNumber) {
     await page.evaluate((quoteNumber) => {
       const element = document.querySelector('#quoteNumber');
+      console.log('el', element);
       if (element) {
         element.textContent = `Quote Number: ${quoteNumber}`;
       }

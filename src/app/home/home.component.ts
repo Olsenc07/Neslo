@@ -13,6 +13,7 @@ import { IntroComponent } from 'src/app/intro/intro.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 import { CarouselComponent } from '../carousel/carousel.component';
+import { NavHeaderComponent } from '../nav-header/nav-header.component';
 
 @Component({
     standalone: true,
@@ -26,6 +27,7 @@ import { CarouselComponent } from '../carousel/carousel.component';
       MatButtonModule,
       MatDividerModule,
       MatIconModule,
+      NavHeaderComponent,
       NgClass,
       SkeletonFormFillComponent,
       IntroComponent,
@@ -35,6 +37,8 @@ import { CarouselComponent } from '../carousel/carousel.component';
 
 export class HomeComponent {
 atSymbol: string = '@';
+headerShow: boolean = false;
+private observer?: IntersectionObserver;
 
 imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.png', alt: 'Neslo Ltd.' }
 messageAB: SafeHtml;
@@ -43,7 +47,7 @@ introAB: SafeHtml;
 imgBC: {img: string, alt: string } = {img:'../../assets/folding_sliding_doors_logo.png', alt: 'Folding Sliding Doors Canada Ltd.' }
 messageBC: SafeHtml;
 introBC: SafeHtml;
-  
+@ViewChild('header', { static: false }) header?: ElementRef<HTMLImageElement>;
 @ViewChild('imgChild', { static: false }) imgChild?: ElementRef<HTMLImageElement>;
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
@@ -81,12 +85,31 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
       </div>`
     );
     }
-
-  @HostListener('window:scroll', ['$event']) 
-  handleScroll(): void {
+    @HostListener('window:visibilityChange', ['$event'])
+    onVisibilityChange() {
+      console.log('hey');
+      this.headerShow = !this.headerShow;
+    }
+    ngAfterViewInit() {
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          this.headerShow = entry.isIntersecting;
+          this.onVisibilityChange();
+        });
+      });
+  
+      this.observer.observe(this.header!.nativeElement);
+    }
+  
+    ngOnDestroy() {
+      this.observer?.disconnect();
+    }
+    @HostListener('window:scroll', ['$event']) 
+    handleScroll(): void {
     // no zoom on mobile
     if(!this.orientationService.screen()){
     const scrollPosition: number = window.scrollY;
+
     const height: number = window.innerHeight;
     const zoomFactor: number = (1 + scrollPosition / height) * 100; 
      // Calculate new size percentage
