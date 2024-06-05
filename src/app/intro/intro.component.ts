@@ -8,12 +8,13 @@ import { CustomTitleStrategy } from './../services/title-strategy.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NavigationService } from '../services/navigation.service';
 
+
 @Component({
   selector: 'app-intro',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, NgClass],
   templateUrl: './intro.component.html',
-  styleUrl: './intro.component.scss',
+  styleUrls: ['./intro.component.scss', './../nav-header/nav-button-styles.component.scss'],
   animations: [
     trigger('fadeIn', [
       transition(':enter', [

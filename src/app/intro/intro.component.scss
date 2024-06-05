@@ -1,30 +1,26 @@
-@mixin button {
-  border: 3px solid var(--wood-dark);
-  color: white; 
-}
+
   .intro-head{
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    // height: auto;
+    @media (max-width: 1025px) {
+    animation: intro-head-animation 1s ease-in-out;
+    }
     height: 100vh;
       @media (min-width: 1000px) {
-        height: 75vh;
+        height: 100vh;
         }
   }
+  @keyframes intro-head-animation {
+    0% {
+      height: 100vh;
+    }
+    100% {
+      height: 100%;
+    }
+  }
 
-.btn-primary {
-    transition: background-image .3s ease-in-out; 
-    background-image: linear-gradient(45deg, var(--wood), var(--wood-light));
-    @include button;
-  }
-  .btn-primary:hover, .btn-primary:focus {
-    background-color: var(--wood-light);
-    background-image: linear-gradient(45deg, var(--wood-dark), var(--wood));
-    border-color: var(--wood); 
-    transform: scale(1.10); 
-  }
   .image-container{
     margin: 0% 15%;
   }
@@ -53,25 +49,7 @@
     opacity: 1;
   }
   
-  .msg-icon{
-    background-image: linear-gradient(45deg, #b78f5d, #854615);
-    margin: 25% 0%;
-    @include button;
-  }
-  .mobile{
-    background-image: linear-gradient(45deg, var(--wood), var(--wood-dark));
-    @include button;
-  }
-  .mobile-request{
-    @include button;
-    background-image: linear-gradient(45deg, var(--wood), var(--wood-light));
-  }
 
-  .quoteDesk{
-    background-image: linear-gradient(45deg, var(--wood), var(--wood-light));
-    margin: 0% 2%;
-    margin-top: -20px;
-  }
   .the-title{
     font-family: serif, auto;
     font-size: 3.2em; 
