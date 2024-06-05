@@ -13,6 +13,7 @@ export class NavigationService {
 
   requestQuote(): void {
     this.router.navigate(['/quotes']);
+    window.scrollTo(0, 0);
   }
 
   navigateToContact(): void {
