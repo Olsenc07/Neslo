@@ -33,8 +33,7 @@
 </textarea>
 </mat-form-field>
 @if(imageSrc && contactForm.get('file')?.value){
-  <div  class="thumbnail-container limit" [ngClass]="{'full-screen': isFullScreen}" 
-  (click)="toggleFullScreen()">
+  <div  class="thumbnail-container">
   <div class="thumbnail-header">
     <button mat-icon-button (click)="removeAttachedFile()"
     matTooltip="Remove file" aria-label="Remove file" class="remove-file-btn">
@@ -44,10 +43,10 @@
 
     @if(this.fileType === 'application/pdf'){
   <iframe [src]="imageSrc" 
-  class="img-thumbnail img-fluid mx-auto d-block thumbnail"
-  alt="Pdf file thumbnail" ></iframe>
+  class="img-thumbnail img-fluid mx-auto"
+  alt="Pdf file" ></iframe>
     } @else {
-      <img [src]="imageSrc" class="img-thumbnail img-fluid mx-auto d-block thumbnail" 
+      <img [src]="imageSrc" class="img-thumbnail img-fluid mx-auto" 
       alt="Image file thumbnail">
     }
   </div>
