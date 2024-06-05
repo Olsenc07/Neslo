@@ -1,23 +1,38 @@
 <mat-toolbar class="header-container">
-      <!-- Logo -->
-      <div>
-        <button mat-icon-button routerLink="/">
-          <img src="./../favicon.ico" class="img-fluid " alt="Neslo logo">
-        </button>
-      </div>
-      
       <!-- Nav Buttons -->
-      <div class="nav-buttons">
-        <button mat-icon-button (click)="navigateToContact()">
+      @if(mobile){
+      <div class="nav-buttons ">
+        <button mat-icon-button class="mobile-nav" (click)="navigateToContact()">
           <mat-icon class="material-symbols-outlined">local_library</mat-icon>
         </button>
-        <button mat-icon-button (click)="navigateToShowcase()">
+        <button mat-icon-button class="msg-icon-nav" (click)="navigateToShowcase()">
           <mat-icon class="material-symbols-outlined">imagesmode</mat-icon>
         </button>
-        <button mat-icon-button  (click)="requestQuote()">
+        <button mat-icon-button class="mobile-request-nav" (click)="requestQuote()">
           <mat-icon class="material-symbols-outlined">description</mat-icon>
         </button>
       </div>
+    }@else{
+        <div class="header-logo">
+            <img src="../favicon.ico" class="img-fluid">
+        </div>
+         <!-- add words under  -->
+        <div class="nav-buttons desktop">
+            <button mat-fab extended class="btn btn-primary" (click)="navigateToContact()">
+              <mat-icon class="material-symbols-outlined">local_library</mat-icon>
+              About Neslo
+            </button>
+            <button mat-fab extended class="btn btn-primary"  (click)="requestQuote()">
+                <mat-icon class="material-symbols-outlined">description</mat-icon>
+                Request Quote
+            </button>
+            <button mat-fab extended class="btn btn-primary" (click)="navigateToShowcase()">
+              <mat-icon class="material-symbols-outlined">imagesmode</mat-icon>
+              Showcase
+            </button>
+            
+          </div>
+      }
   </mat-toolbar>
   
 
