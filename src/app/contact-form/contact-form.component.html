@@ -34,13 +34,7 @@
 </mat-form-field>
 @if(imageSrc && contactForm.get('file')?.value){
   <div  class="thumbnail-container">
-  <div class="thumbnail-header">
-    <button mat-icon-button (click)="removeAttachedFile()"
-    matTooltip="Remove file" aria-label="Remove file" class="remove-file-btn">
-      <mat-icon class="material-symbols-outlined">cancel</mat-icon>
-    </button>   
-  </div>
-
+ <app-close-btn (close)="onBtnClicked()"></app-close-btn>
     @if(this.fileType === 'application/pdf'){
   <iframe [src]="imageSrc" 
   class="img-thumbnail img-fluid mx-auto"
