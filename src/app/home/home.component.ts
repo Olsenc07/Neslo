@@ -1,5 +1,6 @@
 import { Component, HostListener, Renderer2, 
-  ElementRef, ViewChild } from '@angular/core';
+  ElementRef, ViewChild, 
+  AfterViewInit} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -14,6 +15,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 import { CarouselComponent } from '../carousel/carousel.component';
 import { NavHeaderComponent } from '../nav-header/nav-header.component';
+import { ImgService } from '../services/img.service';
 
 @Component({
     standalone: true,
@@ -35,7 +37,7 @@ import { NavHeaderComponent } from '../nav-header/nav-header.component';
     ]
 })
 
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit{
 atSymbol: string = '@';
 headerShow: boolean = false;
 private observer?: IntersectionObserver;
@@ -51,7 +53,8 @@ introBC: SafeHtml;
 @ViewChild('imgChild', { static: false }) imgChild?: ElementRef<HTMLImageElement>;
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
-    protected orientationService: OrientationService) {
+    protected orientationService: OrientationService,
+  protected imgService: ImgService) {
       this.introAB = this.sanitizer.bypassSecurityTrustHtml(
         `Alberta's premier destination for the delivery and installation of <br>
          <b fsdc>Folding Sliding Doors Canada</b>.`

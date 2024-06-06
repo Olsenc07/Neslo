@@ -15,13 +15,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OrientationService } from '../services/orientation.service';
 import { HideFocusService } from '../services/hide-focus.service';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { EmailService } from '../services/email.service';
+import { CloseBtnComponent } from '../close-btn/close-btn.component';
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
   imports: [   
+    CloseBtnComponent,
     MatButtonModule,
     MatIconModule, 
     MatInputModule,
@@ -71,7 +73,7 @@ export class ContactFormComponent {
     } 
   }
     // To remove the attached file
-    removeAttachedFile() {
+    onBtnClicked() {
       this.contactForm.patchValue({ file: null });
       this.imageSrc = '';
     }

@@ -10,7 +10,9 @@
 </div>
 <!-- Sticky Header -->
 <!-- move to outer app.component and se eif that fixes scrolling glitch -->
+@if(this.imgService.img()){
 <app-nav-header [ngClass]="headerShow ? 'head-nav' : 'head-hidden'" [mobile]="this.orientationService.screen()"></app-nav-header>
+}
 <!-- About Us -->
 <section class="my-3" #aboutUs>
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">

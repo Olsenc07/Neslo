@@ -1,22 +1,51 @@
 <!-- new -->
-@defer(on immediate){
 <div class="carousel-container">
+  @if(images.length > 1){
   <div class="carousel-header">
   <h2>{{ heading }}</h2>
   <h3 >{{images[activeImageIndex].public_id}}</h3>
   </div>
+  }
+
+  @if(focusShowcase){
+    <div class="focus-overlay">
+      <div class="d-flex flex-column">
+    <div class="active-image enlarged" >
+      <header class="enlarged-header">
+        <h2>{{images[activeImageIndex].public_id}}</h2>
+        <app-close-btn (close)="onBtnClicked()"></app-close-btn>
+      </header>
+      <img [src]="images[activeImageIndex].secure_url" class="focus-img">
+    <footer class="enlarged-footer">
+      <div class="carousel-controls">
+        <button mat-fab (click)="activateImage(activeImageIndex - 1)">
+          <mat-icon class="material-symbols-outlined">chevron_left</mat-icon>
+        </button>
+        <div class="carousel-status">
+          <span>{{ activeImageIndex + 1 }} / {{ images.length }}</span>
+        </div>
+        <button mat-fab (click)="activateImage(activeImageIndex + 1)">
+          <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
+        </button>
+      </div>
+    </footer>
+  </div>
+    </div>
+  </div>
+  }
 
   <div class="image-stack">
-    @if("images[activeImageIndex].secure_url"){
+    @if(images.length == 10){
     <div class="active-image" >
-      <img [ngSrc]="images[activeImageIndex].secure_url" priorty
-      (load)="onImageLoad()" [class.loaded]="imageLoaded" class="img-main">
+      <img [src]="images[activeImageIndex].secure_url"  
+      (click)="focusImg()" (load)="onImageLoad()" 
+      [class.loaded]="imageLoaded" class="img-main">
     </div>
   }@else{ 
     <ngx-skeleton-loader count="1" [theme]="{ height: '225px', width: '400px' }" appearance="line"></ngx-skeleton-loader>
   }
   <div class="loop-container">
-  @if(images.length > 0){
+  @if(images && images.length > 0){
     @for(image of images; let i = $index; track image){
     <div class="list-image" >
       @if(loadedImages[i] ){
@@ -28,9 +57,9 @@
   }
   }
     </div>
-  
   </div>
-  <footer class="carousel-footer">
+@if(!focusShowcase){
+  <footer>
   <div class="carousel-controls">
     <button mat-fab (click)="activateImage(activeImageIndex - 1)">
       <mat-icon class="material-symbols-outlined">chevron_left</mat-icon>
@@ -42,7 +71,6 @@
       <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
     </button>
   </div>
- 
 </footer>
-</div>
 }
+</div>
