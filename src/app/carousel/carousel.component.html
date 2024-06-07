@@ -1,21 +1,30 @@
 <!-- new -->
-<div class="carousel-container">
+<div class="carousel-container" #viewing>
   @if(images.length > 1){
   <div class="carousel-header">
   <h2>{{ heading }}</h2>
-  <h3 >{{images[activeImageIndex].public_id}}</h3>
+  <h3>{{images[activeImageIndex].public_id}}</h3>
   </div>
   }
 
   @if(focusShowcase){
-    <div class="focus-overlay">
+    <div class="shadow-overlay"></div>
+    <div class="focus-overlay" id="focus">
       <div class="d-flex flex-column">
     <div class="active-image enlarged" >
       <header class="enlarged-header">
-        <h2>{{images[activeImageIndex].public_id}}</h2>
+        <h2 class="pt-2">{{images[activeImageIndex].public_id}}</h2>
         <app-close-btn (close)="onBtnClicked()"></app-close-btn>
       </header>
       <img [src]="images[activeImageIndex].secure_url" class="focus-img">
+      <div class="focus-img-loop">
+      @for(image of images; let i = $index; track image){
+        <div class="list-image focus" >
+          <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
+           (click)="activateImage(i)">
+       </div>
+      }
+    </div>
     <footer class="enlarged-footer">
       <div class="carousel-controls">
         <button mat-fab (click)="activateImage(activeImageIndex - 1)">
@@ -35,7 +44,7 @@
   }
 
   <div class="image-stack">
-    @if(images.length == 10){
+    @if(this.focused()){
     <div class="active-image" >
       <img [src]="images[activeImageIndex].secure_url"  
       (click)="focusImg()" (load)="onImageLoad()" 
@@ -45,16 +54,16 @@
     <ngx-skeleton-loader count="1" [theme]="{ height: '225px', width: '400px' }" appearance="line"></ngx-skeleton-loader>
   }
   <div class="loop-container">
-  @if(images && images.length > 0){
     @for(image of images; let i = $index; track image){
-    <div class="list-image" >
+    <div class="list-image">
       @if(loadedImages[i] ){
         <ngx-skeleton-loader count="1" [theme]="{ height: '40px', width: '50px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
         } 
+  @if(this.focused()){
       <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
        (click)="activateImage(i)">
-   </div>
   }
+   </div>
   }
     </div>
   </div>

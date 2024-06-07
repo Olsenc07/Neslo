@@ -11,7 +11,6 @@ import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
 import { filter } from 'rxjs/operators';
 
-
 @Component({
   standalone: true,
   selector: 'app-root',

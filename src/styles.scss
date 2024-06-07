@@ -118,6 +118,9 @@ html, body {
     height: 100%;
     margin: 0;
 }
+body.noScroll{
+  overflow: hidden;
+}
 p {
   font-size: 1.1em; 
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, computed, signal } from '@angular/core';
 import { ImagesService } from '../services/images.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { take } from 'rxjs';
@@ -21,15 +21,16 @@ import { ImgService } from '../services/img.service';
   animations: [
     trigger('enterLeftToRight', [
       transition(':enter', [
-        style({ transform: 'translateX(-24px)' }),
+        style({ transform: 'translateX(-12px)' }),
         animate('1s ease-in-out', style({ transform: 'translateX(0px)'}))
       ])
     ])
   ],
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
+
   imageLoaded: boolean = false;
   loadedImages: boolean[] = [];
   focusShowcase: boolean = false;
@@ -37,21 +38,44 @@ export class CarouselComponent implements OnInit {
   images: { secure_url: string, public_id: string }[] 
   = [{ secure_url: '', public_id: '' }];
   activeImageIndex: number = 0;
-  intervalId: NodeJS.Timeout | undefined;
+  imgView: boolean = false;
+  @ViewChild('viewing', { static: false }) viewing?: ElementRef<HTMLImageElement>;
 
+  private observerImg?: IntersectionObserver;
+
+  private imgState = signal<boolean>(false)
+  focused = computed<boolean>(() => this.imgState())
+
+setImgState(state: boolean): void {
+  this.imgState.set(state);
+}
+@HostListener('window:visibilityChange', ['$event'])
+  onVisibilityChangeImg() {
+    this.setImgState(true);
+  }
+  
   constructor(protected imagesService: ImagesService,
-    private  imgService: ImgService
+    private renderer: Renderer2
   ) {}
-
+  
   ngOnInit(): void {
     this.imagesService.fetchImages(this.route).pipe(
       take(1)
     ).subscribe((arrayObject: { secure_url: string, public_id: string }[]) => {
-      console.log('hi',arrayObject);
       this.images = arrayObject;
-      // this.startCarousel();
     });
   }
+  ngAfterViewInit(): void {
+    this.observerImg = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        this.imgView = entry.isIntersecting;
+        this.onVisibilityChangeImg();
+      });
+    });
+
+    this.observerImg.observe(this.viewing!.nativeElement);
+  }
+
   onImageLoad(): void {
     this.imageLoaded = true;
   }
@@ -60,32 +84,19 @@ export class CarouselComponent implements OnInit {
     if(index !== this.images.length) {
       this.activeImageIndex = index;
     } else {
-    console.log(index)
     this.activeImageIndex = 0;
     }
    
   }
   focusImg(): void {
     this.focusShowcase = true;
-    this.imgService.setImgFocus(true)
+    this.renderer.addClass(document.body, 'noScroll');
   }
   onBtnClicked(): void {
     this.focusShowcase = false;
+    this.renderer.removeClass(document.body, 'noScroll');
   }
-  
-  
-//   startCarousel(): void {
-//     let iterations = 0;
-//     // const maxIterations = this.images.length * 3; 
-
-//     // this.intervalId = setInterval(() => {
-//     //     if (iterations >= maxIterations) {
-//     //         clearInterval(this.intervalId);
-//     //         return;
-//     //     }
-//     //     this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
-//     //     this.activateImage(this.activeImageIndex);
-//     //     iterations++;
-//     // }, 10000);
-// } 
+  ngOnDestroy() {
+    this.observerImg?.disconnect();
+  }
 }
