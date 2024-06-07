@@ -1,8 +1,13 @@
 .thumbnail-header {
     position: absolute;
-    top: -14px;
-    right: 0;
+    top: -5px;
+    right: -3px;
   }
   .remove-file-btn{
-    background-color: #5e4c5a;
+    &:hover{
+      transform: rotate(90deg);
+    }
+    mat-icon{
+      color: black;
+    }
   }

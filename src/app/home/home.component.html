@@ -1,4 +1,4 @@
-<div class="home-wrapper">
+<div class="homeWrapper">
     <div #header (visibilityChange)="onVisibilityChange()">
 @if(this.orientationService.screen()){
         <app-intro [orientation]="true" class="image-mobile"></app-intro>
@@ -9,10 +9,8 @@
 }
 </div>
 <!-- Sticky Header -->
-<!-- move to outer app.component and se eif that fixes scrolling glitch -->
-@if(this.imgService.img()){
-<app-nav-header [ngClass]="headerShow ? 'head-nav' : 'head-hidden'" [mobile]="this.orientationService.screen()"></app-nav-header>
-}
+<app-nav-header [ngClass]="this.headerToggle() ? 'head-nav' : 'head-hidden'" [mobile]="this.orientationService.screen()"></app-nav-header>
+
 <!-- About Us -->
 <section class="my-3" #aboutUs>
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
@@ -36,25 +34,24 @@
         </div>
     </div>
 </section >
-@defer{
     <!-- Carousel Cloudinary -->
 <section class="my-3" id="showcase">
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
         <div class="text-center mb-4 pt-3" >
-            <h2 heading>Showcase</h2>
+        <h2 heading>Showcase</h2>
             <mat-divider></mat-divider>
         </div>
         <div class="row">
-        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-        <app-carousel [heading]="'Home Essentials'" [route]="'Residential'"></app-carousel>
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+    <app-carousel [heading]="'Home Essentials'" [route]="'Residential'" needs to output wwhen ></app-carousel>
         </div>
-        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-        <app-carousel [heading]="'Premium Selection'" [route]="'Showcase'"></app-carousel>
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+    <app-carousel [heading]="'Premium Selection'" [route]="'Showcase'"></app-carousel>
         </div>
         </div>
     </div>
 </section>
-}
+
 
 <section [ngClass]="this.orientationService.screen() ? 'container-border' : 'container'" class="container-common">
     <div class="text-center mb-4 pt-3">

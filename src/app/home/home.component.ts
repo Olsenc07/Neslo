@@ -1,6 +1,9 @@
 import { Component, HostListener, Renderer2, 
   ElementRef, ViewChild, 
-  AfterViewInit} from '@angular/core';
+  AfterViewInit,
+  signal,
+  computed,
+  OnDestroy} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -37,7 +40,7 @@ import { ImgService } from '../services/img.service';
     ]
 })
 
-export class HomeComponent implements AfterViewInit{
+export class HomeComponent implements AfterViewInit, OnDestroy {
 atSymbol: string = '@';
 headerShow: boolean = false;
 private observer?: IntersectionObserver;
@@ -49,8 +52,17 @@ introAB: SafeHtml;
 imgBC: {img: string, alt: string } = {img:'../../assets/folding_sliding_doors_logo.png', alt: 'Folding Sliding Doors Canada Ltd.' }
 messageBC: SafeHtml;
 introBC: SafeHtml;
+
 @ViewChild('header', { static: false }) header?: ElementRef<HTMLImageElement>;
 @ViewChild('imgChild', { static: false }) imgChild?: ElementRef<HTMLImageElement>;
+
+private headerState = signal<boolean>(false)
+  headerToggle = computed<boolean>(() => this.headerState())
+
+setHeaderState(state: boolean): void {
+  this.headerState.set(state);
+}
+
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     protected orientationService: OrientationService,
@@ -72,12 +84,14 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     );
   
     this.introBC = this.sanitizer.bypassSecurityTrustHtml(
-      `<br><b fsdc> Folding Sliding Doors Canada</b> is the proud supplier for <b>Neslo</b>.`
+      `<br><b fsdc> Folding Sliding Doors Canada</b> is the proud supplier for <br>
+       <b>Neslo</b>
+      | Premium Windows and Doors.`
     );
     this.messageBC = this.sanitizer.bypassSecurityTrustHtml(`
       <b>Neslo</b> specializes in the installation of folding sliding doors from Kelowna, BC.
       <br>
-      Check out our latest projects at Folding Sliding Doors Canada. 
+      Check out our latest projects at on our website. 
       <br>
       <br>
       <p class="headings">
@@ -90,9 +104,10 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     }
     @HostListener('window:visibilityChange', ['$event'])
     onVisibilityChange() {
-      console.log('hey');
-      this.headerShow = !this.headerShow;
+      this.setHeaderState(!this.headerShow);
     }
+
+   
     ngAfterViewInit() {
       this.observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -100,13 +115,8 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
           this.onVisibilityChange();
         });
       });
-  
       this.observer.observe(this.header!.nativeElement);
-    }
-  
-    ngOnDestroy() {
-      this.observer?.disconnect();
-    }
+    } 
     @HostListener('window:scroll', ['$event']) 
     handleScroll(): void {
     // no zoom on mobile
@@ -122,4 +132,7 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     if(scrollPosition < 3) {
       this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', `cover`);
     }}}}
+    ngOnDestroy() {
+      this.observer?.disconnect();
+    }
 }
