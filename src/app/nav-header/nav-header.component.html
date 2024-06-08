@@ -1,7 +1,8 @@
 <mat-toolbar class="header-container">
       <!-- Nav Buttons -->
       @if(mobile){
-      <div class="nav-buttons ">
+       <!-- config button that drops down all options -->
+      <div class="nav-buttons">
         <button mat-icon-button class="m-nav" (click)="navigateToContact()">
           <mat-icon class="material-symbols-outlined">local_library</mat-icon>
         </button>
@@ -16,6 +17,8 @@
         <div class="header-logo">
             <img src="../favicon.ico" class="img-fluid">
         </div>
+        <!-- Config Examples -->
+      <app-config-ex-dropdown></app-config-ex-dropdown>
          <!-- add words under  -->
         <div class="nav-buttons desktop">
             <button mat-fab extended class="btn btn-primary" (click)="navigateToContact()">
@@ -30,17 +33,6 @@
               <mat-icon class="material-symbols-outlined">imagesmode</mat-icon>
               Showcase
             </button>
-            
           </div>
       }
   </mat-toolbar>
-  
-
- <!-- Search Bar -->
-        <!-- need exmaple pics before making drop down -->
-        <!-- <div class="col-auto ml-auto">
-          <mat-form-field appearance="outline">
-            <mat-label>Search</mat-label>
-            <input matInput type="text" placeholder="Search products or configurations">
-          </mat-form-field>
-        </div> -->

@@ -158,7 +158,6 @@ async function fillGridForm(page: Page, gridFormArray: string | any[]) {
   if (quoteForm.quoteNumber) {
     await page.evaluate((quoteNumber) => {
       const element = document.querySelector('#quoteNumber');
-      console.log('el', element);
       if (element) {
         element.textContent = `Quote Number: ${quoteNumber}`;
       }

@@ -9,7 +9,10 @@
 }
 </div>
 <!-- Sticky Header -->
-<app-nav-header [ngClass]="this.headerToggle() ? 'head-nav' : 'head-hidden'" [mobile]="this.orientationService.screen()"></app-nav-header>
+<app-nav-header [ngClass]="this.headerToggle() ? 'head-nav' : 'head-hidden'" 
+[mobile]="this.orientationService.screen()"
+[select]="this.headerToggle()"  
+></app-nav-header>
 
 <!-- About Us -->
 <section class="my-3" #aboutUs>

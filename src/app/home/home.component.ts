@@ -61,8 +61,19 @@ private headerState = signal<boolean>(false)
 
 setHeaderState(state: boolean): void {
   this.headerState.set(state);
-}
+    if (state) {
+      this.simulateKeyPress('Escape');
+    }
+  }
 
+  simulateKeyPress(key: string): void {
+    const event = new KeyboardEvent('keydown', {
+      key: key,
+      bubbles: true,
+      cancelable: true
+    });
+    document.dispatchEvent(event);
+  }
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     protected orientationService: OrientationService,

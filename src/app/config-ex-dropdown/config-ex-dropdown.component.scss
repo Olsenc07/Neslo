@@ -1,0 +1,20 @@
+.config-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    margin: 1%;
+    border-bottom: 1px groove;
+}
+.drop-down{
+    text-align: center;
+}
+.dropdown-image{
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+}
+mat-form-field{
+    width: 100%;
+}
+  

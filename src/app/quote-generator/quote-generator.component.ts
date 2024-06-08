@@ -13,9 +13,9 @@ import { PLATFORM_ID } from '@angular/core';
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {MatCardModule} from '@angular/material/card';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatCardModule} from '@angular/material/card';
+import { MatTooltipModule} from '@angular/material/tooltip';
 import { RecaptchaV3Module } from 'ng-recaptcha';
 
 import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
@@ -240,8 +240,7 @@ contactForm(): void {
       top: document.body.scrollHeight,
       behavior: 'smooth'
     });
-}
-  }
+}}
   onHover(isHovered: boolean): void {
       this.state = isHovered ? 'focus' : 'noFocus';
     }
@@ -269,7 +268,6 @@ clearForm(): void{
     additionalNotes: ''
   });
   this.cdr.detectChanges();
-  console.log('hi', this.quoteForm);
 }
 
 ngOnDestroy(): void {
