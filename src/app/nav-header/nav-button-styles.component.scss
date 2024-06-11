@@ -23,6 +23,10 @@
   }
   .m-nav{
     @include button(false);
+    .close{
+      background-color: var(--wood-red);
+      @include button(true);
+    }
     mat-icon{
       color: var(--wood);
     }
@@ -37,9 +41,13 @@
     background-image: linear-gradient(45deg, var(--wood), var(--wood-light));
   }
   
-  .size-btn{
+  .size-btn-open{
     @include button;
     background-color: var(--wood-red);
+  }
+  .size-btn-closed{
+    @include button;
+    background-color: var(--wood-dark);
   }
   .size-btn:hover{
     border-color: var(--wood); 

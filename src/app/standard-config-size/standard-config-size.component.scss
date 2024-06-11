@@ -6,11 +6,13 @@
 }
 
 .close-button {
-    position: absolute;
-    top: 0px; 
-    right: 0px; 
+    display: flex;
+    // position: absolute;
+    // top: 0px; 
+    // right: 0px; 
     background-color: white;
-    justify-content: flex-end;
+    // justify-content: flex-end;
+    margin: 0% 25%;
   }
 
 .sub-heading{
@@ -70,12 +72,12 @@ div[white]{
 }
 div[grey]{
     @include common();
-    background-color: #f5f5f5;
+    background-color: #f5f5f58f;
 }
 div[blue]{
     @include common();
     padding: 2%;
-    background-color: #e4ebf1;
+    background-color: #e3ebe29e;
 }
 th[blue]{
     background-color: #e4ebf1;
@@ -83,7 +85,7 @@ th[blue]{
 div[green]{
     @include common();
     padding: 2%;
-    background-color: #e3ebe2;
+    background-color: #e4ebf19e;
 }
 div[warning]{
     @include common();

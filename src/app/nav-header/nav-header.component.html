@@ -3,6 +3,20 @@
   @if(mobile){
        <!-- config button that drops down all options -->
       <div class="nav-buttons">
+        <!-- Sizing Reference DropDown -->
+        @if(!dropDown){
+        <button mat-icon-button class="m-nav" (click)="toggleConfig()">
+          <mat-icon class="material-symbols-outlined">straighten</mat-icon>
+        </button>
+        }@else{
+        <button mat-icon-button class="m-nav close" (click)="toggleConfig()">
+          <mat-icon class="material-symbols-outlined">
+            close_fullscreen
+          </mat-icon>
+         </button>
+          <app-config-ex-dropdown class="drop-container"></app-config-ex-dropdown>
+          }
+        <!-- Three main nav buttons -->
         <button mat-icon-button class="m-nav" (click)="navigateToContact()">
           <mat-icon class="material-symbols-outlined">local_library</mat-icon>
         </button>
@@ -19,10 +33,21 @@
       </div>
       <!-- Config Examples -->
       <div class="size-container">
-      <button mat-fab extended (click)="toggleConfig()" class="size-btn">
-      <mat-icon class="material-symbols-outlined">straighten</mat-icon>
-        Sizing Reference
-      </button>
+        @if(dropDown){
+          <button mat-fab extended (click)="toggleConfig()" class="size-btn-closed">
+            <mat-icon class="material-symbols-outlined">
+              close_fullscreen
+            </mat-icon>
+            Close Reference
+          </button>
+        }@else {
+          <button mat-fab extended (click)="toggleConfig()" class="size-btn-open">
+          <mat-icon class="material-symbols-outlined">
+            straighten
+          </mat-icon>
+          Sizing Reference
+          </button>
+      }
         @if(dropDown){
       <app-config-ex-dropdown class="drop-container"></app-config-ex-dropdown>
         }
