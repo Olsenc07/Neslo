@@ -9,7 +9,6 @@ import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgOptimizedImage } from '@angular/common'
 import { CloseBtnComponent } from '../close-btn/close-btn.component';
-import { ImgService } from '../services/img.service';
 
 @Component({
   selector: 'app-carousel',

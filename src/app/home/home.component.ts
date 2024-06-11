@@ -1,24 +1,24 @@
 import { Component, HostListener, Renderer2, 
   ElementRef, ViewChild, 
-  AfterViewInit,
-  signal,
-  computed,
-  OnDestroy} from '@angular/core';
+  AfterViewInit, OnDestroy} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
 import { AboutUsComponent } from 'src/app/about-us/about-us.component';
 import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
 import { OrientationService } from 'src/app/services/orientation.service';
 import { IntroComponent } from 'src/app/intro/intro.component';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 import { CarouselComponent } from '../carousel/carousel.component';
 import { NavHeaderComponent } from '../nav-header/nav-header.component';
+
 import { ImgService } from '../services/img.service';
+import { HeaderService } from '../services/header.service';
 
 @Component({
     standalone: true,
@@ -56,17 +56,9 @@ introBC: SafeHtml;
 @ViewChild('header', { static: false }) header?: ElementRef<HTMLImageElement>;
 @ViewChild('imgChild', { static: false }) imgChild?: ElementRef<HTMLImageElement>;
 
-private headerState = signal<boolean>(false)
-  headerToggle = computed<boolean>(() => this.headerState())
-
-setHeaderState(state: boolean): void {
-  this.headerState.set(state);
-}
-
-
-constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
-    protected orientationService: OrientationService,
-  protected imgService: ImgService) {
+constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, protected imgService: ImgService,
+    protected orientationService: OrientationService, protected headerService: HeaderService,
+  ) {
       this.introAB = this.sanitizer.bypassSecurityTrustHtml(
         `Alberta's premier destination for the delivery and installation of <br>
          <b fsdc>Folding Sliding Doors Canada</b>.`
@@ -104,10 +96,9 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer,
     }
     @HostListener('window:visibilityChange', ['$event'])
     onVisibilityChange() {
-      this.setHeaderState(!this.headerShow);
+      this.headerService.setHeaderState(!this.headerShow);
     }
 
-   
     ngAfterViewInit() {
       this.observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

@@ -1,0 +1,22 @@
+ <div>
+ @for(option of standardConfig; let i = $index; track option){
+    <mat-accordion class="space-accoordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="config-options">
+              <span [innerHTML]="option.name"></span>
+            </div>
+          </mat-panel-title>
+          <mat-panel-description>
+            {{option.symbol}}
+          </mat-panel-description>
+         </mat-expansion-panel-header>
+         <a class="config-details" (click)="configSizeDialog(option.id)"
+            matTooltip="View Reference Form">
+           <img [src]="option.imageUrl" class="dropdown-image" alt="{{option.name}}">
+         </a>
+      </mat-expansion-panel>
+    </mat-accordion>
+  }
+</div>
