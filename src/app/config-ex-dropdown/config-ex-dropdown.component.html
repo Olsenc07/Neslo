@@ -1,12 +1,6 @@
- <!-- then for mobile just have the icon for the drop down -->
-<div class="search-container">
-    <mat-form-field appearance="outline" class="search-box">
-      <mat-label>Configuration Examples</mat-label>
-      <input matInput type="text" placeholder="Search configurations">
-    </mat-form-field>
-    
-    <mat-accordion>
-      @for(option of standardConfig; let i = $index; track option){
+ <div>
+ @for(option of standardConfig; let i = $index; track option){
+    <mat-accordion class="space-accoordion">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -14,15 +8,15 @@
               <span [innerHTML]="option.name"></span>
             </div>
           </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="config-details">
-          <img [src]="option.imageUrl" class="dropdown-image" alt="{{option.name}}">
-          <button mat-button (click)="configSizeDialog(option.id)">Select</button>
           <mat-panel-description>
-          <mat-icon>straighten</mat-icon>
+            {{option.symbol}}
           </mat-panel-description>
-        </div>
+         </mat-expansion-panel-header>
+         <a class="config-details" (click)="configSizeDialog(option.id)"
+            matTooltip="View Reference Form">
+           <img [src]="option.imageUrl" class="dropdown-image" alt="{{option.name}}">
+         </a>
       </mat-expansion-panel>
-    }
     </mat-accordion>
-  </div>
+  }
+</div>

@@ -1,6 +1,6 @@
 <mat-toolbar class="header-container">
       <!-- Nav Buttons -->
-      @if(mobile){
+  @if(mobile){
        <!-- config button that drops down all options -->
       <div class="nav-buttons">
         <button mat-icon-button class="m-nav" (click)="navigateToContact()">
@@ -13,12 +13,20 @@
           <mat-icon class="material-symbols-outlined">description</mat-icon>
         </button>
       </div>
-    }@else{
-        <div class="header-logo">
-            <img src="../favicon.ico" class="img-fluid">
-        </div>
-        <!-- Config Examples -->
-      <app-config-ex-dropdown></app-config-ex-dropdown>
+  }@else{
+      <div class="header-logo">
+          <img src="../favicon.ico" class="img-fluid">
+      </div>
+      <!-- Config Examples -->
+      <div class="size-container">
+      <button mat-fab extended (click)="toggleConfig()" class="size-btn">
+      <mat-icon class="material-symbols-outlined">straighten</mat-icon>
+        Sizing Reference
+      </button>
+        @if(dropDown){
+      <app-config-ex-dropdown class="drop-container"></app-config-ex-dropdown>
+        }
+      </div>
          <!-- add words under  -->
         <div class="nav-buttons desktop">
             <button mat-fab extended class="btn btn-primary" (click)="navigateToContact()">

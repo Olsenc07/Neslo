@@ -1,19 +1,36 @@
 <div class="full-page">
 
-  <header class="d-flex">
+  <header class="d-flex flex-column">
     <h3 class="title">Standard Size Configurations</h3>
+    <button mat-raised-button class="close-button" appCloseDialog aria-label="Close">
+      Close
+    </button>
+
+    <table mat-table class="header-columns">
+      <ng-container matColumnDef="config">
+        <th mat-header-cell *matHeaderCellDef> Config </th>
+      </ng-container>
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Reference </th>
+      </ng-container>
+      <ng-container matColumnDef="fd72_73">
+        <th mat-header-cell *matHeaderCellDef blue> FD 72 and 73 RO Width </th>
+      </ng-container>
+      <ng-container matColumnDef="fd27">
+        <th mat-header-cell *matHeaderCellDef green> FD 27 PVCU RO Width </th>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['config', 'symbol', 'fd72_73', 'fd27']"></tr>
+    </table>
   </header>
-  <button mat-icon-button class="close-button" appCloseDialog aria-label="Close">
-    <mat-icon class="material-symbols-outlined">cancel</mat-icon>
-  </button>
-  <section class="content">
+ 
+  <section>
     <div blue class="sub-heading">RO Ht From Subfloor to Finished Opening for all &nbsp; <b> FD 72 & FD 73 &nbsp; </b> Std Size Doors Is: &nbsp; <b> 95 1/2" </b> </div>
     <div green class="sub-heading">RO Ht From Subfloor to Finished Opening for all &nbsp; <b> FD 27 &nbsp; </b> Std Size Doors is: &nbsp; <b> 96" </b> </div>
     <div class="heading-texts">
      <div class="sub-heading">  
-        <div grey>Rebate width with no screen: &#160;<b> 4 1/4" </b></div> 
+        <div grey> Rebate width with no screen: &#160;<b> 4 1/4" </b></div> 
     <div class="sub-heading">
-        <div grey>Rebate width with a screen: &#160;<b> 5 1/2" </b></div> 
+        <div grey> Rebate width with a screen: &#160;<b> 5 1/2" </b></div> 
     </div>
     <div class="sub-heading">
         <div grey>Sill Type: &#160; <b> Recessed Track </b></div> 
@@ -24,13 +41,13 @@
     </div>
   </section>  
 
-  <table mat-table [dataSource]="tableData">
+  <table mat-table [dataSource]="tableData" class="scroll-table">
   
       <ng-container matColumnDef="config">
         <th mat-header-cell *matHeaderCellDef> Config </th>
-        <td mat-cell *matCellDef="let element" id="{{element.id}}"> 
-        @if(element.id === idMatch){
-          <b>
+        <td mat-cell *matCellDef="let element"> 
+        @if(element.id == idMatch){
+          <b id="focusedId">
             {{element.config}}
             </b>
         }@else {
@@ -55,6 +72,6 @@
       </ng-container>
               
       <tr mat-header-row *matHeaderRowDef="columnsName"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsName;"></tr>  
+      <tr mat-row *matRowDef="let row; columns: columnsName;" ></tr>  
   </table>
 </div>

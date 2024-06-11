@@ -3,13 +3,16 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
+
 import { CloseDialogDirective } from '../directives/close-dialog.directive';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-standard-config-size',
   standalone: true,
-  imports: [ MatDividerModule, MatIconModule,
+  imports: [ MatDividerModule, MatIconModule, MatDialogModule,
     MatButtonModule, MatTableModule, CloseDialogDirective],
   templateUrl: './standard-config-size.component.html',
   styleUrl: './standard-config-size.component.scss',
@@ -17,23 +20,26 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class StandardConfigSizeComponent implements AfterViewInit, OnDestroy{
   columnsName: string[] = ['config', 'symbol', 'fd72_73', 'fd27'];
   idMatch: string = '';
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { id: number }
-  ) {}
 
-  ngAfterViewInit() {
-    if(this.data.id){
-    this.scrollToElement(this.data.id.toString());
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public dialogRef: MatDialogRef<StandardConfigSizeComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { idFocus: string }) {
+
     }
-  }
-  scrollToElement(id: string) {
+
+    // scroll isn't working
+ngAfterViewInit(): void {
+  this.onScroll(this.data.idFocus);
+  
+}
+
+    onScroll(id: string) {
     this.idMatch = id;
     console.log('woooo', this.idMatch);
-    const element = document.getElementById(id);
-    console.log('0', element);
-    if (element){
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    if (isPlatformBrowser(this.platformId)) {
+        document.getElementById('focusedId')?.scrollIntoView({ behavior: 'smooth' });
+      }
   }
 
   readonly tableData: {
@@ -63,6 +69,7 @@ export class StandardConfigSizeComponent implements AfterViewInit, OnDestroy{
       { id: '18', config: '8 + 0', symbol: '_/\\/\\/\\/\\ _', fd72_73: '276 1/4', fd27: '-' },
       { id: '19', config: '9 + 0', symbol: '_/\\/\\/\\/\\/ _', fd72_73: '311 1/4', fd27: '-' },
   ];
+
   ngOnDestroy(): void {
     this.idMatch = '';
   }

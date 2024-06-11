@@ -5,9 +5,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-close-btn',
   standalone: true,
-  imports: [
-    MatButtonModule, MatIconModule
-  ],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './close-btn.component.html',
   styleUrl: './close-btn.component.scss'
 })

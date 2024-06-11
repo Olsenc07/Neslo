@@ -30,6 +30,22 @@ mat-toolbar {
         width: unset;
     }
 }
+.size-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drop-container {
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px #0003;
+    max-height: 50vh;
+    overflow-y: scroll;
+    margin: 1% 0%;
+  }
+  
 button[homeButton]{
     background-color: var(--wood);
     color: white;
