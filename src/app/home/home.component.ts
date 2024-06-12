@@ -68,10 +68,11 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, protec
       Specializing in custom solutions, we ensure top-quality craftsmanship specifically to your home's needs. 
       <br> Keep connected and stay informed by following us on instagram. <br> 
       <br>
-      <p class="headings">
+        <p class="headings">
       <i class="bi bi-instagram px-1"></i>
       <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="styled-link">
-       @foldingslidingdoors_erik</a>
+       foldingslidingdoors_erik
+      </a>
        </p>`
     );
   
