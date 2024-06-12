@@ -2,43 +2,44 @@
   color: white;
   margin-bottom: 5%;
 }
+button[id="submitBtn"]{
+  color: white;
+  background-color: var(--wood);
+&:hover{
+  background-color: var(--wood-red);
+}
+}
 .file-empty{
     background-color: #4A2C2A;
     @include common;
   }
-  .file-added{
+.file-added{
     background-color: #5E4C5A;
     @include common;
   }
-button[id="submitBtn"]{
-    color: white;
-    background-color: var(--wood);
-  &:hover{
-    background-color: var(--wood-red);
-  }
-}
+
 .file-wrapper{
   display: flex;
   justify-content: flex-start;
   margin-left: 1%;
   align-items: center;
 }
-
 .info-container {
     background-color: var(--wood-light-grey);
     border-radius: 25px;
     padding: 20px; 
     margin-bottom: 20px; 
   }
-  .thumbnail-container {
+.thumbnail-container {
     position: relative;
     width: fit-content; 
     margin: auto; 
   }
+
 .img-thumbnail, iframe {
   display: block; 
   width: 100%; 
-  max-height: 100px;
+  max-width: 100px;
   margin-bottom: 4%;
   @media (min-width: 1025px) {
   max-height: 300px;
