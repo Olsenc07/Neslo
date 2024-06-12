@@ -1,13 +1,21 @@
+@mixin close{
+  position: absolute;
+  transition: transform 0.2s ease-in-out;
+  mat-icon{
+    color: black;
+  }
+}
 .thumbnail-header {
-    position: absolute;
+  @include close;
     top: -5px;
     right: -3px;
   }
-  .remove-file-btn{
-    &:hover{
-      transform: rotate(90deg);
-    }
-    mat-icon{
-      color: black;
-    }
+  .thumbnail-header-file {
+    @include close;
+    top: -18px;
+    right: -7px;
+  }
+  .remove-file-btn:hover{
+    transform: rotate(90deg);
+   
   }

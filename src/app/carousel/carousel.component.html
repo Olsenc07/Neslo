@@ -11,16 +11,16 @@
     <div class="shadow-overlay"></div>
     <div class="focus-overlay" id="focus">
       <div class="d-flex flex-column">
-    <div class="active-image enlarged" >
+    <div class="active-image-enlarged" >
       <header class="enlarged-header">
         <h2 class="pt-2">{{images[activeImageIndex].public_id}}</h2>
-        <app-close-btn (close)="onBtnClicked()"></app-close-btn>
+        <app-close-btn (close)="onBtnClicked()" [style]="true"></app-close-btn>
       </header>
       <img [src]="images[activeImageIndex].secure_url" class="focus-img">
       <div class="focus-img-loop">
       @for(image of images; let i = $index; track image){
-        <div class="list-image focus" >
-          <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
+        <div class="list-image-focus" >
+          <img [src]="image.secure_url" class="img-small-focus" [@enterLeftToRight]
            (click)="activateImage(i)">
        </div>
       }
@@ -53,7 +53,7 @@
   }@else{ 
     <ngx-skeleton-loader count="1" [theme]="{ height: '225px', width: '400px' }" appearance="line"></ngx-skeleton-loader>
   }
-  <div class="loop-container">
+  <div class="img-loop">
     @for(image of images; let i = $index; track image){
     <div class="list-image">
       @if(loadedImages[i] ){

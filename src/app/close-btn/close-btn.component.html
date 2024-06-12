@@ -1,5 +1,6 @@
-<div class="thumbnail-header">
-    <button mat-icon-button (click)="emit()" aria-label="Remove file" class="remove-file-btn">
+<div [ngClass]="style ? 'thumbnail-header' : 'thumbnail-header-file' ">
+    <button mat-icon-button (click)="emit()" aria-label="Remove file"
+         class="remove-file-btn">
       <mat-icon class="material-symbols-outlined">cancel</mat-icon>
     </button>   
   </div>

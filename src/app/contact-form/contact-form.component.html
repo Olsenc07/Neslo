@@ -33,7 +33,7 @@
 </textarea>
 </mat-form-field>
 @if(imageSrc && contactForm.get('file')?.value){
-  <div  class="thumbnail-container">
+  <div class="thumbnail-container">
  <app-close-btn (close)="onBtnClicked()"></app-close-btn>
     @if(this.fileType === 'application/pdf'){
   <iframe [src]="imageSrc" 
