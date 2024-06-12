@@ -4,8 +4,22 @@
 *,
 *::before,
 *::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
-  font-family: serif, auto;
+  font-family: serif, 'Times New Roman';
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+
+body.noScroll{
+  overflow: hidden;
 }
 p.headings{
   display: flex;
@@ -114,13 +128,7 @@ b{
 b[fsdc]{
   color: var( --green-field) !important;
 }
-html, body {
-    height: 100%;
-    margin: 0;
-}
-body.noScroll{
-  overflow: hidden;
-}
+
 p {
   font-size: 1.1em; 
 }
