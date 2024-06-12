@@ -105,7 +105,7 @@
    }
 .img-main{
     cursor: pointer;
-    @include imgs;
+    aspect-ratio: 16 / 9;
     border-radius: 15px;
     max-width: 100%;
     height: auto;
