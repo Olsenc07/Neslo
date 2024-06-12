@@ -114,9 +114,12 @@
 .img-main.loaded {
   opacity: 1;
 }
+
+
+// adjust maybe
 .list-image{
-    display: inline-block;
-    vertical-align: middle;
+    // display: inline-block;
+    // vertical-align: middle;
     max-width: 100%;
     cursor: pointer;
 }
@@ -125,6 +128,10 @@
   gap: 1%;
   cursor: pointer;
 }
+
+
+
+
 .img-loop{
     display: flex;
     gap: 1%;

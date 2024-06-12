@@ -13,4 +13,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('../quote-generator/quote-generator.component').then(
         (mod) => mod.QuoteGeneratorComponent)
-  }]
+  },
+   {
+    path: '**', // Wildcard route for a 404 page or redirect
+    redirectTo: 'home', 
+  }
+]
