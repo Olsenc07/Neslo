@@ -1,11 +1,18 @@
-@mixin imgs{
-    aspect-ratio: 16 / 9;
+@mixin img-small{
+  aspect-ratio: 16 / 9;
+  border-radius: 25px;
+  max-height: 10vw;
+  @media (min-width: 601px) {
+  max-height: 6vw;
+  }
+  @media (min-width: 1025px) {
+   max-height: 3vw;
+  }
 }
 .active-image {
     max-width: 100%;
     border-radius: 15px;
     border: 2px solid #ccc;
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
     cursor: pointer;
   }
 .enlarged-header{
@@ -90,19 +97,11 @@
     max-height: max-content;
   }  
 .img-small{
-   width: 100%;
+  @include img-small;
   }
 
-.img-small-focus, .img-small{
-    @include imgs;
-    border-radius: 25px;
-    max-height: 10vw;
-    @media (min-width: 601px) {
-    max-height: 6vw;
-    }
-    @media (min-width: 1025px) {
-     max-height: 3vw;
-    }
+.img-small-focus{
+ @include img-small;
    }
 .img-main{
     cursor: pointer;
