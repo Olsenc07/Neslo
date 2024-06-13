@@ -124,6 +124,7 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, protec
     if(scrollPosition < 3) {
       this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', `cover`);
     }}}}
+    
     ngOnDestroy() {
       this.observer?.disconnect();
     }

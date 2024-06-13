@@ -1,3 +1,18 @@
+@mixin nav-btns{
+  right: 20px;
+  height: 37px;
+  width: 37px;
+  display: flex;
+  position: fixed;
+  border: 1px solid;
+  opacity: .7;
+  z-index: 10;
+  @media (min-width: 601px) {
+    opacity: 1;
+    height: 50px;
+    width: 50px;
+  }
+}
 .initial-icon{
   display: flex;
   align-items: center;
@@ -37,21 +52,13 @@ h2{
 .btm-btn{
   bottom: 150px;
 }
+.phone-btn{
+  bottom: 50px;
+  @include nav-btns;
+}
 .nav-buttons {
-  display: flex;
-  position: fixed;
-  right: 20px;
-  height: 37px;
-  width: 37px;
-  opacity: .7;
+  @include nav-btns;
   // background-image: linear-gradient(45deg, #00000054, transparent);
   background-color: #80808099;
-  border-radius: 50%;
-  border: 1px solid;
-  z-index: 10;
-  @media (min-width: 601px) {
-    opacity: 1;
-    height: 50px;
-    width: 50px;
-  }
+  border-radius: 50%;  
 }
