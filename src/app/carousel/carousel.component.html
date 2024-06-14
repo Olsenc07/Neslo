@@ -45,7 +45,7 @@
 
   <div class="image-stack">
     @if(this.focused()){
-    <div class="active-image" >
+    <div class="active-image">
       <img [src]="images[activeImageIndex].secure_url"  
       (click)="focusImg()" (load)="onImageLoad()" 
       [class.loaded]="imageLoaded" class="img-main">
