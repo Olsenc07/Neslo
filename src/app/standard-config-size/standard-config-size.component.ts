@@ -8,6 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 
 import { CloseDialogDirective } from '../directives/close-dialog.directive';
+import { OrientationService } from '../services/orientation.service';
 
 @Component({
   selector: 'app-standard-config-size',
@@ -22,6 +23,7 @@ export class StandardConfigSizeComponent implements AfterViewInit, OnDestroy{
   idMatch: string = '';
 
   constructor(
+    protected orientationService: OrientationService,
     @Inject(PLATFORM_ID) private platformId: Object,
     public dialogRef: MatDialogRef<StandardConfigSizeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { idFocus: string }) {

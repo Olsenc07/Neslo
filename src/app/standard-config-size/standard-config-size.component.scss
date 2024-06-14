@@ -21,7 +21,13 @@
     // justify-content: flex-end;
     margin: 0% 25%;
   }
-
+.mobile-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1%;
+}
 .sub-heading{
     padding: 1% 0% 0%;
 }
@@ -55,8 +61,9 @@
     flex-direction: column;
     position: relative;
     z-index: 22;
-    border: 2px solid;
+    background-color: white;
     overflow-x: hidden;
+    border: 3px groove;
 }
 header {
     position: relative;
