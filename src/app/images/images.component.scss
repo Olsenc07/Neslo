@@ -6,7 +6,7 @@
   
   .image-grid {
     display: grid;
-    gap: 10px;
+    gap: 7px;
   }
   
   .image-item {
@@ -33,6 +33,6 @@
   }
   
   .image-focused {
-    border: 2px solid var(--wood-light-grey); /* Highlight the focused image */
+    border: 5px groove var(--wood-light);
   }
   

@@ -80,6 +80,21 @@ ngOnInit(): void {
     } }
   }
   back(): void{
+    // if on mobile images page
+    if (this.router.url.startsWith('/images/')) {
+      // Navigate to home and scroll to 'showcase'
+      this.router.navigate(['/home']).then(() => {
+        setTimeout(() => {
+          const showcaseElement = document.getElementById('showcase');
+          if (showcaseElement) {
+            showcaseElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 500); // Adjust the delay as needed for dom to render
+      });
+    } else {
     this.router.navigate(['/home']);
+    // Scroll to top
+    window.scrollTo(0, 0);
+    }
   }
 }

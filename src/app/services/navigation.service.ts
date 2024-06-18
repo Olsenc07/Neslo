@@ -16,9 +16,9 @@ export class NavigationService {
     window.scrollTo(0, 0);
   }
 
-  requestImagesMobile(id: { secure_url: string; public_id: string; }[], index: number): void {
-    const imageId = JSON.stringify(id); 
-    this.router.navigate(['/images', imageId, index.toString()]); 
+  requestImagesMobile(folder: string, index: number): void {
+    this.router.navigate(['/images', folder, index.toString()]); 
+    window.scrollTo(0, 0);
   }
   
   navigateToContact(): void {

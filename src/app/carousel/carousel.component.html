@@ -56,10 +56,11 @@
   <div class="img-loop">
     @for(image of images; let i = $index; track image){
     <div class="list-image">
-      @if(loadedImages[i] ){
-        <ngx-skeleton-loader count="1" [theme]="{ height: '40px', width: '50px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
-        } 
-  @if(this.focused()){
+
+      <!-- make sure it works -->
+      @if(!loadedImages[i] ){
+        <ngx-skeleton-loader count="1" (load)="onImageLoadSmall(i)"  [theme]="{ height: '40px', width: '50px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
+        }@else{
       <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
        (click)="activateImage(i)">
   }

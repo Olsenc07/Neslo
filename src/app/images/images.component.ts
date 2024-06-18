@@ -1,37 +1,44 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { fromEvent, debounceTime } from 'rxjs';
+import { Component, computed, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ImagesService } from '../services/images.service';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-images',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, NgxSkeletonLoaderModule],
   templateUrl: './images.component.html',
   styleUrl: './images.component.scss'
 })
 
 export class ImagesComponent {
+  tempImages: { secure_url: string; public_id: string; }[] = [];
   images: { secure_url: string; public_id: string; }[] = [];
-  indexParam: string | null = '0';
+  imgCount = Math.max(this.tempImages.length, 10);
+
+  private imagesReady = signal<boolean>(false);
+  ready = computed(() => this.imagesReady());
 
   constructor(private route: ActivatedRoute, 
-    private router: Router) {}
+    protected imagesService: ImagesService) {}
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const idParam = params.get('id');
-       this.indexParam = params.get('index');
-      if (idParam) { // Check if idParam is not null
-        this.images = JSON.parse(idParam);
-      } else {
-        // Handle the case where id is missing (e.g., display an error message)
-        console.error(`Image can't be displayed.`);
-        this.router.navigate(['/']);
-      }
-    });
-  }
-
-
- 
+    ngOnInit(): void {
+      this.route.paramMap.subscribe(async params => {
+        const idParam = params.get('folder');
+        const indexParam = params.get('index') || '0';
+        const targetIndex = parseInt(indexParam, this.imgCount);
+  
+        this.imagesReady.set(false);
+        
+        if (idParam === 'Residential') {
+          this.tempImages = this.imagesService.getResidentialImages();
+        } else if (idParam === 'Showcase') {
+          this.tempImages = this.imagesService.getShowcaseImages();
+        }
+        const [targetImage] = this.tempImages.splice(targetIndex, 1);
+            this.images = [targetImage, ...this.tempImages]; 
+            this.imagesReady.set(true);
+      });
+    }
 }
