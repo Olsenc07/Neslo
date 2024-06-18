@@ -1,2 +1,3 @@
 /home
 /quotes
+/images/:id

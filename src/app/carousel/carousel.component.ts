@@ -1,14 +1,18 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, computed, signal } from '@angular/core';
-import { ImagesService } from '../services/images.service';
+import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, computed, signal } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { take } from 'rxjs';
+import { NgOptimizedImage, isPlatformBrowser } from '@angular/common'
 
+import { take } from 'rxjs';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+import { PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+
 import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { NgOptimizedImage } from '@angular/common'
+import { ImagesService } from '../services/images.service';
 import { CloseBtnComponent } from '../close-btn/close-btn.component';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
   selector: 'app-carousel',
@@ -54,6 +58,8 @@ setImgState(state: boolean): void {
   }
   
   constructor(protected imagesService: ImagesService,
+    private navigationService: NavigationService,
+    @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2
   ) {}
   
@@ -64,6 +70,7 @@ setImgState(state: boolean): void {
       this.images = arrayObject;
     });
   }
+
   ngAfterViewInit(): void {
     this.observerImg = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -80,20 +87,30 @@ setImgState(state: boolean): void {
   }
 
   activateImage(index: number): void {
-    if(index !== this.images.length) {
+    if(index <= 0 ){
+      this.activeImageIndex = this.images.length;
+    } else if( index >= this.images.length){
+      this.activeImageIndex = 0;
+    } else{
       this.activeImageIndex = index;
-    } else {
-    this.activeImageIndex = 0;
     }
-   
   }
-  focusImg(): void {
-    this.focusShowcase = true;
-    this.renderer.addClass(document.body, 'noScroll');
+  focusImg(index: number): void {
+    if (window.innerWidth < 1025) {
+      // Navigate to the images page
+      this.navigationService.requestImagesMobile(this.images, index);
+    } else {
+      this.focusShowcase = true;
+      if (isPlatformBrowser(this.platformId)) {
+        this.renderer.addClass(document.body, 'noScroll');
+      }
   }
+}
   onBtnClicked(): void {
     this.focusShowcase = false;
+    if (isPlatformBrowser(this.platformId)) {
     this.renderer.removeClass(document.body, 'noScroll');
+    }
   }
   ngOnDestroy() {
     this.observerImg?.disconnect();

@@ -29,7 +29,7 @@ p.headings{
   --wood-light-grey: #d3d3d385;
   --wood-red: #CC9966;
   --blue: #007bff;
-  --blue-grey: #6b757d;
+  --blue-grey: #6c757e;
   --blue-field: #1f3a3d;
   --green: #008643;
   --green-field: #6a9955;
@@ -116,13 +116,14 @@ button, input, select, textarea {
   }
 }
 a{
+  text-decoration: none; //remove underline
   color: var(--blue-grey);
 }
 b{
-  color: var(--wood-light);
+  color: #bd986587;
 }
 b[fsdc]{
-  color: var( --green-field) !important;
+  color: #6b995580 !important;
 }
 
 p {

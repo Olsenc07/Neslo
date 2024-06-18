@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { NavigationEnd, Router, RouterModule, TitleStrategy } from '@angular/router'
+import { NavigationEnd, Router, RouterModule, Scroll, TitleStrategy } from '@angular/router'
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
 import { filter } from 'rxjs/operators';
+import { fromEvent, debounceTime } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -45,9 +46,14 @@ constructor(public router: Router,
 
 ngOnInit(): void {
   this.router.events.pipe(
-    filter((event: any) => event instanceof NavigationEnd)
-  ).subscribe((event: NavigationEnd) => {
-    this.isHomeRoute = (event.urlAfterRedirects === '/home' || event.urlAfterRedirects === '/');
+    filter((event: any) => event instanceof NavigationEnd || event instanceof Scroll), 
+    debounceTime(400) 
+  ).subscribe((event: any) => {
+    if (event instanceof NavigationEnd) {
+      this.isHomeRoute = (event.urlAfterRedirects === '/home' || event.urlAfterRedirects === '/');
+    } else if (event instanceof Scroll) {
+      this.onWindowScroll();
+    }
   });
 }
 
@@ -75,6 +81,5 @@ ngOnInit(): void {
   }
   back(): void{
     this.router.navigate(['/home']);
-    window.scrollTo(0, 0);
   }
 }

@@ -47,8 +47,8 @@ form{
   width: 100%;
   justify-content: center;
   @media (min-width: 601px) {
-  justify-content: flex-end;
-  padding-right: 2%;
+  justify-content: flex-start;
+  padding-left: 2%;
   }
 }
 .head-nav, .head-hidden {

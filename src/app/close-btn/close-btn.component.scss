@@ -10,12 +10,19 @@
     top: -5px;
     right: -3px;
   }
+  .thumbnail-header:hover mat-icon {
+    transform: rotate(90deg); 
+  }
   .thumbnail-header-file {
     @include close;
     top: -18px;
     right: -7px;
   }
+  .thumbnail-header-file:hover mat-icon {
+    transform: rotate(90deg); 
+  }
   .remove-file-btn:hover{
-    transform: rotate(90deg);
-   
+    mat-icon {
+      transform: rotate(90deg); 
+    }
   }

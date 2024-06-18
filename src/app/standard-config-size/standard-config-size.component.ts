@@ -38,7 +38,6 @@ ngAfterViewInit(): void {
 
     onScroll(id: string) {
     this.idMatch = id;
-    console.log('woooo', this.idMatch);
     if (isPlatformBrowser(this.platformId)) {
         document.getElementById('focusedId')?.scrollIntoView({ behavior: 'smooth' });
       }

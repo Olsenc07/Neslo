@@ -16,6 +16,11 @@ export class NavigationService {
     window.scrollTo(0, 0);
   }
 
+  requestImagesMobile(id: { secure_url: string; public_id: string; }[], index: number): void {
+    const imageId = JSON.stringify(id); 
+    this.router.navigate(['/images', imageId, index.toString()]); 
+  }
+  
   navigateToContact(): void {
     if (isPlatformBrowser(this.platformId)) {
       document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' });

@@ -1,13 +1,8 @@
 @mixin img-small{
   aspect-ratio: 16 / 9;
   border-radius: 25px;
-  max-height: 10vw;
-  @media (min-width: 601px) {
-  max-height: 6vw;
-  }
-  @media (min-width: 1025px) {
+  overflow-y: hidden; 
    max-height: 3vw;
-  }
 }
 .active-image {
     max-width: 100%;
@@ -44,14 +39,7 @@
     flex-direction: column;
     height: auto;
     width: 100%;
-    max-width: 85%;
-    @media (min-width: 601px) {
-      max-width: 80%;
-    }
-    @media (min-width: 1025px) {
-      max-width: 60%;
-    }
-
+    max-width: 60%;
 .focus-img-loop{
     display: flex;
     align-items: center;
@@ -131,10 +119,11 @@
 
 .img-loop{
     display: flex;
-    gap: 1%;
+    gap: 2%;
     margin-top: 1%;
     width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
 }
 .img-small:hover {
     transform: scale(1.1);
@@ -184,6 +173,7 @@
 button{
     border: 1px groove;
     background-color: var(--wood-light-grey);
+    box-shadow: none; 
     }
   }
   
@@ -192,9 +182,5 @@ button{
   }
   .carousel-header h3 {
     animation: smoothAnimation 1s ease-in-out;
-  }
-  
-.loop-container {
-    animation: fadeIn 700ms ease-in;
   }
   
