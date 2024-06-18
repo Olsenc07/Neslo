@@ -1,0 +1,10 @@
+<div class="images-container">
+    <div class="image-grid">
+        @for(image of images; let i = $index; track image){
+            <div class="image-item" [ngClass]="{ 'image-focused': i.toString() === indexParam }">
+            <div class="image-title">{{ image.public_id }}</div>
+            <img [src]="image.secure_url" alt="Image {{ i + 1 }}" class="image-preview">
+        </div>
+    }
+    </div>
+  </div>

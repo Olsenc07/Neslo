@@ -47,7 +47,7 @@
     @if(this.focused()){
     <div class="active-image">
       <img [src]="images[activeImageIndex].secure_url"  
-      (click)="focusImg()" (load)="onImageLoad()" 
+      (click)="focusImg(activeImageIndex)" (load)="onImageLoad()" 
       [class.loaded]="imageLoaded" class="img-main">
     </div>
   }@else{ 

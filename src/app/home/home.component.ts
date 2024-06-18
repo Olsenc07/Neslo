@@ -64,34 +64,93 @@ constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, protec
          <b fsdc>Folding Sliding Doors Canada</b>.`
       );
       this.messageAB = this.sanitizer.bypassSecurityTrustHtml(`
-      Rooted in Central Alberta, we bring over 30 years of expertise as journeyman carpenters and custom home builders to your door and window installations. 
-      Specializing in custom solutions, we ensure top-quality craftsmanship specifically to your home's needs. 
+Nelso | Premium Windows and Doors, managed by Erik Olsen, is rooted in Central Alberta. 
+With over 30 years of expertise as journeyman carpenters and custom home builders, we bring a wealth of experience and knowledge to every door and window installation.
+ Our team specializes in custom solutions, meticulously crafted to meet the unique needs of your home.
+
+<br>
+
+<h3 heading>
+<br>
+Why Choose   <b> Nelso </b>
+</h3>
+
+<ul>
+  <li>Over 30 years of industry expertise</li>
+  <li>Custom solutions tailored to your home's needs</li>
+  <li>Meticulous craftsmanship</li>
+  <li>Unparalleled customer service</li>
+</ul>
+
+
+<h3 heading>
+Our Services
+</h3>
+
+<ul>
+  <li>Fireplace installation</li>
+  <li>Door and window installations</li>
+  <li>Delivery and installation of Folding Sliding Doors Canada</li>
+</ul>
+
+As Alberta's premier destination for Folding Sliding Doors Canada, Nelso ensures a seamless and professional experience from start to finish. 
+Whether you are renovating your existing space or building a new home.
+<br>
       <br> Keep connected and stay informed by following us on instagram. <br> 
       <br>
         <p class="headings">
       <i class="bi bi-instagram px-1"></i>
-      <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank" class="styled-link">
-       foldingslidingdoors_erik
+      <a href="https://www.instagram.com/foldingslidingdoors_erik" target="_blank">
+        FoldingSlidingDoors_Erik
       </a>
        </p>`
     );
   
     this.introBC = this.sanitizer.bypassSecurityTrustHtml(
       `<br><b fsdc> Folding Sliding Doors Canada</b> is the proud supplier for <br>
-       <b>Neslo</b>
-      | Premium Windows and Doors.`
+       <b>Neslo
+      | Premium Windows and Doors.
+      </b>`
     );
     this.messageBC = this.sanitizer.bypassSecurityTrustHtml(`
-      <b>Neslo</b> specializes in the installation of folding sliding doors from Kelowna, BC.
+Folding Sliding Doors Canada, based out of Kelowna, BC, specializes in providing innovative and effortless door solutions that transform spaces. They offer a range of high-quality folding sliding doors designed to enhance both the aesthetics and functionality of your home or business.
+
+<h3 heading>
+<br>
+Why Choose <b fsdc>  FSDC </b >
+</h3>
+
+<ul>
+  <li>Innovative and effortless door solutions</li>
+  <li>High-quality folding sliding doors</li>
+  <li>Enhanced aesthetics and functionality</li>
+  <li>Crafted to meet the highest standards of quality and performance</li>
+</ul>
+
+
+<h3 heading>
+Their Services
+</h3>
+
+<ul>
+  <li>Residential and commercial door solutions</li>
+  <li>Customizable options to fit your design aesthetic</li>
+  <li>Expertise in large-opening door systems</li>
+</ul>
+
+Trust
+<b> Nelso </b>
+ for the installation of these custom windows and doors. 
       <br>
-      Check out our latest projects at on our website. 
+      <br>
+      Check out FSDC's latest projects on their website. 
       <br>
       <br>
       <p class="headings">
       <span class="material-symbols-outlined">
             web
        </span>
-      <a href="https://www.foldingslidingdoors.ca/" target="_blank" class="styled-link"> Folding Sliding Doors Canada</a>
+      <a href="https://www.foldingslidingdoors.ca/" target="_blank"> Folding Sliding Doors Canada</a>
       </div>`
     );
     }
