@@ -34,8 +34,7 @@ export class CarouselComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
 
-  imageLoaded: boolean = false;
-  loadedImages: boolean[] = [];
+  // loadedImages: boolean[] = [];
   focusShowcase: boolean = false;
 
   images: { secure_url: string, public_id: string }[] 
@@ -68,6 +67,7 @@ setImgState(state: boolean): void {
       take(1)
     ).subscribe((arrayObject: { secure_url: string, public_id: string }[]) => {
       this.images = arrayObject;
+      // this.loadedImages = new Array(this.images.length).fill(false);
     });
   }
 
@@ -78,13 +78,13 @@ setImgState(state: boolean): void {
         this.onVisibilityChangeImg();
       });
     });
-
     this.observerImg.observe(this.viewing!.nativeElement);
   }
 
-  onImageLoad(): void {
-    this.imageLoaded = true;
-  }
+
+  // onImageLoadSmall(): void {
+  //   this.loadedImages = new Array(this.images.length).fill(true);
+  // }
 
   activateImage(index: number): void {
     if(index <= 0 ){
@@ -98,18 +98,29 @@ setImgState(state: boolean): void {
   focusImg(index: number): void {
     if (window.innerWidth < 1025) {
       // Navigate to the images page
-      this.navigationService.requestImagesMobile(this.images, index);
+      this.navigationService.requestImagesMobile(this.route, index);
     } else {
       this.focusShowcase = true;
       if (isPlatformBrowser(this.platformId)) {
-        this.renderer.addClass(document.body, 'noScroll');
+        const homeWrapper = document.querySelector('.homeWrapper'); 
+        if (homeWrapper) {
+          // Set the position to static
+          this.renderer.setStyle(homeWrapper, 'position', 'fixed');
+        }
       }
   }
 }
   onBtnClicked(): void {
     this.focusShowcase = false;
     if (isPlatformBrowser(this.platformId)) {
-    this.renderer.removeClass(document.body, 'noScroll');
+      const homeWrapper: Element | null = document.querySelector('.homeWrapper'); 
+      if (homeWrapper) {
+      this.renderer.removeStyle(homeWrapper, 'position');
+      }
+      const showcaseElement:HTMLElement | null = document.getElementById('showcase');
+      if (showcaseElement) {
+        showcaseElement.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }
   ngOnDestroy() {

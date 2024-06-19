@@ -1,10 +1,14 @@
 <div class="images-container">
     <div class="image-grid">
+@if(ready()){
         @for(image of images; let i = $index; track image){
-            <div class="image-item" [ngClass]="{ 'image-focused': i.toString() === indexParam }">
+            <div class="image-item" [ngClass]="{ 'image-focused': i === 0 }">
             <div class="image-title">{{ image.public_id }}</div>
             <img [src]="image.secure_url" alt="Image {{ i + 1 }}" class="image-preview">
         </div>
     }
+} @else{
+    <ngx-skeleton-loader count="4" [theme]="{ height: '150px', width: '200px', 'border-radius': '5px' }" appearance="line"></ngx-skeleton-loader>
+}
     </div>
   </div>
