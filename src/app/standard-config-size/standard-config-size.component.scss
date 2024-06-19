@@ -47,6 +47,7 @@
     height: 100%;
     background-image: linear-gradient(307deg, #f8f9fa, #d3d3d3);
     z-index: 20;
+    border-radius: 15px; // 
   }
 .sticky-header{
     display: flex;
@@ -57,7 +58,7 @@
     transform: translate(-50%, -50%);
     z-index: 21;
 }
-.full-page{ // do this for focus-pverlay for no background scroll
+.full-page{ 
     box-sizing: border-box;
     width: 100%;
     align-items: center;
@@ -66,7 +67,7 @@
     position: relative;
     z-index: 22;
     background-color: transparent;
-    overflow-x: hidden;
+    overflow: hidden; // chnaged from overflow-x
     border: 2px groove;
     border-radius: 15px;
 }

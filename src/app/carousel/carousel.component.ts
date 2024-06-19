@@ -21,11 +21,11 @@ import { NavigationService } from '../services/navigation.service';
     CloseBtnComponent, NgOptimizedImage, SkeletonFormFillComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
-  animations: [
+  animations: [ // other animation ideas for the childs?
     trigger('enterLeftToRight', [
       transition(':enter', [
         style({ transform: 'translateX(-12px)' }),
-        animate('1s ease-in-out', style({ transform: 'translateX(0px)'}))
+        animate('1s linear', style({ transform: 'translateX(0px)'}))
       ])
     ])
   ],

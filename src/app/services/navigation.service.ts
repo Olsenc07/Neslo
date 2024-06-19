@@ -12,13 +12,30 @@ export class NavigationService {
     @Inject(PLATFORM_ID) private platformId: Object) {}
 
   requestQuote(): void {
-    this.router.navigate(['/quotes']);
-    window.scrollTo(0, 0);
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.navigate(['/quotes']).then(() => {
+        setTimeout(() => {
+          const chosenElement = document.getElementById('quote');
+          if (chosenElement) {
+            chosenElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 500); 
+      });
+    }
   }
 
   requestImagesMobile(folder: string, index: number): void {
     this.router.navigate(['/images', folder, index.toString()]); 
-    window.scrollTo(0, 0);
+    if (isPlatformBrowser(this.platformId)) {
+    this.router.navigate(['/images', folder, index.toString()]).then(() => {
+      setTimeout(() => {
+        const chosenElement = document.getElementById('chosenImg');
+        if (chosenElement) {
+          chosenElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500); 
+    });
+    }
   }
   
   navigateToContact(): void {
