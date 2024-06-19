@@ -43,12 +43,12 @@
   </div>
   }
 
-  <div class="image-stack">
+  <div class="image-stack" #main>
     @if(this.focused()){
-    <div class="active-image">
+    <div class="active-image" >
       <img [src]="images[activeImageIndex].secure_url"  
-      (click)="focusImg(activeImageIndex)" (load)="onImageLoad()" 
-      [class.loaded]="imageLoaded" class="img-main">
+      (click)="focusImg(activeImageIndex)" 
+      class="img-main">
     </div>
   }@else{ 
     <ngx-skeleton-loader count="1" [theme]="{ height: '225px', width: '400px' }" appearance="line"></ngx-skeleton-loader>
@@ -56,14 +56,14 @@
   <div class="img-loop">
     @for(image of images; let i = $index; track image){
     <div class="list-image">
-
       <!-- make sure it works -->
-      @if(!loadedImages[i] ){
-        <ngx-skeleton-loader count="1" (load)="onImageLoadSmall(i)"  [theme]="{ height: '40px', width: '50px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
-        }@else{
-      <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
+      <!-- @if(!loadedImages[i] ){
+        <ngx-skeleton-loader count="1" [theme]="{ height: '70px', width: '90px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
+        }@else{ -->
+        <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
        (click)="activateImage(i)">
-  }
+       <!-- (load)="onImageLoadSmall()" -->
+        <!-- } -->
    </div>
   }
     </div>

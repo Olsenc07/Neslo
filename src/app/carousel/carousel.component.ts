@@ -34,8 +34,7 @@ export class CarouselComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() route!: 'Residential' | 'Showcase';
   @Input() heading: string = '';
 
-  imageLoaded: boolean = false;
-  loadedImages: boolean[] = [];
+  // loadedImages: boolean[] = [];
   focusShowcase: boolean = false;
 
   images: { secure_url: string, public_id: string }[] 
@@ -68,7 +67,7 @@ setImgState(state: boolean): void {
       take(1)
     ).subscribe((arrayObject: { secure_url: string, public_id: string }[]) => {
       this.images = arrayObject;
-      this.loadedImages = new Array(this.images.length).fill(false);
+      // this.loadedImages = new Array(this.images.length).fill(false);
     });
   }
 
@@ -82,12 +81,11 @@ setImgState(state: boolean): void {
     this.observerImg.observe(this.viewing!.nativeElement);
   }
 
-  onImageLoad(): void {
-    this.imageLoaded = true;
-  }
-  onImageLoadSmall(index: number): void {
-    this.loadedImages[index] = true;
-  }
+
+  // onImageLoadSmall(): void {
+  //   this.loadedImages = new Array(this.images.length).fill(true);
+  // }
+
   activateImage(index: number): void {
     if(index <= 0 ){
       this.activeImageIndex = this.images.length;

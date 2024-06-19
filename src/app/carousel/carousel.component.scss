@@ -2,7 +2,13 @@
   aspect-ratio: 16 / 9;
   border-radius: 25px;
   overflow-y: hidden; 
+  max-height: 9vw;
+  @media (min-width: 601px) {
+  max-height: 7vw;
+  }
+  @media (min-width: 1025px) {
    max-height: 3vw;
+  }
 }
 .active-image {
     max-width: 100%;
@@ -97,11 +103,8 @@
     border-radius: 15px;
     max-width: 100%;
     height: auto;
-    opacity: 0;
 }
-.img-main.loaded {
-  opacity: 1;
-}
+
 
 
 // adjust maybe

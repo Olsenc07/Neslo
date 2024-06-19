@@ -1,5 +1,5 @@
 <div class="homeWrapper">
-    <div #header (visibilityChange)="onVisibilityChange()">
+    <div #header (visibilityChange)="onHeaderVisibilityChange()">
 @if(this.orientationService.screen()){
         <app-intro [orientation]="true" class="image-mobile"></app-intro>
 }@else {
@@ -16,7 +16,13 @@
 <section class="my-3" #aboutUs>
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
             <div class="text-center mb-4 pt-3" id="contacts">
-                <h2 heading>Neslo Partnerships</h2>
+                <!-- <h2 heading > 
+                    <span class="animate-word-left" [@wordMoveLeft]="state">Neslo</span> 
+                    <span class="animate-word-right" [@wordMoveRight]="state" style="margin-left: 10px;">Partnerships</span>
+                </h2> -->
+                <h2 heading>
+                    Neslo Partnerships
+                </h2>
                 <mat-divider></mat-divider>
             </div>
         <div class="row">

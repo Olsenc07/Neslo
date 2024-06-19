@@ -19,6 +19,7 @@ import { NavHeaderComponent } from '../nav-header/nav-header.component';
 
 import { ImgService } from '../services/img.service';
 import { HeaderService } from '../services/header.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
     standalone: true,
@@ -37,6 +38,28 @@ import { HeaderService } from '../services/header.service';
       SkeletonFormFillComponent,
       IntroComponent,
       InstaCarouselComponent
+    ],
+    animations: [
+      trigger('wordMoveLeft', [
+        state('initial', style({
+          transform: 'translateX(-20px)'
+        })),
+        state('final', style({
+          transform: 'translateX(0px)' 
+        })),
+        transition('initial <=> final', animate('500ms ease-in-out')),
+
+      ]),
+      trigger('wordMoveRight', [
+        state('initial', style({
+          transform: 'translateX(20)'
+        })),
+        state('final', style({
+          transform: 'translateX(0px)' // Adjust as needed
+        })),
+        transition('initial => final', animate('500ms ease-in')),
+        transition('final => initial', animate('500ms ease-out'))
+      ])
     ]
 })
 
@@ -155,15 +178,19 @@ Trust
     );
     }
     @HostListener('window:visibilityChange', ['$event'])
-    onVisibilityChange() {
+    onHeaderVisibilityChange() {
       this.headerService.setHeaderState(!this.headerShow);
     }
+    // @HostListener('window:visibilityChange', ['$event'])
+    // onPartnerVisibilityChange() {
+    //   //trigger animation for Neslo Partnership
+    // }
 
     ngAfterViewInit() {
       this.observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           this.headerShow = entry.isIntersecting;
-          this.onVisibilityChange();
+          this.onHeaderVisibilityChange();
         });
       });
       this.observer.observe(this.header!.nativeElement);
