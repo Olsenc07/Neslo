@@ -13,11 +13,12 @@ import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel
 import { ImagesService } from '../services/images.service';
 import { CloseBtnComponent } from '../close-btn/close-btn.component';
 import { NavigationService } from '../services/navigation.service';
+import { HideFocusService } from '../services/hide-focus.service';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [MatIconModule,  MatButtonModule,NgxSkeletonLoaderModule,
+  imports: [MatIconModule, MatButtonModule, NgxSkeletonLoaderModule,
     CloseBtnComponent, NgOptimizedImage, SkeletonFormFillComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
@@ -57,6 +58,7 @@ setImgState(state: boolean): void {
   }
   
   constructor(protected imagesService: ImagesService,
+    protected hideFocusService: HideFocusService,
     private navigationService: NavigationService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2
@@ -101,6 +103,8 @@ setImgState(state: boolean): void {
       this.navigationService.requestImagesMobile(this.route, index);
     } else {
       this.focusShowcase = true;
+      this.hideFocusService.setInputFocus(true);
+
       if (isPlatformBrowser(this.platformId)) {
         const homeWrapper = document.querySelector('.homeWrapper'); 
         if (homeWrapper) {
@@ -112,6 +116,7 @@ setImgState(state: boolean): void {
 }
   onBtnClicked(): void {
     this.focusShowcase = false;
+    this.hideFocusService.setInputFocus(false);
     if (isPlatformBrowser(this.platformId)) {
       const homeWrapper: Element | null = document.querySelector('.homeWrapper'); 
       if (homeWrapper) {

@@ -44,15 +44,15 @@
   }
 
   <div class="image-stack" #main>
-    @if(this.focused()){
+    <!-- @if(this.focused()){ -->
     <div class="active-image" >
       <img [src]="images[activeImageIndex].secure_url"  
       (click)="focusImg(activeImageIndex)" 
       class="img-main">
     </div>
-  }@else{ 
+  <!-- }@else{ 
     <ngx-skeleton-loader count="1" [theme]="{ height: '225px', width: '400px' }" appearance="line"></ngx-skeleton-loader>
-  }
+  } -->
   <div class="img-loop">
     @for(image of images; let i = $index; track image){
     <div class="list-image">

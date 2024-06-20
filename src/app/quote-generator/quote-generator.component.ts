@@ -35,6 +35,7 @@ import { Subject, Subscription, take} from 'rxjs';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 import { RecaptchaService } from '../services/reCAPTCHA.service';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { GeneratingPopupComponent } from '../generating-popup/generating-popup.component';
 
 @Component({
     standalone: true,
@@ -182,28 +183,31 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
         }
 
 
-  generatePdfDocument(): void {
+        generatePdfDocument(): void {
     this.progress = true;
+    const dialogRef = this.dialog.open(GeneratingPopupComponent);
     this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
+        dialogRef.close();
+        // Trigger second animation of near completion
         this.downloadPDF(pdfBlob);
-        this.snackBar.open('Quote has been generated successfully.', '✅', {
-          duration: 3000
-        });
+              this.snackBar.open('Quote has been generated successfully.', '✅', {
+                duration: 3000
+              });
       },
       error: (error: any) => {
         this.progress = false;
         console.error('PDF generator failed:', error);
-        this.snackBar.open('Error generating PDF. Please try again.', '❌', {
-          duration: 3000
-        });
+              this.snackBar.open('Error generating PDF. Please try again.', '❌', {
+                duration: 3000
+              });
       },
       complete: () => {
         this.progress = false;
         console.log('PDF generation process is complete.');
-      }
-    });
-  }
+            }
+          });
+        }
   
   private scrollToFirstInvalidControl(): void {
     for (const key of Object.keys(this.quoteForm.controls)) {

@@ -1,0 +1,26 @@
+<div class="generating-popup-container">
+    <div class="icons" [@quoteStatus]="status.status">
+    @switch (status.status) {
+        @case('generating'){
+            <mat-icon class="material-symbols-outlined">sync</mat-icon>
+        }
+        @case ('processing') {
+            <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+
+        }
+        @case ('complete') {
+            <mat-icon class="material-symbols-outlined">check_circle</mat-icon>
+              }
+        @case ('error') {
+            <mat-icon class="material-symbols-outlined">error</mat-icon>
+        }
+        @default {
+            <mat-icon class="material-symbols-outlined">sync</mat-icon>
+        }
+    }
+    </div>
+    <div class="message">
+        <h2>{{status.message}}</h2>
+    </div>
+  </div>
+  
