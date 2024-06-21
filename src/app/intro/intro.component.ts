@@ -5,7 +5,7 @@ import { NgClass } from '@angular/common';
 import { Title } from '@angular/platform-browser'
 import { TitleStrategy } from '@angular/router'
 import { CustomTitleStrategy } from './../services/title-strategy.service';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, state } from '@angular/animations';
 import { NavigationService } from '../services/navigation.service';
 
 
@@ -16,10 +16,22 @@ import { NavigationService } from '../services/navigation.service';
   templateUrl: './intro.component.html',
   styleUrls: ['./intro.component.scss', './../nav-header/nav-button-styles.component.scss'],
   animations: [
-    trigger('fadeIn', [
+    trigger('fadeInDown', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(-50%)' }),
         animate('700ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ]),
+    trigger('fadeInShimmer', [
+      state('void', style({
+        opacity: 0,
+        background: 'linear-gradient(to right, #eee 10%, #ddd 20%, #eee 30%, #ddd 40%, #eee 50%, #ddd 60%, #eee 70%, #ddd 80%, #eee 90%, #ddd 100%)'
+      })),
+      transition(':enter', [
+        animate('2s ease-in', style({
+          opacity: 1,
+          background: 'transparent'
+        }))
       ])
     ])
   ],
@@ -27,7 +39,7 @@ import { NavigationService } from '../services/navigation.service';
 })
 export class IntroComponent implements OnInit {
 @Input() orientation: boolean = true
-
+    shimmer: boolean = false;
     constructor(
       private navigationService: NavigationService,
       private title:Title){}
@@ -35,7 +47,9 @@ export class IntroComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Neslo | Premium Windows and Doors')
   }
-
+  downDone(): void{
+    this.shimmer = true;
+  }
 
   requestQuote(): void {
     this.navigationService.requestQuote();

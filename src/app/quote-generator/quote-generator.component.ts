@@ -185,10 +185,11 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
         generatePdfDocument(): void {
     this.progress = true;
-    const dialogRef = this.dialog.open(GeneratingPopupComponent);
+    // const dialogRef = this.dialog.open(GeneratingPopupComponent);
+    // need to work on sending updates to dialog to switch its animations accordingly
     this.pdfService.generatePdf(this.quoteForm.value, this.gridFormArray.value).subscribe({
       next: (pdfBlob: Blob) => {
-        dialogRef.close();
+        // dialogRef.close();
         // Trigger second animation of near completion
         this.downloadPDF(pdfBlob);
               this.snackBar.open('Quote has been generated successfully.', '✅', {

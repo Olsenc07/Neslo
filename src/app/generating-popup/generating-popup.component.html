@@ -2,25 +2,24 @@
     <div class="icons" [@quoteStatus]="status.status">
     @switch (status.status) {
         @case('generating'){
-            <mat-icon class="material-symbols-outlined">sync</mat-icon>
+            <mat-icon class="material-symbols-outlined icon-sync">sync</mat-icon>
         }
         @case ('processing') {
-            <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
-
+            <mat-progress-bar mode="determinate" value="50" class="icon-progress"></mat-progress-bar>
         }
         @case ('complete') {
-            <mat-icon class="material-symbols-outlined">check_circle</mat-icon>
+            <mat-icon class="material-symbols-outlined icon-check">check_circle</mat-icon>
               }
         @case ('error') {
-            <mat-icon class="material-symbols-outlined">error</mat-icon>
+            <mat-icon class="material-symbols-outlined icon-error">error</mat-icon>
         }
         @default {
-            <mat-icon class="material-symbols-outlined">sync</mat-icon>
+            <mat-icon class="material-symbols-outlined icon-sync">sync</mat-icon>
         }
     }
     </div>
     <div class="message">
-        <h2>{{status.message}}</h2>
+        <h2 class="message-text">{{status.message}}</h2>
     </div>
   </div>
   

@@ -15,17 +15,15 @@
 <!-- About Us -->
 <section class="my-3" #aboutUs>
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
-            <div class="text-center mb-4 pt-3" id="contacts">
-                <!-- <h2 heading > 
-                    <span class="animate-word-left" [@wordMoveLeft]="state">Neslo</span> 
-                    <span class="animate-word-right" [@wordMoveRight]="state" style="margin-left: 10px;">Partnerships</span>
-                </h2> -->
+            <div class="text-center mb-4 pt-3" id="contacts" >
                 <h2 heading>
-                    Neslo Partnerships
+                    <div [ngClass]="partnershipMove ? 'word-final' : 'word-left' ">Neslo</div>
+                    &nbsp;
+                    <div [ngClass]="partnershipMove ? 'word-final' : 'word-right' ">Partnerships</div> 
                 </h2>
                 <mat-divider></mat-divider>
             </div>
-        <div class="row">
+        <div class="row" #partnerShip (visibilityChange)="onPartnerVisibilityChange()">
             <!-- Alberta's Distributor -->
             <div class="col-12 col-md-6 d-flex flex-column align-items-center">
                     <app-about-us [img]="imgAB" [title]="'Alberta’s Distributor'" [customColor]="true"
@@ -45,10 +43,10 @@
 <section class="my-3" id="showcase">
     <div [ngClass]="this.orientationService.screen() ? '' : 'bg-light' " class="container container-border">
         <div class="text-center mb-4 pt-3" >
-        <h2 heading>Showcase</h2>
+        <h2 heading [ngClass]="shimmerShowCase ? 'showcase-right right' : '' ">Showcase</h2>
             <mat-divider></mat-divider>
         </div>
-        <div class="row">
+        <div class="row" #showCase (visibilityChange)="onShowCaseVisibilityChange()">
     <div class="col-12 col-md-6 d-flex flex-column align-items-center">
 <app-carousel [heading]="'Home Essentials'" [route]="'Residential'" ></app-carousel>
         </div>
@@ -61,10 +59,10 @@
 
 <section [ngClass]="this.orientationService.screen() ? 'container-border' : 'container'" class="container-common">
     <div class="text-center mb-4 pt-3">
-        <h2 heading> Contact Neslo </h2>
+        <h2 heading [ngClass]="contactLeft ? 'contact-left left' : '' "> Contact Neslo </h2>
             <mat-divider></mat-divider>
     </div>
-    <div class="mt-4 px-3"> 
+    <div class="mt-4 px-3" #contact (visibilityChange)="onContactVisibilityChange()"> 
         <ul>
         <div class="contact-item">
             <li>

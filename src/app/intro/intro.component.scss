@@ -54,7 +54,8 @@
     background-size: 200% 200%; 
     animation: gradient-flow 10s linear infinite; 
       }
-h2[heading] {
+      
+  h2[heading] {
     color: var(--bs-body-bg) !important;
     text-align: center; 
     word-wrap: break-word; 

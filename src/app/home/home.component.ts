@@ -19,7 +19,6 @@ import { NavHeaderComponent } from '../nav-header/nav-header.component';
 
 import { ImgService } from '../services/img.service';
 import { HeaderService } from '../services/header.service';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
     standalone: true,
@@ -38,34 +37,16 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       SkeletonFormFillComponent,
       IntroComponent,
       InstaCarouselComponent
-    ],
-    animations: [
-      trigger('wordMoveLeft', [
-        state('initial', style({
-          transform: 'translateX(-20px)'
-        })),
-        state('final', style({
-          transform: 'translateX(0px)' 
-        })),
-        transition('initial <=> final', animate('500ms ease-in-out')),
-
-      ]),
-      trigger('wordMoveRight', [
-        state('initial', style({
-          transform: 'translateX(20)'
-        })),
-        state('final', style({
-          transform: 'translateX(0px)' // Adjust as needed
-        })),
-        transition('initial => final', animate('500ms ease-in')),
-        transition('final => initial', animate('500ms ease-out'))
-      ])
     ]
 })
 
 export class HomeComponent implements AfterViewInit, OnDestroy {
 atSymbol: string = '@';
 headerShow: boolean = false;
+shimmerShowCase: boolean = false;
+partnershipMove: boolean = false;
+contactLeft: boolean = false;
+
 private observer?: IntersectionObserver;
 
 imgAB: {img: string, alt: string } = {img:'../../assets/Neslo.png', alt: 'Neslo Ltd.' }
@@ -77,6 +58,10 @@ messageBC: SafeHtml;
 introBC: SafeHtml;
 
 @ViewChild('header', { static: false }) header?: ElementRef<HTMLImageElement>;
+@ViewChild('partnerShip', { static: false }) partnerShip?: ElementRef<HTMLImageElement>;
+@ViewChild('showCase', { static: false }) showCase?: ElementRef<HTMLImageElement>;
+@ViewChild('contact', { static: false }) contact?: ElementRef<HTMLImageElement>;
+
 @ViewChild('imgChild', { static: false }) imgChild?: ElementRef<HTMLImageElement>;
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, protected imgService: ImgService,
@@ -140,7 +125,7 @@ Folding Sliding Doors Canada, based out of Kelowna, BC, specializes in providing
 
 <h3 heading>
 <br>
-Why Choose <b fsdc>  FSDC </b >
+<b> Nelso </b> + <b fsdc>  FSDC </b >
 </h3>
 
 <ul>
@@ -152,7 +137,7 @@ Why Choose <b fsdc>  FSDC </b >
 
 
 <h3 heading>
-Their Services
+Combined Services
 </h3>
 
 <ul>
@@ -181,10 +166,25 @@ Trust
     onHeaderVisibilityChange() {
       this.headerService.setHeaderState(!this.headerShow);
     }
-    // @HostListener('window:visibilityChange', ['$event'])
-    // onPartnerVisibilityChange() {
-    //   //trigger animation for Neslo Partnership
-    // }
+    @HostListener('window:visibilityChange', ['$event'])
+    onPartnerVisibilityChange() {
+      if(!this.partnershipMove){
+      this.partnershipMove = true;
+      }
+    }
+    @HostListener('window:visibilityChange', ['$event'])
+    onShowCaseVisibilityChange() {
+      if(!this.shimmerShowCase){
+      this.shimmerShowCase = true;
+      }
+    }
+    @HostListener('window:visibilityChange', ['$event'])
+    onContactVisibilityChange() {
+      if(!this.contactLeft){
+      this.contactLeft = true;
+      }
+    }
+
 
     ngAfterViewInit() {
       this.observer = new IntersectionObserver((entries) => {
@@ -193,7 +193,48 @@ Trust
           this.onHeaderVisibilityChange();
         });
       });
-      this.observer.observe(this.header!.nativeElement);
+      if (this.header) {
+      this.observer.observe(this.header.nativeElement);
+      }
+      // Partnership
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              this.onPartnerVisibilityChange();
+            }, 1000);
+          }
+        });
+      });
+      if (this.partnerShip) {
+        this.observer.observe(this.partnerShip.nativeElement);
+      }
+      // Showcase
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              this.onShowCaseVisibilityChange();
+            }, 500); 
+          }
+        });
+      });
+      if (this.showCase) {
+        this.observer.observe(this.showCase.nativeElement);
+      }
+        // Contact
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                this.onContactVisibilityChange();
+              }, 500); 
+            }
+          });
+        });
+        if (this.contact) {
+          this.observer.observe(this.contact.nativeElement);
+        }
     } 
     @HostListener('window:scroll', ['$event']) 
     handleScroll(): void {
