@@ -1,0 +1,8 @@
+<header [ngClass]="sticky ? 'display-contents' : 'sticky-header'">
+    <h1 class="title">{{title}}</h1>
+    <div class="close-button-container">
+    <button mat-stroked-button class="close-button" appCloseDialog aria-label="Close">
+      Close
+    </button>
+    </div>
+</header>

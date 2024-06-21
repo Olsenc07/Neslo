@@ -4,7 +4,7 @@
        <!-- config button that drops down all options -->
       <div class="nav-buttons">
         <!-- Sizing Reference DropDown -->
-        @if(!dropDown){
+        @if(!configDialog){
         <button mat-icon-button class="m-nav" (click)="toggleConfig()">
           <mat-icon class="material-symbols-outlined">straighten</mat-icon>
         </button>
@@ -14,7 +14,8 @@
             close_fullscreen
           </mat-icon>
          </button>
-          <app-config-ex-dropdown class="drop-container"></app-config-ex-dropdown>
+         <!-- Change to a dialog popup -->
+          <!-- <app-config-ex-dropdown class="drop-container"></app-config-ex-dropdown> -->
           }
         <!-- Three main nav buttons -->
         <button mat-icon-button class="m-nav" (click)="navigateToContact()">
@@ -33,7 +34,7 @@
       </div>
       <!-- Config Examples -->
       <div class="size-container">
-        @if(dropDown){
+        @if(configDialog){
           <button mat-fab extended (click)="toggleConfig()" class="size-btn-closed">
             <mat-icon class="material-symbols-outlined">
               close_fullscreen
@@ -48,9 +49,9 @@
           Sizing Reference
           </button>
       }
-        @if(dropDown){
+        <!-- @if(dropDown){
       <app-config-ex-dropdown class="drop-container"></app-config-ex-dropdown>
-        }
+        } -->
       </div>
          <!-- add words under  -->
         <div class="nav-buttons desktop">

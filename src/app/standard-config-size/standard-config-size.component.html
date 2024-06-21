@@ -1,11 +1,7 @@
 <div class="shadow-overlay"></div>
 <div class="full-page">
   @if(!this.orientationService.screen()){
-  <header class="sticky-header">
-    <h1 class="title">Standard Size Configurations</h1>
-    <button mat-raised-button class="close-button" appCloseDialog aria-label="Close">
-      Close
-    </button>
+    <app-header-title [title]="'Standard Size Configurations'"></app-header-title>
 
     <!-- <table mat-table class="header-columns">
       <ng-container matColumnDef="config">
@@ -22,11 +18,11 @@
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="['config', 'symbol', 'fd72_73', 'fd27']"></tr>
     </table> -->
-  </header>
+
 }@else {
   <div class="mobile-header">
   <h1 class="title">Standard Size Configurations</h1>
-  <button mat-raised-button class="close-button" appCloseDialog aria-label="Close">
+  <button mat-stroked-button class="close-button" appCloseDialog aria-label="Close">
     Close
   </button>
 </div>

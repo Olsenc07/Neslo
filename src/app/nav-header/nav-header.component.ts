@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { NavigationService } from '../services/navigation.service';
 import { ConfigExDropdownComponent } from '../config-ex-dropdown/config-ex-dropdown.component';
 
 @Component({
   selector: 'app-nav-header',
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule,
+  imports: [MatToolbarModule, MatIconModule, MatDialogModule,
      ConfigExDropdownComponent, MatButtonModule],
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.scss','./../nav-header/nav-button-styles.component.scss']
@@ -16,15 +17,26 @@ import { ConfigExDropdownComponent } from '../config-ex-dropdown/config-ex-dropd
 
 export class NavHeaderComponent {
   @Input() mobile!: boolean;
-  dropDown: boolean = false;
+  configDialog: MatDialogRef<ConfigExDropdownComponent> | null = null; 
 
-  constructor(private navigationService: NavigationService) 
+  constructor(private navigationService: NavigationService,
+    private dialog: MatDialog
+  ) 
   {}
 
   toggleConfig(): void {
-    this.dropDown = !this.dropDown;
+    // Open the dialog if it's not already open
+    if (!this.configDialog) {
+      this.configDialog = this.dialog.open(ConfigExDropdownComponent);
+      // Close the dialog when it's closed
+      this.configDialog.afterClosed().subscribe(() => {
+        this.configDialog = null; 
+      });
+    } else {
+      this.configDialog.close();
+      this.configDialog = null; 
+    }
   }
-
   requestQuote(): void {
     this.navigationService.requestQuote();
   }

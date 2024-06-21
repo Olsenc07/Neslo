@@ -36,21 +36,21 @@ mat-toolbar {
     align-items: center;
 }
 
-.drop-container {
-    position: absolute;
-    top: 100%;
-    background-color: #fff;
-    box-shadow: 0 2px 5px #0003;
-    max-height: 50vh;
-    overflow-y: scroll;
-    max-width: 93%;
-    @media (min-width: 601px) {
-    max-width: 75%;
-    }
-    @media (min-width: 1025px) {
-    max-width: 50%;
-    }
-  }
+// .drop-container {
+//     position: absolute;
+//     top: 100%;
+//     background-color: #fff;
+//     box-shadow: 0 2px 5px #0003;
+//     max-height: 50vh;
+//     overflow-y: scroll;
+//     max-width: 93%;
+//     @media (min-width: 601px) {
+//     max-width: 75%;
+//     }
+//     @media (min-width: 1025px) {
+//     max-width: 50%;
+//     }
+//   }
   
 button[homeButton]{
     background-color: var(--wood);

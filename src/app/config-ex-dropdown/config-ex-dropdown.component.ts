@@ -8,13 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
 import { CloseDialogDirective } from "../directives/close-dialog.directive";
+import { ReuseHeaderTitleComponent } from '../reuse-header-title/reuse-header-title.component';
 
 @Component({
   selector: 'app-config-ex-dropdown',
   standalone: true,
   imports: [CloseDialogDirective, MatExpansionModule, MatIconModule, 
-    MatInputModule,  MatDialogModule, MatTooltipModule,
-    MatFormFieldModule,ReactiveFormsModule, StandardConfigSizeComponent
+    MatInputModule,  MatDialogModule, MatTooltipModule, ReuseHeaderTitleComponent,
+    MatFormFieldModule, ReactiveFormsModule, StandardConfigSizeComponent
   ],
   templateUrl: './config-ex-dropdown.component.html',
   styleUrl: './config-ex-dropdown.component.scss'

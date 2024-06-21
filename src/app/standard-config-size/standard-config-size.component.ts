@@ -7,14 +7,15 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 
-import { CloseDialogDirective } from '../directives/close-dialog.directive';
 import { OrientationService } from '../services/orientation.service';
+import { ReuseHeaderTitleComponent } from '../reuse-header-title/reuse-header-title.component';
+import { CloseDialogDirective } from '../directives/close-dialog.directive';
 
 @Component({
   selector: 'app-standard-config-size',
   standalone: true,
-  imports: [ MatDividerModule, MatIconModule, MatDialogModule,
-    MatButtonModule, MatTableModule, CloseDialogDirective],
+  imports: [CloseDialogDirective, MatDividerModule, MatIconModule, MatDialogModule,
+    ReuseHeaderTitleComponent,  MatButtonModule, MatTableModule],
   templateUrl: './standard-config-size.component.html',
   styleUrl: './standard-config-size.component.scss',
 })
@@ -29,7 +30,6 @@ export class StandardConfigSizeComponent implements AfterViewInit, OnDestroy{
     @Inject(MAT_DIALOG_DATA) public data: { idFocus: string }) {
 
     }
-
     // scroll isn't working
 ngAfterViewInit(): void {
   this.onScroll(this.data.idFocus);
