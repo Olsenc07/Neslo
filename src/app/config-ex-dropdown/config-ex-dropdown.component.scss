@@ -12,8 +12,6 @@
     justify-content: center;
     width: 100%;
     cursor: pointer;
-    border-radius: 15px;
-    border: 2px solid #ccc;
 }
 .drop-down{
     text-align: center;
@@ -24,9 +22,17 @@
     border-radius: 15px;
     max-width: 100%;
     height: auto;
+    border-radius: 15px;
+    border: 2px solid #ccc;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 mat-form-field{
     width: 100%;
+}
+header.title{
+    position: sticky;
+    top: 0;
+    z-index: 22;
 }
 .search-container{
     display: flex;
