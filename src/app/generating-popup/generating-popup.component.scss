@@ -1,0 +1,41 @@
+// style and test more, remove temp /test route when done
+.generating-popup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+    height: 100vh;
+    .icons, .message{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 1.5s ease-out, color 2s ease-out;
+      }
+  .icon-sync{
+    transform: rotate(60deg);
+    color: var(--wood);
+  }
+  .icon-progress{
+    color: var(--wood-dark);
+  }
+  .icon-check{
+    transform: scale(1.2); 
+    color: var(--green);
+  }
+  .icon-error{
+    color: var(--red);
+  }
+  .message-text{
+    transform: translateX(25px);
+    font-size: 2.2em;
+    @media (min-width: 601px) {
+      font-size: 2.1em; 
+    }
+    @media (min-width: 1025px) {
+      font-size: 2.8vw; 
+    }
+  }
+
+
+  }
+  

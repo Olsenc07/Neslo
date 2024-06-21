@@ -12,14 +12,18 @@
     justify-content: center;
     width: 100%;
     cursor: pointer;
+    border-radius: 15px;
+    border: 2px solid #ccc;
 }
 .drop-down{
     text-align: center;
 }
 .dropdown-image{
-    width: 50%;
+    cursor: pointer;
+    aspect-ratio: 16 / 9;
+    border-radius: 15px;
+    max-width: 100%;
     height: auto;
-    border-radius: 50%;
 }
 mat-form-field{
     width: 100%;
@@ -30,7 +34,7 @@ mat-form-field{
     align-items: center;
 }
 .space-accoordion{
-    display: flex;
+    display: block;
     margin: 1% 0%;
     padding: 0% 1%;
 }
