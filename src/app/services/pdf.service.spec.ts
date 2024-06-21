@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { PdfService } from './pdf.service';
 import { Form } from '../interfaces/form';
 import { Grid } from '../interfaces/grid';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 const mockForm: Form = {
   quoteNumber: "12345",
@@ -42,9 +43,9 @@ describe('PdfService', () => {
 
   beforeEach(() => {
       TestBed.configureTestingModule({
-          imports: [HttpClientTestingModule],
-          providers: [PdfService]
-      });
+    imports: [],
+    providers: [PdfService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
       service = TestBed.inject(PdfService);
       httpMock = TestBed.inject(HttpTestingController);
   });
