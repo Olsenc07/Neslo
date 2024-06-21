@@ -4,7 +4,7 @@ import {
 } from '@angular/material/autocomplete';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { BoldPipe } from 'src/app/pipes/bold.pipe';
+import { BoldPipe } from '../pipes/bold.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';

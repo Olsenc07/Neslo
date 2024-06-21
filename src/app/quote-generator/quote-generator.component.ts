@@ -16,26 +16,27 @@ import { TitleStrategy } from '@angular/router'
 import { MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MatCardModule} from '@angular/material/card';
 import { MatTooltipModule} from '@angular/material/tooltip';
-import { RecaptchaV3Module } from 'ng-recaptcha';
+// import { RecaptchaV3Module } from 'ng-recaptcha';
 
-import { AutoSearchComponent } from 'src/app/auto-search/auto-search.component';
-import { TextReuseComponent } from 'src/app/text-reuse/text-reuse.component';
-import { DateReuseComponent } from 'src/app/date-reuse/date-reuse.component';
-import { GridFormComponent } from 'src/app/grid-form/grid-form.component';
-import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
+import { AutoSearchComponent } from '../auto-search/auto-search.component';
+import { TextReuseComponent } from '../text-reuse/text-reuse.component';
+import { DateReuseComponent } from '../date-reuse/date-reuse.component';
+import { GridFormComponent } from '../grid-form/grid-form.component';
+import { SkeletonFormFillComponent } from '../contact-form/skeleton-form-fill/skeleton-form-fill.component';
 
 import { Grid } from '../interfaces/grid';
 
-import { PdfService } from '../services/pdf.service';
-import { CustomTitleStrategy } from './../services/title-strategy.service';
-import { environment } from 'environments/environment';
+import { environment } from '../../../environments/environment';
 import { StandardConfigSizeComponent } from "../standard-config-size/standard-config-size.component";
-import { OrientationService } from '../services/orientation.service';
 import { Subject, Subscription, take} from 'rxjs';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
-import { RecaptchaService } from '../services/reCAPTCHA.service';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+// import { RecaptchaService } from '../services/reCAPTCHA.service';
+// import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { GeneratingPopupComponent } from '../generating-popup/generating-popup.component';
+
+import { CustomTitleStrategy } from './../services/title-strategy.service';
+import { PdfService } from '../services/pdf.service';
+import { OrientationService } from '../services/orientation.service';
 
 @Component({
     standalone: true,
@@ -46,7 +47,7 @@ import { GeneratingPopupComponent } from '../generating-popup/generating-popup.c
     ],
 
     imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule, HideFocusDirective,
-      DatePipe, RecaptchaV3Module, MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
+      DatePipe, MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
        MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent, MatTooltipModule,
         MatSelectModule, TextReuseComponent, SkeletonFormFillComponent, StandardConfigSizeComponent]
 })
@@ -66,7 +67,7 @@ export class QuoteGeneratorComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
     private snackBar: MatSnackBar,
-    protected recaptchaService: RecaptchaService,
+    // protected recaptchaService: RecaptchaService,
     protected orientationService: OrientationService,
     private title:Title,   
     public dialog: MatDialog,

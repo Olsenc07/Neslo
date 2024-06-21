@@ -7,16 +7,16 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
-import { AboutUsComponent } from 'src/app/about-us/about-us.component';
-import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
-import { OrientationService } from 'src/app/services/orientation.service';
-import { IntroComponent } from 'src/app/intro/intro.component';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { AboutUsComponent } from '../about-us/about-us.component';
+import { SkeletonFormFillComponent } from '../contact-form/skeleton-form-fill/skeleton-form-fill.component';
+import { IntroComponent } from '../intro/intro.component';
 
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 import { CarouselComponent } from '../carousel/carousel.component';
 import { NavHeaderComponent } from '../nav-header/nav-header.component';
 
+import { OrientationService } from '../services/orientation.service';
 import { ImgService } from '../services/img.service';
 import { HeaderService } from '../services/header.service';
 
@@ -37,7 +37,9 @@ import { HeaderService } from '../services/header.service';
       SkeletonFormFillComponent,
       IntroComponent,
       InstaCarouselComponent
-    ]
+    ],
+    providers: [ImgService, OrientationService, HeaderService]
+
 })
 
 export class HomeComponent implements AfterViewInit, OnDestroy {

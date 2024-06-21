@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { InstagramService } from '../services/instagram.service';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 
 @Component({
   selector: 'app-insta-carousel',
   standalone: true,
-  imports: [CarouselModule],
+  imports: [],
   templateUrl: './insta-carousel.component.html',
   styleUrl: './insta-carousel.component.scss'
 })

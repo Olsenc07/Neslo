@@ -72,14 +72,14 @@ const helmetOptions: HelmetOptions = isProduction ? {
     const server = express();
     server.enable('trust proxy');
     
-    server.use(helmet(helmetOptions));
-    // Middleware to force HTTPS
-    server.use((req, res, next) => {
-    if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
-        return next();
-    }
-    res.redirect(`https://${req.headers.host}${req.url}`);
-        });
+    // server.use(helmet(helmetOptions));
+    // // Middleware to force HTTPS
+    // server.use((req, res, next) => {
+    // if (req.secure || req.headers['x-forwarded-proto'] === 'https') {
+    //     return next();
+    // }
+    // res.redirect(`https://${req.headers.host}${req.url}`);
+    //     });
     
     const corsOptions = isProduction ? {
         origin: 'https://www.neslo.ca',

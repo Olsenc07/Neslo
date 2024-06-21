@@ -1,15 +1,17 @@
 import { NgClass } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ImagesService } from '../services/images.service';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+import { ImagesService } from '../services/images.service';
 
 @Component({
   selector: 'app-images',
   standalone: true,
   imports: [NgClass, NgxSkeletonLoaderModule],
   templateUrl: './images.component.html',
-  styleUrl: './images.component.scss'
+  styleUrl: './images.component.scss',
+  providers: [ImagesService] 
 })
 
 export class ImagesComponent {

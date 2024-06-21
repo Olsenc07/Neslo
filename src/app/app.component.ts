@@ -10,7 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CustomTitleStrategy } from './services/title-strategy.service';
 import { HideFocusService } from './services/hide-focus.service';
 import { filter } from 'rxjs/operators';
-import { fromEvent, debounceTime } from 'rxjs';
+import { debounceTime } from 'rxjs';
 
 @Component({
   standalone: true,

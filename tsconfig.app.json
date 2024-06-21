@@ -7,9 +7,6 @@
       "files": true
     }
   },
-  "compilerOptions": {
-    "baseUrl": "./"
-  },
   "files": [
     "server.ts",
     "src/app/services/pdf.service.spec.ts",

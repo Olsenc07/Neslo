@@ -7,6 +7,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app/app-routes/app-routing.module';
 import { importProvidersFrom } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HideFocusService } from './app/services/hide-focus.service';
+import { CustomTitleStrategy } from './app/services/title-strategy.service';
+
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -17,11 +21,14 @@ bootstrapApplication(AppComponent, {
       includePostRequests: true,
       includeRequestsWithAuthHeaders: true
       }))
-      // ,
-      // importProvidersFrom(
-      //   HttpClientModule,
-      //   BrowserAnimationsModule
-      // )
+      ,
+      importProvidersFrom(
+        HttpClient,
+        BrowserAnimationsModule
+      ),
+      HideFocusService,
+      CustomTitleStrategy
+
     ]
 }).then((started) => {
     console.log('Start up is working');
