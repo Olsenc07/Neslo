@@ -6,10 +6,8 @@ import {bootstrapApplication, provideClientHydration, withHttpTransferCacheOptio
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app/app-routes/app-routing.module';
-import { importProvidersFrom } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HideFocusService } from './app/services/hide-focus.service';
-import { CustomTitleStrategy } from './app/services/title-strategy.service';
+
 
 
 bootstrapApplication(AppComponent, {
@@ -20,15 +18,9 @@ bootstrapApplication(AppComponent, {
       withHttpTransferCacheOptions({
       includePostRequests: true,
       includeRequestsWithAuthHeaders: true
-      }))
-      ,
-      importProvidersFrom(
-        HttpClient,
-        BrowserAnimationsModule
-      ),
-      HideFocusService,
-      CustomTitleStrategy
-
+      })),
+      HttpClient,
+      BrowserAnimationsModule
     ]
 }).then((started) => {
     console.log('Start up is working');

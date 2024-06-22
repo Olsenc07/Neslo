@@ -18,6 +18,7 @@ import { CloseDialogDirective } from '../directives/close-dialog.directive';
     ReuseHeaderTitleComponent,  MatButtonModule, MatTableModule],
   templateUrl: './standard-config-size.component.html',
   styleUrl: './standard-config-size.component.scss',
+  providers: [OrientationService]
 })
 export class StandardConfigSizeComponent implements AfterViewInit, OnDestroy{
   columnsName: string[] = ['config', 'symbol', 'fd72_73', 'fd27'];

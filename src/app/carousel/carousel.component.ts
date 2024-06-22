@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, computed, signal } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NgOptimizedImage, isPlatformBrowser } from '@angular/common'
-
-import { take } from 'rxjs';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
 import { PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
+import { take } from 'rxjs';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel.component';
-import { ImagesService } from '../services/images.service';
 import { CloseBtnComponent } from '../close-btn/close-btn.component';
+
+import { ImagesService } from '../services/images.service';
 import { NavigationService } from '../services/navigation.service';
 import { HideFocusService } from '../services/hide-focus.service';
 
@@ -22,6 +22,7 @@ import { HideFocusService } from '../services/hide-focus.service';
     CloseBtnComponent, NgOptimizedImage, SkeletonFormFillComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
+  providers:[HideFocusService, NavigationService, ImagesService],
   animations: [ // other animation ideas for the childs?
     trigger('enterLeftToRight', [
       transition(':enter', [

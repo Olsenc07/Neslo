@@ -43,7 +43,8 @@ import { OrientationService } from '../services/orientation.service';
     selector: 'app-quote-generator',
     templateUrl: './quote-generator.component.html',
     styleUrl: './quote-generator.component.scss',
-    providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }
+    providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy },
+      PdfService, OrientationService
     ],
 
     imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule, HideFocusDirective,

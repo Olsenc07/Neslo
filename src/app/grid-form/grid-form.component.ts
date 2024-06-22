@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output, OnDestroy, Input, SimpleChanges } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
-import { Grid } from '../interfaces/grid';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { Grid } from '../interfaces/grid';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 
 @Component({

@@ -18,7 +18,8 @@ import { debounceTime } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   imports: [MatIconModule, RouterModule, MatTooltipModule, MatButtonModule, MatDialogModule, NgOptimizedImage],
-  providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }],
+  providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }
+  ],
   animations: [
     trigger('rotateInOut', [
       state('down', style({ transform: 'rotate(0deg)' })), 

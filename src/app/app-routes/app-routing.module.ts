@@ -1,7 +1,4 @@
 import { Routes} from '@angular/router'
-import { OrientationService } from '../services/orientation.service'
-import { PdfService } from '../services/pdf.service'
-import { ImagesService } from '../services/images.service'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -15,8 +12,7 @@ export const routes: Routes = [
     path: 'quotes',
     loadComponent: () =>
       import('../quote-generator/quote-generator.component').then(
-        (mod) => mod.QuoteGeneratorComponent),
-        providers: [PdfService, OrientationService]
+        (mod) => mod.QuoteGeneratorComponent)
   },
   {
     path: 'test',
@@ -27,8 +23,7 @@ export const routes: Routes = [
   { path: 'images/:folder/:index', 
     loadComponent: () =>
       import('../images/images.component').then(
-        (mod) => mod.ImagesComponent),
-        providers: [ImagesService]
+        (mod) => mod.ImagesComponent)
    },
    {
     path: '**', // Wildcard route for a 404 page or redirect
