@@ -1,26 +1,24 @@
 import 'zone.js';
 
 import { AppComponent } from './app/app.component';
-import { provideRouter, withViewTransitions } from '@angular/router';
-import {bootstrapApplication, provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
+import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
+import { bootstrapApplication, provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule} from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app/app-routes/app-routing.module';
-import { importProvidersFrom } from '@angular/core';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes, withViewTransitions()),
+    provideRouter(routes,
+    withViewTransitions(),
+    withComponentInputBinding()),
     provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
     provideClientHydration(
       withHttpTransferCacheOptions({
-      includePostRequests: true
-      })),
-      importProvidersFrom(
-        HttpClientModule,
-        BrowserAnimationsModule
-      )
+      includePostRequests: true,
+      includeRequestsWithAuthHeaders: true
+      }))
     ]
 }).then((started) => {
     console.log('Start up is working');
@@ -28,3 +26,4 @@ bootstrapApplication(AppComponent, {
   .catch((err) => {
     console.error('error has occured on start up', err);
   });
+  

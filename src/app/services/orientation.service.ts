@@ -21,6 +21,9 @@ import {
   
     private orientationState = signal<boolean>(true)
     screen = computed<boolean>(() => this.orientationState())
+
+    private isMobile = signal<boolean>(true)
+    screenMobile = computed<boolean>(() => this.orientationState())
   
     private urlState = signal<string>('/')
     url = computed<string>(() => this.urlState())
@@ -48,6 +51,19 @@ import {
                 this.orientationState.set(true)
                 break
             }
+             // Check if mobile for landscape of mobile for nav headers.
+      const ua = navigator.userAgent;
+      if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+        this.isMobile.set(true);
+      } else if (
+        /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|webOS)/i.test(
+          ua
+        )
+      ) {
+        this.isMobile.set(true);
+      } else {
+        this.isMobile.set(false);
+      }
           })
         })
         // SSR check changing url

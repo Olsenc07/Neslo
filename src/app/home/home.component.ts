@@ -1,22 +1,24 @@
 import { Component, HostListener, Renderer2, 
   ElementRef, ViewChild, 
-  AfterViewInit, OnDestroy} from '@angular/core';
-import { NgClass } from '@angular/common';
+  AfterViewInit, OnDestroy,
+  PLATFORM_ID,
+  Inject} from '@angular/core';
+import { NgClass, isPlatformBrowser } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { ContactFormComponent } from 'src/app/contact-form/contact-form.component';
-import { AboutUsComponent } from 'src/app/about-us/about-us.component';
-import { SkeletonFormFillComponent } from 'src/app/contact-form/skeleton-form-fill/skeleton-form-fill.component';
-import { OrientationService } from 'src/app/services/orientation.service';
-import { IntroComponent } from 'src/app/intro/intro.component';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { AboutUsComponent } from '../about-us/about-us.component';
+import { SkeletonFormFillComponent } from '../contact-form/skeleton-form-fill/skeleton-form-fill.component';
+import { IntroComponent } from '../intro/intro.component';
 
 import { InstaCarouselComponent } from "../insta-carousel/insta-carousel.component";
 import { CarouselComponent } from '../carousel/carousel.component';
 import { NavHeaderComponent } from '../nav-header/nav-header.component';
 
+import { OrientationService } from '../services/orientation.service';
 import { ImgService } from '../services/img.service';
 import { HeaderService } from '../services/header.service';
 
@@ -66,6 +68,7 @@ introBC: SafeHtml;
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, protected imgService: ImgService,
     protected orientationService: OrientationService, protected headerService: HeaderService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
       this.introAB = this.sanitizer.bypassSecurityTrustHtml(
         `Alberta's premier destination for the delivery and installation of <br>
@@ -80,7 +83,7 @@ With over 30 years of expertise as journeyman carpenters and custom home builder
 
 <h3 heading>
 <br>
-Why Choose   <b> Nelso </b>
+Why Choose   <b> Neslo </b>
 </h3>
 
 <ul>
@@ -101,7 +104,7 @@ Our Services
   <li>Delivery and installation of Folding Sliding Doors Canada</li>
 </ul>
 
-As Alberta's premier destination for Folding Sliding Doors Canada, Nelso ensures a seamless and professional experience from start to finish. 
+As Alberta's premier destination for Folding Sliding Doors Canada, Neslo ensures a seamless and professional experience from start to finish. 
 Whether you are renovating your existing space or building a new home.
 <br>
       <br> Keep connected and stay informed by following us on instagram. <br> 
@@ -121,11 +124,13 @@ Whether you are renovating your existing space or building a new home.
       </b>`
     );
     this.messageBC = this.sanitizer.bypassSecurityTrustHtml(`
-Folding Sliding Doors Canada, based out of Kelowna, BC, specializes in providing innovative and effortless door solutions that transform spaces. They offer a range of high-quality folding sliding doors designed to enhance both the aesthetics and functionality of your home or business.
+Folding Sliding Doors Canada, based out of Kelowna, BC, specializes in providing innovative 
+and effortless door solutions that transform spaces. They offer a range of high-quality folding 
+sliding doors designed to enhance both the aesthetics and functionality of your home or business.
 
 <h3 heading>
 <br>
-<b> Nelso </b> + <b fsdc>  FSDC </b >
+<b> Neslo </b> + <b fsdc>  FSDC </b >
 </h3>
 
 <ul>
@@ -134,7 +139,6 @@ Folding Sliding Doors Canada, based out of Kelowna, BC, specializes in providing
   <li>Enhanced aesthetics and functionality</li>
   <li>Crafted to meet the highest standards of quality and performance</li>
 </ul>
-
 
 <h3 heading>
 Combined Services
@@ -147,7 +151,7 @@ Combined Services
 </ul>
 
 Trust
-<b> Nelso </b>
+<b> Neslo </b>
  for the installation of these custom windows and doors. 
       <br>
       <br>
@@ -185,8 +189,9 @@ Trust
       }
     }
 
-
     ngAfterViewInit() {
+      console.log('hey view');
+      if (isPlatformBrowser(this.platformId)) {
       this.observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           this.headerShow = entry.isIntersecting;
@@ -235,6 +240,7 @@ Trust
         if (this.contact) {
           this.observer.observe(this.contact.nativeElement);
         }
+      }
     } 
     @HostListener('window:scroll', ['$event']) 
     handleScroll(): void {

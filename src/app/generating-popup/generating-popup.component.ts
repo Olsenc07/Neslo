@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, Subscription, take, timer } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 interface QuoteGenerationStatus {
   status: 'generating' | 'processing' | 'complete' | 'error';
@@ -67,6 +67,4 @@ export  class GeneratingPopupComponent implements OnInit, OnDestroy {
       this.unsubscribe$.complete();
       this.statusSubscription?.unsubscribe();
     }
-  
-
 }

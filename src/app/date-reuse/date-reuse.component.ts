@@ -4,7 +4,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import  { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 
@@ -15,7 +15,7 @@ import { HideFocusDirective } from '../directives/hide-focus.directive';
     MatDatepickerModule, MatButtonModule, MatFormFieldModule,
     HideFocusDirective, MatIconModule, MatInputModule, ReactiveFormsModule
   ],
-  providers:[provideNativeDateAdapter()],
+  providers:[provideNativeDateAdapter(), MatIconRegistry],
   templateUrl: './date-reuse.component.html',
   styleUrl: './../text-reuse/text-reuse.component.scss'
 })

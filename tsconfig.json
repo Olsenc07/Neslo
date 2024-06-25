@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "incremental": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

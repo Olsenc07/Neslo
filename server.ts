@@ -1,4 +1,6 @@
 import 'zone.js';
+import '@angular/compiler';
+
 import express, { Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
@@ -9,12 +11,14 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import helmet, { HelmetOptions } from 'helmet';
 
+// Check if these routes still work????
 const isProduction = process.env['NODE_ENV'] === 'production';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // static files
 const browserDistFolder = join(__dirname, '../browser');
+
 // SSR entry
 const bootstrapPath = join(__dirname, '../server/main.server.mjs');
 const indexHtml = join(__dirname, 'index.server.html');
@@ -26,15 +30,15 @@ const securityRoutePath = join(__dirname, '../backend/routes/security.js');
 const imagesRoutePath = join(__dirname, '../backend/routes/images.js');
 
 // Rate limiting middleware
-// const apiLimiter = rateLimit({
-//     windowMs: 30 * 60 * 1000, // 30 minutes
-//     max: isProduction ? 3 : 1000, // limit each IP to 3 requests per windowMs
-//     handler: (req: Request, res: Response, next) => {
-//       res.status(429).json({
-//           error: `Please don't spam emails, try again after 30 minutes.`
-//       });
-//   }
-//   });
+const apiLimiter = rateLimit({
+    windowMs: 30 * 60 * 1000, // 30 minutes
+    max: isProduction ? 2 : 1000, // limit each IP to 2 requests per windowMs
+    handler: (req: Request, res: Response, next) => {
+      res.status(429).json({
+          error: `Please don't spam emails, try again after 30 minutes.`
+      });
+  }
+  });
    //  Create Express Server
 async function createServer(): Promise<express.Express> {
 const helmetOptions: HelmetOptions = isProduction ? {
@@ -124,31 +128,27 @@ const helmetOptions: HelmetOptions = isProduction ? {
      server.use("/api/security", securityRoute);
      server.use("/api/images", imagesRoute);
 
-    // All regular routes use the Angular engine
-    server.get('*', async (req: Request, res: Response) => {
+     server.get('*', async (req: Request, res: Response) => {
         try {
-        const { protocol, originalUrl, baseUrl, headers } = req;
-        const commonEngine = new CommonEngine();
-        const { default: bootstrap } = await import(bootstrapPath);
-        commonEngine.render({
+          const { protocol, originalUrl, baseUrl, headers } = req;
+          const { default: bootstrap } = await import(bootstrapPath);
+          const commonEngine = new CommonEngine();
+          const html = await commonEngine.render({
             bootstrap,
             documentFilePath: indexHtml,
             url: `${protocol}://${headers.host}${originalUrl}`,
             publicPath: browserDistFolder,
-            providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
-        })
-        .then(html => res.send(html))
-        .catch(err => {
-            console.error('Error occurred in server side engine:', err);
-            res.status(500).send('Server error');
-        });
-    } catch (error) {
-        console.error('Error occurred in server side rendering:', error);
-        res.status(500).send('Server error');
-    }
-    });
+            providers: [{provide: APP_BASE_HREF, useValue: baseUrl}],
+          });
+      
+          res.send(html);
+        } catch (error) {
+          console.error('Error occurred in server side rendering:', error);
+          res.status(500).send('Server error');
+        }
+      });
 return server;
-  }
+}
 
 async function startServer() {
     const port = process.env['PORT'] || 4200;

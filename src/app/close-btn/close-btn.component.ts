@@ -1,4 +1,4 @@
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass } from '@angular/common';
@@ -7,6 +7,7 @@ import { NgClass } from '@angular/common';
   selector: 'app-close-btn',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, NgClass],
+  providers: [ MatIconRegistry ],
   templateUrl: './close-btn.component.html',
   styleUrl: './close-btn.component.scss'
 })

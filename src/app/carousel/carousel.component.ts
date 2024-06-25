@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, computed, signal } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NgOptimizedImage, isPlatformBrowser } from '@angular/common'
-
+import { PLATFORM_ID } from '@angular/core';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClient} from '@angular/common/http';
 import { take } from 'rxjs';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
-import { PLATFORM_ID } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-
 import { SkeletonFormFillComponent } from './skeleton-carousel/skeleton-carousel.component';
-import { ImagesService } from '../services/images.service';
 import { CloseBtnComponent } from '../close-btn/close-btn.component';
+
+import { ImagesService } from '../services/images.service';
 import { NavigationService } from '../services/navigation.service';
 import { HideFocusService } from '../services/hide-focus.service';
 
@@ -30,6 +30,8 @@ import { HideFocusService } from '../services/hide-focus.service';
       ])
     ])
   ],
+  providers: [    HttpClient
+  ]
 })
 export class CarouselComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() route!: 'Residential' | 'Showcase';
@@ -65,6 +67,7 @@ setImgState(state: boolean): void {
   ) {}
   
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
     this.imagesService.fetchImages(this.route).pipe(
       take(1)
     ).subscribe((arrayObject: { secure_url: string, public_id: string }[]) => {
@@ -72,8 +75,10 @@ setImgState(state: boolean): void {
       // this.loadedImages = new Array(this.images.length).fill(false);
     });
   }
+  }
 
   ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
     this.observerImg = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         this.imgView = entry.isIntersecting;
@@ -81,6 +86,7 @@ setImgState(state: boolean): void {
       });
     });
     this.observerImg.observe(this.viewing!.nativeElement);
+  }
   }
 
 

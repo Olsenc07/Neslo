@@ -1,21 +1,22 @@
 import { Component, EventEmitter, Output, OnDestroy, Input, SimpleChanges } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
-import { Grid } from '../interfaces/grid';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { Grid } from '../interfaces/grid';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
 
 @Component({
   selector: 'app-grid-form',
   standalone: true,
-  imports: [ ReactiveFormsModule, MatIconModule, MatSelectModule, MatCardModule,
+  imports: [ ReactiveFormsModule, MatIconModule, MatSelectModule, MatCardModule, 
     HideFocusDirective, MatDividerModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+    providers: [ MatIconRegistry ], 
   templateUrl: './grid-form.component.html',
   styleUrl: './grid-form.component.scss',
 })

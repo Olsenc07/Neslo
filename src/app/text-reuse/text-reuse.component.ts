@@ -1,20 +1,20 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HideFocusService } from '../services/hide-focus.service';
 import { OrientationService } from '../services/orientation.service';
 import { HideFocusDirective } from '../directives/hide-focus.directive';
-import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-text-reuse',
   standalone: true,
   imports: [MatButtonModule, MatInputModule, MatIconModule,  
     HideFocusDirective, MatFormFieldModule, ReactiveFormsModule],
-  providers: [],
+  providers: [HideFocusService, OrientationService, MatIconRegistry],
   templateUrl: './text-reuse.component.html',
   styleUrl: './text-reuse.component.scss'
 })
