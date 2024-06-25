@@ -1,5 +1,5 @@
 # Step 1: Build Backend & Angular SSR
-FROM node:18.20.2 as build-step
+FROM node:18.20.3 as build-step
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Step 2: Setup the server using the same Node.js image
-FROM node:18.20.2
+FROM node:18.20.3
 
 # Set the working directory in this new stage
 WORKDIR /app

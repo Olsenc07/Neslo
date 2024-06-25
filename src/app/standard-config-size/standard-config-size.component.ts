@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy} from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { isPlatformBrowser } from '@angular/common';
@@ -18,7 +18,7 @@ import { CloseDialogDirective } from '../directives/close-dialog.directive';
     ReuseHeaderTitleComponent,  MatButtonModule, MatTableModule],
   templateUrl: './standard-config-size.component.html',
   styleUrl: './standard-config-size.component.scss',
-  providers: [OrientationService]
+  providers: [OrientationService, MatIconRegistry]
 })
 export class StandardConfigSizeComponent implements AfterViewInit, OnDestroy{
   columnsName: string[] = ['config', 'symbol', 'fd72_73', 'fd27'];

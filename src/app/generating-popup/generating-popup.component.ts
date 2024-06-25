@@ -67,6 +67,4 @@ export  class GeneratingPopupComponent implements OnInit, OnDestroy {
       this.unsubscribe$.complete();
       this.statusSubscription?.unsubscribe();
     }
-  
-
 }

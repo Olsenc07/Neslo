@@ -2,7 +2,7 @@ import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/c
 import { NavigationEnd, Router, RouterModule, Scroll, TitleStrategy } from '@angular/router'
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -12,13 +12,16 @@ import { HideFocusService } from './services/hide-focus.service';
 import { filter } from 'rxjs/operators';
 import { debounceTime } from 'rxjs';
 
+
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [MatIconModule, RouterModule, MatTooltipModule, MatButtonModule, MatDialogModule, NgOptimizedImage],
-  providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }
+  imports: [MatIconModule, RouterModule, MatTooltipModule, MatButtonModule,
+     MatDialogModule, NgOptimizedImage],
+  providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy },
+    MatIconRegistry
   ],
   animations: [
     trigger('rotateInOut', [
@@ -46,6 +49,7 @@ constructor(public router: Router,
 ){}
 
 ngOnInit(): void {
+  if (isPlatformBrowser(this.platformId)) {
   this.router.events.pipe(
     filter((event: any) => event instanceof NavigationEnd || event instanceof Scroll), 
     debounceTime(400) 
@@ -56,6 +60,7 @@ ngOnInit(): void {
       this.onWindowScroll();
     }
   });
+}
 }
 
 

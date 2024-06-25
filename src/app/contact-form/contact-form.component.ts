@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import  { MatButtonModule } from '@angular/material/button';
 import { NgClass } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -37,7 +37,8 @@ import { HideFocusService } from '../services/hide-focus.service';
   ],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss',
-  providers: [EmailService, HideFocusService, OrientationService]
+  providers: [EmailService, HideFocusService, 
+    OrientationService, MatIconRegistry]
 })
 
 export class ContactFormComponent {
@@ -88,12 +89,10 @@ export class ContactFormComponent {
       // this.snackBar.open('Direct messaging is not yet supported. Please try again soon.', 'Close', {
       //   duration: 3000
       // });
-      console.log('values', this.contactForm.value);
       this.emailService.sendEmail(this.contactForm.value)
         .subscribe({
     next: (response) => {
       // Handle successful response
-      console.log('Email sent successfully:', response);
       // Reset the form and show a success message
       this.contactForm.reset();
       this.snackBar.open('Email sent successfully!', 'Close', {

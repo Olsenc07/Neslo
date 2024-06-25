@@ -1,5 +1,5 @@
 import { Component,Input, OnInit } from '@angular/core';
-import { MatIconModule} from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgClass } from '@angular/common';
 import { Title } from '@angular/platform-browser'
@@ -35,7 +35,9 @@ import { NavigationService } from '../services/navigation.service';
       ])
     ])
   ],
-  providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy }]
+  providers: [
+    MatIconRegistry
+  ]
 })
 export class IntroComponent implements OnInit {
 @Input() orientation: boolean = true

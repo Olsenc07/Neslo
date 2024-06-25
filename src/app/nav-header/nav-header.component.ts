@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule} from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { NavigationService } from '../services/navigation.service';
@@ -11,6 +11,7 @@ import { ConfigExDropdownComponent } from '../config-ex-dropdown/config-ex-dropd
   standalone: true,
   imports: [MatToolbarModule, MatIconModule, MatDialogModule,
      ConfigExDropdownComponent, MatButtonModule],
+     providers: [MatIconRegistry],
   templateUrl: './nav-header.component.html',
   styleUrls: ['./nav-header.component.scss','./../nav-header/nav-button-styles.component.scss']
 })

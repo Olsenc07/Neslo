@@ -8,7 +8,24 @@
 @mixin blue {
     background-color: #e4ebf1;
   }
-  
+  @mixin font-large{
+    font-size: 1.5em; 
+    @media (min-width: 601px) {
+        font-size: 1.1em; 
+    }
+    @media (min-width: 1025px) {
+        font-size: 1.4vw; 
+    }
+}
+@mixin font-small{
+    font-size: 1.3em; 
+    @media (min-width: 601px) {
+        font-size: 1.1em; 
+    }
+    @media (min-width: 1025px) {
+        font-size: 1.1vw; 
+    }
+}
   @mixin green {
     background-color: #e3ebe29e;
   }
@@ -58,9 +75,10 @@
     position: relative;
     z-index: 22;
     background-color: transparent;
-    overflow: hidden; // chnaged from overflow-x
-    border: 2px groove;
-    border-radius: 15px;
+    overflow-y: hidden; 
+
+    border: 2px solid #ccc;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 header {
     position: relative;
@@ -96,13 +114,16 @@ b{
 }
 div[white]{
     @include common();
+    @include font-small;
     background-color: white;
 }
 div[grey]{
     @include common();
+    @include font-small();
 }
 div[blue]{
     @include common();
+    @include font-small;
     @include blue;
 }
 th[blue], td[blue]{
@@ -110,10 +131,12 @@ th[blue], td[blue]{
 }
 div[green]{
     @include common();
+    @include font-small;
     @include green;
 }
 div[warning]{
     @include common();
+    @include font-small;
     color: #d93934;
 }
 th, tbody{
@@ -126,7 +149,11 @@ th[grey], td[grey]{
     background-color: var(--wood-light-grey);
     text-align: center;
 }
+th{
+    @include font-large;
+}
 td{
+    @include font-small;
     text-align: center; 
   }
 h1{

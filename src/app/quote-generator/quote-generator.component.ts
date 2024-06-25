@@ -2,7 +2,7 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -44,9 +44,8 @@ import { OrientationService } from '../services/orientation.service';
     templateUrl: './quote-generator.component.html',
     styleUrl: './quote-generator.component.scss',
     providers: [{ provide: TitleStrategy, useClass: CustomTitleStrategy },
-      PdfService, OrientationService
+      PdfService, OrientationService, MatIconRegistry
     ],
-
     imports: [AutoSearchComponent, MatProgressSpinnerModule, MatDialogModule, HideFocusDirective,
       DatePipe, MatInputModule, MatButtonModule, GridFormComponent, MatDividerModule, MatCardModule,
        MatIconModule, MatFormFieldModule, ReactiveFormsModule, DateReuseComponent, MatTooltipModule,
