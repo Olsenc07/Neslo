@@ -31,23 +31,23 @@ export class StandardConfigSizeComponent implements AfterViewInit, OnDestroy{
     @Inject(MAT_DIALOG_DATA) public data: { idFocus: string }) {
 
     }
-    // scroll isn't working
 ngAfterViewInit(): void {
-  this.onScroll(this.data.idFocus);
-  
+    this.onScroll(this.data.idFocus);
 }
 
 onScroll(id: string) {
   this.idMatch = id;
   if (isPlatformBrowser(this.platformId)) {
     setTimeout(() => {
-      const focusedElement = document.getElementById(id); 
+      const focusedElement = document.getElementById('focusedId'); 
       if (focusedElement) {
         focusedElement.scrollIntoView({
-          behavior: 'smooth'
+          behavior: 'smooth',
+          block: 'center', 
+          inline: 'nearest'
         });
       }
-      }, 400);
+      }, 300);
     }
   }
 
