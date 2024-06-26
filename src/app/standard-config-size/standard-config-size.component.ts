@@ -41,12 +41,9 @@ onScroll(id: string) {
   this.idMatch = id;
   if (isPlatformBrowser(this.platformId)) {
     setTimeout(() => {
-      const focusedId = document.getElementById('focusedId');
-      if (focusedId) {
-        const middleY = window.innerHeight / 2;
-        const scrollDistance = focusedId.offsetTop - middleY;
-        window.scrollTo({
-          top: scrollDistance,
+      const focusedElement = document.getElementById(id); 
+      if (focusedElement) {
+        focusedElement.scrollIntoView({
           behavior: 'smooth'
         });
       }
@@ -69,13 +66,13 @@ onScroll(id: string) {
       { id: '5', config: '2 + 2', symbol: '/\\ /\\', fd72_73: '145 1/2', fd27: '-' },
       { id: '6', config: '3 + 0', symbol: '/\\/ ', fd72_73: '108', fd27: '109 1/16' },
       { id: '7', config: '3 + 1', symbol: '/\\/ \\', fd72_73: '141 7/8', fd27: '143 7/16' },
-      { id: '8', config: '3 + 3', symbol: '/\\/ \/\\', fd72_73: '209 5/8', fd27: '-' },
+      { id: '8', config: '3 + 3', symbol: '/\\/ \\/\\', fd72_73: '209 5/8', fd27: '-' },
       { id: '9', config: '3 + 5', symbol: '/\\/ /\\/\\/', fd72_73: '-', fd27: '-' },
       { id: '10', config: '4 + 0', symbol: '/\\/\\ ', fd72_73: '140 3/4', fd27: '142 1/4' },
       { id: '11', config: '4 + 4', symbol: '/\\/\\ /\\/\\', fd72_73: '277 1/8', fd27: '-' },
       { id: '12', config: '5 + 0', symbol: '/\\/\\/ ', fd72_73: '175 3/4', fd27: '177 3/4' },
       { id: '13', config: '5 + 1', symbol: '/\\/\\/ ', fd72_73: '209 5/8', fd27: '' },
-      { id: '14', config: '5 + 3', symbol: '/\\/\\/ \/\\', fd72_73: '277 1/2', fd27: '-' },
+      { id: '14', config: '5 + 3', symbol: '/\\/\\/ \\/\\', fd72_73: '277 1/2', fd27: '-' },
       { id: '15', config: '5 + 5', symbol: '/\\/\\ /\\/\\', fd72_73: '345 1/4', fd27: '-' },
       { id: '16', config: '6 + 0', symbol: '/\\/\\/\\ ', fd72_73: '208 1/2', fd27: '' },
       { id: '17', config: '6 + 6', symbol: '/\\/\\/\\ /\\/\\/\\', fd72_73: '416 3/4', fd27: '-' },
