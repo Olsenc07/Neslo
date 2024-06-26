@@ -37,13 +37,21 @@ ngAfterViewInit(): void {
   
 }
 
-    onScroll(id: string) {
-    this.idMatch = id;
-    if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => {
-        document.getElementById('focusedId')?.scrollIntoView({ behavior: 'smooth' });
-        }, 400);
+onScroll(id: string) {
+  this.idMatch = id;
+  if (isPlatformBrowser(this.platformId)) {
+    setTimeout(() => {
+      const focusedId = document.getElementById('focusedId');
+      if (focusedId) {
+        const middleY = window.innerHeight / 2;
+        const scrollDistance = focusedId.offsetTop - middleY;
+        window.scrollTo({
+          top: scrollDistance,
+          behavior: 'smooth'
+        });
       }
+      }, 400);
+    }
   }
 
   readonly tableData: {
