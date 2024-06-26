@@ -29,18 +29,28 @@ export class ImagesComponent {
       this.route.paramMap.subscribe(async params => {
         const idParam = params.get('folder');
         const indexParam = params.get('index') || '0';
-        const targetIndex = parseInt(indexParam, this.imgCount);
-  
+        const targetIndex = parseInt(indexParam, 10); // Use 10 as radix for parseInt
+    
         this.imagesReady.set(false);
-        
+    
         if (idParam === 'Residential') {
           this.tempImages = this.imagesService.getResidentialImages();
         } else if (idParam === 'Showcase') {
           this.tempImages = this.imagesService.getShowcaseImages();
+        } else if (idParam === 'Windows') {
+          this.tempImages = this.imagesService.getWindowsImages();
+        } else if (idParam === 'Specific') {
+          this.tempImages = this.imagesService.getSpecificImages();
+        } else if (idParam === 'Handles') {
+          this.tempImages = this.imagesService.getHandlesImages();
         }
-        const [targetImage] = this.tempImages.splice(targetIndex, 1);
-            this.images = [targetImage, ...this.tempImages]; 
-            this.imagesReady.set(true);
+    
+        if (this.tempImages.length > 0) {
+          const [targetImage] = this.tempImages.splice(targetIndex, 1);
+          this.images = [targetImage, ...this.tempImages];
+          this.imagesReady.set(true);
+        }
       });
     }
+    
 }

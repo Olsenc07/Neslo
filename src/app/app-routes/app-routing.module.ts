@@ -25,6 +25,11 @@ export const routes: Routes = [
       import('../images/images.component').then(
         (c) => c.ImagesComponent)
    },
+   { path: 'extended-showcase', 
+    loadComponent: () =>
+      import('../extended-showcase/extended-showcase.component').then(
+        (c) => c.ExtendedShowcaseComponent)
+   },
    {
     path: '**', // Wildcard route for a 404 page or redirect
     redirectTo: 'home', 

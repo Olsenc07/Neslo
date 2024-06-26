@@ -50,7 +50,7 @@ div[blackIcons]{
   }
   }
 button, input, select, textarea {
-  font-family: serif, auto;
+  font-family: serif, 'Times New Roman';
 }
 // dialog pop up container
 .cdk-overlay-pane {
@@ -58,40 +58,40 @@ button, input, select, textarea {
   max-height: 77%;
 }
 .mat-typography {
-  font-family: serif, auto;
+  font-family: serif, 'Times New Roman';
   
   // Base mobile styles
   & .mat-h1, & .mat-headline-5 {
-    font-family: serif, auto;
+    font-family: serif, 'Times New Roman';
     font-size: 2.1em ; 
   }
 
   & .mat-h2, & h2 {
-    font-family: 'serif', auto;
+    font-family: serif, 'Times New Roman';
     font-size: 1.9em; 
     color: #000000;
   }
 
   & h3{
-    font-family: 'serif', auto;
+    font-family: serif, 'Times New Roman';
     font-size: 1.7em ; 
   }
 
   // Tablet and up
   @media (min-width: 601px) {
     & .mat-h1, & .mat-headline-5 {
-      font-family: 'serif', auto;
+      font-family: serif, 'Times New Roman';
       font-size: 1.5em; 
     }
 
     & .mat-h2, & h2 {
-      font-family: 'serif', auto;
+      font-family: serif, 'Times New Roman';
       font-size: 1.3em; 
       color: #000000;
     }
 
     & h3{
-      font-family: 'serif', auto;
+      font-family: serif, 'Times New Roman';
       font-size: 1.1em; 
     }
   }
@@ -99,18 +99,18 @@ button, input, select, textarea {
   // Desktops and up
   @media (min-width: 1025px) {
     & .mat-h1, & .mat-headline-5 {
-      font-family: serif, auto;
+      font-family: serif, 'Times New Roman';
       font-size: 2.2vw; 
     }
 
     & .mat-h2, & h2 {
-      font-family: serif, auto;
+      font-family: serif, 'Times New Roman';
       font-size: 2vw; 
       color: #000000;
     }
 
     & h3{
-      font-family: serif, auto;
+      font-family: serif, 'Times New Roman';
       font-size: 1.4vw; 
     }
   }

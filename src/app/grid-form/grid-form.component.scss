@@ -38,7 +38,6 @@ td {
 
 th{
     border: 1px;
-    color: var(--green);
 }
 mat-form-field {
     width: 100%; 
@@ -48,13 +47,13 @@ mat-form-field[blue]{
     background-color: var(--blue-field);
 }
 mat-form-field[green]{
-    background-color: var(--green-field);
+    background-color: var(--wood);
 }
 mat-form-field[red]{
-    background-color: var(--red);
+    background-color: var(--wood-red);
 }
 mat-form-field[purple]{
-    background-color: #917c92;
+    background-color: var(--wood-dark);
     text-align: center;
     width: 100%;
 }

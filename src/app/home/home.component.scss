@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
   }
-  @mixin background($shade: #cc9965, $linear: var(--wood-red)){
+  @mixin background($shade: #cc9965){
     background-clip: text;
     -webkit-background-clip: text;
     color: $shade;
-    background-image: linear-gradient(45deg, var(--wood), $linear);
+    background-image: linear-gradient(45deg, var(--wood), var(--wood-red));
   }
 // @mixin movingIn{
 //     transform: translateX(15vw);
@@ -50,6 +50,9 @@ form{
   margin-left: 25px; 
   margin-top: 4px; 
 }
+.extend-btn{
+  background-color: var(--wood-light);
+}
 .section-padding {
   padding: 60px 0;
 }
@@ -89,7 +92,7 @@ form{
   transition: transform 1.7s ease-out, color 2s ease-out;
 }
 .word-left {
-  transform: translateX(px);
+  transform: translateX(0px);
   transform: rotate(-15deg); 
   color: var(--wood);
 }
@@ -104,7 +107,7 @@ form{
   @include background;
 }
 h2.showcase-right.right {
-  @include background(#cc9965, var(--wood));
+  @include background;
   // @include movingIn;
   transform: translateX(45px);
   // justify-content: flex-end ;

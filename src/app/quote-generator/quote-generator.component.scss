@@ -11,6 +11,7 @@ button[clear]{
     display: none;
     @media (min-width: 601px) {
     display: flex;
+    font-family: serif, 'Times New Roman';
     justify-content: center;
     }
 }
@@ -72,7 +73,8 @@ h2{
     font-size: 2vw; 
   }
   }
-h1, h2[quote]{
+h1{
+    font-family: serif, 'Times New Roman';
     color: var(--wood-light);
 }
 .notes-container, .notes-form  {
@@ -86,6 +88,9 @@ h1, h2[quote]{
   }
 mat-card-actions{
     justify-content: space-between;
+}
+mat-card-title{
+font-family: serif, 'Times New Roman';
 }
 form{
     padding-bottom: 1%;

@@ -41,7 +41,7 @@ cloudinary.config({
 
 router.get('/cloudinary', async (req: Request, res: Response) => {
   const folder = req.query['folder'] as string;
-  const validFolders = ['Residential', 'Showcase'];
+  const validFolders = ['Residential', 'Showcase', 'Handles', 'Specific', 'Windows'];
   const limit = 10;
  
     if (!validFolders.includes(folder)) {
