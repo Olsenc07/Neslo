@@ -48,23 +48,28 @@
         </div>
         <div class="row" #showCase (visibilityChange)="onShowCaseVisibilityChange()">
     <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-<app-carousel [heading]="'Home Essentials'" [route]="'Residential'" ></app-carousel>
+        <app-carousel [heading]="'Home Essentials'" [route]="'Residential'" ></app-carousel>
+    </div>
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+        <app-carousel [heading]="'Premium Selection'" [route]="'Showcase'"></app-carousel>
+    </div>
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+        <app-carousel [heading]="'Summer Specials'" [route]="'Specific'"></app-carousel>
+    </div>
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+        <app-carousel [heading]="'Windows'" [route]="'Windows'"></app-carousel>
+    </div>
+    <div class="text-center mb-4 pt-3" >
+        <h2 heading>Accessories</h2>
+            <mat-divider></mat-divider>
         </div>
     <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-<app-carousel [heading]="'Premium Selection'" [route]="'Showcase'"></app-carousel>
-        </div>
-        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-            <app-carousel [heading]="'Handles'" [route]="'Handles'"></app-carousel>
-                    </div>
-        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-            <app-carousel [heading]="'Summer Specials'" [route]="'Specific'"></app-carousel>
-                    </div>
-                    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
-                        <app-carousel [heading]="'Windows'" [route]="'Windows'"></app-carousel>
-                                </div>
+        <app-carousel [heading]="'Handles'" [route]="'Handles'" [noAspectRatio]='true'></app-carousel>
+    </div>
         </div>
     </div>
 
+    <!-- Once I get a few more categories -->
      <!-- <div class="container mt-4">
         <h2 class="text-center mb-3">Looking for more?</h2>
         <!-- <ul class="list-group list-group-flush text-center">

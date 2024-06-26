@@ -11,29 +11,30 @@
     <div class="shadow-overlay"></div>
     <div class="focus-overlay" id="focus">
       <div class="d-flex flex-column">
-    <div class="active-image-enlarged focus-shadow" >
+    <div [ngClass]="!noAspectRatio? 'active-image-enlarged': 'active-image-enlarged-vertical'"
+    class="focus-shadow" >
       <header class="enlarged-header">
         <h2 class="pt-2">{{images[activeImageIndex].public_id}}</h2>
         <app-close-btn (close)="onBtnClicked()" [style]="true"></app-close-btn>
       </header>
-      <img [src]="images[activeImageIndex].secure_url" class="focus-img">
+      <img [src]="images[activeImageIndex].secure_url" 
+      [ngClass]="!noAspectRatio? 'focus-img': 'focus-img-vertical'">
       <div class="focus-img-loop">
       @for(image of images; let i = $index; track image){
         <div class="list-image-focus" >
-          <img [src]="image.secure_url" class="img-small-focus" [@enterLeftToRight]
-           (click)="activateImage(i)">
+          <img [src]="image.secure_url" class="img-small-focus" [@enterLeftToRight]>
        </div>
       }
     </div>
     <footer class="enlarged-footer">
       <div class="carousel-controls">
-        <button mat-fab (click)="activateImage(activeImageIndex - 1)">
+        <button mat-fab (click)="decreaseIndex()">
           <mat-icon class="material-symbols-outlined">chevron_left</mat-icon>
         </button>
         <div class="carousel-status">
           <span>{{ activeImageIndex + 1 }} / {{ images.length }}</span>
         </div>
-        <button mat-fab (click)="activateImage(activeImageIndex + 1)">
+        <button mat-fab (click)="increaseIndex()">
           <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
         </button>
       </div>
@@ -48,7 +49,7 @@
     <div class="active-image" >
       <img [src]="images[activeImageIndex].secure_url"  
       (click)="focusImg(activeImageIndex)" 
-      class="img-main">
+      [ngClass]="!noAspectRatio? 'img-main': ' vertical-images'">
     </div>
   <!-- }@else{ 
     <ngx-skeleton-loader count="1" [theme]="{ height: '225px', width: '400px' }" appearance="line"></ngx-skeleton-loader>
@@ -60,8 +61,7 @@
       <!-- @if(!loadedImages[i] ){
         <ngx-skeleton-loader count="1" [theme]="{ height: '70px', width: '90px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
         }@else{ -->
-        <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
-       (click)="activateImage(i)">
+        <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]>
        <!-- (load)="onImageLoadSmall()" -->
         <!-- } -->
    </div>
@@ -71,13 +71,13 @@
 @if(!focusShowcase){
   <footer>
   <div class="carousel-controls">
-    <button mat-fab (click)="activateImage(activeImageIndex - 1)">
+    <button mat-fab (click)="decreaseIndex()">
       <mat-icon class="material-symbols-outlined">chevron_left</mat-icon>
     </button>
     <div class="carousel-status">
       <span>{{ activeImageIndex + 1 }} / {{ images.length }}</span>
     </div>
-    <button mat-fab (click)="activateImage(activeImageIndex + 1)">
+    <button mat-fab (click)="increaseIndex()">
       <mat-icon class="material-symbols-outlined">chevron_right</mat-icon>
     </button>
   </div>
