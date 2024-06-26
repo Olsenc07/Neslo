@@ -22,7 +22,8 @@
       <div class="focus-img-loop">
       @for(image of images; let i = $index; track image){
         <div class="list-image-focus" >
-          <img [src]="image.secure_url" class="img-small-focus" [@enterLeftToRight]>
+          <img [src]="image.secure_url" class="img-small-focus" [@enterLeftToRight]
+          (click)="active_image(i)">
        </div>
       }
     </div>
@@ -61,7 +62,8 @@
       <!-- @if(!loadedImages[i] ){
         <ngx-skeleton-loader count="1" [theme]="{ height: '70px', width: '90px', 'border-radius': '15px'}" appearance="line"></ngx-skeleton-loader>
         }@else{ -->
-        <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]>
+        <img [src]="image.secure_url" class="img-small" [@enterLeftToRight]
+        (click)="active_image(i)">
        <!-- (load)="onImageLoadSmall()" -->
         <!-- } -->
    </div>
