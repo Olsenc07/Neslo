@@ -156,8 +156,9 @@ td{
     @include font-small;
     text-align: center; 
   }
-h1{
+.title{
     display: flex;
+    color: var(--wood-red);
     text-align: center;
     word-wrap: break-word; 
     justify-content: center;
