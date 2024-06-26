@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild, computed, signal } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { NgOptimizedImage, isPlatformBrowser } from '@angular/common'
+import { NgOptimizedImage, NgClass, isPlatformBrowser } from '@angular/common'
 import { PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +19,7 @@ import { HideFocusService } from '../services/hide-focus.service';
   selector: 'app-carousel',
   standalone: true,
   imports: [MatIconModule, MatButtonModule, NgxSkeletonLoaderModule,
-    CloseBtnComponent, NgOptimizedImage, SkeletonFormFillComponent],
+    NgClass, CloseBtnComponent, NgOptimizedImage, SkeletonFormFillComponent],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   animations: [ // other animation ideas for the childs?
@@ -36,6 +36,7 @@ import { HideFocusService } from '../services/hide-focus.service';
 export class CarouselComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() route!: 'Residential' | 'Showcase' | 'Specific' | 'Handles' | 'Windows';
   @Input() heading: string = '';
+  @Input() noAspectRatio: boolean = false;
 
   // loadedImages: boolean[] = [];
   focusShowcase: boolean = false;
@@ -94,14 +95,11 @@ setImgState(state: boolean): void {
   //   this.loadedImages = new Array(this.images.length).fill(true);
   // }
 
-  activateImage(index: number): void {
-    if(index <= 0 ){
-      this.activeImageIndex = this.images.length;
-    } else if( index >= this.images.length){
-      this.activeImageIndex = 0;
-    } else{
-      this.activeImageIndex = index;
-    }
+  increaseIndex(): void {
+    this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
+  }
+  decreaseIndex(): void {
+    this.activeImageIndex = (this.activeImageIndex - 1 + this.images.length) % this.images.length;
   }
   focusImg(index: number): void {
     if (window.innerWidth < 1025) {
