@@ -21,6 +21,7 @@ import { NavHeaderComponent } from '../nav-header/nav-header.component';
 import { OrientationService } from '../services/orientation.service';
 import { ImgService } from '../services/img.service';
 import { HeaderService } from '../services/header.service';
+import { NavigationService } from '../services/navigation.service';
 
 @Component({
     standalone: true,
@@ -68,6 +69,7 @@ introBC: SafeHtml;
 
 constructor(private renderer: Renderer2, private sanitizer: DomSanitizer, protected imgService: ImgService,
     protected orientationService: OrientationService, protected headerService: HeaderService,
+    protected navigationService: NavigationService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
       this.introAB = this.sanitizer.bypassSecurityTrustHtml(
@@ -190,7 +192,6 @@ Trust
     }
 
     ngAfterViewInit() {
-      console.log('hey view');
       if (isPlatformBrowser(this.platformId)) {
       this.observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -258,6 +259,11 @@ Trust
       this.renderer.setStyle(this.imgChild.nativeElement, 'background-size', `cover`);
     }}}}
     
+    extendedShowcase(): void {
+      this.navigationService.onExtendedClick();
+    }
+
+
     ngOnDestroy() {
       this.observer?.disconnect();
     }

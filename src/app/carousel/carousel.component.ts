@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnDe
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NgOptimizedImage, isPlatformBrowser } from '@angular/common'
 import { PLATFORM_ID } from '@angular/core';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClient} from '@angular/common/http';
 import { take } from 'rxjs';
@@ -34,7 +34,7 @@ import { HideFocusService } from '../services/hide-focus.service';
   ]
 })
 export class CarouselComponent implements AfterViewInit, OnInit, OnDestroy {
-  @Input() route!: 'Residential' | 'Showcase';
+  @Input() route!: 'Residential' | 'Showcase' | 'Specific' | 'Handles' | 'Windows';
   @Input() heading: string = '';
 
   // loadedImages: boolean[] = [];

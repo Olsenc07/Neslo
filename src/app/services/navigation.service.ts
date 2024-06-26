@@ -53,4 +53,14 @@ export class NavigationService {
       }
     }
   }
+
+  onExtendedClick(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.router.navigate(['/extended-showcase'])
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+    }
+  }
 }

@@ -122,11 +122,13 @@ const helmetOptions: HelmetOptions = isProduction ? {
      const securityRoute = (await import(securityRoutePath)).default;
      const imagesRoute = (await import(imagesRoutePath)).default;
 
+
     // API Routes
      server.use("/api/email", emailRoute);
      server.use("/api/pdf", pdfRoute);
      server.use("/api/security", securityRoute);
      server.use("/api/images", imagesRoute);
+
 
      server.get('*', async (req: Request, res: Response) => {
         try {

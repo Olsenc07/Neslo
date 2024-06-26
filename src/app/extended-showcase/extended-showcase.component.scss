@@ -1,0 +1,8 @@
+h2.showcase-right.right {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #cc9965;
+    background-image: linear-gradient(45deg, var(--wood), var(--wood-red));
+    transform: translateX(45px);
+    transition: all 1s ease-out;
+  }

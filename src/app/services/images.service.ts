@@ -10,11 +10,17 @@ import { map, tap } from 'rxjs/operators';
 export class ImagesService {
   apiUrl: string = environment.apiUrl;
 
-   private residentialImages = signal<{ secure_url: string, public_id: string }[]>(this.loadFromCache('ResidentialImages') || []);
-   private showcaseImages = signal<{ secure_url: string, public_id: string }[]>(this.loadFromCache('ShowcaseImages') || []);
+  private residentialImages = signal<{ secure_url: string, public_id: string }[]>(this.loadFromCache('ResidentialImages') || []);
+  private showcaseImages = signal<{ secure_url: string, public_id: string }[]>(this.loadFromCache('ShowcaseImages') || []);
+  private windowsImages = signal<{ secure_url: string, public_id: string }[]>(this.loadFromCache('WindowsImages') || []);
+  private specificImages = signal<{ secure_url: string, public_id: string }[]>(this.loadFromCache('SpecificImages') || []);
+  private handlesImages = signal<{ secure_url: string, public_id: string }[]>(this.loadFromCache('HandlesImages') || []);
 
-   getResidentialImages = computed(() => this.residentialImages());
-   getShowcaseImages = computed(() => this.showcaseImages());
+  getResidentialImages = computed(() => this.residentialImages());
+  getShowcaseImages = computed(() => this.showcaseImages());
+  getWindowsImages = computed(() => this.windowsImages());
+  getSpecificImages = computed(() => this.specificImages());
+  getHandlesImages = computed(() => this.handlesImages());
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +37,15 @@ export class ImagesService {
         } else if (folder === 'Showcase') {
           this.showcaseImages.set(images);
           this.saveToCache('ShowcaseImages', images);
+        } else if (folder === 'Windows') {
+          this.windowsImages.set(images);
+          this.saveToCache('WindowsImages', images);
+        } else if (folder === 'Specific') {
+          this.specificImages.set(images);
+          this.saveToCache('SpecificImages', images);
+        } else if (folder === 'Handles') {
+          this.handlesImages.set(images);
+          this.saveToCache('HandlesImages', images);
         }
       })
     );
