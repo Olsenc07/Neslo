@@ -95,6 +95,9 @@ setImgState(state: boolean): void {
   //   this.loadedImages = new Array(this.images.length).fill(true);
   // }
 
+  active_image(index: number): void {
+    this.activeImageIndex = index;
+  }
   increaseIndex(): void {
     this.activeImageIndex = (this.activeImageIndex + 1) % this.images.length;
   }
