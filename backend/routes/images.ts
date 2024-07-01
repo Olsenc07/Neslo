@@ -66,9 +66,9 @@ router.get('/cloudinary', async (req: Request, res: Response) => {
   
         const images = result.resources.map((resource: CloudinaryInterface) => {
           const filename = resource.public_id.split('/').pop();
-
+    
           return {
-            secure_url: resource.secure_url,
+            secure_url: cloudinary.url(resource.public_id, { quality: "auto", fetch_format: "auto" }),
             public_id: filename 
           };
         });
